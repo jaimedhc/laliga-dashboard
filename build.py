@@ -25,18 +25,32 @@ def num(r, k, cast=int):
     except (KeyError, ValueError, TypeError):
         return cast(0)
 
-INTS = ["FTHG", "FTAG"]
+def first(r, keys, cast=float):
+    for k in keys:
+        try:
+            v = cast(float(r[k]))
+            if v:
+                return v
+        except (KeyError, ValueError, TypeError):
+            pass
+    return cast(0)
+
 rows = []
 for r in csv.DictReader(io.StringIO(load())):
     if not (r.get("FTHG") or "").strip() or not (r.get("Date") or "").strip():
         continue  # partido sin jugar o fila vacía
     d = pdate(r["Date"])
-    rows.append((d, [
-        d.strftime("%d/%m"), r["HomeTeam"], r["AwayTeam"],
-        num(r, "FTHG"), num(r, "FTAG"), num(r, "HxG", float), num(r, "AxG", float),
+    tm = (r.get("Time") or "").strip()
+    rows.append(((d, tm), [
+        d.strftime("%d/%m"), tm, r["HomeTeam"], r["AwayTeam"],
+        num(r, "FTHG"), num(r, "FTAG"), num(r, "HTHG"), num(r, "HTAG"),
+        num(r, "HxG", float), num(r, "AxG", float),
         num(r, "HS"), num(r, "AS"), num(r, "HST"), num(r, "AST"),
         num(r, "HF"), num(r, "AF"), num(r, "HC"), num(r, "AC"),
         num(r, "HY"), num(r, "AY"), num(r, "HR"), num(r, "AR"),
+        first(r, ["AvgCH", "AvgH"]), first(r, ["AvgCD", "AvgD"]), first(r, ["AvgCA", "AvgA"]),
+        first(r, ["AvgC>2.5", "Avg>2.5"]), first(r, ["AvgC<2.5", "Avg<2.5"]),
+        first(r, ["AHCh", "AHh"]),
     ]))
 
 if not rows:
@@ -44,6 +58,9 @@ if not rows:
 
 rows.sort(key=lambda x: x[0])
 data = json.dumps([x[1] for x in rows], ensure_ascii=False, separators=(",", ":"))
-html = open("template.html", encoding="utf-8").read().replace("__DATA__", data)
+pl = "{}"
+if os.path.exists("players.json"):
+    pl = json.dumps(json.load(open("players.json", encoding="utf-8")).get("teams", {}), ensure_ascii=False, separators=(",", ":"))
+html = open("template.html", encoding="utf-8").read().replace("__DATA__", data).replace("__PLAYERS__", pl)
 open("index.html", "w", encoding="utf-8").write(html)
 print(f"OK: {len(rows)} partidos")

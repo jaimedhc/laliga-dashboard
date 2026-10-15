@@ -30,54 +30,80 @@ th:first-child,td:first-child{text-align:left}th{font-weight:500;color:var(--mu)
 svg{width:100%;min-width:460px;display:block}svg text{fill:var(--mu);font:11px "IBM Plex Sans",system-ui,sans-serif}
 .gf{fill:var(--ac)}.ga{fill:var(--dr)}
 .lgd{color:var(--mu);font-size:13px;margin:4px 0 0}.note{color:var(--mu);font-size:13px}
-</style></head><body><main>
+select{font:inherit;color:inherit;background:var(--s);border:1px solid var(--ln);border-radius:8px;padding:6px 8px;margin-bottom:8px;width:100%}
+.rk{display:grid;grid-template-columns:130px 1fr 38px;gap:6px;align-items:center;font-size:13px;padding:2px 0}.rk .b{height:8px;border-radius:4px;background:var(--ac);opacity:.7}.rk.on{font-weight:600}.rk.on .b{opacity:1}.rk span:last-child{text-align:right}.mu{color:var(--mu);font-size:12px}
+.k.s b{font-size:18px}.pl th button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}</style></head><body><main>
 <h1>La Liga 2026-27</h1>
 <p class="sub" id="sub"></p>
 <div class="wrap">
- <section class="c sc"><h2>Clasificación</h2><table class="lg" id="lg"></table></section>
+ <div><section class="c sc"><h2>Clasificación</h2><table class="lg" id="lg"></table></section><section class="c"><h2>Ranking por estadística</h2><select id="mt" aria-label="Estadística"></select><div id="rk"></div></section></div>
  <div id="team"></div>
 </div>
 <p class="note">Fuente: football-data.co.uk. Se actualiza solo cada día; los datos aparecen cuando la fuente publica la jornada (suele tardar uno o dos días). Solo estadísticas de equipo de esta temporada.</p>
 </main>
 <script>
 const D=__DATA__;
+const PL=__PLAYERS__;
 const NM={"Ath Bilbao":"Athletic","Ath Madrid":"Atlético","Espanol":"Espanyol","La Coruna":"Deportivo","Santander":"Racing","Sociedad":"Real Sociedad","Vallecano":"Rayo Vallecano","Alaves":"Alavés","Malaga":"Málaga"};
 const nm=t=>NM[t]||t;
-const K=['d','h','a','hg','ag','hx','ax','hs','as','hst','ast','hf','af','hc','ac','hy','ay','hr','ar'];
+const K=['d','tm','h','a','hg','ag','h1','a1','hx','ax','hs','as','hst','ast','hf','af','hc','ac','hy','ay','hr','ar','oh','od','oa','ov','un','hcp'];
 const M=D.map(r=>Object.fromEntries(K.map((k,i)=>[k,r[i]])));
 const TEAMS=[...new Set(M.flatMap(m=>[m.h,m.a]))];
 const f1=n=>n.toLocaleString("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1});
+const pc=x=>Math.round(x*100)+' %';
 function games(t){return M.filter(m=>m.h===t||m.a===t).map(m=>{const h=m.h===t,g=(a,b)=>h?m[a]:m[b],o=(a,b)=>h?m[b]:m[a];
- return{d:m.d,h,riv:h?m.a:m.h,gf:g('hg','ag'),ga:o('hg','ag'),xf:g('hx','ax'),xa:o('hx','ax'),sf:g('hs','as'),sa:o('hs','as'),tf:g('hst','ast'),ta:o('hst','ast'),ff:g('hf','af'),fa:o('hf','af'),cf:g('hc','ac'),ca:o('hc','ac'),yf:g('hy','ay'),ya:o('hy','ay'),rf:g('hr','ar'),ra:o('hr','ar')}})}
+ const i=m.oh&&m.od&&m.oa?1/m.oh+1/m.od+1/m.oa:0,pw=i?(1/(h?m.oh:m.oa))/i:null,pd=i?(1/m.od)/i:null,gf=g('hg','ag'),ga=o('hg','ag'),p1=g('h1','a1'),q1=o('h1','a1');
+ return{d:m.d,h,riv:h?m.a:m.h,gf,ga,p1,q1,p2:gf-p1,q2:ga-q1,pw,pd,xf:g('hx','ax'),xa:o('hx','ax'),sf:g('hs','as'),sa:o('hs','as'),tf:g('hst','ast'),ta:o('hst','ast'),ff:g('hf','af'),fa:o('hf','af'),cf:g('hc','ac'),ca:o('hc','ac'),yf:g('hy','ay'),ya:o('hy','ay'),rf:g('hr','ar'),ra:o('hr','ar')}})}
 const res=x=>x.gf>x.ga?'W':x.gf<x.ga?'L':'D';
 function liga(){return TEAMS.map(t=>{const gs=games(t);let w=0,e=0,gf=0,ga=0;gs.forEach(x=>{gf+=x.gf;ga+=x.ga;const r=res(x);r==='W'?w++:r==='D'&&e++});
  return{t,pj:gs.length,pts:w*3+e,gf,ga,dg:gf-ga}}).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf)}
-const L=liga();let sel=L[0].t;
+const L=liga();let sel=L[0].t,mi=0;
+const av=(gs,k)=>gs.length?gs.reduce((s,x)=>s+x[k],0)/gs.length:0;
 document.getElementById('sub').textContent=M.length+' partidos jugados · datos hasta el '+M[M.length-1].d;
+const go=()=>{paintLiga();paintTeam();paintRank()};
 function paintLiga(){document.getElementById('lg').innerHTML='<tr><th>#</th><th>Equipo</th><th>PJ</th><th>DG</th><th>Pts</th></tr>'+
  L.map((r,i)=>`<tr class="t ${r.t===sel?'on':''}"><td>${i+1}</td><td><button data-t="${r.t}">${nm(r.t)}</button></td><td>${r.pj}</td><td>${r.dg>0?'+':''}${r.dg}</td><td><b>${r.pts}</b></td></tr>`).join('');
- document.querySelectorAll('#lg button').forEach(b=>b.onclick=()=>{sel=b.dataset.t;paintLiga();paintTeam()});
+ document.querySelectorAll('#lg button').forEach(b=>b.onclick=()=>{sel=b.dataset.t;go()});
  document.querySelectorAll('#lg tr.t').forEach(tr=>tr.onclick=()=>tr.querySelector('button').click())}
-const ROWS=[['Goles','gf','ga'],['xG (goles esperados)','xf','xa'],['Tiros','sf','sa'],['Tiros a puerta','tf','ta'],['Córners','cf','ca'],['Faltas','ff','fa'],['Amarillas','yf','ya'],['Rojas','rf','ra']];
-const av=(gs,k)=>gs.length?gs.reduce((s,x)=>s+x[k],0)/gs.length:0;
+const MT=[['Goles a favor','gf'],['Goles en contra','ga'],['xG a favor','xf'],['xG en contra','xa'],['Tiros','sf'],['Tiros a puerta','tf'],['Córners','cf'],['Faltas cometidas','ff'],['Amarillas','yf'],['Rojas','rf']];
+document.getElementById('mt').innerHTML=MT.map((m,i)=>`<option value="${i}">${m[0]} (por partido)</option>`).join('');
+document.getElementById('mt').onchange=e=>{mi=+e.target.value;paintRank()};
+function paintRank(){const k=MT[mi][1],a=TEAMS.map(t=>({t,v:av(games(t),k)})).sort((x,y)=>y.v-x.v),mx=a[0].v||1;
+ document.getElementById('rk').innerHTML=a.map((x,i)=>`<div class="rk ${x.t===sel?'on':''}"><span>${i+1}. ${nm(x.t)}</span><div class="b" style="width:${x.v/mx*100}%"></div><span>${f1(x.v)}</span></div>`).join('')}
+
+const AL={"Alaves":["alaves"],"Ath Bilbao":["athletic"],"Ath Madrid":["atletico"],"Betis":["betis"],"Celta":["celta"],"Espanol":["espanyol"],"La Coruna":["coruna"],"Santander":["racing"],"Sociedad":["sociedad"],"Vallecano":["vallecano","rayo"],"Real Madrid":["real madrid"]};
+const nz=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const POS={Goalkeeper:"POR",Defender:"DEF",Midfielder:"MED",Attacker:"DEL"};
+let ps="min";
+function squad(t){const ks=AL[t]||[nz(t)],k=Object.keys(PL).find(n=>ks.some(a=>nz(n).includes(a)));return k?PL[k]:null}
+function squadHtml(){const sq=squad(sel);
+ if(!sq||!sq.length)return `<section class="c"><h2>Plantilla</h2><p class="note">Aún no hay datos de jugadores para este equipo. Aparecerán cuando se active la fuente de jugadores (ver instrucciones).</p></section>`;
+ const a=[...sq].sort((x,y)=>ps==="n"?x.n.localeCompare(y.n,"es"):(y[ps]-x[ps])||(y.min-x.min));
+ const H=[["n","Jugador"],["pj","PJ"],["min","Min"],["g","Goles"],["a","Asist."],["y","Amarillas"],["r","Rojas"]];
+ return `<section class="c sc"><h2>Plantilla</h2><table class="pl"><tr>${H.map(h=>`<th><button data-p="${h[0]}">${h[1]}${ps===h[0]?" ↓":""}</button></th>`).join("")}</tr>${a.map(p=>`<tr><td>${p.n} <span class="mu">${POS[p.pos]||""}</span></td><td>${p.pj}</td><td>${p.min}</td><td>${p.g}</td><td>${p.a}</td><td>${p.y}</td><td>${p.r}</td></tr>`).join("")}</table></section>`}
+const ROWS=[['Goles','gf','ga'],['Goles 1ª parte','p1','q1'],['Goles 2ª parte','p2','q2'],['xG (goles esperados)','xf','xa'],['Tiros','sf','sa'],['Tiros a puerta','tf','ta'],['Córners','cf','ca'],['Faltas','ff','fa'],['Amarillas','yf','ya'],['Rojas','rf','ra']];
 function paintTeam(){
- const gs=games(sel),H=gs.filter(x=>x.h),A=gs.filter(x=>!x.h),r=L.find(x=>x.t===sel),pos=L.indexOf(r)+1;
- const w=gs.filter(x=>res(x)==='W').length,e=gs.filter(x=>res(x)==='D').length,l=gs.length-w-e;
- const sum=k=>gs.reduce((s,x)=>s+x[k],0);
+ const gs=games(sel),H=gs.filter(x=>x.h),A=gs.filter(x=>!x.h),r=L.find(x=>x.t===sel),pos=L.indexOf(r)+1,n=gs.length;
+ const w=gs.filter(x=>res(x)==='W').length,e=gs.filter(x=>res(x)==='D').length,l=n-w-e;
+ const sum=k=>gs.reduce((s,x)=>s+x[k],0),cnt=f=>gs.filter(f).length,sgn=v=>(v>0?'+':'')+f1(v);
  const kp=[['Posición',pos+'º · '+r.pts+' pts'],['Balance',`${w}G ${e}E ${l}P`],['Goles',`${r.gf} a favor · ${r.ga} en contra`],['xG',`${f1(sum('xf'))} a favor · ${f1(sum('xa'))} en contra`],['Tarjetas',`${sum('yf')} amarillas · ${sum('rf')} rojas`]];
- const n=gs.length,W=640,Ht=190,B=22,mx=Math.max(3,...gs.flatMap(x=>[x.gf,x.ga])),bw=(W-10)/n;
+ const mk=gs.filter(x=>x.pw!==null),ex=mk.reduce((s,x)=>s+3*x.pw+x.pd,0),ptsM=mk.reduce((s,x)=>s+(res(x)==='W'?3:res(x)==='D'?1:0),0);
+ const adv=[['Puntos por partido',f1(r.pts/n)],['Victorias',pc(w/n)],['Portería a cero',cnt(x=>x.ga===0)+' de '+n],['Sin marcar',cnt(x=>x.gf===0)+' de '+n],['Ambos marcan',pc(cnt(x=>x.gf>0&&x.ga>0)/n)],['Más de 2,5 goles',pc(cnt(x=>x.gf+x.ga>2)/n)],['Tiros a puerta / tiros',pc(sum('tf')/(sum('sf')||1))],['Goles / tiros',pc(sum('gf')/(sum('sf')||1))],['Goles menos xG',sgn(sum('gf')-sum('xf'))],['Pts reales vs cuotas',mk.length?`${ptsM} vs ${f1(ex)}`:'–']];
+ const W=640,Ht=190,B=22,mx=Math.max(3,...gs.flatMap(x=>[x.gf,x.ga])),bw=(W-10)/n;
  let s=`<svg viewBox="0 0 ${W} ${Ht}" role="img" aria-label="Goles por partido">`;
  gs.forEach((x,i)=>{const x0=10+i*bw,h1=(Ht-B-14)*x.gf/mx,h2=(Ht-B-14)*x.ga/mx,b=bw*.3;
   s+=`<rect class="gf" rx="2" x="${x0+bw*.15}" y="${Ht-B-h1}" width="${b}" height="${h1}"><title>${nm(x.riv)}: ${x.gf}-${x.ga}</title></rect><rect class="ga" rx="2" x="${x0+bw*.15+b+2}" y="${Ht-B-h2}" width="${b}" height="${h2}"><title>${nm(x.riv)}: ${x.gf}-${x.ga}</title></rect>
   <text x="${x0+bw*.5}" y="${Ht-B-Math.max(h1,h2)-4}" text-anchor="middle">${x.gf}-${x.ga}</text><text x="${x0+bw*.5}" y="${Ht-6}" text-anchor="middle">${nm(x.riv).slice(0,3)}</text>`});
  s+='</svg>';
  const tr=ROWS.map(([lb,a,b])=>`<tr><td>${lb}</td><td>${f1(av(gs,a))}</td><td>${f1(av(gs,b))}</td><td>${f1(av(H,a))}</td><td>${f1(av(A,a))}</td></tr>`).join('');
- const ml=gs.map(x=>`<tr><td>${x.d}</td><td>${x.h?'Casa':'Fuera'}</td><td>${nm(x.riv)}</td><td><b>${x.gf}-${x.ga}</b></td><td>${f1(x.xf)}-${f1(x.xa)}</td><td>${x.sf}-${x.sa}</td><td>${x.cf}-${x.ca}</td><td>${x.yf}-${x.ya}</td></tr>`).join('');
+ const ml=gs.map(x=>`<tr><td>${x.d}</td><td>${x.h?'Casa':'Fuera'}</td><td>${nm(x.riv)}</td><td><b>${x.gf}-${x.ga}</b> <span class="mu">(${x.p1}-${x.q1})</span></td><td>${f1(x.xf)}-${f1(x.xa)}</td><td>${x.sf} (${x.tf}) - ${x.sa} (${x.ta})</td><td>${x.cf}-${x.ca}</td><td>${x.ff}-${x.fa}</td><td>${x.yf}-${x.ya}</td><td>${x.rf}-${x.ra}</td><td>${x.pw===null?'–':pc(x.pw)}</td></tr>`).join('');
  document.getElementById('team').innerHTML=`<h1 style="margin-bottom:10px">${nm(sel)}</h1>
  <div class="k">${kp.map(k=>`<div><span>${k[0]}</span><b style="font-size:${k[1].length>14?15:21}px">${k[1]}</b></div>`).join('')}</div>
  <section class="c"><h2>Forma reciente</h2><div class="f">${gs.map(x=>`<i class="${res(x)}" title="${nm(x.riv)} ${x.gf}-${x.ga}">${{W:'G',D:'E',L:'P'}[res(x)]}</i>`).join('')}</div></section>
  <section class="c sc"><h2>Goles por partido</h2>${s}<p class="lgd">Azul: goles a favor · Gris: goles en contra</p></section>
+ <section class="c"><h2>Resumen avanzado</h2><div class="k s" style="margin:0">${adv.map(k=>`<div><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}</div></section>
  <section class="c sc"><h2>Promedios por partido</h2><table><tr><th></th><th>Equipo</th><th>Rival</th><th>Equipo en casa</th><th>Equipo fuera</th></tr>${tr}</table></section>
- <section class="c sc"><h2>Partidos</h2><table><tr><th>Fecha</th><th>Lugar</th><th>Rival</th><th>Resultado</th><th>xG</th><th>Tiros</th><th>Córners</th><th>Amarillas</th></tr>${ml}</table></section>`}
-paintLiga();paintTeam();
+ <section class="c sc"><h2>Partidos</h2><table><tr><th>Fecha</th><th>Lugar</th><th>Rival</th><th>Resultado (descanso)</th><th>xG</th><th>Tiros (a puerta)</th><th>Córners</th><th>Faltas</th><th>Amarillas</th><th>Rojas</th><th>Gana según cuotas</th></tr>${ml}</table></section>${squadHtml()}`;
+ document.querySelectorAll('.pl button').forEach(b=>b.onclick=()=>{ps=b.dataset.p;paintTeam()})}
+go();
 </script></body></html>
