@@ -38,16 +38,17 @@ def pm(l, K=10):
 def predict(p, h, a):
     i, j = p["ix"][h], p["ix"][a]
     lh = math.exp(p["mu"]+p["hm"]+p["att"][i]-p["df"][j]); la = math.exp(p["mu"]+p["att"][j]-p["df"][i])
-    ph, pa = pm(lh), pm(la); H = D = A = 0.0; best = (0, 0, 0)
+    ph, pa = pm(lh), pm(la); H = D = A = 0.0; cells = []
     for x, u in enumerate(ph):
         for y, v in enumerate(pa):
-            q = u*v
+            q = u*v; cells.append((q, x, y))
             if x > y: H += q
             elif x == y: D += q
             else: A += q
-            if q > best[0]: best = (q, x, y)
-    s = H+D+A
-    return H/s, D/s, A/s, lh, la, f"{best[1]}-{best[2]}", ph, pa
+    s = H+D+A; fav = max((H, 0), (D, 1), (A, 2))[1]
+    q, x, y = max((c for c in cells if outcome(c[1], c[2]) == fav), key=lambda c: c[0])  # marcador más probable del resultado favorito
+    o25 = sum(c[0] for c in cells if c[1]+c[2] > 2)/s; bb = sum(c[0] for c in cells if c[1] > 0 and c[2] > 0)/s
+    return H/s, D/s, A/s, lh, la, f"{x}-{y}", ph, pa, o25, bb, q/s
 
 def outcome(gh, ga): return 0 if gh > ga else (1 if gh == ga else 2)
 
@@ -89,8 +90,8 @@ def run(data, cal, sims=4000, w=0.5, reg=16.0):
     today = date.today().isoformat(); fut = [c for c in pend if c[1] >= today]; jn = min((c[0] for c in fut), default=None)
     show = [c for c in pend if c[1] < today or (jn and c[0] in (jn, jn+1))]; out["next"] = []
     for j, d, h, a in sorted(show, key=lambda c: (c[1], c[0])):
-        H, D, A, lh, la, sc, _, _ = predict(p, h, a)
-        out["next"].append({"j": j, "d": d[8:]+"/"+d[5:7], "h": h, "a": a, "ph": H, "pd": D, "pa": A, "xh": lh, "xa": la, "sc": sc, "pp": d < today})
+        H, D, A, lh, la, sc, _, _, o25, bb, scp = predict(p, h, a)
+        out["next"].append({"j": j, "d": d[8:]+"/"+d[5:7], "h": h, "a": a, "ph": H, "pd": D, "pa": A, "xh": lh, "xa": la, "sc": sc, "scp": scp, "o25": o25, "bb": bb, "pp": d < today})
     bp = [0]*n; bd = [0]*n; bg = [0]*n; pj = [0]*n
     for h, a, gh, ga, *_ in ms:
         i, j = ix[h], ix[a]; bg[i] += gh; bg[j] += ga; bd[i] += gh-ga; bd[j] += ga-gh; pj[i] += 1; pj[j] += 1
