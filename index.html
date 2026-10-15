@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Liga 2026-27 · Ficha por equipo</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F4;--s:#fff;--ink:#17262E;--mu:#5B6B74;--ln:#D8E0E4;--ac:#2347B5;--as:#DCE4F8;--up:#12794A;--dn:#B3261E;--dr:#8A949A;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10181D;--s:#18232A;--ink:#E7EEF1;--mu:#93A4AD;--ln:#2A3943;--ac:#7C9BFF;--as:#25335F;--up:#4CC98A;--dn:#FF8A80;--dr:#7B8A92;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10181D;--s:#18232A;--ink:#E7EEF1;--mu:#93A4AD;--ln:#2A3943;--ac:#7C9BFF;--as:#25335F;--up:#4CC98A;--dn:#FF8A80;--dr:#7B8A92;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:24px;margin:0;font-weight:600}h2{font-size:16px;margin:0 0 10px;font-weight:600}
+.sub{color:var(--mu);margin:2px 0 16px}
+.wrap{display:grid;grid-template-columns:300px 1fr;gap:12px;align-items:start}
+@media(max-width:800px){.wrap{grid-template-columns:1fr}}
+.c{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:14px;margin-bottom:12px}
+.sc{overflow-x:auto}table{width:100%;border-collapse:collapse}
+th,td{padding:7px 6px;border-bottom:1px solid var(--ln);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}th{font-weight:500;color:var(--mu);font-size:13px}
+.lg td:nth-child(2){text-align:left}.lg tr.t{cursor:pointer}.lg tr.t:hover,.lg tr.on{background:var(--as)}
+.lg button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.lg button:focus-visible{outline:2px solid var(--ac)}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}
+.k div{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:10px 12px}
+.k span{color:var(--mu);font-size:13px}.k b{display:block;font-size:21px;font-weight:600}
+.f{display:flex;gap:6px;flex-wrap:wrap}
+.f i{font-style:normal;font-weight:600;width:28px;height:28px;border-radius:6px;display:grid;place-items:center;color:#fff;font-size:13px}
+.W{background:var(--up)}.L{background:var(--dn)}.D{background:var(--dr)}
+svg{width:100%;min-width:460px;display:block}svg text{fill:var(--mu);font:11px "IBM Plex Sans",system-ui,sans-serif}
+.gf{fill:var(--ac)}.ga{fill:var(--dr)}
+.lgd{color:var(--mu);font-size:13px;margin:4px 0 0}.note{color:var(--mu);font-size:13px}
+</style></head><body><main>
+<h1>La Liga 2026-27</h1>
+<p class="sub" id="sub"></p>
+<div class="wrap">
+ <section class="c sc"><h2>Clasificación</h2><table class="lg" id="lg"></table></section>
+ <div id="team"></div>
+</div>
+<p class="note">Fuente: football-data.co.uk. Se actualiza solo cada día; los datos aparecen cuando la fuente publica la jornada (suele tardar uno o dos días). Solo estadísticas de equipo de esta temporada.</p>
+</main>
+<script>
+const D=[["15/08","Alaves","Getafe",3,0,1.93,0.24,18,6,8,2,16,13,5,3,4,3,0,1],["15/08","Sevilla","Vallecano",2,1,2.19,1.89,13,6,4,3,18,18,1,2,4,4,1,0],["16/08","Santander","Villarreal",2,2,1.87,0.66,17,12,3,7,14,14,6,10,2,4,0,0],["16/08","Espanol","Levante",3,0,1.56,0.28,16,4,6,0,17,7,0,1,3,0,0,0],["17/08","La Coruna","Elche",1,1,0.34,1.41,8,11,3,6,17,12,2,6,2,2,0,0],["19/08","Ath Madrid","Malaga",2,0,0.93,0.15,15,5,6,1,17,11,6,1,2,3,0,0],["20/08","Vallecano","Alaves",1,1,0.42,2.0,8,15,3,3,14,13,9,7,1,2,0,0],["21/08","Betis","Sociedad",1,0,1.24,1.36,18,9,7,3,9,12,4,5,3,3,0,0],["22/08","Ath Bilbao","Sevilla",1,3,1.25,0.41,18,7,8,4,11,16,10,3,2,5,1,0],["22/08","Valencia","Celta",0,0,0.58,0.66,8,7,2,3,17,17,1,2,2,3,0,0],["22/08","Espanol","Real Madrid",1,2,1.05,2.7,8,21,3,8,19,7,0,8,5,1,0,0],["23/08","Ath Madrid","Villarreal",2,2,0.78,3.6,19,13,4,6,12,13,5,3,3,2,1,0],["23/08","Getafe","Santander",1,0,1.24,1.3,12,6,1,3,14,17,8,6,1,3,0,0],["23/08","Elche","Barcelona",0,5,0.7,4.38,7,11,2,7,13,12,3,1,1,0,0,0],["24/08","Osasuna","Levante",0,0,0.67,1.31,12,11,7,1,9,12,9,4,2,1,0,0],["24/08","Malaga","La Coruna",1,1,1.97,1.11,13,6,2,4,12,12,7,4,1,4,0,0],["25/08","Valencia","Betis",0,1,1.12,0.71,16,15,3,3,10,11,8,2,2,1,0,0],["26/08","Real Madrid","Sociedad",4,1,3.14,0.56,20,10,11,3,10,8,4,7,3,3,0,0],["27/08","Celta","Osasuna",1,2,0.13,2.68,4,13,2,5,7,16,5,3,0,1,1,0],["27/08","Barcelona","Ath Bilbao",2,0,3.91,0.25,22,5,10,0,13,6,12,5,1,2,0,0],["28/08","Santander","Elche",3,2,1.72,1.04,13,18,6,7,17,19,5,10,2,1,0,0],["28/08","Alaves","Villarreal",1,0,0.81,1.4,9,19,2,6,15,8,5,9,3,1,0,0],["29/08","Levante","Betis",5,2,2.76,1.92,19,20,10,6,9,7,5,8,1,1,0,0],["29/08","Sociedad","Espanol",2,1,1.66,0.76,17,11,10,3,19,14,7,3,2,4,0,0],["29/08","Sevilla","Ath Madrid",1,3,0.89,0.93,20,12,5,5,20,16,4,2,2,2,0,0],["30/08","Real Madrid","Malaga",4,0,2.4,0.72,19,14,8,1,6,9,9,6,0,2,0,0],["30/08","La Coruna","Valencia",3,1,1.42,1.33,11,12,4,4,14,5,5,5,2,1,1,0],["30/08","Celta","Ath Bilbao",0,2,0.57,2.64,8,17,2,7,8,17,4,7,0,3,0,0],["31/08","Osasuna","Getafe",1,0,1.67,0.65,10,11,2,1,17,14,1,3,5,4,0,0],["31/08","Barcelona","Vallecano",5,2,2.83,1.09,26,11,9,5,4,11,9,5,0,1,0,0],["03/09","Sociedad","Celta",0,0,0.97,0.36,16,7,5,2,15,11,11,3,2,3,0,0],["04/09","Betis","Real Madrid",1,0,0.93,3.46,10,20,5,8,11,13,6,10,3,5,0,0],["05/09","Ath Bilbao","Ath Madrid",3,0,1.41,1.03,11,15,4,5,8,6,3,8,0,1,0,0],["05/09","Vallecano","Santander",3,2,1.61,0.48,16,9,10,4,15,12,9,6,3,2,2,0],["05/09","Villarreal","La Coruna",2,3,1.2,0.83,17,8,5,3,14,14,7,1,2,2,0,0],["06/09","Valencia","Barcelona",0,5,0.66,4.08,3,25,2,10,7,6,1,4,1,3,0,0],["06/09","Alaves","Osasuna",5,2,1.19,1.63,12,7,7,5,14,13,4,1,1,2,0,0],["06/09","Malaga","Levante",0,0,1.59,0.98,10,11,3,3,15,11,6,4,4,2,0,0],["06/09","Espanol","Sevilla",1,1,1.22,0.53,12,6,3,3,17,13,0,4,2,3,0,1],["07/09","Getafe","Celta",1,1,0.81,0.96,10,16,2,3,8,9,3,5,4,2,1,0],["07/09","Elche","Sociedad",2,3,2.47,0.58,20,13,10,6,9,8,6,7,4,1,0,1],["11/09","Sevilla","Valencia",1,0,0.93,0.1,13,3,4,0,8,12,6,4,1,2,0,0],["12/09","Santander","Alaves",2,1,2.02,1.98,11,16,4,8,16,17,4,6,2,3,1,0],["12/09","Osasuna","Espanol",0,2,1.05,1.43,11,6,4,3,10,24,3,4,2,3,0,0],["12/09","Ath Bilbao","Elche",1,1,2.4,0.84,19,3,3,1,11,12,7,1,3,3,0,0],["12/09","Real Madrid","Vallecano",4,1,2.61,1.22,24,18,11,7,9,13,11,5,0,1,0,0],["13/09","Celta","Malaga",1,1,1.9,0.42,17,12,5,2,10,10,1,5,1,1,0,0],["13/09","Levante","Barcelona",2,4,2.42,2.59,13,12,7,6,11,11,3,5,1,1,0,0],["13/09","Getafe","La Coruna",1,1,0.77,0.86,15,10,4,3,14,9,3,7,3,1,0,0],["13/09","Sociedad","Ath Madrid",0,3,0.27,2.05,8,13,3,5,13,9,9,3,3,1,0,0],["14/09","Villarreal","Betis",1,2,1.9,3.52,14,26,8,12,7,8,7,4,1,0,0,0],["15/09","Vallecano","Espanol",2,1,1.71,1.66,16,19,2,5,10,15,3,5,5,1,0,1],["15/09","Alaves","Valencia",0,1,1.05,0.65,15,10,3,3,7,14,2,5,1,4,0,0],["15/09","Elche","Real Madrid",2,3,0.78,3.62,11,20,3,4,21,8,2,5,4,2,0,0],["16/09","Ath Madrid","Osasuna",4,0,3.99,0.48,27,3,11,1,7,12,8,0,1,2,0,0],["16/09","La Coruna","Sevilla",0,1,0.14,0.73,4,11,3,6,15,16,4,4,1,4,1,0],["16/09","Barcelona","Santander",7,2,6.74,1.98,30,5,9,3,10,13,18,0,3,2,0,0],["17/09","Betis","Getafe",1,0,1.53,0.32,22,8,8,2,13,24,4,3,0,0,0,0],["17/09","Malaga","Villarreal",1,3,0.63,3.33,5,16,1,7,17,10,4,8,0,0,0,0],["18/09","Espanol","Elche",1,3,1.05,1.44,23,9,4,6,14,9,3,3,2,2,0,1],["19/09","Osasuna","Vallecano",1,1,0.53,1.01,10,19,3,2,21,13,4,4,3,2,0,0],["19/09","Ath Bilbao","Alaves",0,0,1.62,0.05,24,2,6,0,14,13,5,1,2,0,0,0],["19/09","Celta","Santander",5,0,2.08,0.61,13,11,9,5,13,11,3,3,2,5,0,0],["19/09","Sevilla","Barcelona",1,3,0.45,3.26,7,24,3,7,10,11,1,3,1,0,0,0],["20/09","Getafe","Malaga",1,0,0.95,0.52,20,11,7,4,16,16,5,9,4,2,0,0],["20/09","Ath Madrid","Real Madrid",2,1,2.35,0.3,18,8,9,3,19,6,3,1,2,2,0,1],["20/09","La Coruna","Betis",1,1,2.09,0.8,24,11,7,4,6,9,11,5,1,1,0,0],["20/09","Villarreal","Levante",3,1,4.27,0.45,21,6,7,1,9,10,7,1,1,1,0,0],["20/09","Valencia","Sociedad",2,3,1.55,2.65,22,21,5,6,9,12,7,5,2,1,0,1],["09/10","Malaga","Espanol",1,1,0.59,0.99,15,9,7,4,10,15,8,2,4,5,0,0],["10/10","Alaves","Ath Madrid",1,2,1.3,2.05,8,22,3,7,11,14,0,10,0,3,1,0],["10/10","Barcelona","Getafe",3,0,1.93,0.14,23,4,8,1,9,11,9,2,2,4,0,0],["10/10","Real Madrid","Villarreal",1,0,1.43,0.59,11,15,4,4,8,13,9,3,5,2,1,0],["11/10","Elche","Celta",0,0,0.78,0.47,13,7,2,0,19,21,5,2,1,3,0,0],["11/10","Sociedad","La Coruna",3,2,1.44,2.13,12,21,4,7,14,13,7,10,1,2,1,1],["11/10","Betis","Osasuna",5,2,2.89,1.94,20,11,7,5,11,13,8,4,2,5,0,0],["11/10","Santander","Valencia",2,2,1.28,1.8,20,10,11,2,15,10,8,3,3,3,0,0],["12/10","Levante","Sevilla",3,3,1.95,2.53,20,18,8,5,7,17,5,2,2,4,0,1]];
+const NM={"Ath Bilbao":"Athletic","Ath Madrid":"Atlético","Espanol":"Espanyol","La Coruna":"Deportivo","Santander":"Racing","Sociedad":"Real Sociedad","Vallecano":"Rayo Vallecano","Alaves":"Alavés","Malaga":"Málaga"};
+const nm=t=>NM[t]||t;
+const K=['d','h','a','hg','ag','hx','ax','hs','as','hst','ast','hf','af','hc','ac','hy','ay','hr','ar'];
+const M=D.map(r=>Object.fromEntries(K.map((k,i)=>[k,r[i]])));
+const TEAMS=[...new Set(M.flatMap(m=>[m.h,m.a]))];
+const f1=n=>n.toLocaleString("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1});
+function games(t){return M.filter(m=>m.h===t||m.a===t).map(m=>{const h=m.h===t,g=(a,b)=>h?m[a]:m[b],o=(a,b)=>h?m[b]:m[a];
+ return{d:m.d,h,riv:h?m.a:m.h,gf:g('hg','ag'),ga:o('hg','ag'),xf:g('hx','ax'),xa:o('hx','ax'),sf:g('hs','as'),sa:o('hs','as'),tf:g('hst','ast'),ta:o('hst','ast'),ff:g('hf','af'),fa:o('hf','af'),cf:g('hc','ac'),ca:o('hc','ac'),yf:g('hy','ay'),ya:o('hy','ay'),rf:g('hr','ar'),ra:o('hr','ar')}})}
+const res=x=>x.gf>x.ga?'W':x.gf<x.ga?'L':'D';
+function liga(){return TEAMS.map(t=>{const gs=games(t);let w=0,e=0,gf=0,ga=0;gs.forEach(x=>{gf+=x.gf;ga+=x.ga;const r=res(x);r==='W'?w++:r==='D'&&e++});
+ return{t,pj:gs.length,pts:w*3+e,gf,ga,dg:gf-ga}}).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf)}
+const L=liga();let sel=L[0].t;
+document.getElementById('sub').textContent=M.length+' partidos jugados · datos hasta el '+M[M.length-1].d;
+function paintLiga(){document.getElementById('lg').innerHTML='<tr><th>#</th><th>Equipo</th><th>PJ</th><th>DG</th><th>Pts</th></tr>'+
+ L.map((r,i)=>`<tr class="t ${r.t===sel?'on':''}"><td>${i+1}</td><td><button data-t="${r.t}">${nm(r.t)}</button></td><td>${r.pj}</td><td>${r.dg>0?'+':''}${r.dg}</td><td><b>${r.pts}</b></td></tr>`).join('');
+ document.querySelectorAll('#lg button').forEach(b=>b.onclick=()=>{sel=b.dataset.t;paintLiga();paintTeam()});
+ document.querySelectorAll('#lg tr.t').forEach(tr=>tr.onclick=()=>tr.querySelector('button').click())}
+const ROWS=[['Goles','gf','ga'],['xG (goles esperados)','xf','xa'],['Tiros','sf','sa'],['Tiros a puerta','tf','ta'],['Córners','cf','ca'],['Faltas','ff','fa'],['Amarillas','yf','ya'],['Rojas','rf','ra']];
+const av=(gs,k)=>gs.length?gs.reduce((s,x)=>s+x[k],0)/gs.length:0;
+function paintTeam(){
+ const gs=games(sel),H=gs.filter(x=>x.h),A=gs.filter(x=>!x.h),r=L.find(x=>x.t===sel),pos=L.indexOf(r)+1;
+ const w=gs.filter(x=>res(x)==='W').length,e=gs.filter(x=>res(x)==='D').length,l=gs.length-w-e;
+ const sum=k=>gs.reduce((s,x)=>s+x[k],0);
+ const kp=[['Posición',pos+'º · '+r.pts+' pts'],['Balance',`${w}G ${e}E ${l}P`],['Goles',`${r.gf} a favor · ${r.ga} en contra`],['xG',`${f1(sum('xf'))} a favor · ${f1(sum('xa'))} en contra`],['Tarjetas',`${sum('yf')} amarillas · ${sum('rf')} rojas`]];
+ const n=gs.length,W=640,Ht=190,B=22,mx=Math.max(3,...gs.flatMap(x=>[x.gf,x.ga])),bw=(W-10)/n;
+ let s=`<svg viewBox="0 0 ${W} ${Ht}" role="img" aria-label="Goles por partido">`;
+ gs.forEach((x,i)=>{const x0=10+i*bw,h1=(Ht-B-14)*x.gf/mx,h2=(Ht-B-14)*x.ga/mx,b=bw*.3;
+  s+=`<rect class="gf" rx="2" x="${x0+bw*.15}" y="${Ht-B-h1}" width="${b}" height="${h1}"><title>${nm(x.riv)}: ${x.gf}-${x.ga}</title></rect><rect class="ga" rx="2" x="${x0+bw*.15+b+2}" y="${Ht-B-h2}" width="${b}" height="${h2}"><title>${nm(x.riv)}: ${x.gf}-${x.ga}</title></rect>
+  <text x="${x0+bw*.5}" y="${Ht-B-Math.max(h1,h2)-4}" text-anchor="middle">${x.gf}-${x.ga}</text><text x="${x0+bw*.5}" y="${Ht-6}" text-anchor="middle">${nm(x.riv).slice(0,3)}</text>`});
+ s+='</svg>';
+ const tr=ROWS.map(([lb,a,b])=>`<tr><td>${lb}</td><td>${f1(av(gs,a))}</td><td>${f1(av(gs,b))}</td><td>${f1(av(H,a))}</td><td>${f1(av(A,a))}</td></tr>`).join('');
+ const ml=gs.map(x=>`<tr><td>${x.d}</td><td>${x.h?'Casa':'Fuera'}</td><td>${nm(x.riv)}</td><td><b>${x.gf}-${x.ga}</b></td><td>${f1(x.xf)}-${f1(x.xa)}</td><td>${x.sf}-${x.sa}</td><td>${x.cf}-${x.ca}</td><td>${x.yf}-${x.ya}</td></tr>`).join('');
+ document.getElementById('team').innerHTML=`<h1 style="margin-bottom:10px">${nm(sel)}</h1>
+ <div class="k">${kp.map(k=>`<div><span>${k[0]}</span><b style="font-size:${k[1].length>14?15:21}px">${k[1]}</b></div>`).join('')}</div>
+ <section class="c"><h2>Forma reciente</h2><div class="f">${gs.map(x=>`<i class="${res(x)}" title="${nm(x.riv)} ${x.gf}-${x.ga}">${{W:'G',D:'E',L:'P'}[res(x)]}</i>`).join('')}</div></section>
+ <section class="c sc"><h2>Goles por partido</h2>${s}<p class="lgd">Azul: goles a favor · Gris: goles en contra</p></section>
+ <section class="c sc"><h2>Promedios por partido</h2><table><tr><th></th><th>Equipo</th><th>Rival</th><th>Equipo en casa</th><th>Equipo fuera</th></tr>${tr}</table></section>
+ <section class="c sc"><h2>Partidos</h2><table><tr><th>Fecha</th><th>Lugar</th><th>Rival</th><th>Resultado</th><th>xG</th><th>Tiros</th><th>Córners</th><th>Amarillas</th></tr>${ml}</table></section>`}
+paintLiga();paintTeam();
+</script></body></html>
