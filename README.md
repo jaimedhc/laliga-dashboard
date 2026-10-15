@@ -69,3 +69,16 @@ jobs:
           git add index.html
           git diff --cached --quiet || (git commit -m "Actualizar datos" && git push)
 ```
+
+## Jugadores (goles, asistencias, amarillas...)
+
+Los datos por jugador salen de API-Football (plan gratuito: 100 peticiones al día; este proyecto usa unas 30).
+
+1. Regístrate gratis en api-football.com y copia tu clave de API.
+2. En tu repositorio de GitHub: **Settings > Secrets and variables > Actions > New repository secret**.
+   Nombre: `API_FOOTBALL_KEY`. Valor: tu clave. Guarda.
+3. Sube `players.py`, `build.py` y `template.html` (sustituyen a los anteriores).
+4. Edita `.github/workflows/update.yml` (icono del lápiz) y sustituye todo su contenido por el del archivo `update.yml` de este paquete.
+5. Ejecuta **Actions > Actualizar dashboard > Run workflow** y abre el paso **Descargar jugadores** para ver el resultado.
+
+Si el plan gratuito no cubre la temporada actual, ese paso mostrará el aviso de la API y la página seguirá funcionando sin plantillas.
