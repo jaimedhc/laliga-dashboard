@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La Liga 2026-27 · Ficha por equipo</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF2F4;--s:#fff;--ink:#17262E;--mu:#5B6B74;--ln:#D8E0E4;--ac:#2347B5;--as:#DCE4F8;--up:#12794A;--dn:#B3261E;--dr:#8A949A;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10181D;--s:#18232A;--ink:#E7EEF1;--mu:#93A4AD;--ln:#2A3943;--ac:#7C9BFF;--as:#25335F;--up:#4CC98A;--dn:#FF8A80;--dr:#7B8A92;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10181D;--s:#18232A;--ink:#E7EEF1;--mu:#93A4AD;--ln:#2A3943;--ac:#7C9BFF;--as:#25335F;--up:#4CC98A;--dn:#FF8A80;--dr:#7B8A92;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:24px;margin:0;font-weight:600}h2{font-size:16px;margin:0 0 10px;font-weight:600}
+.sub{color:var(--mu);margin:2px 0 16px}
+.wrap{display:grid;grid-template-columns:300px 1fr;gap:12px;align-items:start}
+@media(max-width:800px){.wrap{grid-template-columns:1fr}}
+.c{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:14px;margin-bottom:12px}
+.sc{overflow-x:auto}table{width:100%;border-collapse:collapse}
+th,td{padding:7px 6px;border-bottom:1px solid var(--ln);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}th{font-weight:500;color:var(--mu);font-size:13px}
+.lg td:nth-child(2){text-align:left}.lg tr.t{cursor:pointer}.lg tr.t:hover,.lg tr.on{background:var(--as)}
+.lg button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.lg button:focus-visible{outline:2px solid var(--ac)}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}
+.k div{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:10px 12px}
+.k span{color:var(--mu);font-size:13px}.k b{display:block;font-size:21px;font-weight:600}
+.f{display:flex;gap:6px;flex-wrap:wrap}
+.f i{font-style:normal;font-weight:600;width:28px;height:28px;border-radius:6px;display:grid;place-items:center;color:#fff;font-size:13px}
+.W{background:var(--up)}.L{background:var(--dn)}.D{background:var(--dr)}
+svg{width:100%;min-width:460px;display:block}svg text{fill:var(--mu);font:11px "IBM Plex Sans",system-ui,sans-serif}
+.gf{fill:var(--ac)}.ga{fill:var(--dr)}
+.lgd{color:var(--mu);font-size:13px;margin:4px 0 0}.note{color:var(--mu);font-size:13px}
+</style></head><body><main>
+<h1>La Liga 2026-27</h1>
+<p class="sub" id="sub"></p>
+<div class="wrap">
+ <section class="c sc"><h2>Clasificación</h2><table class="lg" id="lg"></table></section>
+ <div id="team"></div>
+</div>
+<p class="note">Fuente: football-data.co.uk. Se actualiza solo cada día; los datos aparecen cuando la fuente publica la jornada (suele tardar uno o dos días). Solo estadísticas de equipo de esta temporada.</p>
+</main>
+<script>
+const D=__DATA__;
+const NM={"Ath Bilbao":"Athletic","Ath Madrid":"Atlético","Espanol":"Espanyol","La Coruna":"Deportivo","Santander":"Racing","Sociedad":"Real Sociedad","Vallecano":"Rayo Vallecano","Alaves":"Alavés","Malaga":"Málaga"};
+const nm=t=>NM[t]||t;
+const K=['d','h','a','hg','ag','hx','ax','hs','as','hst','ast','hf','af','hc','ac','hy','ay','hr','ar'];
+const M=D.map(r=>Object.fromEntries(K.map((k,i)=>[k,r[i]])));
+const TEAMS=[...new Set(M.flatMap(m=>[m.h,m.a]))];
+const f1=n=>n.toLocaleString("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1});
+function games(t){return M.filter(m=>m.h===t||m.a===t).map(m=>{const h=m.h===t,g=(a,b)=>h?m[a]:m[b],o=(a,b)=>h?m[b]:m[a];
+ return{d:m.d,h,riv:h?m.a:m.h,gf:g('hg','ag'),ga:o('hg','ag'),xf:g('hx','ax'),xa:o('hx','ax'),sf:g('hs','as'),sa:o('hs','as'),tf:g('hst','ast'),ta:o('hst','ast'),ff:g('hf','af'),fa:o('hf','af'),cf:g('hc','ac'),ca:o('hc','ac'),yf:g('hy','ay'),ya:o('hy','ay'),rf:g('hr','ar'),ra:o('hr','ar')}})}
+const res=x=>x.gf>x.ga?'W':x.gf<x.ga?'L':'D';
+function liga(){return TEAMS.map(t=>{const gs=games(t);let w=0,e=0,gf=0,ga=0;gs.forEach(x=>{gf+=x.gf;ga+=x.ga;const r=res(x);r==='W'?w++:r==='D'&&e++});
+ return{t,pj:gs.length,pts:w*3+e,gf,ga,dg:gf-ga}}).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf)}
+const L=liga();let sel=L[0].t;
+document.getElementById('sub').textContent=M.length+' partidos jugados · datos hasta el '+M[M.length-1].d;
+function paintLiga(){document.getElementById('lg').innerHTML='<tr><th>#</th><th>Equipo</th><th>PJ</th><th>DG</th><th>Pts</th></tr>'+
+ L.map((r,i)=>`<tr class="t ${r.t===sel?'on':''}"><td>${i+1}</td><td><button data-t="${r.t}">${nm(r.t)}</button></td><td>${r.pj}</td><td>${r.dg>0?'+':''}${r.dg}</td><td><b>${r.pts}</b></td></tr>`).join('');
+ document.querySelectorAll('#lg button').forEach(b=>b.onclick=()=>{sel=b.dataset.t;paintLiga();paintTeam()});
+ document.querySelectorAll('#lg tr.t').forEach(tr=>tr.onclick=()=>tr.querySelector('button').click())}
+const ROWS=[['Goles','gf','ga'],['xG (goles esperados)','xf','xa'],['Tiros','sf','sa'],['Tiros a puerta','tf','ta'],['Córners','cf','ca'],['Faltas','ff','fa'],['Amarillas','yf','ya'],['Rojas','rf','ra']];
+const av=(gs,k)=>gs.length?gs.reduce((s,x)=>s+x[k],0)/gs.length:0;
+function paintTeam(){
+ const gs=games(sel),H=gs.filter(x=>x.h),A=gs.filter(x=>!x.h),r=L.find(x=>x.t===sel),pos=L.indexOf(r)+1;
+ const w=gs.filter(x=>res(x)==='W').length,e=gs.filter(x=>res(x)==='D').length,l=gs.length-w-e;
+ const sum=k=>gs.reduce((s,x)=>s+x[k],0);
+ const kp=[['Posición',pos+'º · '+r.pts+' pts'],['Balance',`${w}G ${e}E ${l}P`],['Goles',`${r.gf} a favor · ${r.ga} en contra`],['xG',`${f1(sum('xf'))} a favor · ${f1(sum('xa'))} en contra`],['Tarjetas',`${sum('yf')} amarillas · ${sum('rf')} rojas`]];
+ const n=gs.length,W=640,Ht=190,B=22,mx=Math.max(3,...gs.flatMap(x=>[x.gf,x.ga])),bw=(W-10)/n;
+ let s=`<svg viewBox="0 0 ${W} ${Ht}" role="img" aria-label="Goles por partido">`;
+ gs.forEach((x,i)=>{const x0=10+i*bw,h1=(Ht-B-14)*x.gf/mx,h2=(Ht-B-14)*x.ga/mx,b=bw*.3;
+  s+=`<rect class="gf" rx="2" x="${x0+bw*.15}" y="${Ht-B-h1}" width="${b}" height="${h1}"><title>${nm(x.riv)}: ${x.gf}-${x.ga}</title></rect><rect class="ga" rx="2" x="${x0+bw*.15+b+2}" y="${Ht-B-h2}" width="${b}" height="${h2}"><title>${nm(x.riv)}: ${x.gf}-${x.ga}</title></rect>
+  <text x="${x0+bw*.5}" y="${Ht-B-Math.max(h1,h2)-4}" text-anchor="middle">${x.gf}-${x.ga}</text><text x="${x0+bw*.5}" y="${Ht-6}" text-anchor="middle">${nm(x.riv).slice(0,3)}</text>`});
+ s+='</svg>';
+ const tr=ROWS.map(([lb,a,b])=>`<tr><td>${lb}</td><td>${f1(av(gs,a))}</td><td>${f1(av(gs,b))}</td><td>${f1(av(H,a))}</td><td>${f1(av(A,a))}</td></tr>`).join('');
+ const ml=gs.map(x=>`<tr><td>${x.d}</td><td>${x.h?'Casa':'Fuera'}</td><td>${nm(x.riv)}</td><td><b>${x.gf}-${x.ga}</b></td><td>${f1(x.xf)}-${f1(x.xa)}</td><td>${x.sf}-${x.sa}</td><td>${x.cf}-${x.ca}</td><td>${x.yf}-${x.ya}</td></tr>`).join('');
+ document.getElementById('team').innerHTML=`<h1 style="margin-bottom:10px">${nm(sel)}</h1>
+ <div class="k">${kp.map(k=>`<div><span>${k[0]}</span><b style="font-size:${k[1].length>14?15:21}px">${k[1]}</b></div>`).join('')}</div>
+ <section class="c"><h2>Forma reciente</h2><div class="f">${gs.map(x=>`<i class="${res(x)}" title="${nm(x.riv)} ${x.gf}-${x.ga}">${{W:'G',D:'E',L:'P'}[res(x)]}</i>`).join('')}</div></section>
+ <section class="c sc"><h2>Goles por partido</h2>${s}<p class="lgd">Azul: goles a favor · Gris: goles en contra</p></section>
+ <section class="c sc"><h2>Promedios por partido</h2><table><tr><th></th><th>Equipo</th><th>Rival</th><th>Equipo en casa</th><th>Equipo fuera</th></tr>${tr}</table></section>
+ <section class="c sc"><h2>Partidos</h2><table><tr><th>Fecha</th><th>Lugar</th><th>Rival</th><th>Resultado</th><th>xG</th><th>Tiros</th><th>Córners</th><th>Amarillas</th></tr>${ml}</table></section>`}
+paintLiga();paintTeam();
+</script></body></html>
