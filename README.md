@@ -82,3 +82,9 @@ Los datos por jugador salen de API-Football (plan gratuito: 100 peticiones al d�
 5. Ejecuta **Actions > Actualizar dashboard > Run workflow** y abre el paso **Descargar jugadores** para ver el resultado.
 
 Si el plan gratuito no cubre la temporada actual, ese paso mostrará el aviso de la API y la página seguirá funcionando sin plantillas.
+
+## Modelo y predicciones (usa solo la temporada actual)
+
+La pestaña **Modelo y predicciones** necesita estos archivos en el repositorio:
+`build.py`, `model.py`, `template.html` y `calendario.json` (el calendario completo de la RFEF).
+No hace falta cambiar `update.yml`: `build.py` ya llama al modelo. Cada día se recalcula con los partidos nuevos.

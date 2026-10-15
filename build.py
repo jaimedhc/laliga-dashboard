@@ -1,5 +1,6 @@
 """Descarga el CSV de La Liga de football-data.co.uk y genera index.html."""
 import csv, io, json, os, urllib.request
+import model
 from datetime import datetime
 
 URL = os.environ.get("CSV_URL", "https://www.football-data.co.uk/mmz4281/2627/SP1.csv")
@@ -61,6 +62,10 @@ data = json.dumps([x[1] for x in rows], ensure_ascii=False, separators=(",", ":"
 pl = "{}"
 if os.path.exists("players.json"):
     pl = json.dumps(json.load(open("players.json", encoding="utf-8")).get("teams", {}), ensure_ascii=False, separators=(",", ":"))
-html = open("template.html", encoding="utf-8").read().replace("__DATA__", data).replace("__PLAYERS__", pl)
+data_rows = [x[1] for x in rows]
+cal = json.load(open("calendario.json")) if os.path.exists("calendario.json") else []
+mo = model.run(data_rows, cal) if cal else {}
+html = (open("template.html", encoding="utf-8").read().replace("__DATA__", data).replace("__PLAYERS__", pl)
+        .replace("__MODEL__", json.dumps(mo, ensure_ascii=False, separators=(",", ":"))))
 open("index.html", "w", encoding="utf-8").write(html)
 print(f"OK: {len(rows)} partidos")
