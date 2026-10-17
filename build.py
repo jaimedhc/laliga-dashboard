@@ -65,7 +65,10 @@ if os.path.exists("players.json"):
 data_rows = [x[1] for x in rows]
 cal = json.load(open("calendario.json")) if os.path.exists("calendario.json") else []
 mo = model.run(data_rows, cal) if cal else {}
+played_set = {(r[2], r[3]) for r in data_rows}
+pend_cal = [c for c in cal if (c[2], c[3]) not in played_set]
 html = (open("template.html", encoding="utf-8").read().replace("__DATA__", data).replace("__PLAYERS__", pl)
-        .replace("__MODEL__", json.dumps(mo, ensure_ascii=False, separators=(",", ":"))))
+        .replace("__MODEL__", json.dumps(mo, ensure_ascii=False, separators=(",", ":")))
+        .replace("__CAL__", json.dumps(pend_cal, separators=(",", ":"))))
 open("index.html", "w", encoding="utf-8").write(html)
 print(f"OK: {len(rows)} partidos")

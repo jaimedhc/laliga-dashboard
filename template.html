@@ -47,6 +47,7 @@ select{font:inherit;color:inherit;background:var(--s);border:1px solid var(--ln)
 const D=__DATA__;
 const PL=__PLAYERS__;
 const MO=__MODEL__;
+const CAL=__CAL__;
 const NM={"Ath Bilbao":"Athletic","Ath Madrid":"Atlético","Espanol":"Espanyol","La Coruna":"Deportivo","Santander":"Racing","Sociedad":"Real Sociedad","Vallecano":"Rayo Vallecano","Alaves":"Alavés","Malaga":"Málaga"};
 const nm=t=>NM[t]||t;
 const K=['d','tm','h','a','hg','ag','h1','a1','hx','ax','hs','as','hst','ast','hf','af','hc','ac','hy','ay','hr','ar','oh','od','oa','ov','un','hcp'];
@@ -84,6 +85,23 @@ function squadHtml(){const sq=squad(sel);
  const a=[...sq].sort((x,y)=>ps==="n"?x.n.localeCompare(y.n,"es"):(y[ps]-x[ps])||(y.min-x.min));
  const H=[["n","Jugador"],["pj","PJ"],["min","Min"],["g","Goles"],["a","Asist."],["y","Amarillas"],["r","Rojas"]];
  return `<section class="c sc"><h2>Plantilla</h2><table class="pl"><tr>${H.map(h=>`<th><button data-p="${h[0]}">${h[1]}${ps===h[0]?" ↓":""}</button></th>`).join("")}</tr>${a.map(p=>`<tr><td>${p.n} <span class="mu">${POS[p.pos]||""}</span></td><td>${p.pj}</td><td>${p.min}</td><td>${p.g}</td><td>${p.a}</td><td>${p.y}</td><td>${p.r}</td></tr>`).join("")}</table></section>`}
+
+let rv="",rvFor="",win=2;
+const posOf=t=>L.findIndex(x=>x.t===t)+1;
+const nearOf=(o,ex)=>{const p=posOf(o);return L.filter((x,i)=>Math.abs(i+1-p)<=win&&x.t!==o&&x.t!==ex).map(x=>x.t)};
+const ppgOf=gs=>gs.length?gs.reduce((s,x)=>s+(x.gf>x.ga?3:x.gf===x.ga?1:0),0)/gs.length:0;
+const RK=[['Goles a favor','gf'],['Goles en contra','ga'],['xG a favor','xf'],['xG en contra','xa'],['Tiros','sf'],['Tiros del rival','sa'],['Tiros a puerta','tf'],['Córners','cf'],['Faltas','ff'],['Amarillas','yf'],['Rojas','rf']];
+function rvBlock(t,o){const set=nearOf(o,t),p=posOf(o),all=games(t),gs=all.filter(x=>set.includes(x.riv)),lo=Math.max(1,p-win),hi=Math.min(L.length,p+win);
+ const hd=`<h3 style="font-size:15px;margin:14px 0 6px">${nm(t)} contra equipos cercanos a ${nm(o)} (puestos ${lo}º a ${hi}º)</h3><p class="note">Equipos considerados: ${set.map(nm).join(', ')}.</p>`;
+ if(!gs.length)return hd+`<p class="note">${nm(t)} aún no ha jugado contra ninguno de ellos.</p>`;
+ const w=gs.filter(x=>res(x)==='W').length,e=gs.filter(x=>res(x)==='D').length;
+ return hd+`<table class="mt"><tr><th></th><th>Contra ellos (${gs.length} partidos: ${w}G ${e}E ${gs.length-w-e}P)</th><th>Media de la temporada</th></tr><tr><td>Puntos por partido</td><td>${f1(ppgOf(gs))}</td><td>${f1(ppgOf(all))}</td></tr>${RK.map(([lb,k])=>`<tr><td>${lb}</td><td>${f1(av(gs,k))}</td><td>${f1(av(all,k))}</td></tr>`).join('')}</table>
+ <table style="margin-top:8px"><tr><th>Fecha</th><th>Lugar</th><th>Rival (puesto actual)</th><th>Resultado</th><th>xG</th></tr>${gs.map(x=>`<tr><td>${x.d}</td><td>${x.h?'Casa':'Fuera'}</td><td>${nm(x.riv)} (${posOf(x.riv)}º)</td><td><b>${x.gf}-${x.ga}</b></td><td>${f1(x.xf)}-${f1(x.xa)}</td></tr>`).join('')}</table>`}
+function rivalHtml(){
+ if(rvFor!==sel||!rv||rv===sel){const c=CAL.filter(c=>c[2]===sel||c[3]===sel).sort((a,b)=>a[1]<b[1]?-1:1)[0];rv=c?(c[2]===sel?c[3]:c[2]):TEAMS.find(t=>t!==sel);rvFor=sel}
+ return `<section class="c sc"><h2>Contra equipos parecidos al rival</h2><select id="rv" aria-label="Rival" style="width:auto">${TEAMS.filter(t=>t!==sel).sort((a,b)=>nm(a).localeCompare(nm(b),'es')).map(t=>`<option value="${t}" ${t===rv?'selected':''}>${nm(t)} (${posOf(t)}º)</option>`).join('')}</select>
+ <select id="wn" aria-label="Ventana" style="margin-left:8px;width:auto">${[2,3,4].map(v=>`<option value="${v}" ${v===win?"selected":""}>±${v} puestos</option>`).join("")}</select><p class="note">Por defecto se elige el próximo partido pendiente del equipo. Se agrupan los equipos que están por encima y por debajo del rival en la clasificación actual, dentro de la ventana elegida (en los extremos de la tabla se recorta). Ampliar la ventana da más partidos pero menos parecidos.</p>${rvBlock(sel,rv)}${rvBlock(rv,sel)}
+ <p class="note">Son muy pocos partidos (cada pareja se ha enfrentado como mucho una vez), así que son tendencias y no conclusiones.</p></section>`}
 const ROWS=[['Goles','gf','ga'],['Goles 1ª parte','p1','q1'],['Goles 2ª parte','p2','q2'],['xG (goles esperados)','xf','xa'],['Tiros','sf','sa'],['Tiros a puerta','tf','ta'],['Córners','cf','ca'],['Faltas','ff','fa'],['Amarillas','yf','ya'],['Rojas','rf','ra']];
 function paintTeam(){
  const gs=games(sel),H=gs.filter(x=>x.h),A=gs.filter(x=>!x.h),r=L.find(x=>x.t===sel),pos=L.indexOf(r)+1,n=gs.length;
@@ -106,8 +124,8 @@ function paintTeam(){
  <section class="c sc"><h2>Goles por partido</h2>${s}<p class="lgd">Azul: goles a favor · Gris: goles en contra</p></section>
  <section class="c"><h2>Resumen avanzado</h2><div class="k s" style="margin:0">${adv.map(k=>`<div><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}</div></section>
  <section class="c sc"><h2>Promedios por partido</h2><table><tr><th></th><th>Equipo</th><th>Rival</th><th>Equipo en casa</th><th>Equipo fuera</th></tr>${tr}</table></section>
- <section class="c sc"><h2>Partidos</h2><table><tr><th>Fecha</th><th>Lugar</th><th>Rival</th><th>Resultado (descanso)</th><th>xG</th><th>Tiros (a puerta)</th><th>Córners</th><th>Faltas</th><th>Amarillas</th><th>Rojas</th><th>Gana según cuotas</th></tr>${ml}</table></section>${squadHtml()}`;
- document.querySelectorAll('.pl button').forEach(b=>b.onclick=()=>{ps=b.dataset.p;paintTeam()})}
+ <section class="c sc"><h2>Partidos</h2><table><tr><th>Fecha</th><th>Lugar</th><th>Rival</th><th>Resultado (descanso)</th><th>xG</th><th>Tiros (a puerta)</th><th>Córners</th><th>Faltas</th><th>Amarillas</th><th>Rojas</th><th>Gana según cuotas</th></tr>${ml}</table></section>${rivalHtml()}${squadHtml()}`;
+ document.querySelectorAll('.pl button').forEach(b=>b.onclick=()=>{ps=b.dataset.p;paintTeam()});document.querySelectorAll('#rv').forEach(s=>s.onchange=()=>{rv=s.value;paintTeam()});document.querySelectorAll('#wn').forEach(s=>s.onchange=()=>{win=+s.value;paintTeam()})}
 const pr=x=>x<0.005?'<1 %':Math.round(x*100)+' %',f2=n=>n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
 function paintModel(){const el=document.getElementById('mov');
  if(!MO||!MO.n){el.innerHTML='<section class="c"><p class="note">El modelo aparecerá cuando exista el archivo calendario.json.</p></section>';return}
