@@ -78,6 +78,8 @@ def run(data, cal, sims=4000, w=0.5, reg=16.0):
         out["bt"] = {"n": len(bt), "model": score([(a, b) for a, b, _ in bt]), "market": score([(c, b) for _, b, c in bt]),
                      "blend": score([(tuple((x+y)/2 for x, y in zip(a, c)), b) for a, b, c in bt]),
                      "uniform": score([((1/3, 1/3, 1/3), b) for _, b, _ in bt])}
+        dl = [math.log(max(c[b], 1e-9)) - math.log(max(a[b], 1e-9)) for a, b, c in bt]  # log-loss modelo menos mercado
+        mdl = sum(dl)/len(dl); out["bt"]["d"] = {"m": mdl, "se": math.sqrt(sum((x-mdl)**2 for x in dl)/(len(dl)-1)/len(dl))}
         sens = []  # sensibilidad a los parámetros (no se usa para elegir)
         for w2 in (0.0, 0.5, 1.0):
             for r2 in (8, 16, 32):
@@ -115,5 +117,5 @@ def run(data, cal, sims=4000, w=0.5, reg=16.0):
             if r < 4: t4[t] += 1
             if r >= n-3: rl[t] += 1
     out["teams"] = [{"t": t, "att": math.exp(p["att"][i]), "df": math.exp(-p["df"][i]), "pj": pj[i], "pts": bp[i],
-                     "exp": sp[i]/sims, "ch": ch[i]/sims, "t4": t4[i]/sims, "rl": rl[i]/sims} for i, t in enumerate(teams)]
+                     "sa": p["sa"][i], "sd": p["sd"][i], "exp": sp[i]/sims, "ch": ch[i]/sims, "t4": t4[i]/sims, "rl": rl[i]/sims} for i, t in enumerate(teams)]
     return out
