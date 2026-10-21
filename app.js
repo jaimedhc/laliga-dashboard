@@ -341,6 +341,44 @@ function umbral(X, k, side, thr) {
   return {up, dn};
 }
 const lineTxt = L => f1(L).replace(',0', '');
+/* Media según solo los rivales parecidos: lo que hizo t contra los parecidos a o y lo que concedió o contra los parecidos a t. */
+function crossMean(X, k, side) {
+  const one = (cT, cO) => {
+    const a = cT.rows[k], b = cO.rows[k]; if (!a || !b) return null;
+    const n1 = a.f.n, n2 = b.a.n; if (!n1 && !n2) return null;
+    return {m: ((n1 ? a.obs * n1 : 0) + (n2 ? b.obsA * n2 : 0)) / (n1 + n2), n: n1 + n2};
+  };
+  const H = one(X.cH, X.cA), A = one(X.cA, X.cH);
+  if (side === 'H') return H; if (side === 'A') return A;
+  return H && A ? {m: H.m + A.m, n: Math.min(H.n, A.n)} : null;
+}
+/* Probabilidad de superar L según el modelo y según los rivales parecidos; la prudente es la menor de las dos. */
+function bothOver(X, k, side, L) {
+  const pm = lineP(X, k, side, L), c = crossMean(X, k, side), x = X.est[k][side];
+  const px = c ? pOver({m: Math.max(c.m, 0.01), V: x.V * Math.max(c.m, 0.01) / x.m}, L, VK[k].cont) : null;
+  return {pm, px, over: px == null ? pm : Math.min(pm, px), under: px == null ? 1 - pm : Math.min(1 - pm, 1 - px)};
+}
+const LEVELS3 = [['Muy prudente', 0.85], ['Prudente', 0.70], ['Optimista', 0.60]];
+function prudentHtml(X, h, a) {
+  const cell = (k, side, thr) => {
+    const x = X.est[k][side], sd = Math.sqrt(x.V), lo = Math.max(0.5, Math.floor(x.m - 4 * sd) + 0.5), hi = Math.floor(x.m + 4 * sd) + 0.5;
+    let up = null, dn = null;
+    for (let L = lo; L <= hi; L += 1) { const b = bothOver(X, k, side, L); if (b.over >= thr) up = {L, p: b.over}; if (!dn && b.under >= thr) dn = {L, p: b.under}; }
+    const fmt = (t, o) => `${t} ${lineTxt(o.L)} <small>(${pc(o.p)} · cuota justa ${f2(1 / o.p)})</small>`;
+    return [up ? fmt('más de', up) : '', dn ? fmt('menos de', dn) : ''].filter(Boolean).join('<br>') || '–';
+  };
+  const rowsDef = [['g', 'T', 'Goles (total)'], ['c', 'T', 'Córners (total)'], ['y', 'T', 'Amarillas (total)'], ['st', 'T', 'Tiros a puerta (total)'],
+    ['s', 'T', 'Tiros (total)'], ['f', 'T', 'Faltas (total)'], ['g', 'H', 'Goles ' + NM[h]], ['g', 'A', 'Goles ' + NM[a]],
+    ['c', 'H', 'Córners ' + NM[h]], ['c', 'A', 'Córners ' + NM[a]], ['y', 'H', 'Amarillas ' + NM[h]], ['y', 'A', 'Amarillas ' + NM[a]]];
+  const rows = rowsDef.filter(([k]) => X.est[k]).map(([k, side, lab]) => {
+    const c = crossMean(X, k, side), m = X.est[k][side].m;
+    const agree = c ? (Math.abs(c.m - m) <= Math.max(0.15 * m, 0.5) ? '<span class="chip clear">Coinciden</span>' : `<span class="chip maybe">${c.m > m ? 'Parecidos: más' : 'Parecidos: menos'}</span>`) : '<span class="chip">Sin cruce</span>';
+    return `<tr><td class="l">${esc(lab)}</td><td>${f1(m)}</td><td>${c ? `${f1(c.m)} <small>(${c.n} p.)</small>` : '–'}</td><td>${agree}</td>${LEVELS3.map(([, t]) => `<td>${cell(k, side, t)}</td>`).join('')}</tr>`;
+  });
+  return card('Umbrales prudentes: modelo y rivales parecidos', tbl([['Estadística', 'l'], 'Esperado (modelo)', 'Rivales parecidos', 'Acuerdo',
+    'Muy prudente (85 %)', 'Prudente (70 %)', 'Optimista (60 %)'], rows, 'num et') +
+    note(`Una línea aparece solo si la cumplen a la vez el modelo y lo que han hecho los dos equipos contra rivales parecidos (se toma la menor de las dos probabilidades); si no hay partidos en el cruce, solo el modelo. "Rivales parecidos" mezcla lo que cada equipo hizo contra los parecidos al otro y lo que el otro concedió contra los parecidos a él; con pocos partidos es muy inestable. La <b>cuota justa</b> es la que correspondería a esa probabilidad: solo tendría sentido si una casa pagara claramente más (por su margen, al menos un 5-10 % más). Una línea muy probable paga muy poco, y que algo sea probable no lo convierte en buena apuesta.`));
+}
 function renderPartido() {
   const f = FX.find(x => fxKey(x) === ST_.fx) || upcoming()[0] || FX[0];
   if (!f) { $('c-partido').innerHTML = card('', note('No quedan partidos pendientes.')); return; }
@@ -428,7 +466,7 @@ function renderPartido() {
     <div class="tile"><span>Marcador más probable</span><b>${pr.top[0][0]}-${pr.top[0][1]}</b><small>${pc(pr.top[0][2])} · luego ${pr.top.slice(1, 3).map(t => `${t[0]}-${t[1]} ${pc(t[2])}`).join(', ')}</small></div>
     <div class="tile"><span>Más de 2,5 goles</span><b>${pc(pr.ou[2])}</b>${mo != null ? `<small>mercado ${pc(mo)}</small>` : ''}</div>
     <div class="tile"><span>Ambos marcan</span><b>${pc(pr.bb)}</b></div></div>`;
-  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + card('Conclusiones', concl, 'concl') +
+  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + prudentHtml(X, h, a) + card('Conclusiones', concl, 'concl') +
     card('Estimaciones y umbrales', tbl(['', esc(NM[h]), esc(NM[a]), 'Total', 'Probabilidad de superar la línea (total)'], erows, 'num et') +
       note(`Cada celda da la media esperada y, en pequeño, su rango con ±${z} ${z === 1 ? 'error' : 'errores'}: lo que cabe esperar de media, no de un partido concreto. Las probabilidades de la derecha sí son para este partido e incluyen la variación normal entre partidos. ` +
         `${!ST_.useX ? 'El ajuste con rivales parecidos está desactivado.' : wmax < 0.01
