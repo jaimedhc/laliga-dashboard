@@ -1,169 +1,65 @@
-<!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>La Liga 2026-27 · Ficha por equipo</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#EEF2F4;--s:#fff;--ink:#17262E;--mu:#5B6B74;--ln:#D8E0E4;--ac:#2347B5;--as:#DCE4F8;--up:#12794A;--dn:#B3261E;--dr:#8A949A;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10181D;--s:#18232A;--ink:#E7EEF1;--mu:#93A4AD;--ln:#2A3943;--ac:#7C9BFF;--as:#25335F;--up:#4CC98A;--dn:#FF8A80;--dr:#7B8A92;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#10181D;--s:#18232A;--ink:#E7EEF1;--mu:#93A4AD;--ln:#2A3943;--ac:#7C9BFF;--as:#25335F;--up:#4CC98A;--dn:#FF8A80;--dr:#7B8A92;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:1100px;margin:0 auto;padding:20px 16px 40px}
-h1{font-size:24px;margin:0;font-weight:600}h2{font-size:16px;margin:0 0 10px;font-weight:600}
-.sub{color:var(--mu);margin:2px 0 16px}
-.wrap{display:grid;grid-template-columns:300px 1fr;gap:12px;align-items:start}
-@media(max-width:800px){.wrap{grid-template-columns:1fr}}
-.c{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:14px;margin-bottom:12px}
-.sc{overflow-x:auto}table{width:100%;border-collapse:collapse}
-th,td{padding:7px 6px;border-bottom:1px solid var(--ln);text-align:right;white-space:nowrap}
-th:first-child,td:first-child{text-align:left}th{font-weight:500;color:var(--mu);font-size:13px}
-.lg td:nth-child(2){text-align:left}.lg tr.t{cursor:pointer}.lg tr.t:hover,.lg tr.on{background:var(--as)}
-.lg button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
-.lg button:focus-visible{outline:2px solid var(--ac)}
-.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px}
-.k div{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:10px 12px}
-.k span{color:var(--mu);font-size:13px}.k b{display:block;font-size:21px;font-weight:600}
-.f{display:flex;gap:6px;flex-wrap:wrap}
-.f i{font-style:normal;font-weight:600;width:28px;height:28px;border-radius:6px;display:grid;place-items:center;color:#fff;font-size:13px}
-.W{background:var(--up)}.L{background:var(--dn)}.D{background:var(--dr)}
-svg{width:100%;min-width:460px;display:block}svg text{fill:var(--mu);font:11px "IBM Plex Sans",system-ui,sans-serif}
-.gf{fill:var(--ac)}.ga{fill:var(--dr)}
-.lgd{color:var(--mu);font-size:13px;margin:4px 0 0}.note{color:var(--mu);font-size:13px}
-select{font:inherit;color:inherit;background:var(--s);border:1px solid var(--ln);border-radius:8px;padding:6px 8px;margin-bottom:8px;width:100%}
-.rk{display:grid;grid-template-columns:120px 1fr 78px;gap:6px;align-items:center;font-size:13px;padding:2px 0}.rk .b{height:8px;border-radius:4px;background:var(--ac);opacity:.7}.rk.on{font-weight:600}.rk.on .b{opacity:1}.rk span:last-child{text-align:right}.mu{color:var(--mu);font-size:12px}
-.k.s b{font-size:18px}.sg{font-weight:600}[hidden]{display:none!important}.nav{display:flex;gap:8px;margin-bottom:14px}.nav button{font:inherit;color:var(--mu);background:var(--s);border:1px solid var(--ln);border-radius:8px;padding:7px 12px;cursor:pointer}.nav button[aria-pressed="true"]{background:var(--ac);color:#fff;border-color:var(--ac)}.mt td:not(:first-child){text-align:right}.pl th button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}</style></head><body><main>
-<h1>La Liga 2026-27</h1>
-<p class="sub" id="sub"></p>
-<div class="nav" id="nav"><button data-v="eq" aria-pressed="true">Equipos</button><button data-v="mo" aria-pressed="false">Modelo y predicciones</button></div>
-<div class="wrap" id="eqv">
- <div><section class="c sc"><h2>Clasificación</h2><table class="lg" id="lg"></table></section><section class="c"><h2>Ranking por estadística</h2><select id="mt" aria-label="Estadística"></select><div id="rk"></div></section></div>
- <div id="team"></div>
-</div>
-<div id="mov" hidden></div>
-<p class="note">Fuente: football-data.co.uk. Se actualiza solo cada día; los datos aparecen cuando la fuente publica la jornada (suele tardar uno o dos días). Solo estadísticas de equipo de esta temporada.</p>
+<title>LaLiga 2026-27</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Clasificación, estadísticas, análisis de partidos y predicciones de LaLiga 2026-27 con datos solo de esta temporada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>/*__CSS__*/</style>
+<div class="page">
+<header class="top">
+  <div><h1>LaLiga 2026-27</h1><p class="sub" id="sub"></p></div>
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button role="tab" data-view="equipos" aria-selected="true">Equipos</button>
+    <button role="tab" data-view="partido" aria-selected="false">Análisis de partido</button>
+    <button role="tab" data-view="predicciones" aria-selected="false">Predicciones</button>
+    <button role="tab" data-view="historial" aria-selected="false">Historial</button>
+    <button role="tab" data-view="metodo" aria-selected="false">Método</button>
+  </nav>
+</header>
+<main>
+  <section id="v-equipos" class="eq">
+    <div>
+      <section class="card"><h2>Clasificación</h2><div id="tabla"></div></section>
+      <section class="card"><h2>Ranking por estadística</h2><select id="rk-sel" aria-label="Estadística del ranking"></select><div id="rank"></div></section>
+    </div>
+    <div id="team"></div>
+  </section>
+  <section id="v-partido" hidden><div id="c-partido"></div></section>
+  <section id="v-predicciones" hidden><div id="c-pred"></div></section>
+  <section id="v-historial" hidden><div id="c-hist"></div></section>
+  <section id="v-metodo" hidden class="card prose">
+    <h2>Cómo funciona</h2>
+    <h3>Datos</h3>
+    <p>Los resultados, las estadísticas de cada partido (tiros, córners, faltas, tarjetas), el xG y las cuotas de cierre salen del CSV de football-data.co.uk. Las fechas y cuotas de los próximos partidos salen de su archivo de próximos partidos, que se publica unos días antes de cada jornada; si un partido todavía no aparece, se usa el calendario de la RFEF. GitHub descarga todo dos veces al día y regenera esta página. Solo se usan datos de esta temporada.</p>
+    <h3>Modelo de goles</h3>
+    <p>Cada equipo tiene un ataque y una defensa, y todos comparten una ventaja de local. Los goles esperados de un partido salen de combinar la media de la liga, el ataque de un equipo, la defensa del otro y, para el local, la ventaja de jugar en casa. Para estimar esos valores se mezclan al 50 % goles reales y xG, porque el xG depende menos del azar.</p>
+    <p>Con pocos partidos, un equipo puede parecer mucho mejor o peor de lo que es, así que los valores se acercan a la media de la liga. Cuánto se acercan no está fijado a mano: se calcula con los propios datos según cuánto se diferencian de verdad los equipos. A medida que avanza la temporada, se encogen menos.</p>
+    <p>La probabilidad de cada marcador sale de una distribución de Poisson, con la corrección de Dixon-Coles para los marcadores bajos (0-0, 1-0, 0-1 y 1-1), que es donde el Poisson simple se equivoca, y promediando sobre la incertidumbre de cada parámetro.</p>
+    <h3>Estadísticas</h3>
+    <p>El mismo esquema de ataque y defensa se ajusta por separado para xG, tiros, tiros a puerta, córners, faltas, tarjetas y goles de la primera parte. Cada estadística tiene su propia ventaja de local y su propia variación: los córners varían de un partido a otro más de lo que daría el azar puro, y las faltas, menos. Así, cada valor esperado tiene en cuenta al rival y el campo.</p>
+    <h3>Error, señal y modos</h3>
+    <p>El error es cuánto podría moverse una media solo por azar con los partidos jugados. Una diferencia es <b>clara</b> si supera dos errores, <b>posible</b> si supera uno y <b>ruido</b> si no llega. En el análisis de partido, el modo optimista da por buenas las diferencias de más de un error y los umbrales con al menos un 60 % de probabilidad; el prudente exige dos errores y un 70 %.</p>
+    <p>El rango de una media no es lo mismo que lo que puede pasar en un partido: un equipo que promedia 5 córners puede sacar 1 o 10. Por eso el análisis separa el rango de la media de la probabilidad de superar cada línea en ese partido.</p>
+    <h3>Rivales parecidos</h3>
+    <p>Para un partido A–B se miran los partidos de A contra los equipos que están a pocos puestos de B en la clasificación actual, y al revés. Cada uno de esos partidos se compara con lo que esperaba el modelo, que ya tiene en cuenta el rival y el campo. La media de esas diferencias ajusta la estimación solo en la medida en que los datos de toda la liga demuestran que el rendimiento cambia de verdad según la zona de la tabla del rival. Si no lo demuestran, el cruce se muestra pero no mueve las cifras.</p>
+    <h3>Simulación</h3>
+    <p>Se juega el resto de la liga 5.000 veces. En cada simulación se sortea la fuerza de cada equipo con su incertidumbre, más una variación extra porque los equipos cambian durante la temporada por lesiones, entrenadores o fichajes. Los empates a puntos se resuelven como en el artículo 10 de las normas de competición de la RFEF: entre dos equipos, la diferencia de goles en sus partidos; entre más de dos, los puntos y después la diferencia de goles en los partidos entre ellos; luego la diferencia de goles general y los goles a favor. El juego limpio se sustituye por un sorteo.</p>
+    <h3>Registro de predicciones</h3>
+    <p>En cada actualización se guardan en predictions.json las predicciones de los partidos de los próximos diez días. Se van renovando con los datos nuevos hasta el día del partido y a partir de ahí quedan congeladas. Cuando llega el resultado se evalúan frente a lo que pasó y frente a las cuotas de cierre. Los partidos anteriores al registro tienen predicciones reconstruidas, calculadas solo con los partidos previos a cada uno; se marcan aparte porque se hicieron con el código actual.</p>
+    <h3>Límites</h3>
+    <p>Con pocos partidos por equipo, casi todo tiene mucho error. El modelo no sabe nada de lesiones, alineaciones, rotaciones ni cambios de entrenador, y las casas de apuestas sí lo tienen en cuenta; por eso, en la prueba retrospectiva, el mercado predice mejor. Esto es una herramienta de análisis, no un consejo de apuestas.</p>
+    <h3>Glosario</h3>
+    <dl>
+      <dt>xG (goles esperados)</dt><dd>Calidad de las ocasiones: la probabilidad de gol de cada tiro según su distancia, su ángulo y el tipo de jugada, sumada en todo el partido.</dd>
+      <dt>xPts (puntos esperados)</dt><dd>Los puntos que habría sumado un equipo si cada partido se hubiera decidido según el xG de los dos equipos.</dd>
+      <dt>Log-loss y Brier</dt><dd>Miden lo buenas que han sido unas probabilidades; cuanto más bajas, mejor. Repartir un tercio a cada resultado da una log-loss de 1,10.</dd>
+      <dt>Margen de las casas</dt><dd>Las probabilidades que implican las cuotas suman más del 100 %. Ese exceso se quita repartiéndolo en proporción a cada resultado.</dd>
+      <dt>Cuota de cierre</dt><dd>La última cuota antes del partido, la que incorpora más información.</dd>
+      <dt>pp (puntos porcentuales)</dt><dd>Diferencia entre dos porcentajes: de 40 % a 45 % son 5 pp.</dd>
+    </dl>
+  </section>
 </main>
-<script>
-const D=__DATA__;
-const PL=__PLAYERS__;
-const MO=__MODEL__;
-const CAL=__CAL__;
-const NM={"Ath Bilbao":"Athletic","Ath Madrid":"Atlético","Espanol":"Espanyol","La Coruna":"Deportivo","Santander":"Racing","Sociedad":"Real Sociedad","Vallecano":"Rayo Vallecano","Alaves":"Alavés","Malaga":"Málaga"};
-const nm=t=>NM[t]||t;
-const K=['d','tm','h','a','hg','ag','h1','a1','hx','ax','hs','as','hst','ast','hf','af','hc','ac','hy','ay','hr','ar','oh','od','oa','ov','un','hcp'];
-const M=D.map(r=>Object.fromEntries(K.map((k,i)=>[k,r[i]])));
-const TEAMS=[...new Set(M.flatMap(m=>[m.h,m.a]))];
-const f1=n=>n.toLocaleString("es-ES",{minimumFractionDigits:1,maximumFractionDigits:1});
-const pc=x=>Math.round(x*100)+' %';
-const GCACHE={};const games=t=>GCACHE[t]||(GCACHE[t]=games0(t));function games0(t){return M.filter(m=>m.h===t||m.a===t).map(m=>{const h=m.h===t,g=(a,b)=>h?m[a]:m[b],o=(a,b)=>h?m[b]:m[a];
- const i=m.oh&&m.od&&m.oa?1/m.oh+1/m.od+1/m.oa:0,pw=i?(1/(h?m.oh:m.oa))/i:null,pd=i?(1/m.od)/i:null,gf=g('hg','ag'),ga=o('hg','ag'),p1=g('h1','a1'),q1=o('h1','a1');
- return{d:m.d,h,riv:h?m.a:m.h,gf,ga,p1,q1,p2:gf-p1,q2:ga-q1,pw,pd,xf:g('hx','ax'),xa:o('hx','ax'),sf:g('hs','as'),sa:o('hs','as'),tf:g('hst','ast'),ta:o('hst','ast'),ff:g('hf','af'),fa:o('hf','af'),cf:g('hc','ac'),ca:o('hc','ac'),yf:g('hy','ay'),ya:o('hy','ay'),rf:g('hr','ar'),ra:o('hr','ar')}})}
-const res=x=>x.gf>x.ga?'W':x.gf<x.ga?'L':'D';
-function liga(){return TEAMS.map(t=>{const gs=games(t);let w=0,e=0,gf=0,ga=0;gs.forEach(x=>{gf+=x.gf;ga+=x.ga;const r=res(x);r==='W'?w++:r==='D'&&e++});
- return{t,pj:gs.length,pts:w*3+e,gf,ga,dg:gf-ga}}).sort((a,b)=>b.pts-a.pts||b.dg-a.dg||b.gf-a.gf)}
-const L=liga();let sel=L[0].t,mi=0;
-const av=(gs,k)=>gs.length?gs.reduce((s,x)=>s+x[k],0)/gs.length:0;
-document.getElementById('sub').textContent=M.length+' partidos jugados · datos hasta el '+M[M.length-1].d;
-const go=()=>{paintLiga();paintTeam();paintRank()};
-function paintLiga(){document.getElementById('lg').innerHTML='<tr><th>#</th><th>Equipo</th><th>PJ</th><th>DG</th><th>Pts</th></tr>'+
- L.map((r,i)=>`<tr class="t ${r.t===sel?'on':''}"><td>${i+1}</td><td><button data-t="${r.t}">${nm(r.t)}</button></td><td>${r.pj}</td><td>${r.dg>0?'+':''}${r.dg}</td><td><b>${r.pts}</b></td></tr>`).join('');
- document.querySelectorAll('#lg button').forEach(b=>b.onclick=()=>{sel=b.dataset.t;go()});
- document.querySelectorAll('#lg tr.t').forEach(tr=>tr.onclick=()=>tr.querySelector('button').click())}
-const VARS=[['Goles','gf','ga'],['Goles 1ª parte','p1','q1'],['Goles 2ª parte','p2','q2'],['xG','xf','xa'],['Tiros','sf','sa'],['Tiros a puerta','tf','ta'],['Córners','cf','ca'],['Faltas','ff','fa'],['Amarillas','yf','ya'],['Rojas','rf','ra']];
-const KEYS=VARS.flatMap(v=>[v[1],v[2]]);
-const LB={gf:'Goles a favor',ga:'Goles en contra',p1:'Goles 1ª parte a favor',q1:'Goles 1ª parte en contra',p2:'Goles 2ª parte a favor',q2:'Goles 2ª parte en contra',xf:'xG a favor',xa:'xG en contra',sf:'Tiros',sa:'Tiros del rival',tf:'Tiros a puerta',ta:'Tiros a puerta del rival',cf:'Córners',ca:'Córners del rival',ff:'Faltas cometidas',fa:'Faltas del rival',yf:'Amarillas',ya:'Amarillas del rival',rf:'Rojas',ra:'Rojas del rival'};
-const MT=KEYS.map(k=>[LB[k],k]);
-document.getElementById('mt').innerHTML=MT.map((m,i)=>`<option value="${i}">${m[0]} (por partido)</option>`).join('');
-document.getElementById('mt').onchange=e=>{mi=+e.target.value;paintRank()};
-function paintRank(){const k=MT[mi][1],a=TEAMS.map(t=>{const gs=games(t);return{t,v:av(gs,k),se:Math.sqrt(SK[k].w/gs.length)}}).sort((x,y)=>y.v-x.v),mx=a[0].v||1;
- document.getElementById('rk').innerHTML=`<p class="note" style="margin:0 0 6px">Media de la liga: ${f1(MU[k])}. En negrita, equipos que se alejan de la media más de dos errores (no es ruido).</p>`+a.map((x,i)=>`<div class="rk ${x.t===sel?'on':''}"><span>${i+1}. ${nm(x.t)}</span><div class="b" style="width:${x.v/mx*100}%"></div><span class="${Math.abs(x.v-MU[k])>2*x.se?'sg':''}">${f1(x.v)} ±${f1(x.se)}</span></div>`).join('')}
-const AL={"Alaves":["alaves"],"Ath Bilbao":["athletic"],"Ath Madrid":["atletico"],"Betis":["betis"],"Celta":["celta"],"Espanol":["espanyol"],"La Coruna":["coruna"],"Santander":["racing"],"Sociedad":["sociedad"],"Vallecano":["vallecano","rayo"],"Real Madrid":["real madrid"]};
-const nz=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
-const POS={Goalkeeper:"POR",Defender:"DEF",Midfielder:"MED",Attacker:"DEL"};
-let ps="min";
-function squad(t){const ks=AL[t]||[nz(t)],k=Object.keys(PL).find(n=>ks.some(a=>nz(n).includes(a)));return k?PL[k]:null}
-function squadHtml(){const sq=squad(sel);
- if(!sq||!sq.length)return `<section class="c"><h2>Plantilla</h2><p class="note">Aún no hay datos de jugadores para este equipo. Aparecerán cuando se active la fuente de jugadores (ver instrucciones).</p></section>`;
- const a=[...sq].sort((x,y)=>ps==="n"?x.n.localeCompare(y.n,"es"):(y[ps]-x[ps])||(y.min-x.min));
- const H=[["n","Jugador"],["pj","PJ"],["min","Min"],["g","Goles"],["a","Asist."],["y","Amarillas"],["r","Rojas"]];
- return `<section class="c sc"><h2>Plantilla</h2><table class="pl"><tr>${H.map(h=>`<th><button data-p="${h[0]}">${h[1]}${ps===h[0]?" ↓":""}</button></th>`).join("")}</tr>${a.map(p=>`<tr><td>${p.n} <span class="mu">${POS[p.pos]||""}</span></td><td>${p.pj}</td><td>${p.min}</td><td>${p.g}</td><td>${p.a}</td><td>${p.y}</td><td>${p.r}</td></tr>`).join("")}</table></section>`}
-
-let rv="",rvFor="",win=2;
-const posOf=t=>L.findIndex(x=>x.t===t)+1;
-const nearOf=(o,ex)=>{const p=posOf(o);return L.filter((x,i)=>Math.abs(i+1-p)<=win&&x.t!==o&&x.t!==ex).map(x=>x.t)};
-const ppgOf=gs=>gs.length?gs.reduce((s,x)=>s+(x.gf>x.ga?3:x.gf===x.ga?1:0),0)/gs.length:0;
-const RK=[['Goles a favor','gf'],['Goles en contra','ga'],['xG a favor','xf'],['xG en contra','xa'],['Tiros','sf'],['Tiros del rival','sa'],['Tiros a puerta','tf'],['Córners','cf'],['Faltas','ff'],['Amarillas','yf'],['Rojas','rf']];
-function rvBlock(t,o){const set=nearOf(o,t),p=posOf(o),all=games(t),gs=all.filter(x=>set.includes(x.riv)),lo=Math.max(1,p-win),hi=Math.min(L.length,p+win),n=gs.length;
- const hd=`<h3 style="font-size:15px;margin:14px 0 6px">${nm(t)} contra equipos cercanos a ${nm(o)} (puestos ${lo}º a ${hi}º)</h3><p class="note">Equipos considerados: ${set.map(nm).join(', ')}.</p>`;
- if(!n)return hd+`<p class="note">${nm(t)} aún no ha jugado contra ninguno de ellos.</p>`;
- const w=gs.filter(x=>res(x)==='W').length,e=gs.filter(x=>res(x)==='D').length;
- const rows=KEYS.map(k=>{const m=av(gs,k),b=av(all,k),se=Math.sqrt(SK[k].w/n),d=m-b;return `<tr><td>${LB[k]}</td><td>${f1(m)}</td><td>${f1(b)}</td><td>${sgn1(d)}</td><td>±${f1(se)}</td><td>${Math.abs(d)>2*se?'fuera del ruido':'dentro del ruido'}</td></tr>`}).join('');
- return hd+`<table class="mt"><tr><th></th><th>Contra ellos (${n} partidos: ${w}G ${e}E ${n-w-e}P)</th><th>Media de la temporada</th><th>Diferencia</th><th>Error</th><th>Señal</th></tr><tr><td>Puntos por partido</td><td>${f1(ppgOf(gs))}</td><td>${f1(ppgOf(all))}</td><td>${sgn1(ppgOf(gs)-ppgOf(all))}</td><td></td><td></td></tr>${rows}</table>
- <table style="margin-top:8px"><tr><th>Fecha</th><th>Lugar</th><th>Rival (puesto actual)</th><th>Resultado</th><th>xG</th></tr>${gs.map(x=>`<tr><td>${x.d}</td><td>${x.h?'Casa':'Fuera'}</td><td>${nm(x.riv)} (${posOf(x.riv)}º)</td><td><b>${x.gf}-${x.ga}</b></td><td>${f1(x.xf)}-${f1(x.xa)}</td></tr>`).join('')}</table>`}
-function rivalHtml(){
- if(rvFor!==sel||!rv||rv===sel){const c=CAL.filter(c=>c[2]===sel||c[3]===sel).sort((a,b)=>a[1]<b[1]?-1:1)[0];rv=c?(c[2]===sel?c[3]:c[2]):TEAMS.find(t=>t!==sel);rvFor=sel}
- return `<section class="c sc"><h2>Contra equipos parecidos al rival</h2><select id="rv" aria-label="Rival" style="width:auto">${TEAMS.filter(t=>t!==sel).sort((a,b)=>nm(a).localeCompare(nm(b),'es')).map(t=>`<option value="${t}" ${t===rv?'selected':''}>${nm(t)} (${posOf(t)}º)</option>`).join('')}</select>
- <select id="wn" aria-label="Ventana" style="margin-left:8px;width:auto">${[2,3,4].map(v=>`<option value="${v}" ${v===win?"selected":""}>±${v} puestos</option>`).join("")}</select><p class="note">Por defecto se elige el próximo partido pendiente del equipo. Se agrupan los equipos que están por encima y por debajo del rival en la clasificación actual, dentro de la ventana elegida (en los extremos de la tabla se recorta). Ampliar la ventana da más partidos pero menos parecidos.</p>${rvBlock(sel,rv)}${rvBlock(rv,sel)}
- <p class="note">Son muy pocos partidos (cada pareja se ha enfrentado como mucho una vez), así que son tendencias y no conclusiones.</p></section>`}
-
-const mean=a=>a.length?a.reduce((s,x)=>s+x,0)/a.length:0,vr=a=>a.length>1?a.reduce((s,x)=>s+(x-mean(a))**2,0)/(a.length-1):0;
-const sgn1=v=>(v>0?'+':'')+f1(v);
-const SK={},MU={},HK={},TOT={},ALLG=TEAMS.flatMap(t=>games(t));
-KEYS.forEach(k=>{const a=TEAMS.map(t=>games(t).map(x=>x[k])),all=a.flat(),w=a.reduce((s,x)=>s+vr(x),0)/a.length,n=all.length/a.length;
- SK[k]={w,s:Math.max(vr(a.map(mean))-w/n,.02*w)};MU[k]=mean(all);
- HK[k]=(mean(ALLG.filter(x=>x.h).map(x=>x[k]))-mean(ALLG.filter(x=>!x.h).map(x=>x[k])))/2});
-VARS.forEach(v=>{TOT[v[1]]=Math.sqrt(vr(ALLG.map(x=>x[v[1]]+x[v[2]])))});
-const shr=(a,k)=>a.length?(mean(a)-MU[k])*SK[k].s/(SK[k].s+SK[k].w/a.length):0;
-const exv=(f,a,t,o,home,d)=>MU[f]+(home?HK[f]:-HK[f])+shr(games(t).filter(x=>!(x.d===d&&x.riv===o)).map(x=>x[f]),f)+shr(games(o).filter(x=>!(x.d===d&&x.riv===t)).map(x=>x[a]),a);
-function cellv(x,v){const f=v[1],a=v[2],e1=exv(f,a,sel,x.riv,x.h,x.d),e2=exv(f,a,x.riv,sel,!x.h,x.d),d1=x[f]-e1,d2=x[a]-e2,z1=d1/Math.sqrt(SK[f].w),z2=d2/Math.sqrt(SK[a].w),fx=f==='xf'?f1:(n=>n);
- return `<td>${fx(x[f])}-${fx(x[a])}<br><span class="mu ${Math.max(Math.abs(z1),Math.abs(z2))>=2?'sg':''}" title="${sgn1(z1)} / ${sgn1(z2)} desviaciones">${sgn1(d1)} / ${sgn1(d2)}</span></td>`}
-function varHtml(t){const gs=games(t),n=gs.length;
- const rows=KEYS.map(k=>{const a=gs.map(x=>x[k]),m=mean(a),s=Math.sqrt(vr(a)),se=s/Math.sqrt(n),d=m-MU[k];
-  return `<tr><td>${LB[k]}</td><td>${f1(m)}</td><td>${f1(s)}</td><td>±${f1(se)}</td><td>${sgn1(d)} ${Math.abs(d)>2*se?'(fuera del ruido)':'(dentro del ruido)'}</td><td>${f1(MU[k]+shr(a,k))}</td></tr>`}).join('');
- return `<section class="c sc"><h2>Variación y señal de cada estadística</h2><table class="mt"><tr><th></th><th>Media</th><th>Desv. típica</th><th>Error de la media</th><th>Frente a la liga</th><th>Esperable (encogido)</th></tr>${rows}</table>
- <p class="note">La desviación típica es cuánto varía el equipo de un partido a otro, en las unidades de cada estadística. El error de la media es la incertidumbre de su media (desviación típica de la liga entre la raíz del número de partidos). "Fuera del ruido" significa que la diferencia con la liga supera dos errores. "Esperable" acerca la media a la de la liga según cuánta parte de la variación entre equipos es real, que es poca: cuantos menos partidos, más se encoge.</p></section>`}
-const ROWS=[['Goles','gf','ga'],['Goles 1ª parte','p1','q1'],['Goles 2ª parte','p2','q2'],['xG (goles esperados)','xf','xa'],['Tiros','sf','sa'],['Tiros a puerta','tf','ta'],['Córners','cf','ca'],['Faltas','ff','fa'],['Amarillas','yf','ya'],['Rojas','rf','ra']];
-function paintTeam(){
- const gs=games(sel),H=gs.filter(x=>x.h),A=gs.filter(x=>!x.h),r=L.find(x=>x.t===sel),pos=L.indexOf(r)+1,n=gs.length;
- const w=gs.filter(x=>res(x)==='W').length,e=gs.filter(x=>res(x)==='D').length,l=n-w-e;
- const sum=k=>gs.reduce((s,x)=>s+x[k],0),cnt=f=>gs.filter(f).length,sgn=v=>(v>0?'+':'')+f1(v);
- const kp=[['Posición',pos+'º · '+r.pts+' pts'],['Balance',`${w}G ${e}E ${l}P`],['Goles',`${r.gf} a favor · ${r.ga} en contra`],['xG',`${f1(sum('xf'))} a favor · ${f1(sum('xa'))} en contra`],['Tarjetas',`${sum('yf')} amarillas · ${sum('rf')} rojas`]];
- const mk=gs.filter(x=>x.pw!==null),ex=mk.reduce((s,x)=>s+3*x.pw+x.pd,0),ptsM=mk.reduce((s,x)=>s+(res(x)==='W'?3:res(x)==='D'?1:0),0);
- const E=(p,m)=>'±'+Math.round(Math.sqrt(p*(1-p)/m)*100)+' pp',cn=c=>'±'+f1(Math.sqrt(c*(n-c)/n)),ptsA=gs.map(x=>res(x)==='W'?3:res(x)==='D'?1:0),shots=sum('sf')||1,vp=mk.reduce((s,x)=>s+9*x.pw+x.pd-(3*x.pw+x.pd)**2,0),c0=cnt(x=>x.ga===0),c1=cnt(x=>x.gf===0),c2=cnt(x=>x.gf>0&&x.ga>0),c3=cnt(x=>x.gf+x.ga>2);
- const adv=[['Puntos por partido',f1(r.pts/n),'±'+f1(Math.sqrt(vr(ptsA)/n))],['Victorias',pc(w/n),E(w/n,n)],['Portería a cero',c0+' de '+n,cn(c0)],['Sin marcar',c1+' de '+n,cn(c1)],['Ambos marcan',pc(c2/n),E(c2/n,n)],['Más de 2,5 goles',pc(c3/n),E(c3/n,n)],['Tiros a puerta / tiros',pc(sum('tf')/shots),E(sum('tf')/shots,shots)],['Goles / tiros',pc(sum('gf')/shots),E(sum('gf')/shots,shots)],['Goles menos xG',sgn(sum('gf')-sum('xf')),'±'+f1(Math.sqrt(vr(gs.map(x=>x.gf-x.xf))*n))],['Pts reales vs cuotas',mk.length?`${ptsM} vs ${f1(ex)}`:'–',mk.length?'±'+f1(Math.sqrt(vp)):'']];
- const W=640,Ht=190,B=22,mx=Math.max(3,...gs.flatMap(x=>[x.gf,x.ga])),bw=(W-10)/n;
- let s=`<svg viewBox="0 0 ${W} ${Ht}" role="img" aria-label="Goles por partido">`;
- gs.forEach((x,i)=>{const x0=10+i*bw,h1=(Ht-B-14)*x.gf/mx,h2=(Ht-B-14)*x.ga/mx,b=bw*.3;
-  s+=`<rect class="gf" rx="2" x="${x0+bw*.15}" y="${Ht-B-h1}" width="${b}" height="${h1}"><title>${nm(x.riv)}: ${x.gf}-${x.ga}</title></rect><rect class="ga" rx="2" x="${x0+bw*.15+b+2}" y="${Ht-B-h2}" width="${b}" height="${h2}"><title>${nm(x.riv)}: ${x.gf}-${x.ga}</title></rect>
-  <text x="${x0+bw*.5}" y="${Ht-B-Math.max(h1,h2)-4}" text-anchor="middle">${x.gf}-${x.ga}</text><text x="${x0+bw*.5}" y="${Ht-6}" text-anchor="middle">${nm(x.riv).slice(0,3)}</text>`});
- s+='</svg>';
- const tr=ROWS.map(([lb,a,b])=>`<tr><td>${lb}</td><td>${f1(av(gs,a))}</td><td>${f1(av(gs,b))}</td><td>${f1(av(H,a))}</td><td>${f1(av(A,a))}</td></tr>`).join('');
- const ml=gs.map(x=>`<tr><td>${x.d}</td><td>${x.h?'Casa':'Fuera'}</td><td>${nm(x.riv)}</td>${VARS.map(v=>cellv(x,v)).join('')}<td>${x.pw===null?'–':pc(x.pw)}</td></tr>`).join('');
- document.getElementById('team').innerHTML=`<h1 style="margin-bottom:10px">${nm(sel)}</h1>
- <div class="k">${kp.map(k=>`<div><span>${k[0]}</span><b style="font-size:${k[1].length>14?15:21}px">${k[1]}</b></div>`).join('')}</div>
- <section class="c"><h2>Forma reciente</h2><div class="f">${gs.map(x=>`<i class="${res(x)}" title="${nm(x.riv)} ${x.gf}-${x.ga}">${{W:'G',D:'E',L:'P'}[res(x)]}</i>`).join('')}</div></section>
- <section class="c sc"><h2>Goles por partido</h2>${s}<p class="lgd">Azul: goles a favor · Gris: goles en contra</p></section>
- <section class="c"><h2>Resumen avanzado</h2><div class="k s" style="margin:0">${adv.map(k=>`<div><span>${k[0]}</span><b>${k[1]}</b><span>${k[2]||""}</span></div>`).join('')}</div></section>
- <section class="c sc"><h2>Promedios por partido</h2><table><tr><th></th><th>Equipo</th><th>Rival</th><th>Equipo en casa</th><th>Equipo fuera</th></tr>${tr}</table></section>
- ${varHtml(sel)}<section class="c sc"><h2>Partidos</h2><table><tr><th>Fecha</th><th>Lugar</th><th>Rival</th>${VARS.map(v=>`<th>${v[0]}</th>`).join("")}<th>Gana según cuotas</th></tr>${ml}</table><p class="note">Cada celda muestra el valor del equipo y el del rival. Debajo, la diferencia con lo esperado en las unidades de cada estadística (equipo / rival), sin contar ese partido en el cálculo. En negrita, desviaciones de dos o más; al pasar el cursor se ven en desviaciones típicas.</p></section>${rivalHtml()}${squadHtml()}`;
- document.querySelectorAll('.pl button').forEach(b=>b.onclick=()=>{ps=b.dataset.p;paintTeam()});document.querySelectorAll('#rv').forEach(s=>s.onchange=()=>{rv=s.value;paintTeam()});document.querySelectorAll('#wn').forEach(s=>s.onchange=()=>{win=+s.value;paintTeam()})}
-const pr=x=>x<0.005?'<1 %':Math.round(x*100)+' %',f2=n=>n.toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2});
-function paintModel(){const el=document.getElementById('mov');
- if(!MO||!MO.n){el.innerHTML='<section class="c"><p class="note">El modelo aparecerá cuando exista el archivo calendario.json.</p></section>';return}
- let bt='';const b=MO.bt;
- if(b){const rs=[['Mercado (cuotas de cierre)',b.market],['Modelo',b.model],['Mezcla 50/50',b.blend],['Reparto uniforme (1/3 cada uno)',b.uniform]],best=rs.slice(0,3).reduce((a,x)=>x[1].ll<a[1].ll?x:a);
-  bt=`<section class="c sc"><h2>¿Mejora el modelo al mercado?</h2><table class="mt"><tr><th>Predictor</th><th>Brier</th><th>Log-loss</th></tr>${rs.map(r=>`<tr><td>${r[0]}</td><td>${f2(r[1].br)}</td><td>${f2(r[1].ll)}</td></tr>`).join('')}</table><p class="note">Valores más bajos son mejores. Se evalúan ${b.n} partidos, prediciendo cada uno solo con los anteriores (el modelo se reajusta cada 5 partidos). Ahora mismo el mejor predictor es: ${best[0]}. Diferencia de log-loss modelo menos mercado: ${(b.d.m>0?"+":"")+f2(b.d.m)} ± ${f2(b.d.se)} (${Math.abs(b.d.m)>2*b.d.se?"fuera del ruido":"dentro del ruido"}; positivo = el modelo es peor). Con tan pocos partidos las diferencias pequeñas no son concluyentes${MO.sens?`: cambiar los parámetros del modelo mueve el log-loss entre ${f2(MO.sens[0])} y ${f2(MO.sens[1])}`:''}.</p></section>`}
- const kp=[['Ventaja de local',`+${Math.round(MO.hm*100)} % de goles`],['Partidos usados',MO.n],['Pendientes',MO.pend],['Simulaciones',MO.sims]];
- const EV=VARS.slice(3),nz=MO.next.map(m=>`<tr><td>${m.pp?'Aplazado':'J'+m.j+' · '+m.d}</td><td>${nm(m.h)} - ${nm(m.a)}</td>${EV.map(v=>{const e=exv(v[1],v[2],m.h,m.a,true,null)+exv(v[1],v[2],m.a,m.h,false,null),s=TOT[v[1]];return `<td>${f1(e)} (${f1(Math.max(e-s,0))}-${f1(e+s)})</td>`}).join('')}</tr>`).join('');
- const nx=MO.next.map(m=>`<tr><td>${m.pp?'Aplazado':'J'+m.j+' · '+m.d}</td><td>${nm(m.h)} - ${nm(m.a)}</td><td>${pr(m.ph)}</td><td>${pr(m.pd)}</td><td>${pr(m.pa)}</td><td>${f1(m.xh)} (±${f1(Math.sqrt(m.xh))}) - ${f1(m.xa)} (±${f1(Math.sqrt(m.xa))})</td><td>${m.sc} (${pr(m.scp)})</td><td>${pr(m.o25)}</td><td>${pr(m.bb)}</td></tr>`).join('');
- const sm=[...MO.teams].sort((x,y)=>y.exp-x.exp).map(t=>`<tr><td>${nm(t.t)}</td><td>${t.pts}</td><td>${f1(t.exp)}</td><td>${pr(t.ch)}</td><td>${pr(t.t4)}</td><td>${pr(t.rl)}</td></tr>`).join('');
- const rt=[...MO.teams].sort((x,y)=>y.att-x.att).map(t=>`<tr><td>${nm(t.t)}</td><td>×${f2(t.att)} (±${f2(t.att*t.sa)})</td><td>×${f2(t.df)} (±${f2(t.df*t.sd)})</td></tr>`).join('');
- el.innerHTML=`<div class="k">${kp.map(k=>`<div><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}</div>${bt}
- <section class="c sc"><h2>Próximos partidos</h2><table class="mt"><tr><th>Cuándo</th><th>Partido</th><th>1</th><th>X</th><th>2</th><th>Goles esperados</th><th>Resultado más probable</th><th>+2,5 goles</th><th>Ambos marcan</th></tr>${nx}</table><p class="note">El marcador es el más probable dentro del resultado favorito (1, X o 2), con su probabilidad entre paréntesis. Ningún marcador concreto supera el 10-15 %, así que sirve como referencia y no como pronóstico.</p></section>
- <section class="c sc"><h2>Estadísticas esperadas (total de ambos equipos)</h2><table class="mt"><tr><th>Cuándo</th><th>Partido</th>${EV.map(v=>`<th>${v[0]}</th>`).join('')}</tr>${nz}</table><p class="note">Valor esperado y, entre paréntesis, el rango de una desviación típica del total de un partido (cubre aproximadamente dos de cada tres partidos).</p></section>
- <section class="c sc"><h2>Simulación del resto de la liga</h2><table class="mt"><tr><th>Equipo</th><th>Pts ahora</th><th>Pts final esperados</th><th>Campeón</th><th>Champions (top 4)</th><th>Descenso</th></tr>${sm}</table><p class="note">Se simulan ${MO.sims} veces los ${MO.pend} partidos pendientes. El error de la propia simulación es como mucho de ±0,8 puntos porcentuales. El desempate se aproxima por diferencia de goles y goles a favor, no por el enfrentamiento directo.</p></section>
- <section class="c sc"><h2>Fuerza estimada de cada equipo</h2><table class="mt"><tr><th>Equipo</th><th>Ataque (goles marcados)</th><th>Defensa (goles encajados)</th></tr>${rt}</table><p class="note">Respecto a un equipo medio: ×1,20 en ataque son un 20 % más de goles; en defensa, valores menores de 1 encajan menos.</p></section>
- <section class="c"><h2>Cómo funciona</h2><p class="note">Modelo de Poisson con ataque y defensa por equipo y una ventaja de local común, ajustado solo con partidos de esta temporada. Mezcla goles reales y xG al 50 % para reducir el azar. Los valores se acercan a la media (regularización) porque hay pocos partidos. No usa lesiones, alineaciones ni cuotas de los próximos partidos.</p></section>`}
-document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#nav button').forEach(x=>x.setAttribute('aria-pressed',x===b));const m=b.dataset.v==='mo';document.getElementById('eqv').hidden=m;document.getElementById('mov').hidden=!m;if(m)paintModel()});
-go();
-</script></body></html>
+<footer class="foot" id="foot"></footer>
+</div>
+<script>/*__DATA__*/</script>
+<script>/*__APP__*/</script>

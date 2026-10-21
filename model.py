@@ -1,121 +1,767 @@
-"""Modelo de Poisson con datos solo de esta temporada: ataque/defensa por equipo, ventaja de local,
-backtest contra las cuotas y simulación del resto de la liga."""
-import bisect, math, random
-from datetime import date
+"""Modelos estadísticos del dashboard de LaLiga 2026-27. Solo usan partidos de la temporada en curso.
 
-def fit(ms, teams, reg, w, cycles=40):
-    ix = {t: i for i, t in enumerate(teams)}; n = len(teams); obs = []
-    for h, a, gh, ga, xh, xa in ms:  # objetivo = mezcla de goles reales y xG
-        obs.append((ix[h], ix[a], 1, w*gh + (1-w)*xh)); obs.append((ix[a], ix[h], 0, w*ga + (1-w)*xa))
-    ao = [[] for _ in range(n)]; do = [[] for _ in range(n)]
-    for o in obs: ao[o[0]].append(o); do[o[1]].append(o)
-    p = {"mu": 0.2, "hm": 0.2, "att": [0.0]*n, "df": [0.0]*n, "ix": ix}
-    lam = lambda o: math.exp(p["mu"] + p["hm"]*o[2] + p["att"][o[0]] - p["df"][o[1]])
-    for _ in range(cycles):
-        L = [lam(o) for o in obs]; p["mu"] += sum(o[3]-l for o, l in zip(obs, L)) / sum(L)
-        hs = [(o, lam(o)) for o in obs if o[2]]
-        p["hm"] += sum(o[3]-l for o, l in hs) / sum(l for _, l in hs)
-        for i in range(n):
-            ls = [(o, lam(o)) for o in ao[i]]
-            p["att"][i] += (sum(o[3]-l for o, l in ls) - reg*p["att"][i]) / (sum(l for _, l in ls) + reg)
-            ls = [(o, lam(o)) for o in do[i]]
-            p["df"][i] += (-sum(o[3]-l for o, l in ls) - reg*p["df"][i]) / (sum(l for _, l in ls) + reg)
-    p["sa"] = [1/math.sqrt(sum(lam(o) for o in ao[i]) + reg) for i in range(n)]
-    p["sd"] = [1/math.sqrt(sum(lam(o) for o in do[i]) + reg) for i in range(n)]
-    return p
+Todo está escrito en Python estándar (sin numpy) para que GitHub Actions lo ejecute sin instalar nada.
 
-def pois(l, r):
-    u = r.random(); k = 0; q = math.exp(-l); c = q
-    while u > c and k < 15:
-        k += 1; q *= l/k; c += q
-    return k
+- glm(): modelo log-lineal tipo Poisson con ataque y defensa por equipo, ventaja de local y
+  sobredispersión. El encogimiento hacia la media se estima con los propios datos (Bayes empírico):
+  cuanto más se diferencian de verdad los equipos, menos se encogen. Sirve para goles y estadísticas.
+- Goles: el objetivo mezcla goles reales y xG, se corrigen los marcadores bajos (Dixon-Coles, que
+  ajusta 0-0, 1-0, 0-1 y 1-1) y la incertidumbre de los parámetros se integra en cada predicción.
+- simulate(): resto de la liga con los desempates del art. 10 de las normas de competición RFEF.
+- walk_forward_*(): prueba retrospectiva; cada partido se predice solo con los anteriores.
+- update_log() / evaluate_log(): predicciones congeladas antes de cada partido y su evaluación.
+"""
+import math
+import random
+from datetime import date, timedelta
 
-def pm(l, K=10):
-    o = [math.exp(-l)]
-    for k in range(1, K+1): o.append(o[-1]*l/k)
-    return o
+VERSION = "3.0"
 
-def predict(p, h, a):
-    i, j = p["ix"][h], p["ix"][a]
-    lh = math.exp(p["mu"]+p["hm"]+p["att"][i]-p["df"][j]); la = math.exp(p["mu"]+p["att"][j]-p["df"][i])
-    ph, pa = pm(lh), pm(la); H = D = A = 0.0; cells = []
-    for x, u in enumerate(ph):
-        for y, v in enumerate(pa):
-            q = u*v; cells.append((q, x, y))
-            if x > y: H += q
-            elif x == y: D += q
-            else: A += q
-    s = H+D+A; fav = max((H, 0), (D, 1), (A, 2))[1]
-    q, x, y = max((c for c in cells if outcome(c[1], c[2]) == fav), key=lambda c: c[0])  # marcador más probable del resultado favorito
-    o25 = sum(c[0] for c in cells if c[1]+c[2] > 2)/s; bb = sum(c[0] for c in cells if c[1] > 0 and c[2] > 0)/s
-    return H/s, D/s, A/s, lh, la, f"{x}-{y}", ph, pa, o25, bb, q/s
+# Estadísticas que se modelan aparte de los goles (clave, nombre).
+STATS = [("g1", "Goles 1ª parte"), ("xg", "xG"), ("s", "Tiros"), ("st", "Tiros a puerta"),
+         ("c", "Córners"), ("f", "Faltas"), ("y", "Amarillas"), ("r", "Rojas")]
+CROSS_KEYS = ["g", "g1", "g2", "xg", "s", "st", "c", "f", "y", "r"]
 
-def outcome(gh, ga): return 0 if gh > ga else (1 if gh == ga else 2)
+# w: peso de los goles reales frente al xG en el objetivo. half_life: vida media en días del peso
+# temporal (None = todos los partidos pesan igual). dc: corrección de marcadores bajos.
+GOALS = {"w": 0.5, "half_life": None, "dc": True}
 
-def mkt(oh, od, oa):
-    if not (oh and od and oa): return None
-    s = 1/oh + 1/od + 1/oa
-    return (1/oh/s, 1/od/s, 1/oa/s)
+# Cuadratura de Gauss-Hermite (5 puntos, pesos ya divididos por raíz de pi).
+GH = [(-2.0201828704560856, 0.011257411327720691), (-0.9585724646138185, 0.22207592200561265),
+      (0.0, 0.5333333333333333), (0.9585724646138185, 0.22207592200561265),
+      (2.0201828704560856, 0.011257411327720691)]
 
-def score(rows):
-    ll = br = 0.0
-    for pr, o in rows:
-        ll -= math.log(max(pr[o], 1e-9)); br += sum((pr[k]-(1 if k == o else 0))**2 for k in range(3))
-    return {"ll": ll/len(rows), "br": br/len(rows)}
 
-def backtest(ms, teams, reg, w, start=30, step=5):
-    out = []; p = None
-    for k in range(start, len(ms)):
-        if (k-start) % step == 0: p = fit([m[:6] for m in ms[:k]], teams, reg, w)
-        m = ms[k]; out.append((predict(p, m[0], m[1])[:3], outcome(m[2], m[3]), mkt(*m[6:9])))
+# ----------------------------------------------------------------- utilidades
+def days(d1, d2):
+    return (date.fromisoformat(d2) - date.fromisoformat(d1)).days
+
+
+def pmf(lam, K=10):
+    out = [math.exp(-lam)]
+    for k in range(1, K + 1):
+        out.append(out[-1] * lam / k)
     return out
 
-def run(data, cal, sims=4000, w=0.5, reg=16.0):
-    ms = [(r[2], r[3], r[4], r[5], r[8], r[9], r[22], r[23], r[24]) for r in data]
-    teams = sorted({m[0] for m in ms} | {m[1] for m in ms}); out = {"n": len(ms), "w": w, "reg": reg, "sims": sims}
-    if len(ms) >= 40:
-        bt = [x for x in backtest(ms, teams, reg, w) if x[2]]
-        out["bt"] = {"n": len(bt), "model": score([(a, b) for a, b, _ in bt]), "market": score([(c, b) for _, b, c in bt]),
-                     "blend": score([(tuple((x+y)/2 for x, y in zip(a, c)), b) for a, b, c in bt]),
-                     "uniform": score([((1/3, 1/3, 1/3), b) for _, b, _ in bt])}
-        dl = [math.log(max(c[b], 1e-9)) - math.log(max(a[b], 1e-9)) for a, b, c in bt]  # log-loss modelo menos mercado
-        mdl = sum(dl)/len(dl); out["bt"]["d"] = {"m": mdl, "se": math.sqrt(sum((x-mdl)**2 for x in dl)/(len(dl)-1)/len(dl))}
-        sens = []  # sensibilidad a los parámetros (no se usa para elegir)
-        for w2 in (0.0, 0.5, 1.0):
-            for r2 in (8, 16, 32):
-                b2 = [x for x in backtest(ms, teams, r2, w2) if x[2]]
-                sens.append(score([(a, b) for a, b, _ in b2])["ll"])
-        out["sens"] = [min(sens), max(sens)]
-    p = fit([m[:6] for m in ms], teams, reg, w); ix = p["ix"]; n = len(teams)
-    out["hm"] = math.exp(p["hm"]) - 1
-    played = {(m[0], m[1]) for m in ms}; pend = [c for c in cal if (c[2], c[3]) not in played]; out["pend"] = len(pend)
-    today = date.today().isoformat(); fut = [c for c in pend if c[1] >= today]; jn = min((c[0] for c in fut), default=None)
-    show = [c for c in pend if c[1] < today or (jn and c[0] in (jn, jn+1))]; out["next"] = []
-    for j, d, h, a in sorted(show, key=lambda c: (c[1], c[0])):
-        H, D, A, lh, la, sc, _, _, o25, bb, scp = predict(p, h, a)
-        out["next"].append({"j": j, "d": d[8:]+"/"+d[5:7], "h": h, "a": a, "ph": H, "pd": D, "pa": A, "xh": lh, "xa": la, "sc": sc, "scp": scp, "o25": o25, "bb": bb, "pp": d < today})
-    bp = [0]*n; bd = [0]*n; bg = [0]*n; pj = [0]*n
-    for h, a, gh, ga, *_ in ms:
-        i, j = ix[h], ix[a]; bg[i] += gh; bg[j] += ga; bd[i] += gh-ga; bd[j] += ga-gh; pj[i] += 1; pj[j] += 1
-        if gh > ga: bp[i] += 3
-        elif gh < ga: bp[j] += 3
-        else: bp[i] += 1; bp[j] += 1
-    sched = [(ix[h], ix[a]) for j, d, h, a in pend]; rnd = random.Random(7)
-    ch = [0]*n; t4 = [0]*n; rl = [0]*n; sp = [0]*n
+
+def outcome(x, y):
+    return 0 if x > y else (1 if x == y else 2)
+
+
+def mkey(h, a):
+    return h + "|" + a
+
+
+def mean(xs):
+    xs = list(xs)
+    return sum(xs) / len(xs) if xs else None
+
+
+def corr(x, y):
+    n = len(x)
+    if n < 3:
+        return 0.0
+    mx, my = sum(x) / n, sum(y) / n
+    sxy = sum((a - mx) * (b - my) for a, b in zip(x, y))
+    sxx = sum((a - mx) ** 2 for a in x)
+    syy = sum((b - my) ** 2 for b in y)
+    return sxy / math.sqrt(sxx * syy) if sxx > 0 and syy > 0 else 0.0
+
+
+def implied(odds):
+    """Probabilidades del mercado quitando el margen (normalización proporcional)."""
+    if not odds or any((not o) or o <= 1 for o in odds):
+        return None
+    inv = [1 / o for o in odds]
+    s = sum(inv)
+    return [x / s for x in inv]
+
+
+def value(m, key):
+    """Valores [local, visitante] de una estadística en un partido (None si falta)."""
+    if key == "g":
+        return [m["hg"], m["ag"]]
+    if key == "g2":
+        g1 = m.get("g1")
+        return None if g1 is None else [m["hg"] - g1[0], m["ag"] - g1[1]]
+    return m.get(key)
+
+
+# ----------------------------------------------------------------- modelo de equipos
+def glm(obs, n, outer=14, tol=1e-7):
+    """Ajusta log m = mu + eta*local + a[i] - d[j] con previas a ~ N(0, sa²) y d ~ N(0, sd²).
+
+    obs: lista de (equipo, rival, local 0/1, valor, peso). sa y sd se estiman con los datos (Bayes
+    empírico) y phi (dispersión: varianza = phi * media) con los residuos de Pearson.
+    Devuelve las medias posteriores, sus varianzas (va, vd) y la varianza de los niveles base."""
+    N = len(obs)
+    I = [o[0] for o in obs]
+    J = [o[1] for o in obs]
+    H = [o[2] for o in obs]
+    Y = [float(o[3]) for o in obs]
+    W = [float(o[4]) for o in obs]
+    sw = sum(W)
+    mu = math.log(max(sum(w * y for w, y in zip(W, Y)) / sw, 1e-3))
+    eta = 0.0
+    a = [0.0] * n
+    d = [0.0] * n
+    byI = [[] for _ in range(n)]
+    byJ = [[] for _ in range(n)]
+    for k in range(N):
+        byI[I[k]].append(k)
+        byJ[J[k]].append(k)
+    hk = [k for k in range(N) if H[k]]
+    sa2 = sd2 = 0.09
+    phi = 1.0
+    eta_prec = 4.0  # previa débil para la ventaja de local: N(0, 0,5²)
+    m = [1.0] * N
+    for _ in range(outer):
+        for k in range(N):
+            m[k] = math.exp(mu + eta * H[k] + a[I[k]] - d[J[k]])
+        for _ in range(100):
+            big = 0.0
+            st = sum(W[k] * (Y[k] - m[k]) for k in range(N)) / sum(W[k] * m[k] for k in range(N))
+            mu += st
+            big = max(big, abs(st))
+            f = math.exp(st)
+            for k in range(N):
+                m[k] *= f
+            if hk:
+                num = sum(W[k] * (Y[k] - m[k]) for k in hk) / phi - eta * eta_prec
+                den = sum(W[k] * m[k] for k in hk) / phi + eta_prec
+                st = num / den
+                eta += st
+                big = max(big, abs(st))
+                f = math.exp(st)
+                for k in hk:
+                    m[k] *= f
+            for i in range(n):
+                ks = byI[i]
+                num = sum(W[k] * (Y[k] - m[k]) for k in ks) / phi - a[i] / sa2
+                den = sum(W[k] * m[k] for k in ks) / phi + 1 / sa2
+                st = num / den
+                a[i] += st
+                big = max(big, abs(st))
+                f = math.exp(st)
+                for k in ks:
+                    m[k] *= f
+            for j in range(n):
+                ks = byJ[j]
+                num = -sum(W[k] * (Y[k] - m[k]) for k in ks) / phi - d[j] / sd2
+                den = sum(W[k] * m[k] for k in ks) / phi + 1 / sd2
+                st = num / den
+                d[j] += st
+                big = max(big, abs(st))
+                f = math.exp(-st)
+                for k in ks:
+                    m[k] *= f
+            if big < tol:
+                break
+        Ia = [sum(W[k] * m[k] for k in byI[i]) / phi for i in range(n)]
+        Id = [sum(W[k] * m[k] for k in byJ[j]) / phi for j in range(n)]
+        va = [1 / (Ia[i] + 1 / sa2) for i in range(n)]
+        vd = [1 / (Id[j] + 1 / sd2) for j in range(n)]
+        pe = 2 + sum(Ia[i] * va[i] for i in range(n)) + sum(Id[j] * vd[j] for j in range(n))
+        pear = sum(W[k] * (Y[k] - m[k]) ** 2 / max(m[k], 1e-6) for k in range(N))
+        phi = min(max(pear / max(sw - pe, 0.5 * sw), 0.2), 5.0)
+        sa2 = min(max(sum(x * x + v for x, v in zip(a, va)) / n, 0.03 ** 2), 0.6 ** 2)
+        sd2 = min(max(sum(x * x + v for x, v in zip(d, vd)) / n, 0.03 ** 2), 0.6 ** 2)
+    Ia = [sum(W[k] * m[k] for k in byI[i]) / phi for i in range(n)]
+    Id = [sum(W[k] * m[k] for k in byJ[j]) / phi for j in range(n)]
+    va = [1 / (Ia[i] + 1 / sa2) for i in range(n)]
+    vd = [1 / (Id[j] + 1 / sd2) for j in range(n)]
+    mh = sum(W[k] * m[k] for k in hk) / phi
+    ma = sum(W[k] * m[k] for k in range(N)) / phi - mh
+    return {"mu": mu, "eta": eta, "a": a, "d": d, "va": va, "vd": vd,
+            "vh0": 1 / mh if mh > 0 else 0.0, "va0": 1 / ma if ma > 0 else 0.0,
+            "phi": phi, "sa": math.sqrt(sa2), "sd": math.sqrt(sd2), "m": m[:]}
+
+
+def lin(p, i, j, home):
+    """Logaritmo de la media esperada del equipo i contra j y su varianza (incertidumbre)."""
+    return (p["mu"] + (p["eta"] if home else 0.0) + p["a"][i] - p["d"][j],
+            (p["vh0"] if home else p["va0"]) + p["va"][i] + p["vd"][j])
+
+
+def weight(m, half_life, ref):
+    return 0.5 ** (max(days(m["date"], ref), 0) / half_life) if (half_life and ref) else 1.0
+
+
+# ----------------------------------------------------------------- goles
+def fit_rho(pairs, sd=0.2):
+    """Parámetro de Dixon-Coles por máxima verosimilitud con una previa suave N(0, 0,2²)."""
+    best_r, best = 0.0, -1e18
+    for k in range(-50, 31):
+        r = k / 200
+        ll = -r * r / (2 * sd * sd)
+        ok = True
+        for x, y, lh, la in pairs:
+            if x > 1 or y > 1:
+                continue
+            t = (1 - lh * la * r) if (x == 0 and y == 0) else (1 + lh * r) if x == 0 else (1 + la * r) if y == 0 else (1 - r)
+            if t <= 1e-9:
+                ok = False
+                break
+            ll += math.log(t)
+        if ok and ll > best:
+            best, best_r = ll, r
+    return best_r
+
+
+def fit_goals(matches, teams, cfg=None, ref=None):
+    c = dict(GOALS, **(cfg or {}))
+    ix = {t: k for k, t in enumerate(teams)}
+    obs = []
+    for m in matches:
+        wt = weight(m, c["half_life"], ref)
+        xg = m.get("xg")
+        yh = m["hg"] if xg is None else c["w"] * m["hg"] + (1 - c["w"]) * xg[0]
+        ya = m["ag"] if xg is None else c["w"] * m["ag"] + (1 - c["w"]) * xg[1]
+        i, j = ix[m["h"]], ix[m["a"]]
+        obs += [(i, j, 1, yh, wt), (j, i, 0, ya, wt)]
+    p = glm(obs, len(teams))
+    pairs = [(m["hg"], m["ag"], math.exp(lin(p, ix[m["h"]], ix[m["a"]], 1)[0]),
+              math.exp(lin(p, ix[m["a"]], ix[m["h"]], 0)[0])) for m in matches]
+    p["rho"] = fit_rho(pairs) if c["dc"] else 0.0
+    p.update(ix=ix, teams=teams, w=c["w"])
+    return p
+
+
+def score_matrix(p, i, j, K=10):
+    """Probabilidad de cada marcador, promediando sobre la incertidumbre de los parámetros."""
+    lh, vh = lin(p, i, j, 1)
+    la, va = lin(p, j, i, 0)
+    rho = p.get("rho", 0.0)
+    sh, sa = math.sqrt(2 * vh), math.sqrt(2 * va)
+    M = [[0.0] * (K + 1) for _ in range(K + 1)]
+    for xi, wi in GH:
+        l1 = math.exp(lh + sh * xi)
+        p1 = pmf(l1, K)
+        for xj, wj in GH:
+            l2 = math.exp(la + sa * xj)
+            p2 = pmf(l2, K)
+            ww = wi * wj
+            for x in range(K + 1):
+                c = ww * p1[x]
+                row = M[x]
+                for y in range(K + 1):
+                    row[y] += c * p2[y]
+            if rho:
+                M[0][0] += ww * p1[0] * p2[0] * (max(1 - l1 * l2 * rho, 0.0) - 1)
+                M[0][1] += ww * p1[0] * p2[1] * (max(1 + l1 * rho, 0.0) - 1)
+                M[1][0] += ww * p1[1] * p2[0] * (max(1 + l2 * rho, 0.0) - 1)
+                M[1][1] += ww * p1[1] * p2[1] * (max(1 - rho, 0.0) - 1)
+    s = sum(map(sum, M))
+    return [[v / s for v in row] for row in M]
+
+
+def summarize(M):
+    K = len(M) - 1
+    pH = pD = pA = eh = ea = bb = 0.0
+    tot = [0.0] * (2 * K + 1)
+    hx = [0.0] * (K + 1)
+    ay = [0.0] * (K + 1)
+    cells = []
+    for x in range(K + 1):
+        for y in range(K + 1):
+            q = M[x][y]
+            if x > y:
+                pH += q
+            elif x == y:
+                pD += q
+            else:
+                pA += q
+            eh += x * q
+            ea += y * q
+            tot[x + y] += q
+            hx[x] += q
+            ay[y] += q
+            if x and y:
+                bb += q
+            cells.append((q, x, y))
+    cells.sort(reverse=True)
+    over = lambda dist, L: sum(v for k, v in enumerate(dist) if k > L)
+    fav = max(range(3), key=lambda k: (pH, pD, pA)[k])
+    fs = next(c for c in cells if outcome(c[1], c[2]) == fav)
+    return {"p": [pH, pD, pA], "e": [eh, ea], "ou": [over(tot, L) for L in (0.5, 1.5, 2.5, 3.5, 4.5)],
+            "bb": bb, "th": [over(hx, L) for L in (0.5, 1.5, 2.5)], "ta": [over(ay, L) for L in (0.5, 1.5, 2.5)],
+            "top": [[c[1], c[2], c[0]] for c in cells[:6]], "fs": [fs[1], fs[2], fs[0]]}
+
+
+def predict_goals(p, h, a):
+    return summarize(score_matrix(p, p["ix"][h], p["ix"][a]))
+
+
+# ----------------------------------------------------------------- estadísticas
+def fit_stat(matches, teams, key, cfg=None, ref=None):
+    c = dict(GOALS, **(cfg or {}))
+    ix = {t: k for k, t in enumerate(teams)}
+    obs = []
+    for m in matches:
+        v = m.get(key)
+        if v is None:
+            continue
+        wt = weight(m, c["half_life"], ref)
+        i, j = ix[m["h"]], ix[m["a"]]
+        obs += [(i, j, 1, v[0], wt), (j, i, 0, v[1], wt)]
+    if len(obs) < 40:
+        return None
+    p = glm(obs, len(teams))
+    m, ph = p["m"], p["phi"]
+    rh = [(obs[k][3] - m[k]) / math.sqrt(m[k] * ph) for k in range(0, len(obs), 2)]
+    ra = [(obs[k + 1][3] - m[k + 1]) / math.sqrt(m[k + 1] * ph) for k in range(0, len(obs), 2)]
+    p["rr"] = max(-0.6, min(0.6, corr(rh, ra)))  # correlación entre los dos equipos del mismo partido
+    p.update(ix=ix, key=key)
+    return p
+
+
+def stat_pred(p, i, j, home):
+    """Media esperada, varianza del partido y error de la media para el equipo i contra j."""
+    l, v = lin(p, i, j, home)
+    mean_ = math.exp(l + v / 2)
+    err2 = mean_ * mean_ * (math.exp(v) - 1)
+    return mean_, p["phi"] * mean_ + err2, math.sqrt(err2)
+
+
+def stat_total(p, i, j):
+    m1, v1, e1 = stat_pred(p, i, j, 1)
+    m2, v2, e2 = stat_pred(p, j, i, 0)
+    cov = p["rr"] * p["phi"] * math.sqrt(m1 * m2)
+    return m1 + m2, max(v1 + v2 + 2 * cov, 1e-6), math.sqrt(e1 * e1 + e2 * e2)
+
+
+def expectations(played, gm, sms):
+    """Valor esperado por el modelo (en la muestra) de cada estadística en cada partido jugado."""
+    out = []
+    for m in played:
+        i, j = gm["ix"][m["h"]], gm["ix"][m["a"]]
+        e = {"g": [math.exp(lin(gm, i, j, 1)[0]), math.exp(lin(gm, j, i, 0)[0])]}
+        for k, p in sms.items():
+            if p:
+                e[k] = [math.exp(lin(p, i, j, 1)[0]), math.exp(lin(p, j, i, 0)[0])]
+        if "g1" in e:
+            e["g2"] = [e["g"][0] - e["g1"][0], e["g"][1] - e["g1"][1]]
+        out.append(e)
+    return out
+
+
+def cross_tau(played, E, key, pos, tiers=4):
+    """Cuánto cambia de verdad el rendimiento de un equipo según el nivel del rival, más allá del modelo.
+
+    Agrupa los rivales en 4 franjas de la clasificación, calcula el residuo medio (real - esperado) de
+    cada equipo en cada franja y le resta el ruido esperado. Devuelve las varianzas reales (tau²) de lo
+    producido y de lo concedido, y la varianza de un residuo individual (s2)."""
+    gf, ga, allr = {}, {}, []
+    nt = len(pos)
+    for m, e in zip(played, E):
+        obs = value(m, key)
+        if obs is None or key not in e:
+            continue
+        for s in (0, 1):
+            t, o = (m["h"], m["a"]) if s == 0 else (m["a"], m["h"])
+            tier = min(tiers - 1, (pos[o] - 1) * tiers // nt)
+            rf = obs[s] - e[key][s]
+            gf.setdefault((t, tier), []).append(rf)
+            ga.setdefault((t, tier), []).append(obs[1 - s] - e[key][1 - s])
+            allr.append(rf)
+    if len(allr) < 20:
+        return {"tf": 0.0, "ta": 0.0, "s2": 1.0}
+    s2 = sum(r * r for r in allr) / len(allr)
+
+    def est(g):
+        v = [(sum(r) / len(r)) ** 2 - s2 / len(r) for r in g.values()]
+        return max(0.0, sum(v) / len(v))
+    return {"tf": est(gf), "ta": est(ga), "s2": s2}
+
+
+def cross_tau_tested(played, E, key, pos, R=200, alpha=0.01, seed=1):
+    """cross_tau con una prueba de permutación: se barajan los puestos de los equipos R veces y el efecto
+    solo se usa si el real supera al del azar con p <= alpha (exigente porque se prueban 20 efectos)."""
+    c = cross_tau(played, E, key, pos)
+    rnd = random.Random(seed)
+    names, vals = list(pos.keys()), list(pos.values())
+    nf = na = 0
+    for _ in range(R):
+        rnd.shuffle(vals)
+        z = cross_tau(played, E, key, dict(zip(names, vals)))
+        nf += z["tf"] >= c["tf"]
+        na += z["ta"] >= c["ta"]
+    c["pf"], c["pa"] = (nf + 1) / (R + 1), (na + 1) / (R + 1)
+    if c["tf"] <= 0 or c["pf"] > alpha:
+        c["tf"] = 0.0
+    if c["ta"] <= 0 or c["pa"] > alpha:
+        c["ta"] = 0.0
+    return c
+
+
+# ----------------------------------------------------------------- clasificación y simulación
+def xpts(xh, xa, K=10):
+    """Puntos esperados de cada equipo según el xG del partido."""
+    p1, p2 = pmf(xh, K), pmf(xa, K)
+    w = sum(p1[x] * p2[y] for x in range(K + 1) for y in range(x))
+    l = sum(p1[x] * p2[y] for y in range(K + 1) for x in range(y))
+    dr = sum(p1[x] * p2[x] for x in range(K + 1))
+    s = w + l + dr
+    return (3 * w + dr) / s, (3 * l + dr) / s
+
+
+def h2h(grp, G):
+    pt = {t: 0 for t in grp}
+    dg = {t: 0 for t in grp}
+    for t in grp:
+        for u in grp:
+            r = G[t][u] if t != u else None
+            if r is None:
+                continue
+            x, y = r
+            dg[t] += x - y
+            dg[u] += y - x
+            if x > y:
+                pt[t] += 3
+            elif x < y:
+                pt[u] += 3
+            else:
+                pt[t] += 1
+                pt[u] += 1
+    return pt, dg
+
+
+def rank(n, pts, gd, gf, G, rnd=None):
+    """Orden final con los desempates del art. 10: entre dos, diferencia de goles en sus partidos;
+    entre más de dos, puntos y luego diferencia de goles en la mini-liga entre ellos; después
+    diferencia de goles general y goles a favor (el juego limpio se sustituye por sorteo)."""
+    order = sorted(range(n), key=lambda t: -pts[t])
+    out = []
+    k = 0
+    while k < n:
+        e = k
+        while e + 1 < n and pts[order[e + 1]] == pts[order[k]]:
+            e += 1
+        grp = order[k:e + 1]
+        if len(grp) > 1:
+            pt, dg = h2h(grp, G)
+            tie = (lambda t: rnd.random()) if rnd else (lambda t: 0)
+            if len(grp) == 2:
+                grp = sorted(grp, key=lambda t: (-dg[t], -gd[t], -gf[t], tie(t)))
+            else:
+                grp = sorted(grp, key=lambda t: (-pt[t], -dg[t], -gd[t], -gf[t], tie(t)))
+        out += grp
+        k = e + 1
+    return out
+
+
+def standings(played, teams):
+    n = len(teams)
+    ix = {t: k for k, t in enumerate(teams)}
+    rows = [{"t": t, "pj": 0, "w": 0, "d": 0, "l": 0, "gf": 0, "ga": 0, "pts": 0, "xpts": 0.0, "xn": 0, "form": ""}
+            for t in teams]
+    G = [[None] * n for _ in range(n)]
+    for m in played:
+        i, j = ix[m["h"]], ix[m["a"]]
+        x, y = m["hg"], m["ag"]
+        G[i][j] = (x, y)
+        for t, f, c in ((i, x, y), (j, y, x)):
+            r = rows[t]
+            r["pj"] += 1
+            r["gf"] += f
+            r["ga"] += c
+            if f > c:
+                r["w"] += 1
+                r["pts"] += 3
+                r["form"] += "W"
+            elif f == c:
+                r["d"] += 1
+                r["pts"] += 1
+                r["form"] += "D"
+            else:
+                r["l"] += 1
+                r["form"] += "L"
+        if m.get("xg"):
+            xh, xa = xpts(*m["xg"])
+            rows[i]["xpts"] += xh
+            rows[j]["xpts"] += xa
+            rows[i]["xn"] += 1
+            rows[j]["xn"] += 1
+    order = rank(n, [r["pts"] for r in rows], [r["gf"] - r["ga"] for r in rows], [r["gf"] for r in rows], G)
+    out = []
+    for p, t in enumerate(order):
+        r = rows[t]
+        r["pos"] = p + 1
+        r["form"] = r["form"][-5:]
+        out.append(r)
+    return out
+
+
+def pois(lam, rnd):
+    u = rnd.random()
+    k = 0
+    q = math.exp(-lam)
+    c = q
+    while u > c and k < 20:
+        k += 1
+        q *= lam / k
+        c += q
+    return k
+
+
+def dc_sample(lh, la, rho, rnd):
+    if not rho:
+        return pois(lh, rnd), pois(la, rnd)
+    t = (max(1 - lh * la * rho, 0.0), max(1 + lh * rho, 0.0), max(1 + la * rho, 0.0), max(1 - rho, 0.0))
+    tmax = max(1.0, *t)
+    while True:
+        x, y = pois(lh, rnd), pois(la, rnd)
+        w = t[2 * x + y] if (x < 2 and y < 2) else 1.0
+        if rnd.random() * tmax <= w:
+            return x, y
+
+
+def simulate(p, teams, played, pending, sims=5000, seed=2026, drift=0.08):
+    """Simula los partidos pendientes muchas veces, sorteando también la fuerza de cada equipo.
+
+    drift añade una variación extra (desviación en escala logarítmica) porque la fuerza de los equipos
+    cambia a lo largo de la temporada: lesiones, entrenadores, fichajes de invierno."""
+    n = len(teams)
+    ix = p["ix"]
+    pts0, gd0, gf0 = [0] * n, [0] * n, [0] * n
+    G0 = [[None] * n for _ in range(n)]
+    for m in played:
+        i, j = ix[m["h"]], ix[m["a"]]
+        x, y = m["hg"], m["ag"]
+        G0[i][j] = (x, y)
+        gf0[i] += x
+        gf0[j] += y
+        gd0[i] += x - y
+        gd0[j] += y - x
+        if x > y:
+            pts0[i] += 3
+        elif x < y:
+            pts0[j] += 3
+        else:
+            pts0[i] += 1
+            pts0[j] += 1
+    sched = [(ix[f["h"]], ix[f["a"]]) for f in pending]
+    rnd = random.Random(seed)
+    rho = p.get("rho", 0.0)
+    sa = [math.sqrt(v + drift * drift) for v in p["va"]]
+    sd = [math.sqrt(v + drift * drift) for v in p["vd"]]
+    s_mu, s_eta = math.sqrt(p["va0"]), math.sqrt(p["vh0"] + p["va0"])
+    pos = [[0] * n for _ in range(n)]
+    ptsl = [[] for _ in range(n)]
     for _ in range(sims):
-        ea = [p["att"][t] + rnd.gauss(0, p["sa"][t]) for t in range(n)]; ed = [p["df"][t] + rnd.gauss(0, p["sd"][t]) for t in range(n)]
-        pt = bp[:]; gd = bd[:]; gf = bg[:]
+        mu = p["mu"] + rnd.gauss(0, s_mu)
+        eta = p["eta"] + rnd.gauss(0, s_eta)
+        a = [p["a"][t] + rnd.gauss(0, sa[t]) for t in range(n)]
+        d = [p["d"][t] + rnd.gauss(0, sd[t]) for t in range(n)]
+        pts, gd, gf = pts0[:], gd0[:], gf0[:]
+        G = [row[:] for row in G0]
         for i, j in sched:
-            x = pois(math.exp(p["mu"]+p["hm"]+ea[i]-ed[j]), rnd); y = pois(math.exp(p["mu"]+ea[j]-ed[i]), rnd)
-            gf[i] += x; gf[j] += y; gd[i] += x-y; gd[j] += y-x
-            if x > y: pt[i] += 3
-            elif x < y: pt[j] += 3
-            else: pt[i] += 1; pt[j] += 1
-        for r, t in enumerate(sorted(range(n), key=lambda t: (-pt[t], -gd[t], -gf[t], rnd.random()))):
-            sp[t] += pt[t]
-            if r == 0: ch[t] += 1
-            if r < 4: t4[t] += 1
-            if r >= n-3: rl[t] += 1
-    out["teams"] = [{"t": t, "att": math.exp(p["att"][i]), "df": math.exp(-p["df"][i]), "pj": pj[i], "pts": bp[i],
-                     "sa": p["sa"][i], "sd": p["sd"][i], "exp": sp[i]/sims, "ch": ch[i]/sims, "t4": t4[i]/sims, "rl": rl[i]/sims} for i, t in enumerate(teams)]
+            x, y = dc_sample(math.exp(mu + eta + a[i] - d[j]), math.exp(mu + a[j] - d[i]), rho, rnd)
+            G[i][j] = (x, y)
+            gf[i] += x
+            gf[j] += y
+            gd[i] += x - y
+            gd[j] += y - x
+            if x > y:
+                pts[i] += 3
+            elif x < y:
+                pts[j] += 3
+            else:
+                pts[i] += 1
+                pts[j] += 1
+        for r, t in enumerate(rank(n, pts, gd, gf, G, rnd)):
+            pos[t][r] += 1
+            ptsl[t].append(pts[t])
+    out = []
+    for t in range(n):
+        s = sorted(ptsl[t])
+        q = lambda f: s[min(len(s) - 1, int(f * len(s)))]
+        pr = [c / sims for c in pos[t]]
+        out.append({"t": teams[t], "mean": sum(s) / sims, "p10": q(0.1), "p90": q(0.9), "pos": pr,
+                    "ch": pr[0], "t4": sum(pr[:4]), "t6": sum(pr[:6]), "rel": sum(pr[n - 3:])})
+    return out
+
+
+# ----------------------------------------------------------------- evaluación
+def ll(p, o):
+    return -math.log(max(p[o], 1e-9))
+
+
+def brier(p, o):
+    return sum((p[k] - (1 if k == o else 0)) ** 2 for k in range(3))
+
+
+def walk_forward_goals(played, teams, cfg=None, min_train=30):
+    """Cada partido se predice con un modelo ajustado solo con los partidos de días anteriores."""
+    out = []
+    for d in sorted({m["date"] for m in played}):
+        train = [m for m in played if m["date"] < d]
+        if len(train) < min_train:
+            continue
+        p = fit_goals(train, teams, cfg, ref=d)
+        out += [(m, predict_goals(p, m["h"], m["a"])) for m in played if m["date"] == d]
+    return out
+
+
+def walk_forward_stats(played, teams, min_train=30, step=8):
+    """Totales esperados de cada estadística, prediciendo cada partido solo con los anteriores.
+    Los modelos se reajustan cada vez que hay al menos `step` partidos nuevos."""
+    out, models, base, last = {}, None, None, -10 ** 9
+    for d in sorted({m["date"] for m in played}):
+        train = [m for m in played if m["date"] < d]
+        if len(train) < min_train:
+            continue
+        if len(train) - last >= step:
+            models = {k: fit_stat(train, teams, k) for k, _ in STATS}
+            base = {k: mean(sum(m[k]) for m in train if m.get(k) is not None) for k, _ in STATS}
+            last = len(train)
+        for m in played:
+            if m["date"] != d:
+                continue
+            i, j = teams.index(m["h"]), teams.index(m["a"])
+            pred = {k: stat_total(p, i, j)[0] for k, p in models.items() if p}
+            out[mkey(m["h"], m["a"])] = {"pred": pred, "base": base}
+    return out
+
+
+def agg(rows):
+    """Resumen de un conjunto de predicciones evaluadas (dicts con p, o y mk opcional)."""
+    if not rows:
+        return None
+    res = {"n": len(rows), "acc": mean(1.0 if max(range(3), key=lambda k: r["p"][k]) == r["o"] else 0.0 for r in rows),
+           "ll": mean(ll(r["p"], r["o"]) for r in rows), "br": mean(brier(r["p"], r["o"]) for r in rows)}
+    wm = [r for r in rows if r.get("mk")]
+    if wm:
+        diffs = [ll(r["p"], r["o"]) - ll(r["mk"], r["o"]) for r in wm]
+        dm = mean(diffs)
+        se = math.sqrt(sum((x - dm) ** 2 for x in diffs) / (len(diffs) - 1) / len(diffs)) if len(diffs) > 1 else None
+        blend = [[(a + b) / 2 for a, b in zip(r["p"], r["mk"])] for r in wm]
+        res.update(nm=len(wm), llm=mean(ll(r["mk"], r["o"]) for r in wm),
+                   brm=mean(brier(r["mk"], r["o"]) for r in wm),
+                   accm=mean(1.0 if max(range(3), key=lambda k: r["mk"][k]) == r["o"] else 0.0 for r in wm),
+                   llb=mean(ll(b, r["o"]) for b, r in zip(blend, wm)),
+                   llmod=mean(ll(r["p"], r["o"]) for r in wm), dll=dm, dse=se)
+    res["pd"] = mean(r["p"][1] for r in rows)
+    res["fd"] = mean(1.0 if r["o"] == 1 else 0.0 for r in rows)
+    return res
+
+
+def calibration(rows, bins=5):
+    acc = [[0.0, 0.0, 0] for _ in range(bins)]
+    for r in rows:
+        for k in range(3):
+            b = min(bins - 1, int(r["p"][k] * bins))
+            acc[b][0] += r["p"][k]
+            acc[b][1] += 1.0 if r["o"] == k else 0.0
+            acc[b][2] += 1
+    return [{"lo": b / bins, "hi": (b + 1) / bins, "p": s / c, "f": h / c, "n": c} for b, (s, h, c) in enumerate(acc) if c]
+
+
+def backtest_summary(wf):
+    rows = []
+    for m, pr in wf:
+        o = outcome(m["hg"], m["ag"])
+        mo = implied(m.get("ou"))
+        rows.append({"p": pr["p"], "o": o, "mk": implied(m.get("odds")), "j": m.get("j"),
+                     "ov": pr["ou"][2], "mov": mo[0] if mo else None, "tot": m["hg"] + m["ag"]})
+    res = agg(rows) or {}
+    ou = [r for r in rows if r["mov"] is not None]
+    if ou:
+        bl = lambda p, y: -math.log(max(p if y else 1 - p, 1e-9))
+        res["ou"] = {"n": len(ou), "ll": mean(bl(r["ov"], r["tot"] > 2) for r in ou),
+                     "llm": mean(bl(r["mov"], r["tot"] > 2) for r in ou)}
+    res["calib"] = calibration(rows)
+    res["by_j"] = []
+    for j in sorted({r["j"] for r in rows if r["j"]}):
+        a = agg([r for r in rows if r["j"] == j])
+        a["j"] = j
+        res["by_j"].append(a)
+    return res
+
+
+# ----------------------------------------------------------------- registro de predicciones
+def make_entry(pr, st, base, j, d, made, bf, mk=None, mo=None):
+    r4 = lambda x: round(x, 4)
+    return {"j": j, "date": d, "made": made, "bf": bf, "v": VERSION,
+            "p": [r4(x) for x in pr["p"]], "e": [round(x, 3) for x in pr["e"]],
+            "o25": r4(pr["ou"][2]), "bb": r4(pr["bb"]),
+            "st": {k: round(v, 2) for k, v in (st or {}).items()},
+            "sb": {k: round(v, 2) for k, v in (base or {}).items() if v is not None},
+            "mk": [r4(x) for x in mk] if mk else None, "mo": r4(mo) if mo is not None else None}
+
+
+def update_log(log, played, pending, gm, sms, wf_goals, wf_stats, today, horizon=10):
+    """Añade predicciones al registro sin tocar nunca las de partidos ya jugados.
+
+    - Partidos jugados sin predicción guardada: se reconstruyen con la prueba retrospectiva (bf=True).
+    - Partidos pendientes con fecha entre hoy y hoy+horizon: se actualizan en cada ejecución hasta el día
+      del partido; después quedan congelados."""
+    E = log.setdefault("entries", {})
+    for m, pr in wf_goals:
+        k = mkey(m["h"], m["a"])
+        if k not in E:
+            ws = wf_stats.get(k, {})
+            E[k] = make_entry(pr, ws.get("pred"), ws.get("base"), m.get("j"), m["date"], m["date"], True)
+    lim = (date.fromisoformat(today) + timedelta(days=horizon)).isoformat()
+    base = {k: mean(sum(m[k]) for m in played if m.get(k) is not None) for k, _ in STATS}
+    for f in pending:
+        if not (today <= f["date"] <= lim):
+            continue
+        i, j = gm["ix"][f["h"]], gm["ix"][f["a"]]
+        pr = predict_goals(gm, f["h"], f["a"])
+        st = {k: stat_total(p, i, j)[0] for k, p in sms.items() if p}
+        mo = implied(f.get("ou"))
+        E[mkey(f["h"], f["a"])] = make_entry(pr, st, base, f["j"], f["date"], today, False,
+                                             implied(f.get("odds")), mo[0] if mo else None)
+    log["version"] = VERSION
+    log["updated"] = today
+    return log
+
+
+def evaluate_log(log, played):
+    E = log.get("entries", {})
+    rows = []
+    for m in played:
+        e = E.get(mkey(m["h"], m["a"]))
+        if not e:
+            continue
+        o = outcome(m["hg"], m["ag"])
+        r = {"h": m["h"], "a": m["a"], "j": m.get("j"), "d": m["date"], "hg": m["hg"], "ag": m["ag"], "o": o,
+             "p": e["p"], "mk": implied(m.get("odds")), "bf": e.get("bf", False), "made": e.get("made"),
+             "o25": e.get("o25"), "tot": m["hg"] + m["ag"], "st": {}}
+        for k, v in (e.get("st") or {}).items():
+            obs = m.get(k)
+            if obs is not None:
+                r["st"][k] = [v, sum(obs), (e.get("sb") or {}).get(k)]
+        odds = m.get("odds")
+        if odds:
+            edges = [e["p"][k] * odds[k] - 1 for k in range(3)]
+            kb = max(range(3), key=lambda k: edges[k])
+            if edges[kb] > 0.05:
+                r["bet"] = [kb, odds[kb], round(odds[kb] - 1 if kb == o else -1.0, 3)]
+        rows.append(r)
+    real = [r for r in rows if not r["bf"]]
+    out = {"n": len(rows), "nreal": len(real), "all": agg(rows), "real": agg(real), "calib": calibration(rows),
+           "by_j": [], "rows": sorted(rows, key=lambda r: r["d"], reverse=True)}
+    for j in sorted({r["j"] for r in rows if r["j"]}):
+        rj = [r for r in rows if r["j"] == j]
+        a = agg(rj)
+        a["j"] = j
+        a["real"] = sum(1 for r in rj if not r["bf"])
+        out["by_j"].append(a)
+    bets = [r["bet"] for r in rows if "bet" in r]
+    if bets:
+        pr = [b[2] for b in bets]
+        mp = mean(pr)
+        sd = math.sqrt(sum((x - mp) ** 2 for x in pr) / (len(pr) - 1)) if len(pr) > 1 else 0.0
+        out["bets"] = {"n": len(pr), "won": sum(1 for x in pr if x > 0), "profit": sum(pr), "roi": mp,
+                       "se": sd / math.sqrt(len(pr))}
+    st = {}
+    for k, _ in STATS:
+        tr = [r["st"][k] for r in rows if k in r["st"]]
+        if tr:
+            st[k] = {"n": len(tr), "mae": mean(abs(p - o) for p, o, _ in tr),
+                     "maeb": mean(abs(b - o) for p, o, b in tr if b is not None),
+                     "bias": mean(p - o for p, o, _ in tr)}
+    out["stats"] = st
     return out
