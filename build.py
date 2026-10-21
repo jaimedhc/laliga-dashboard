@@ -102,6 +102,15 @@ def odds2(r, prefixes):
     return None
 
 
+def ah3(r):
+    """Hándicap asiático del local y cuotas medias (local, visitante)."""
+    for line, h, a in (("AHh", "AvgAHH", "AvgAHA"), ("AHh", "B365AHH", "B365AHA")):
+        v = [fnum(r, line), fnum(r, h), fnum(r, a)]
+        if v[0] is not None and all(x is not None and x > 1 for x in v[1:]):
+            return v
+    return None
+
+
 def es_time(t):
     """football-data da la hora británica; en la España peninsular es siempre una hora más."""
     try:
@@ -135,7 +144,7 @@ def load_fixtures(text):
         d, h, a = pdate(r.get("Date")), (r.get("HomeTeam") or "").strip(), (r.get("AwayTeam") or "").strip()
         if d and h and a:
             fx[(h, a)] = {"date": d, "time": es_time(r.get("Time")), "odds": odds3(r, ("Avg", "B365", "Max")),
-                          "ou": odds2(r, ("Avg", "B365", "Max"))}
+                          "ou": odds2(r, ("Avg", "B365", "Max")), "ah": ah3(r)}
     return fx
 
 
@@ -153,7 +162,7 @@ def pending_list(cal, played_keys, fx, over):
         if f:
             date_, tm, src = f["date"], f["time"], 2
         out.append({"j": j, "date": date_, "cal": d, "time": tm, "h": h, "a": a, "src": src,
-                    "odds": f.get("odds"), "ou": f.get("ou")})
+                    "odds": f.get("odds"), "ou": f.get("ou"), "ah": f.get("ah")})
     return sorted(out, key=lambda f: (f["date"], f["time"], f["j"], f["h"]))
 
 
@@ -188,7 +197,7 @@ def build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, va
     keys = ["g", "g1", "xg", "s", "st", "c", "f", "y", "r"]
     EX = [[rnd(x) for k in keys for x in (e.get(k) or [None, None])] for e in E]
     FX = [[f["j"], f["date"], f["time"], ti[f["h"]], ti[f["a"]], f["src"]] + (f["odds"] or [None] * 3)
-          + (f["ou"] or [None] * 2) for f in pend]
+          + (f["ou"] or [None] * 2) + (f.get("ah") or [None] * 3) for f in pend]
     CXQ = ("tf", "ta", "s2", "pf", "pa")
     SM = {k: dict(export_glm(p, ("rr",)), **{q: rnd(cross[k].get(q), 5) for q in CXQ}) for k, p in sms.items() if p}
     GM = dict(export_glm(gm, ("rho", "w")), cx={k: {q: rnd(cross[k].get(q), 5) for q in CXQ} for k in ("g", "g2")})

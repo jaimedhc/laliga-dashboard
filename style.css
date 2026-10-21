@@ -67,7 +67,7 @@ small{font-size:12px}
 .go:hover{background:var(--as)}
 table.lg td,table.lg th{padding:6px 7px}
 table.lg td:nth-child(n+3),table.lg th:nth-child(n+3){text-align:right}
-table.lg tr.on td{background:var(--as)}
+table.lg tr.on td,table.et tr.on td{background:var(--as)}
 table.lg tr.ucl td:first-child{box-shadow:inset 3px 0 var(--ucl)}
 table.lg tr.uel td:first-child{box-shadow:inset 3px 0 var(--uel)}
 table.lg tr.rel td:first-child{box-shadow:inset 3px 0 var(--rel)}

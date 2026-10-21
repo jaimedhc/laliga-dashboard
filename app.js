@@ -78,7 +78,7 @@ const TB = D.table, ROW = {};
 TB.forEach(r => { ROW[r.t] = r; });
 const POS = T.map((_, i) => ROW[i].pos);
 const FX = D.fx.map(r => ({j: r[0], d: r[1], tm: r[2], h: r[3], a: r[4], src: r[5],
-  odds: ok(r[6]) ? r.slice(6, 9) : null, ou: ok(r[9]) ? r.slice(9, 11) : null, past: r[1] < D.meta.today}));
+  odds: ok(r[6]) ? r.slice(6, 9) : null, ou: ok(r[9]) ? r.slice(9, 11) : null, ah: ok(r[11]) && ok(r[12]) ? r.slice(11, 14) : null, past: r[1] < D.meta.today}));
 const implied = o => { if (!o) return null; const inv = o.map(x => 1 / x), s = inv[0] + inv[1] + inv[2]; return inv.map(x => x / s); };
 const implied2 = o => { if (!o) return null; const a = 1 / o[0], b = 1 / o[1]; return a / (a + b); };
 
@@ -120,7 +120,8 @@ function summarize(X) {
   const P = [pH, pD, pA], fav = P.indexOf(Math.max(pH, pD, pA));
   const fs = cells.find(c => (c[1] > c[2] ? 0 : c[1] === c[2] ? 1 : 2) === fav);
   const varOf = (d, m) => d.reduce((s, v, k) => s + v * (k - m) ** 2, 0);
-  return {p: P, e: [eh, ea], V: [varOf(hx, eh), varOf(ay, ea), varOf(tot, eh + ea)], bb, tot, hx, ay,
+  const dd = new Map(); for (let x = 0; x <= K; x++) for (let y = 0; y <= K; y++) dd.set(x - y, (dd.get(x - y) || 0) + X[x][y]);
+  return {p: P, e: [eh, ea], V: [varOf(hx, eh), varOf(ay, ea), varOf(tot, eh + ea)], bb, tot, hx, ay, dd,
     ou: [0.5, 1.5, 2.5, 3.5, 4.5].map(L => over(tot, L)), top: cells.slice(0, 6).map(c => [c[1], c[2], c[0]]), fs: [fs[1], fs[2], fs[0]]};
 }
 const over = (dist, L) => dist.reduce((s, v, k) => s + (k > L ? v : 0), 0);
@@ -379,6 +380,76 @@ function prudentHtml(X, h, a) {
     'Muy prudente (85 %)', 'Prudente (70 %)', 'Optimista (60 %)'], rows, 'num et') +
     note(`Una línea aparece solo si la cumplen a la vez el modelo y lo que han hecho los dos equipos contra rivales parecidos (se toma la menor de las dos probabilidades); si no hay partidos en el cruce, solo el modelo. "Rivales parecidos" mezcla lo que cada equipo hizo contra los parecidos al otro y lo que el otro concedió contra los parecidos a él; con pocos partidos es muy inestable. La <b>cuota justa</b> es la que correspondería a esa probabilidad: solo tendría sentido si una casa pagara claramente más (por su margen, al menos un 5-10 % más). Una línea muy probable paga muy poco, y que algo sea probable no lo convierte en buena apuesta.`));
 }
+/* ---------------------------------------------------------------- cara a cara y hándicaps */
+const normDist = (mu, sd) => { const m = new Map(), s = Math.max(sd, 0.3);
+  for (let d = Math.floor(mu - 6 * s); d <= Math.ceil(mu + 6 * s); d++) { const q = Phi((d + 0.5 - mu) / s) - Phi((d - 0.5 - mu) / s); if (q > 1e-7) m.set(d, q); } return m; };
+const flip = dist => { const m = new Map(); dist.forEach((q, d) => m.set(-d, q)); return m; };
+function settle(dist, h) { let w = 0, p = 0, l = 0; dist.forEach((q, d) => { const v = d + h; if (Math.abs(v) < 1e-9) p += q; else if (v > 0) w += q; else l += q; }); return {w, p, l}; }
+/* Hándicap asiático h sobre la diferencia (equipo − rival): líneas de cuarto se reparten en dos mitades. */
+function ah(dist, h) {
+  const parts = Math.abs(Math.round(h * 4)) % 2 === 1 ? [h - 0.25, h + 0.25] : [h]; let w = 0, p = 0, l = 0;
+  parts.forEach(x => { const s = settle(dist, x); w += s.w / parts.length; p += s.p / parts.length; l += s.l / parts.length; });
+  return {w, p, l, fair: w > 0 ? 1 + l / w : 1e9};
+}
+const hTxt = h => (h > 0 ? '+' : h < 0 ? '−' : '') + f2(Math.abs(h)).replace(/,00$/, '').replace(/(,\d)0$/, '$1');
+const fairTxt = x => isFinite(x) && x < 100 ? f2(x) : '–';
+function h2hHtml(X, f) {
+  const h = f.h, a = f.a, md = MODES[ST_.mode], NMx = s => NM[s === 'H' ? h : a];
+  const keys = [['g', 'goles'], ['xg', 'xG'], ['s', 'tiros'], ['st', 'tiros a puerta'], ['c', 'córners'], ['y', 'amarillas'], ['f', 'faltas']];
+  const rows = [], good = [], clash = [];
+  keys.forEach(([k, lab]) => {
+    const E = X.est[k], rH = X.cH.rows[k], rA = X.cA.rows[k]; if (!E || !rH || !rA) return;
+    const pH = crossMean(X, k, 'H'), pA = crossMean(X, k, 'A'), dm = E.H.m - E.A.m;
+    const distM = k === 'g' ? X.pr.dd : normDist(dm, Math.sqrt(E.H.V + E.A.V));
+    let distX = null, dx = null;
+    if (pH && pA) {
+      const VH = E.H.V * pH.m / E.H.m, VA = E.A.V * pA.m / E.A.m;
+      dx = pH.m - pA.m; distX = normDist(dx, Math.sqrt(VH + VA + VH / pH.n + VA / pA.n));
+    }
+    const fav = (dx != null ? dx : dm) >= 0 ? 'H' : 'A', und = fav === 'H' ? 'A' : 'H';
+    const dM = fav === 'H' ? distM : flip(distM), dX = distX ? (fav === 'H' ? distX : flip(distX)) : null;
+    const both = hh => { const m = ah(dM, hh), x = dX ? ah(dX, hh) : null; const w = x ? Math.min(m.w, x.w) : m.w, l = x ? Math.max(m.l, x.l) : m.l; return {m, x, w, l, fair: w > 0 ? 1 + l / w : 1e9}; };
+    const more = both(-0.5), agree = !dX || (dm >= 0) === (dx >= 0);
+    let best = null, safe = null;
+    if (!VK[k].cont) for (let hh = -0.5; hh >= -40; hh -= 1) { const b = both(hh); if (b.w >= md.thr) best = {hh, ...b}; if (b.w >= 0.85) safe = {hh, ...b}; if (b.w < 0.5) break; }
+    const cell = b => b ? `${esc(NMx(fav))} ${hTxt(b.hh)} <small>(${pc(b.w)} · cuota justa ${fairTxt(b.fair)})</small>` : '–';
+    rows.push(`<tr><td class="l">${VK[k].n}</td><td>${f1(rH.obs)} <small>(${rH.f.n})</small></td><td>${f1(rA.obs)} <small>(${rA.f.n})</small></td>` +
+      `<td>${f1(rH.obsA)}</td><td>${f1(rA.obsA)}</td><td>${dx != null ? sg1(dx) : '–'}</td><td>${sg1(dm)}</td>` +
+      `<td>${agree ? `<b>${esc(NMx(fav))}</b> ${more.x ? pc(more.x.w) + ' / ' : ''}${pc(more.m.w)}` : '<span class="chip maybe">No coinciden</span>'}</td>` +
+      `<td>${agree ? cell(best) : '–'}</td><td>${agree ? cell(safe) : '–'}</td></tr>`);
+    if (!agree) clash.push(lab);
+    else if (more.w >= md.thr) good.push([more.w, `<b>${esc(NMx(fav))}</b> debería tener más ${lab} que el ${esc(NMx(und))}: contra rivales parecidos ${esc(NMx(fav))} hace ${f1((fav === 'H' ? rH : rA).obs)} y ${esc(NMx(und))} ${f1((fav === 'H' ? rA : rH).obs)}; proyección para este partido ${f1(fav === 'H' ? pH && pH.m : pA && pA.m)} frente a ${f1(fav === 'H' ? pA && pA.m : pH && pH.m)}. Probabilidad ${more.x ? pc(more.x.w) + ' según el cruce y ' : ''}${pc(more.m.w)} según el modelo.` +
+        (best ? ` Hándicap ${md.name.toLowerCase()}: <b>${esc(NMx(fav))} ${hTxt(best.hh)} ${lab}</b> (${pc(best.w)}, cuota justa ${fairTxt(best.fair)}).` : '')]);
+  });
+  good.sort((x, y) => y[0] - x[0]);
+  const warn = [];
+  const vH = X.cH.gs, vA = X.cA.gs;
+  if (vH.length && vH.every(g => !g.home)) warn.push(`Todos los partidos del cruce del ${esc(NM[h])} fueron fuera de casa y hoy juega en casa.`);
+  if (vA.length && vA.every(g => g.home)) warn.push(`Todos los partidos del cruce del ${esc(NM[a])} fueron en casa y hoy juega fuera.`);
+  const n1 = vH.length, n2 = vA.length;
+  return card('Cara a cara con rivales parecidos', `<p class="note" style="margin-top:0">${esc(NM[h])}: ${n1} partidos contra rivales parecidos al ${esc(NM[a])} · ${esc(NM[a])}: ${n2} contra rivales parecidos al ${esc(NM[h])}. Ventana ±${ST_.win} puestos; modo ${md.name.toLowerCase()} (${Math.round(md.thr * 100)} %).</p>` +
+    (warn.length ? `<p class="note"><span class="chip warn">Atención</span> ${warn.join(' ')}</p>` : '') +
+    `<h3>Conclusiones</h3>` + (good.length ? `<ul class="cl">${good.map(x => `<li>${x[1]}</li>`).join('')}</ul>` : note('Ninguna estadística cumple a la vez el cruce y el modelo con la probabilidad exigida.')) +
+    (clash.length ? note(`El cruce y el modelo no coinciden en quién tendrá más ${clash.join(', ')}: ahí no hay conclusión.`) : '') +
+    `<h3>Detalle</h3>` + tbl([['Estadística', 'l'], `${esc(NM[h])} hace`, `${esc(NM[a])} hace`, `${esc(NM[h])} concede`, `${esc(NM[a])} concede`,
+      'Local − visitante (cruce)', 'Local − visitante (modelo)', 'Quién más (cruce / modelo)', `Hándicap ${md.name.toLowerCase()}`, 'Hándicap muy prudente (85 %)'], rows, 'num et') +
+    note(`"Hace" y "concede" son medias contra los rivales parecidos al otro equipo (entre paréntesis, partidos). La diferencia del cruce proyecta cada equipo mezclando lo que hace él contra los parecidos al rival y lo que el rival concede contra los parecidos a él. Las probabilidades del hándicap son las menores entre cruce y modelo, para ser prudentes. Un hándicap −1,5 significa ganar esa estadística por 2 o más. La cuota justa es la que corresponde a esa probabilidad: solo hay valor si una casa paga claramente más.`));
+}
+function ahGoalsHtml(X, f) {
+  const dd = X.pr.dd, lines = [-1.5, -1.25, -1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5];
+  const mk = f.ah, rows = lines.map(hh => {
+    const H = ah(dd, hh), A = ah(flip(dd), -hh), isM = mk && Math.abs(mk[0] - hh) < 1e-9;
+    return `<tr class="${isM ? 'on' : ''}"><td class="l">${esc(NM[f.h])} ${hTxt(hh)} · ${esc(NM[f.a])} ${hTxt(-hh)}</td><td>${pc(H.w)}</td><td>${H.p > 0.001 ? pc(H.p) : '–'}</td><td>${pc(H.l)}</td><td>${fairTxt(H.fair)}</td><td>${fairTxt(A.fair)}</td>` +
+      `<td>${isM ? `${f2(mk[1])} / ${f2(mk[2])}` : ''}</td></tr>`;
+  });
+  let mtxt = 'football-data todavía no ha publicado el hándicap asiático de este partido.';
+  if (mk) {
+    const H = ah(dd, mk[0]), A = ah(flip(dd), -mk[0]), evH = H.w * (mk[1] - 1) - H.l, evA = A.w * (mk[2] - 1) - A.l;
+    mtxt = `Línea del mercado: ${esc(NM[f.h])} ${hTxt(mk[0])} a ${f2(mk[1])} y ${esc(NM[f.a])} ${hTxt(-mk[0])} a ${f2(mk[2])}. Con las probabilidades del modelo, apostar 1 € daría de media ${sgn(evH * 100, f0)} céntimos al ${esc(NM[f.h])} y ${sgn(evA * 100, f0)} al ${esc(NM[f.a])}. Recuerda que en la prueba retrospectiva el modelo ha sido peor que el mercado: un valor positivo aquí es más probablemente un error del modelo que de la casa.`;
+  }
+  return card('Hándicap asiático (goles)', tbl([['Línea', 'l'], 'Gana local', 'Nulo', 'Pierde local', 'Cuota justa local', 'Cuota justa visitante', 'Mercado (local / visitante)'], rows, 'num et') +
+    note(`${mtxt} En las líneas de cuarto (,25 y ,75) la apuesta se reparte entre las dos líneas vecinas; "nulo" es la probabilidad de que se devuelva el dinero.`));
+}
 function renderPartido() {
   const f = FX.find(x => fxKey(x) === ST_.fx) || upcoming()[0] || FX[0];
   if (!f) { $('c-partido').innerHTML = card('', note('No quedan partidos pendientes.')); return; }
@@ -466,7 +537,7 @@ function renderPartido() {
     <div class="tile"><span>Marcador más probable</span><b>${pr.top[0][0]}-${pr.top[0][1]}</b><small>${pc(pr.top[0][2])} · luego ${pr.top.slice(1, 3).map(t => `${t[0]}-${t[1]} ${pc(t[2])}`).join(', ')}</small></div>
     <div class="tile"><span>Más de 2,5 goles</span><b>${pc(pr.ou[2])}</b>${mo != null ? `<small>mercado ${pc(mo)}</small>` : ''}</div>
     <div class="tile"><span>Ambos marcan</span><b>${pc(pr.bb)}</b></div></div>`;
-  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + prudentHtml(X, h, a) + card('Conclusiones', concl, 'concl') +
+  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + h2hHtml(X, f) + ahGoalsHtml(X, f) + prudentHtml(X, h, a) + card('Conclusiones', concl, 'concl') +
     card('Estimaciones y umbrales', tbl(['', esc(NM[h]), esc(NM[a]), 'Total', 'Probabilidad de superar la línea (total)'], erows, 'num et') +
       note(`Cada celda da la media esperada y, en pequeño, su rango con ±${z} ${z === 1 ? 'error' : 'errores'}: lo que cabe esperar de media, no de un partido concreto. Las probabilidades de la derecha sí son para este partido e incluyen la variación normal entre partidos. ` +
         `${!ST_.useX ? 'El ajuste con rivales parecidos está desactivado.' : wmax < 0.01
