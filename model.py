@@ -765,3 +765,67 @@ def evaluate_log(log, played):
                      "bias": mean(p - o for p, o, _ in tr)}
     out["stats"] = st
     return out
+
+
+# ----------------------------------------------------------------- rachas
+def p_over(m, V, L):
+    """Probabilidad de superar L con media m y varianza V (binomial negativa o Poisson)."""
+    k = math.floor(L)
+    if k < 0:
+        return 1.0
+    if V > m * 1.02:
+        r = m * m / (V - m)
+        q = m / (r + m)
+        pk = (1 - q) ** r
+        c = pk
+        for i in range(1, k + 1):
+            pk *= (i - 1 + r) / i * q
+            c += pk
+    else:
+        pk = math.exp(-m)
+        c = pk
+        for i in range(1, k + 1):
+            pk *= m / i
+            c += pk
+    return max(0.0, 1 - c)
+
+
+STREAK_KEYS = ["s", "st", "c", "f", "y"]
+
+
+def streak_backtest(played, teams, step=8):
+    """¿Se cumplen las rachas? Para cada equipo con 5 partidos previos y cada estadística se toma la línea que
+    superó en sus 5 últimos (5 de 5) o en 4 de 5, y se mira si la supera en el partido siguiente. Se compara
+    con lo que decía el modelo ajustado solo con los partidos anteriores."""
+    res, models, last = {}, None, -10 ** 9
+    for d in sorted({m["date"] for m in played}):
+        train = [m for m in played if m["date"] < d]
+        if len(train) < 30:
+            continue
+        if len(train) - last >= step:
+            models = {k: fit_stat(train, teams, k) for k in STREAK_KEYS}
+            last = len(train)
+        for m in (x for x in played if x["date"] == d):
+            for side in (0, 1):
+                t, o = (m["h"], m["a"]) if side == 0 else (m["a"], m["h"])
+                hist = [x for x in train if t in (x["h"], x["a"])][-5:]
+                if len(hist) < 5:
+                    continue
+                for k in STREAK_KEYS:
+                    vals = [x[k][0 if x["h"] == t else 1] for x in hist if x.get(k)]
+                    if len(vals) < 5 or not m.get(k) or not models.get(k):
+                        continue
+                    mu, V, _ = stat_pred(models[k], teams.index(t), teams.index(o), 1 if side == 0 else 0)
+                    for rule, L in (("5", min(vals) - 0.5), ("4", sorted(vals)[1] - 0.5)):
+                        if L < 0.5:
+                            continue
+                        r = res.setdefault(rule, {}).setdefault(k, [0, 0, 0.0])
+                        r[0] += 1
+                        r[1] += m[k][side] > L
+                        r[2] += p_over(mu, V, L)
+    out = {}
+    for rule, by in res.items():
+        n = sum(v[0] for v in by.values())
+        out[rule] = {"n": n, "hit": sum(v[1] for v in by.values()) / n, "model": sum(v[2] for v in by.values()) / n,
+                     "by": {k: {"n": v[0], "hit": v[1] / v[0], "model": v[2] / v[0]} for k, v in by.items()}}
+    return out

@@ -659,13 +659,81 @@ function renderHist() {
     card('Partidos evaluados', tbl(['Fecha', 'J', ['Partido', 'l'], 'Resultado', 'Modelo 1 · X · 2', 'Mercado', '', 'Apuesta simulada', 'Predicción'], mrows, 'num'));
 }
 
+/* ---------------------------------------------------------------- vista: tendencias */
+const TK = [['s', 'Tiros'], ['st', 'Tiros a puerta'], ['c', 'Córners'], ['y', 'Amarillas'], ['f', 'Faltas'], ['g', 'Goles']];
+const TSt = {fx: 'all', k: 'all', min: 0.6, sort: 'gap', line: {}, odds: {}};
+try { const sv = JSON.parse(localStorage.getItem('tend-odds') || '{}'); if (sv && typeof sv === 'object') TSt.odds = sv; } catch (e) { /* sin almacenamiento */ }
+const saveOdds = () => { try { localStorage.setItem('tend-odds', JSON.stringify(TSt.odds)); } catch (e) { /* sin almacenamiento */ } };
+const lapl = (h, n) => (h + 1) / (n + 2);  // frecuencia suavizada: con 2 de 2 no da 100 %
+function tendRows() {
+  const rows = [], STR = (D.streak || {})['5'];
+  nextList().filter(f => TSt.fx === 'all' || fxKey(f) === TSt.fx).forEach(f => {
+    const X = estimates(f.h, f.a, ST_.win, false);
+    [['H', f.h, f.a, true], ['A', f.a, f.h, false], ['T', null, null, null]].forEach(([side, t, o, home]) => {
+      TK.forEach(([k, lab]) => {
+        if (TSt.k !== 'all' && TSt.k !== k) return;
+        if (side === 'T' && !['c', 'y', 's', 'st', 'g'].includes(k)) return;
+        const E = X.est[k]; if (!E) return;
+        const val = g => side === 'T' ? (ok(g.f[k]) && ok(g.a[k]) ? g.f[k] + g.a[k] : null) : g.f[k];
+        const tm = side === 'T' ? f.h : t, hist = G[tm].filter(g => ok(val(g)));
+        const last = hist.slice(-5).map(val);
+        if (last.length < 3) return;
+        const key = `${fxKey(f)}|${side}|${k}`;
+        const L = TSt.line[key] != null ? TSt.line[key] : Math.min(...last) - 0.5;
+        if (L < 0.5) return;
+        const same = side === 'T' ? null : hist.filter(g => g.home === home).slice(-5).map(val);
+        let cr = null;
+        if (side !== 'T') { const S = new Set(near(o, t, ST_.win)), gs = G[t].filter(g => S.has(g.o) && ok(g.f[k])); cr = {n: gs.length, h: gs.filter(g => g.f[k] > L).length, v: gs.map(g => g.f[k])}; }
+        else { const S1 = new Set(near(f.a, f.h, ST_.win)), S2 = new Set(near(f.h, f.a, ST_.win));
+          const g1 = G[f.h].filter(g => S1.has(g.o)), g2 = G[f.a].filter(g => S2.has(g.o)), all = g1.concat(g2).map(val).filter(ok);
+          cr = {n: all.length, h: all.filter(v => v > L).length, v: all}; }
+        const pm = lineP(X, k, side, L), hits = last.filter(v => v > L).length;
+        const parts = [pm]; if (cr && cr.n) parts.push(lapl(cr.h, cr.n));
+        const pp = Math.min(...parts), odds = TSt.odds[key + '|' + L], emp = lapl(hits + (cr ? cr.h : 0), last.length + (cr ? cr.n : 0));
+        rows.push({f, side, t, k, lab, key, L, last, hits, same, cr, pm, pp, odds, emp, gap: emp - pm, ev: ok(odds) ? pp * odds - 1 : null,
+          custom: TSt.line[key] != null, calib: STR && STR.by[k] ? STR.by[k].hit : null, mean: E[side].m});
+      });
+    });
+  });
+  const keep = r => r.custom || ok(r.odds) || (r.pp >= TSt.min && r.pm <= 0.92);
+  const by = TSt.sort === 'gap' ? (x, y) => y.gap - x.gap : (x, y) => y.pp - x.pp;
+  return rows.filter(keep).sort((x, y) => (ok(y.ev) - ok(x.ev)) || ((y.ev || 0) - (x.ev || 0)) || by(x, y));
+}
+function renderTend() {
+  const rows = tendRows(), S5 = (D.streak || {})['5'], S4 = (D.streak || {})['4'];
+  const fxs = nextList();
+  const ctr = `<div class="ctr"><label>Partido <select id="t-fx"><option value="all">Todos los próximos</option>${fxs.map(f => `<option value="${fxKey(f)}" ${fxKey(f) === TSt.fx ? 'selected' : ''}>${nm(f.h)} – ${nm(f.a)}</option>`).join('')}</select></label>
+    <label>Estadística <select id="t-k"><option value="all">Todas</option>${TK.map(([k, l]) => `<option value="${k}" ${k === TSt.k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+    <label>Ordenar <select id="t-sort"><option value="gap" ${TSt.sort === 'gap' ? 'selected' : ''}>La racha supera al modelo</option><option value="pp" ${TSt.sort === 'pp' ? 'selected' : ''}>Más probables</option></select></label>
+    <label>Probabilidad prudente mínima <select id="t-min">${[0.5, 0.6, 0.7, 0.8].map(v => `<option value="${v}" ${v === TSt.min ? 'selected' : ''}>${Math.round(v * 100)} %</option>`).join('')}</select></label></div>`;
+  const spark = (vals, L) => vals.map(v => `<span class="tv ${v > L ? 'hit' : 'miss'}">${f0(v)}</span>`).join('');
+  const body = rows.slice(0, 150).map(r => {
+    const who = r.side === 'T' ? 'Total del partido' : NM[r.t];
+    const sm = r.same && r.same.length ? `${r.same.filter(v => v > r.L).length}/${r.same.length}` : '–';
+    const evc = ok(r.ev) ? `<span class="chip ${r.ev > 0.05 ? 'clear' : r.ev > 0 ? 'maybe' : 'noise'}">${sgn(r.ev * 100, f0)} cént.</span>` : '–';
+    return `<tr><td class="l">${nm(r.f.h)} – ${nm(r.f.a)}<br><small>${r.f.past ? 'aplazado' : fdl(r.f.d)}</small></td><td class="l">${esc(who)}</td><td class="l">${r.lab}</td>` +
+      `<td><input class="tin tl" data-key="${r.key}" type="number" step="1" min="0.5" value="${r.L}" aria-label="Línea" style="width:5.2em"></td>` +
+      `<td class="l"><span class="tvs">${spark(r.last, r.L)}</span> <small>${r.hits}/${r.last.length}</small></td><td>${sm}</td>` +
+      `<td>${r.cr && r.cr.n ? `${r.cr.h}/${r.cr.n}` : '–'}</td><td>${f1(r.mean)}</td><td>${pc(r.emp)}</td><td>${pc(r.pm)}</td><td>${ppt(r.gap)}</td><td><b>${pc(r.pp)}</b></td><td>${fairTxt(1 / r.pp)}</td>` +
+      `<td><input class="tin to" data-key="${r.key}|${r.L}" type="number" step="0.01" min="1.01" value="${ok(r.odds) ? r.odds : ''}" placeholder="cuota" aria-label="Cuota de la casa" style="width:5.6em"></td><td>${evc}</td></tr>`;
+  });
+  const calib = S5 ? `En lo que va de temporada, cuando un equipo superaba una línea en sus 5 últimos partidos, la volvió a superar en el siguiente el <b>${pc(S5.hit)}</b> de las veces (${S5.n} casos); el modelo ya preveía de media un ${pc(S5.model)}.` +
+    (S4 ? ` Con 4 de 5, se cumplió el ${pc(S4.hit)} (modelo: ${pc(S4.model)}).` : '') +
+    ` Es decir: la racha se cumple a menudo, pero no aporta nada que el modelo no supiera ya. La racha elige líneas bajas, que por eso se cumplen mucho y pagan poco. Una apuesta solo tiene valor si la casa paga más que la cuota justa.` : '';
+  $('c-tend').innerHTML = ctr + card('Qué dicen los datos sobre las rachas', note(calib) + (S5 ? tbl([['Estadística', 'l'], 'Casos', 'Se cumplió', 'El modelo decía'],
+      Object.entries(S5.by).map(([k, v]) => `<tr><td class="l">${VK[k].n}</td><td>${v.n}</td><td>${pc(v.hit)}</td><td>${pc(v.model)}</td></tr>`), 'num') : '')) +
+    card('Tendencias de los próximos partidos', tbl([['Partido', 'l'], ['Equipo', 'l'], ['Estadística', 'l'], 'Línea (más de)', ['Últimos partidos', 'l'], 'Mismo campo', 'Rivales parecidos',
+      'Esperado (modelo)', 'Según la racha', 'Según el modelo', 'Diferencia', 'Prudente', 'Cuota justa', 'Cuota de la casa', 'Valor por 1 €'], body, 'num et tt') +
+      note(`La línea por defecto es la más alta que el equipo superó en sus 5 últimos partidos; puedes cambiarla y escribir la cuota que te ofrece la casa. <b>Mismo campo</b>: veces que la superó en sus últimos partidos en casa (o fuera, según toque hoy). <b>Rivales parecidos</b>: veces que la superó contra los rivales a ±${ST_.win} puestos del de hoy. <b>Según la racha</b>: veces que la superó en los últimos partidos y contra rivales parecidos, juntas y suavizadas. <b>Diferencia</b>: cuánto más optimista es la racha que el modelo; al ordenar por ella salen primero casos como el del Rayo, en los que el equipo viene rindiendo muy por encima de lo que el modelo espera (y donde una casa que no lo tenga en cuenta podría pagar de más). Se ocultan las líneas casi seguras (el modelo da más del 92 %), que no pagan nada. <b>Prudente</b>: la menor entre el modelo y los rivales parecidos (suavizada para que 2 de 2 no cuente como 100 %). <b>Valor</b>: lo que ganarías de media por euro con la probabilidad prudente; en verde si supera 5 céntimos. Las cuotas que escribas se guardan solo en este navegador. ${rows.length > 150 ? `Se muestran 150 de ${rows.length}; filtra por partido o estadística.` : ''} No es una recomendación de apuesta.`));
+}
+
 /* ---------------------------------------------------------------- arranque */
-const VIEWS = ['equipos', 'partido', 'predicciones', 'historial', 'metodo'];
+const VIEWS = ['equipos', 'partido', 'predicciones', 'tendencias', 'historial', 'metodo'];
 const rendered = {};
 function show(view, scroll) {
   if (!VIEWS.includes(view)) view = 'equipos';
   VIEWS.forEach(v => { $('v-' + v).hidden = v !== view; const b = document.querySelector(`[data-view="${v}"]`); if (b) b.setAttribute('aria-selected', String(v === view)); });
-  if (view === 'equipos') renderEquipos(); else if (view === 'partido') renderPartido(); else if (view === 'predicciones') renderPred(); else if (view === 'historial') renderHist();
+  if (view === 'equipos') renderEquipos(); else if (view === 'partido') renderPartido(); else if (view === 'predicciones') renderPred(); else if (view === 'historial') renderHist(); else if (view === 'tendencias') renderTend();
   rendered[view] = true;
   try { history.replaceState(null, '', '#' + view); } catch (e) { /* sin historial */ }
   if (scroll) window.scrollTo({top: 0});
@@ -687,6 +755,12 @@ document.addEventListener('change', e => {
   else if (t.id === 'win-sel') { ST_.win = +t.value; renderPartido(); }
   else if (t.id === 'x-chk') { ST_.useX = t.checked; renderPartido(); }
   else if (t.id === 'j-sel') { ST_.jsel = t.value; renderPred(); }
+  else if (t.id === 't-fx') { TSt.fx = t.value; renderTend(); }
+  else if (t.id === 't-k') { TSt.k = t.value; renderTend(); }
+  else if (t.id === 't-min') { TSt.min = +t.value; renderTend(); }
+  else if (t.id === 't-sort') { TSt.sort = t.value; renderTend(); }
+  else if (t.classList.contains('tl')) { const v = parseFloat(t.value); if (ok(v) && v > 0) { TSt.line[t.dataset.key] = Math.floor(v) + 0.5; renderTend(); } }
+  else if (t.classList.contains('to')) { const v = parseFloat(String(t.value).replace(',', '.')); if (ok(v) && v > 1) TSt.odds[t.dataset.key] = v; else delete TSt.odds[t.dataset.key]; saveOdds(); renderTend(); }
 });
 $('rk-sel').innerHTML = RKS.map(([v, l]) => `<option value="${v}">${l} por partido</option>`).join('');
 const m = D.meta;

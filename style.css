@@ -141,3 +141,8 @@ table.xt th:nth-child(6),table.xt td:nth-child(6){border-left:1px solid var(--ln
   .card{padding:14px}
   .pb{grid-template-columns:58px minmax(0,1fr)}
 }
+.tvs{display:inline-flex;gap:2px;vertical-align:middle}
+.tv{display:inline-block;min-width:22px;padding:1px 3px;border-radius:4px;font-size:12px;text-align:center;font-variant-numeric:tabular-nums}
+.tv.hit{background:var(--upb);color:var(--up)}.tv.miss{background:var(--dnb);color:var(--dn)}
+.tin{font:inherit;font-size:13px;color:var(--ink);background:var(--s);border:1px solid var(--ln);border-radius:6px;padding:3px 5px;text-align:right}
+table.tt td{vertical-align:middle}

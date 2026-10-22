@@ -184,7 +184,7 @@ def agg_round(a):
     return {k: (round(v, 4) if isinstance(v, float) else v) for k, v in a.items()}
 
 
-def build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn):
+def build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn, STREAK=None):
     ti = {t: k for k, t in enumerate(teams)}
     M = []
     for m in played:
@@ -219,7 +219,7 @@ def build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, va
         "M": M, "E": EX, "fx": FX, "table": TB, "gm": GM, "sm": SM, "sim": SIM,
         "bt": {**agg_round({k: v for k, v in bt.items() if k not in ("calib", "by_j", "ou")}),
                "calib": bt.get("calib"), "by_j": [agg_round(a) for a in bt.get("by_j", [])], "ou": bt.get("ou")},
-        "var": variants, "log": LOG, "pl": jload("players.json", {}).get("teams", {}),
+        "var": variants, "log": LOG, "streak": STREAK, "pl": jload("players.json", {}).get("teams", {}),
     }
 
 
@@ -288,13 +288,14 @@ def main():
         s = bt if not cfg else model.backtest_summary(model.walk_forward_goals(played, teams, cfg))
         variants.append({"name": name, **{k: rnd(s.get(k), 4) for k in ("n", "ll", "llm", "dll", "dse", "acc", "pd", "fd")}})
     wfs = model.walk_forward_stats(played, teams)
+    streaks = model.streak_backtest(played, teams)
     t3 = time.time()
 
     log = model.update_log(jload(LOG_PATH, {}), played, pend, gm, sms, wf, wfs, TODAY)
     write(LOG_PATH, json.dumps(log, ensure_ascii=False, indent=1, sort_keys=True))
     ev = model.evaluate_log(log, played)
 
-    payload = build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn)
+    payload = build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn, streaks)
     fragment = render(payload)
     write(OUT_HTML, full_document(fragment))
     if ENV("ARTIFACT_OUT"):
