@@ -184,7 +184,7 @@ def agg_round(a):
     return {k: (round(v, 4) if isinstance(v, float) else v) for k, v in a.items()}
 
 
-def build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn, STREAK=None):
+def build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn, trends_bt=None, trends_now=None, trends_flex=None):
     ti = {t: k for k, t in enumerate(teams)}
     M = []
     for m in played:
@@ -211,6 +211,14 @@ def build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, va
     LOG = {"n": ev["n"], "nreal": ev["nreal"], "all": agg_round(ev["all"]), "real": agg_round(ev["real"]),
            "calib": ev["calib"], "by_j": [agg_round(a) for a in ev["by_j"]], "bets": ev.get("bets"),
            "stats": ev["stats"], "rows": rows}
+    T2 = lambda c: {"side": c["side"], "k": c["k"], "over": c["over"], "tier": c["tier"], "L": c["L"]}
+    TB_TR = None
+    if trends_bt:
+        TB_TR = {"summ": {k: {q: rnd(v, 4) if isinstance(v, float) else v for q, v in s.items()} for k, s in trends_bt["summ"].items()},
+                 "cases": [{**T2(c), "d": c["d"], "h": ti[c["h"]], "a": ti[c["a"]], "obs": c["obs"], "hit": c["hit"], "pm": rnd(c["pm"], 4)}
+                           for c in sorted(trends_bt["cases"], key=lambda c: c["d"], reverse=True)]}
+    TR = [{**T2(c), "j": f["j"], "d": f["date"], "h": ti[f["h"]], "a": ti[f["a"]], "m": rnd(c["m"], 3), "V": rnd(c["V"], 3),
+           "pm": rnd(c["pm"], 4), "series": c["series"], "cross": c["cross"], "same": c["same"]} for f, c in (trends_now or [])]
     return {
         "meta": {"gen": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), "today": TODAY,
                  "last": played[-1]["date"], "n": len(played), "ver": model.VERSION, "fx": len(fx),
@@ -219,8 +227,26 @@ def build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, va
         "M": M, "E": EX, "fx": FX, "table": TB, "gm": GM, "sm": SM, "sim": SIM,
         "bt": {**agg_round({k: v for k, v in bt.items() if k not in ("calib", "by_j", "ou")}),
                "calib": bt.get("calib"), "by_j": [agg_round(a) for a in bt.get("by_j", [])], "ou": bt.get("ou")},
-        "var": variants, "log": LOG, "streak": STREAK, "pl": jload("players.json", {}).get("teams", {}),
+        "var": variants, "log": LOG, "tb": TB_TR, "tr": TR,
+        "tbf": {k: {q: rnd(v, 4) if isinstance(v, float) else v for q, v in s.items()} for k, s in (trends_flex or {}).items()}, "pl": jload("players.json", {}).get("teams", {}),
     }
+
+
+def trends_live(played, pend, pos, sms):
+    """Tendencias claras de los partidos que se muestran en la página (los de fecha pasada sin resultado y las dos
+    próximas jornadas), con todos los partidos jugados y la clasificación actual."""
+    up = [f for f in pend if f["date"] >= TODAY]
+    js = []
+    for f in up:
+        if f["j"] not in js:
+            js.append(f["j"])
+    js = js[:2]
+    first = up[0]["date"] if up else None
+    show = [f for f in pend if f["date"] < TODAY] + [f for f in up if f["j"] in js or f["date"] == first]
+    out = []
+    for f in show:
+        out += [(f, c) for c in model.trend_candidates(played, pos, sms, f["h"], f["a"])]
+    return out
 
 
 def render(payload):
@@ -288,14 +314,16 @@ def main():
         s = bt if not cfg else model.backtest_summary(model.walk_forward_goals(played, teams, cfg))
         variants.append({"name": name, **{k: rnd(s.get(k), 4) for k in ("n", "ll", "llm", "dll", "dse", "acc", "pd", "fd")}})
     wfs = model.walk_forward_stats(played, teams)
-    streaks = model.streak_backtest(played, teams)
+    trends_bt = model.trend_backtest(played, teams)
+    trends_flex = model.trend_backtest(played, teams, strict=False)["summ"]
     t3 = time.time()
 
     log = model.update_log(jload(LOG_PATH, {}), played, pend, gm, sms, wf, wfs, TODAY)
     write(LOG_PATH, json.dumps(log, ensure_ascii=False, indent=1, sort_keys=True))
     ev = model.evaluate_log(log, played)
 
-    payload = build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn, streaks)
+    payload = build_payload(played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn, trends_bt,
+                            trends_live(played, pend, pos, sms), trends_flex)
     fragment = render(payload)
     write(OUT_HTML, full_document(fragment))
     if ENV("ARTIFACT_OUT"):

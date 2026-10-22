@@ -146,3 +146,6 @@ table.xt th:nth-child(6),table.xt td:nth-child(6){border-left:1px solid var(--ln
 .tv.hit{background:var(--upb);color:var(--up)}.tv.miss{background:var(--dnb);color:var(--dn)}
 .tin{font:inherit;font-size:13px;color:var(--ink);background:var(--s);border:1px solid var(--ln);border-radius:6px;padding:3px 5px;text-align:right}
 table.tt td{vertical-align:middle}
+.story{max-width:90ch;margin:0 0 10px;line-height:1.55}
+.tvrow{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 10px;align-items:center}
+.tvrow small{color:var(--mu);margin-right:4px}

@@ -660,71 +660,96 @@ function renderHist() {
 }
 
 /* ---------------------------------------------------------------- vista: tendencias */
-const TK = [['s', 'Tiros'], ['st', 'Tiros a puerta'], ['c', 'Córners'], ['y', 'Amarillas'], ['f', 'Faltas'], ['g', 'Goles']];
-const TSt = {fx: 'all', k: 'all', min: 0.6, sort: 'gap', line: {}, odds: {}};
-try { const sv = JSON.parse(localStorage.getItem('tend-odds') || '{}'); if (sv && typeof sv === 'object') TSt.odds = sv; } catch (e) { /* sin almacenamiento */ }
-const saveOdds = () => { try { localStorage.setItem('tend-odds', JSON.stringify(TSt.odds)); } catch (e) { /* sin almacenamiento */ } };
+/* Las tendencias las detecta build.py (model.trend_candidates); aquí solo se presentan y se evalúan las líneas. */
+const TKN = {s: 'tiros', st: 'tiros a puerta', c: 'córners', y: 'amarillas', f: 'faltas'};
+const TSt = {fx: 'all', odds: {}};
+try { const sv = JSON.parse(localStorage.getItem('tend-odds2') || '{}'); if (sv && typeof sv === 'object') TSt.odds = sv; } catch (e) { /* sin almacenamiento */ }
+const saveOdds = () => { try { localStorage.setItem('tend-odds2', JSON.stringify(TSt.odds)); } catch (e) { /* sin almacenamiento */ } };
 const lapl = (h, n) => (h + 1) / (n + 2);  // frecuencia suavizada: con 2 de 2 no da 100 %
-function tendRows() {
-  const rows = [], STR = (D.streak || {})['5'];
-  nextList().filter(f => TSt.fx === 'all' || fxKey(f) === TSt.fx).forEach(f => {
-    const X = estimates(f.h, f.a, ST_.win, false);
-    [['H', f.h, f.a, true], ['A', f.a, f.h, false], ['T', null, null, null]].forEach(([side, t, o, home]) => {
-      TK.forEach(([k, lab]) => {
-        if (TSt.k !== 'all' && TSt.k !== k) return;
-        if (side === 'T' && !['c', 'y', 's', 'st', 'g'].includes(k)) return;
-        const E = X.est[k]; if (!E) return;
-        const val = g => side === 'T' ? (ok(g.f[k]) && ok(g.a[k]) ? g.f[k] + g.a[k] : null) : g.f[k];
-        const tm = side === 'T' ? f.h : t, hist = G[tm].filter(g => ok(val(g)));
-        const last = hist.slice(-5).map(val);
-        if (last.length < 3) return;
-        const key = `${fxKey(f)}|${side}|${k}`;
-        const L = TSt.line[key] != null ? TSt.line[key] : Math.min(...last) - 0.5;
-        if (L < 0.5) return;
-        const same = side === 'T' ? null : hist.filter(g => g.home === home).slice(-5).map(val);
-        let cr = null;
-        if (side !== 'T') { const S = new Set(near(o, t, ST_.win)), gs = G[t].filter(g => S.has(g.o) && ok(g.f[k])); cr = {n: gs.length, h: gs.filter(g => g.f[k] > L).length, v: gs.map(g => g.f[k])}; }
-        else { const S1 = new Set(near(f.a, f.h, ST_.win)), S2 = new Set(near(f.h, f.a, ST_.win));
-          const g1 = G[f.h].filter(g => S1.has(g.o)), g2 = G[f.a].filter(g => S2.has(g.o)), all = g1.concat(g2).map(val).filter(ok);
-          cr = {n: all.length, h: all.filter(v => v > L).length, v: all}; }
-        const pm = lineP(X, k, side, L), hits = last.filter(v => v > L).length;
-        const parts = [pm]; if (cr && cr.n) parts.push(lapl(cr.h, cr.n));
-        const pp = Math.min(...parts), odds = TSt.odds[key + '|' + L], emp = lapl(hits + (cr ? cr.h : 0), last.length + (cr ? cr.n : 0));
-        rows.push({f, side, t, k, lab, key, L, last, hits, same, cr, pm, pp, odds, emp, gap: emp - pm, ev: ok(odds) ? pp * odds - 1 : null,
-          custom: TSt.line[key] != null, calib: STR && STR.by[k] ? STR.by[k].hit : null, mean: E[side].m});
-      });
-    });
+function pOverPy(m, V, L) {  // igual que model.p_over, para que la página y Python den lo mismo
+  const k = Math.floor(L); if (k < 0) return 1;
+  let pk, c;
+  if (V > m * 1.02) { const r = m * m / (V - m), q = m / (r + m); pk = Math.pow(1 - q, r); c = pk; for (let i = 1; i <= k; i++) { pk *= (i - 1 + r) / i * q; c += pk; } }
+  else { pk = Math.exp(-m); c = pk; for (let i = 1; i <= k; i++) { pk *= m / i; c += pk; } }
+  return Math.min(1, Math.max(0, 1 - c));
+}
+const TIER = {muy: ['Muy clara', 'clear'], una: ['Clara', 'maybe']};
+const lineLab = (over, L, k) => `${over ? 'más' : 'menos'} de ${lineTxt(L)} ${TKN[k]}`;
+const trFx = r => FX.find(f => f.h === r.h && f.a === r.a) || {h: r.h, a: r.a, d: r.d, j: r.j, tm: '', past: r.d < D.meta.today};
+const vchips = (vals, ok_) => `<span class="tvs">${vals.map(v => `<span class="tv ${ok_(v) ? 'hit' : 'miss'}">${f0(v)}</span>`).join('')}</span>`;
+const nOf = (arr, ok_) => arr.filter(ok_).length;
+const enumTxt = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1] : String(a[0]);
+function trendBlock(r) {
+  const f = trFx(r), fk = fxKey(f), over = r.over, okAt = L => over ? (v => v > L) : (v => v < L), ok0 = okAt(r.L);
+  const who = r.side === 'T' ? 'Total del partido' : NM[r.side === 'H' ? r.h : r.a];
+  const rival = r.side === 'H' ? NM[r.a] : r.side === 'A' ? NM[r.h] : null;
+  const campo = r.side === 'H' ? 'en casa' : r.side === 'A' ? 'fuera' : '(el local en casa y el visitante fuera)';
+  const all = r.series.flat();
+  let story;
+  if (r.side === 'T') {
+    story = `Los últimos 5 partidos del ${esc(NM[r.h])} terminaron con ${enumTxt(r.series[0])} ${TKN[r.k]} y los del ${esc(NM[r.a])} con ${enumTxt(r.series[1])}: ${nOf(all, ok0)} de 10 cumplen la línea.`;
+  } else {
+    const s0 = r.series[0], n = nOf(s0, ok0);
+    story = `En sus últimos 5 partidos hizo ${enumTxt(s0)} ${TKN[r.k]}: ${n === 5 ? 'los 5 cumplen la línea' : `cumplen la línea los ${n} más recientes`}.`;
+  }
+  story += ` Contra rivales parecidos al ${r.side === 'T' ? 'otro equipo' : esc(rival)}: ${nOf(r.cross, ok0)} de ${r.cross.length} (${enumTxt(r.cross)}).` +
+    ` En sus últimos partidos ${campo}: ${nOf(r.same, ok0)} de ${r.same.length}.` +
+    ` El modelo espera ${f1(r.m)} y le da un ${pc(r.pm)}${r.pm < 0.4 ? ': la racha va claramente más allá de lo que espera' : ''}.`;
+  const lines = [];
+  for (let L = r.L, q = 0; q < 7 && L >= 0.5; q++, L += over ? -1 : 1) {
+    const pmL = over ? pOverPy(r.m, r.V, L) : 1 - pOverPy(r.m, r.V, L);
+    lines.push(L); if (pmL >= 0.9) break;
+  }
+  const rows = lines.map(L => {
+    const okL = okAt(L), pmL = over ? pOverPy(r.m, r.V, L) : 1 - pOverPy(r.m, r.V, L);
+    const hl = nOf(all, okL), hc = nOf(r.cross, okL), hs = nOf(r.same, okL);
+    const pr = lapl(hl + hc, all.length + r.cross.length), pp = Math.min(pmL, pr);
+    const key = `${fk}|${r.side}|${r.k}|${over ? '+' : '-'}|${L}`, odds = TSt.odds[key], ev = ok(odds) ? pp * odds - 1 : null;
+    const evc = ok(ev) ? `<span class="chip ${ev > 0.05 ? 'clear' : ev > 0 ? 'maybe' : 'noise'}">${sgn(ev * 100, f0)} cént.</span>` : '–';
+    return `<tr class="${L === r.L ? 'on' : ''}"><td class="l">${lineLab(over, L, r.k)}</td><td>${hl}/${all.length}</td><td>${hc}/${r.cross.length}</td><td>${hs}/${r.same.length}</td>` +
+      `<td>${pc(pmL)}</td><td>${pc(pr)}</td><td><b>${pc(pp)}</b></td><td>${fairTxt(1 / pp)}</td>` +
+      `<td><input class="tin to" data-key="${key}" type="number" step="0.01" min="1.01" value="${ok(odds) ? odds : ''}" placeholder="cuota" aria-label="Cuota de la casa para ${lineLab(over, L, r.k)}" style="width:5.6em"></td><td>${evc}</td></tr>`;
   });
-  const keep = r => r.custom || ok(r.odds) || (r.pp >= TSt.min && r.pm <= 0.92);
-  const by = TSt.sort === 'gap' ? (x, y) => y.gap - x.gap : (x, y) => y.pp - x.pp;
-  return rows.filter(keep).sort((x, y) => (ok(y.ev) - ok(x.ev)) || ((y.ev || 0) - (x.ev || 0)) || by(x, y));
+  const [tl, tc] = TIER[r.tier];
+  return `<section class="card trend"><div class="th"><h2 style="margin:0">${esc(who)}: ${lineLab(over, r.L, r.k)}</h2><span class="chip ${tc}">${tl}</span></div>
+    <p class="sub" style="margin:-6px 0 10px">${nm(f.h)} – ${nm(f.a)} · ${f.past ? `J${f.j}, aplazado sin fecha nueva` : `J${f.j} · ${fdl(f.d)}${f.tm ? ' ' + f.tm : ''}`}</p>
+    <p class="story">${story}</p>
+    <div class="tvrow">${r.side === 'T' ? `<span><small>${esc(SH[r.h])}</small> ${vchips(r.series[0], ok0)}</span><span><small>${esc(SH[r.a])}</small> ${vchips(r.series[1], ok0)}</span>` : `<span><small>Últimos 5</small> ${vchips(r.series[0], ok0)}</span>`}
+      <span><small>Parecidos</small> ${vchips(r.cross, ok0)}</span><span><small>Mismo campo</small> ${vchips(r.same, ok0)}</span></div>
+    ${tbl([['Línea', 'l'], 'Últimos', 'Parecidos', 'Mismo campo', 'Modelo', 'Racha', 'Prudente', 'Cuota justa', 'Cuota de la casa', 'Valor por 1 €'], rows, 'num et tt')}
+    ${note('La primera fila es la línea de la propia racha; las siguientes son más seguras. Escribe la cuota que te ofrecen en la línea que te interese.')}</section>`;
 }
 function renderTend() {
-  const rows = tendRows(), S5 = (D.streak || {})['5'], S4 = (D.streak || {})['4'];
-  const fxs = nextList();
-  const ctr = `<div class="ctr"><label>Partido <select id="t-fx"><option value="all">Todos los próximos</option>${fxs.map(f => `<option value="${fxKey(f)}" ${fxKey(f) === TSt.fx ? 'selected' : ''}>${nm(f.h)} – ${nm(f.a)}</option>`).join('')}</select></label>
-    <label>Estadística <select id="t-k"><option value="all">Todas</option>${TK.map(([k, l]) => `<option value="${k}" ${k === TSt.k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-    <label>Ordenar <select id="t-sort"><option value="gap" ${TSt.sort === 'gap' ? 'selected' : ''}>La racha supera al modelo</option><option value="pp" ${TSt.sort === 'pp' ? 'selected' : ''}>Más probables</option></select></label>
-    <label>Probabilidad prudente mínima <select id="t-min">${[0.5, 0.6, 0.7, 0.8].map(v => `<option value="${v}" ${v === TSt.min ? 'selected' : ''}>${Math.round(v * 100)} %</option>`).join('')}</select></label></div>`;
-  const spark = (vals, L) => vals.map(v => `<span class="tv ${v > L ? 'hit' : 'miss'}">${f0(v)}</span>`).join('');
-  const body = rows.slice(0, 150).map(r => {
-    const who = r.side === 'T' ? 'Total del partido' : NM[r.t];
-    const sm = r.same && r.same.length ? `${r.same.filter(v => v > r.L).length}/${r.same.length}` : '–';
-    const evc = ok(r.ev) ? `<span class="chip ${r.ev > 0.05 ? 'clear' : r.ev > 0 ? 'maybe' : 'noise'}">${sgn(r.ev * 100, f0)} cént.</span>` : '–';
-    return `<tr><td class="l">${nm(r.f.h)} – ${nm(r.f.a)}<br><small>${r.f.past ? 'aplazado' : fdl(r.f.d)}</small></td><td class="l">${esc(who)}</td><td class="l">${r.lab}</td>` +
-      `<td><input class="tin tl" data-key="${r.key}" type="number" step="1" min="0.5" value="${r.L}" aria-label="Línea" style="width:5.2em"></td>` +
-      `<td class="l"><span class="tvs">${spark(r.last, r.L)}</span> <small>${r.hits}/${r.last.length}</small></td><td>${sm}</td>` +
-      `<td>${r.cr && r.cr.n ? `${r.cr.h}/${r.cr.n}` : '–'}</td><td>${f1(r.mean)}</td><td>${pc(r.emp)}</td><td>${pc(r.pm)}</td><td>${ppt(r.gap)}</td><td><b>${pc(r.pp)}</b></td><td>${fairTxt(1 / r.pp)}</td>` +
-      `<td><input class="tin to" data-key="${r.key}|${r.L}" type="number" step="0.01" min="1.01" value="${ok(r.odds) ? r.odds : ''}" placeholder="cuota" aria-label="Cuota de la casa" style="width:5.6em"></td><td>${evc}</td></tr>`;
-  });
-  const calib = S5 ? `En lo que va de temporada, cuando un equipo superaba una línea en sus 5 últimos partidos, la volvió a superar en el siguiente el <b>${pc(S5.hit)}</b> de las veces (${S5.n} casos); el modelo ya preveía de media un ${pc(S5.model)}.` +
-    (S4 ? ` Con 4 de 5, se cumplió el ${pc(S4.hit)} (modelo: ${pc(S4.model)}).` : '') +
-    ` Es decir: la racha se cumple a menudo, pero no aporta nada que el modelo no supiera ya. La racha elige líneas bajas, que por eso se cumplen mucho y pagan poco. Una apuesta solo tiene valor si la casa paga más que la cuota justa.` : '';
-  $('c-tend').innerHTML = ctr + card('Qué dicen los datos sobre las rachas', note(calib) + (S5 ? tbl([['Estadística', 'l'], 'Casos', 'Se cumplió', 'El modelo decía'],
-      Object.entries(S5.by).map(([k, v]) => `<tr><td class="l">${VK[k].n}</td><td>${v.n}</td><td>${pc(v.hit)}</td><td>${pc(v.model)}</td></tr>`), 'num') : '')) +
-    card('Tendencias de los próximos partidos', tbl([['Partido', 'l'], ['Equipo', 'l'], ['Estadística', 'l'], 'Línea (más de)', ['Últimos partidos', 'l'], 'Mismo campo', 'Rivales parecidos',
-      'Esperado (modelo)', 'Según la racha', 'Según el modelo', 'Diferencia', 'Prudente', 'Cuota justa', 'Cuota de la casa', 'Valor por 1 €'], body, 'num et tt') +
-      note(`La línea por defecto es la más alta que el equipo superó en sus 5 últimos partidos; puedes cambiarla y escribir la cuota que te ofrece la casa. <b>Mismo campo</b>: veces que la superó en sus últimos partidos en casa (o fuera, según toque hoy). <b>Rivales parecidos</b>: veces que la superó contra los rivales a ±${ST_.win} puestos del de hoy. <b>Según la racha</b>: veces que la superó en los últimos partidos y contra rivales parecidos, juntas y suavizadas. <b>Diferencia</b>: cuánto más optimista es la racha que el modelo; al ordenar por ella salen primero casos como el del Rayo, en los que el equipo viene rindiendo muy por encima de lo que el modelo espera (y donde una casa que no lo tenga en cuenta podría pagar de más). Se ocultan las líneas casi seguras (el modelo da más del 92 %), que no pagan nada. <b>Prudente</b>: la menor entre el modelo y los rivales parecidos (suavizada para que 2 de 2 no cuente como 100 %). <b>Valor</b>: lo que ganarías de media por euro con la probabilidad prudente; en verde si supera 5 céntimos. Las cuotas que escribas se guardan solo en este navegador. ${rows.length > 150 ? `Se muestran 150 de ${rows.length}; filtra por partido o estadística.` : ''} No es una recomendación de apuesta.`));
+  const TR = D.tr || [], TBs = (D.tb || {}).summ || {}, cases = (D.tb || {}).cases || [], F = D.tbf || {};
+  const fxs = [...new Map(TR.map(r => { const f = trFx(r); return [fxKey(f), f]; })).values()];
+  const list = TR.filter(r => TSt.fx === 'all' || fxKey(trFx(r)) === TSt.fx).sort((x, y) => (x.tier === 'muy' ? 0 : 1) - (y.tier === 'muy' ? 0 : 1) || (x.d < y.d ? -1 : 1));
+  const sAll = TBs.all;
+  const ctr = fxs.length > 1 ? `<div class="ctr"><label>Partido <select id="t-fx"><option value="all">Todos (${TR.length})</option>${fxs.map(f => `<option value="${fxKey(f)}" ${fxKey(f) === TSt.fx ? 'selected' : ''}>${nm(f.h)} – ${nm(f.a)}</option>`).join('')}</select></label></div>` : '';
+  const intro = card('Qué cuenta como tendencia', `<p class="story" style="margin-top:0">Solo aparece una tendencia si se cumple todo esto a la vez:</p><ul class="cl">
+    <li>El equipo superó (o no llegó a) la línea en sus <b>5 últimos partidos</b> (muy clara) o en los <b>4 últimos seguidos</b> (clara).</li>
+    <li>También en <b>todos</b> sus partidos contra rivales parecidos al de hoy (a ±2 puestos en la clasificación; al menos 2 partidos).</li>
+    <li>También en sus últimos partidos en el <b>mismo campo</b> que hoy (al menos 2; en las claras se permite una excepción).</li>
+    <li>La línea va <b>más allá de lo que espera el modelo</b>, que le da un 50 % o menos. Si el modelo ya la da por probable, no es una tendencia sino lo normal, y las casas la pagarán como tal.</li></ul>`);
+  const empty = card('', note(`No hay ninguna tendencia clara en los próximos partidos. Es lo normal: con estas condiciones salen pocas${sAll ? ` (${sAll.n} en toda la temporada)` : ''}. Cuando aparezca alguna, saldrá aquí.`));
+  const LAB = {'muy+': 'Muy clara · más de', 'muy-': 'Muy clara · menos de', 'una+': 'Clara · más de', 'una-': 'Clara · menos de', all: 'Todas'};
+  const hrows = ['muy+', 'muy-', 'una+', 'una-', 'all'].filter(k => TBs[k]).map(k => { const s = TBs[k], hh = Math.round(s.hit * s.n), q = (hh + 2) / (s.n + 4), e = Math.sqrt(q * (1 - q) / (s.n + 4));
+    return `<tr class="${k === 'all' ? 'on' : ''}"><td class="l">${LAB[k]}</td><td>${s.n}</td><td>${Math.round(s.hit * s.n)}</td><td>${pf(s.hit)} <small>±${f0(e * 100)} pp</small></td><td>${pc(s.model)}</td></tr>`; });
+  const crows = cases.map(c => { const who = c.side === 'T' ? 'Total' : NM[c.side === 'H' ? c.h : c.a];
+    return `<tr><td>${fd(c.d)}</td><td class="l">${nm(c.h)} – ${nm(c.a)}</td><td class="l">${esc(who)}: ${lineLab(c.over, c.L, c.k)} <span class="chip ${TIER[c.tier][1]}">${TIER[c.tier][0]}</span></td><td>${f0(c.obs)}</td>` +
+      `<td><span class="chip ${c.hit ? 'clear' : 'noise'}">${c.hit ? 'Se cumplió' : 'No se cumplió'}</span></td><td>${pc(c.pm)}</td></tr>`; });
+  const comb = keys => { const ss = keys.map(k => F[k]).filter(Boolean), n = ss.reduce((s, x) => s + x.n, 0);
+    return n ? {n, hit: ss.reduce((s, x) => s + x.hit * x.n, 0) / n, model: ss.reduce((s, x) => s + x.model * x.n, 0) / n} : null; };
+  const fUp = comb(['muy+', 'una+']), fDn = comb(['muy-', 'una-']);
+  const flex = F.all ? `Como referencia, con una definición más flexible (la excepción puede ser cualquier partido y basta con que la racha llegue a lo que espera el modelo) habrían salido ${F.all.n} casos y se habrían cumplido el ${pf(F.all.hit)}, cuando el modelo esperaba un ${pc(F.all.model)}` +
+    (fDn ? `. Las rachas a la baja solo se mantuvieron el ${pf(fDn.hit)} de las veces, cuando el modelo esperaba un ${pc(fDn.model)}: un equipo que encadena partidos con pocos tiros, córners o tarjetas suele volver a su nivel` : '') +
+    (fUp ? `. Las rachas al alza se mantuvieron el ${pf(fUp.hit)} (el modelo esperaba un ${pc(fUp.model)}), pero con solo ${fUp.n} casos` : '') + '.' : '';
+  const verdict = sAll ? (sAll.n < 30 ? `Con ${sAll.n} casos todavía no se puede saber si estas tendencias aciertan más que el modelo: la diferencia puede ser azar. El historial se rellena solo cada jornada.`
+    : Math.abs(sAll.hit - sAll.model) > 2 * Math.sqrt(sAll.hit * (1 - sAll.hit) / sAll.n) ? (sAll.hit > sAll.model ? 'Con estos casos, las tendencias se cumplen claramente más de lo que esperaba el modelo.' : 'Con estos casos, las tendencias se cumplen claramente menos de lo que esperaba el modelo.')
+      : 'Con estos casos, las tendencias se cumplen más o menos lo que esperaba el modelo: no aportan información extra.') : '';
+  const hist = card('Cómo les ha ido esta temporada', note(`Cada caso se detectó con los datos anteriores a su partido, igual que se detectan ahora. ${verdict}`) +
+    (hrows.length ? tbl([['Tipo', 'l'], 'Casos', 'Se cumplieron', 'Porcentaje', 'El modelo esperaba'], hrows, 'num') : '') +
+    (crows.length ? tbl(['Fecha', ['Partido', 'l'], ['Tendencia', 'l'], 'Resultado', '', 'El modelo daba'], crows, 'num') : note('Todavía no se ha detectado ninguna.')) + (flex ? note(flex) : ''));
+  $('c-tend').innerHTML = ctr + (list.length ? list.map(trendBlock).join('') : empty) + hist + intro.replace(/<\/section>$/, note('<b>Racha</b>: veces que se cumplió en los partidos de la tendencia (últimos, rivales parecidos), suavizada para que 5 de 5 no cuente como 100 %. <b>Prudente</b>: la menor entre el modelo y la racha. <b>Cuota justa</b>: la que corresponde a la probabilidad prudente; solo hay valor si la casa paga claramente más. Las cuotas que escribes se guardan solo en este navegador. Esto es un análisis, no una recomendación de apuesta.') + '</section>');
 }
 
 /* ---------------------------------------------------------------- arranque */
@@ -756,10 +781,6 @@ document.addEventListener('change', e => {
   else if (t.id === 'x-chk') { ST_.useX = t.checked; renderPartido(); }
   else if (t.id === 'j-sel') { ST_.jsel = t.value; renderPred(); }
   else if (t.id === 't-fx') { TSt.fx = t.value; renderTend(); }
-  else if (t.id === 't-k') { TSt.k = t.value; renderTend(); }
-  else if (t.id === 't-min') { TSt.min = +t.value; renderTend(); }
-  else if (t.id === 't-sort') { TSt.sort = t.value; renderTend(); }
-  else if (t.classList.contains('tl')) { const v = parseFloat(t.value); if (ok(v) && v > 0) { TSt.line[t.dataset.key] = Math.floor(v) + 0.5; renderTend(); } }
   else if (t.classList.contains('to')) { const v = parseFloat(String(t.value).replace(',', '.')); if (ok(v) && v > 1) TSt.odds[t.dataset.key] = v; else delete TSt.odds[t.dataset.key]; saveOdds(); renderTend(); }
 });
 $('rk-sel').innerHTML = RKS.map(([v, l]) => `<option value="${v}">${l} por partido</option>`).join('');

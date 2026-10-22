@@ -767,7 +767,7 @@ def evaluate_log(log, played):
     return out
 
 
-# ----------------------------------------------------------------- rachas
+# ----------------------------------------------------------------- tendencias
 def p_over(m, V, L):
     """Probabilidad de superar L con media m y varianza V (binomial negativa o Poisson)."""
     k = math.floor(L)
@@ -787,45 +787,126 @@ def p_over(m, V, L):
         for i in range(1, k + 1):
             pk *= m / i
             c += pk
-    return max(0.0, 1 - c)
+    return min(1.0, max(0.0, 1 - c))
 
 
-STREAK_KEYS = ["s", "st", "c", "f", "y"]
+TREND_KEYS = ["s", "st", "c", "y", "f"]
+TREND_WIN = 2  # rivales parecidos: a ±2 puestos en la clasificación
 
 
-def streak_backtest(played, teams, step=8):
-    """¿Se cumplen las rachas? Para cada equipo con 5 partidos previos y cada estadística se toma la línea que
-    superó en sus 5 últimos (5 de 5) o en 4 de 5, y se mira si la supera en el partido siguiente. Se compara
-    con lo que decía el modelo ajustado solo con los partidos anteriores."""
-    res, models, last = {}, None, -10 ** 9
+def _series(ms, t, k, total=False):
+    """Valores de la estadística k del equipo t (o del total de sus partidos), en orden: (valor, en casa, rival)."""
+    out = []
+    for x in ms:
+        if t not in (x["h"], x["a"]) or not x.get(k):
+            continue
+        s = 0 if x["h"] == t else 1
+        out.append((x[k][0] + x[k][1] if total else x[k][s], s == 0, x["a"] if s == 0 else x["h"]))
+    return out
+
+
+def _near(pos, o, ex, win=TREND_WIN):
+    return {u for u in pos if u not in (o, ex) and abs(pos[u] - pos[o]) <= win}
+
+
+def _classify(series, cross, same, m, V, strict=True):
+    """Tendencia clara o nada (strict=False es la definición flexible de referencia: la excepción puede ser
+    cualquier partido y basta con que la racha llegue al nivel que espera el modelo).
+
+    series: los últimos valores de cada serie, del más antiguo al más reciente (una serie para un equipo; dos para
+    el total del partido, una por equipo).
+    - 'muy': los 5 últimos partidos más allá de la línea; también todos contra rivales parecidos y en el mismo campo.
+    - 'una': los 4 últimos seguidos (la excepción solo puede ser el más antiguo de los 5); todos contra rivales
+      parecidos y como mucho una excepción en el mismo campo.
+    En los dos casos la línea es la de la propia racha y el modelo tiene que darle un 50 % o menos: si el modelo ya
+    la ve probable, no es una tendencia sino lo esperado. Rivales parecidos y mismo campo necesitan 2 partidos o más."""
+    for tier, n_last, miss in (("muy", 5, 0), ("una", 4, 1)):
+        for over in (True, False):
+            if strict:
+                vals = [v for s in series for v in s[-n_last:]]
+                L = (min(vals) - 0.5) if over else (max(vals) + 0.5)
+            else:
+                vals = sorted(v for s in series for v in s[-5:])
+                e = 5 - n_last
+                L = (vals[e] - 0.5) if over else (vals[-1 - e] + 0.5)
+                if (over and L + 0.5 < m) or (not over and L - 0.5 > m):
+                    continue
+            if L < 0.5:
+                continue
+            hit = (lambda L: lambda v: v > L)(L) if over else (lambda L: lambda v: v < L)(L)
+            pm = p_over(m, V, L)
+            pm = pm if over else 1 - pm
+            if strict and pm > 0.5:
+                continue
+            if len(cross) < 2 or not all(hit(v) for v in cross):
+                continue
+            if len(same) < 2 or sum(1 for v in same if not hit(v)) > miss:
+                continue
+            return {"over": over, "tier": tier, "L": L, "pm": pm}
+    return None
+
+
+def trend_candidates(train, pos, models, h, a, strict=True):
+    """Tendencias claras de un partido h-a con los datos de train y la clasificación pos."""
+    out = []
+    for k in TREND_KEYS:
+        p = models.get(k)
+        if not p:
+            continue
+        ix = p["ix"]
+        for side, t, o, home in (("H", h, a, True), ("A", a, h, False)):
+            ser = _series(train, t, k)
+            if len(ser) < 5:
+                continue
+            last = [v for v, _, _ in ser[-5:]]
+            near = _near(pos, o, t)
+            cross = [v for v, _, op in ser if op in near]
+            same = [v for v, hm, _ in ser if hm == home][-3:]
+            m, V, _ = stat_pred(p, ix[t], ix[o], 1 if home else 0)
+            c = _classify([last], cross, same, m, V, strict)
+            if c:
+                out.append(dict(side=side, k=k, m=m, V=V, last=last, series=[last], cross=cross, same=same, **c))
+        sh, sa = _series(train, h, k, True), _series(train, a, k, True)
+        if len(sh) >= 5 and len(sa) >= 5:
+            series = [[v for v, _, _ in sh[-5:]], [v for v, _, _ in sa[-5:]]]
+            last = series[0] + series[1]
+            nh, na = _near(pos, a, h), _near(pos, h, a)
+            cross = [v for v, _, op in sh if op in nh] + [v for v, _, op in sa if op in na]
+            same = [v for v, hm, _ in sh if hm][-3:] + [v for v, hm, _ in sa if not hm][-3:]
+            m, V, _ = stat_total(p, ix[h], ix[a])
+            c = _classify(series, cross, same, m, V, strict)
+            if c:
+                out.append(dict(side="T", k=k, m=m, V=V, last=last, series=series, cross=cross, same=same, **c))
+    return out
+
+
+def trend_backtest(played, teams, step=8, strict=True):
+    """Cada tendencia que habría detectado el buscador esta temporada, con los datos anteriores a su fecha
+    (clasificación de ese día incluida), y si se cumplió en el partido siguiente."""
+    cases, models, last = [], None, -10 ** 9
     for d in sorted({m["date"] for m in played}):
         train = [m for m in played if m["date"] < d]
         if len(train) < 30:
             continue
         if len(train) - last >= step:
-            models = {k: fit_stat(train, teams, k) for k in STREAK_KEYS}
+            models = {k: fit_stat(train, teams, k) for k in TREND_KEYS}
             last = len(train)
+        pos = {r["t"]: r["pos"] for r in standings(train, teams)}
         for m in (x for x in played if x["date"] == d):
-            for side in (0, 1):
-                t, o = (m["h"], m["a"]) if side == 0 else (m["a"], m["h"])
-                hist = [x for x in train if t in (x["h"], x["a"])][-5:]
-                if len(hist) < 5:
+            for c in trend_candidates(train, pos, models, m["h"], m["a"], strict):
+                ob = m.get(c["k"])
+                if not ob:
                     continue
-                for k in STREAK_KEYS:
-                    vals = [x[k][0 if x["h"] == t else 1] for x in hist if x.get(k)]
-                    if len(vals) < 5 or not m.get(k) or not models.get(k):
-                        continue
-                    mu, V, _ = stat_pred(models[k], teams.index(t), teams.index(o), 1 if side == 0 else 0)
-                    for rule, L in (("5", min(vals) - 0.5), ("4", sorted(vals)[1] - 0.5)):
-                        if L < 0.5:
-                            continue
-                        r = res.setdefault(rule, {}).setdefault(k, [0, 0, 0.0])
-                        r[0] += 1
-                        r[1] += m[k][side] > L
-                        r[2] += p_over(mu, V, L)
-    out = {}
-    for rule, by in res.items():
-        n = sum(v[0] for v in by.values())
-        out[rule] = {"n": n, "hit": sum(v[1] for v in by.values()) / n, "model": sum(v[2] for v in by.values()) / n,
-                     "by": {k: {"n": v[0], "hit": v[1] / v[0], "model": v[2] / v[0]} for k, v in by.items()}}
-    return out
+                obs = ob[0] + ob[1] if c["side"] == "T" else ob[0 if c["side"] == "H" else 1]
+                pm = c["pm"]
+                cases.append({"d": d, "h": m["h"], "a": m["a"], "side": c["side"], "k": c["k"], "over": c["over"],
+                              "tier": c["tier"], "L": c["L"], "obs": obs, "hit": (obs > c["L"]) if c["over"] else (obs < c["L"]),
+                              "pm": pm})
+    summ = {}
+    for c in cases:
+        for key in (c["tier"] + ("+" if c["over"] else "-"), "all"):
+            s = summ.setdefault(key, [0, 0, 0.0])
+            s[0] += 1
+            s[1] += c["hit"]
+            s[2] += c["pm"]
+    return {"summ": {k: {"n": n, "hit": h / n, "model": p / n} for k, (n, h, p) in summ.items()}, "cases": cases}
