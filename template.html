@@ -1,19 +1,20 @@
-<title>LaLiga 2026-27</title>
+<title>__TITLE__</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Clasificación, estadísticas, análisis de partidos y predicciones de LaLiga 2026-27 con datos solo de esta temporada.">
+<meta name="description" content="__TITLE__: clasificación, estadísticas, análisis de partidos y predicciones con datos solo de esta temporada, con un modelo que aprende cada jornada.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>/*__CSS__*/</style>
 <div class="page">
 <header class="top">
-  <div><h1>LaLiga 2026-27</h1><p class="sub" id="sub"></p></div>
+  <div><nav class="lgs" id="lgs" aria-label="Liga"></nav><h1>__TITLE__</h1><p class="sub" id="sub"></p></div>
   <nav class="tabs" role="tablist" aria-label="Secciones">
     <button role="tab" data-view="equipos" aria-selected="true">Equipos</button>
     <button role="tab" data-view="partido" aria-selected="false">Análisis de partido</button>
     <button role="tab" data-view="predicciones" aria-selected="false">Predicciones</button>
     <button role="tab" data-view="tendencias" aria-selected="false">Tendencias</button>
     <button role="tab" data-view="historial" aria-selected="false">Historial</button>
+    <button role="tab" data-view="aprendizaje" aria-selected="false">Aprendizaje</button>
     <button role="tab" data-view="metodo" aria-selected="false">Método</button>
   </nav>
 </header>
@@ -29,34 +30,38 @@
   <section id="v-predicciones" hidden><div id="c-pred"></div></section>
   <section id="v-tendencias" hidden><div id="c-tend"></div></section>
   <section id="v-historial" hidden><div id="c-hist"></div></section>
+  <section id="v-aprendizaje" hidden><div id="c-learn"></div></section>
   <section id="v-metodo" hidden class="card prose">
     <h2>Cómo funciona</h2>
     <h3>Datos</h3>
-    <p>Los resultados, las estadísticas de cada partido (tiros, córners, faltas, tarjetas), el xG y las cuotas de cierre salen del CSV de football-data.co.uk. Las fechas y cuotas de los próximos partidos salen de su archivo de próximos partidos, que se publica unos días antes de cada jornada; si un partido todavía no aparece, se usa el calendario de la RFEF. GitHub descarga todo dos veces al día y regenera esta página. Solo se usan datos de esta temporada.</p>
+    <p>Los resultados, las estadísticas de cada partido (tiros, córners, faltas, tarjetas), el xG<span id="m-ref"></span> y las cuotas de cierre salen del CSV de football-data.co.uk. Las fechas y cuotas de los próximos partidos salen de su archivo de próximos partidos, que se publica unos días antes de cada jornada; si un partido todavía no aparece, se usa <span id="m-cal">el calendario de la liga</span>. GitHub descarga todo dos veces al día y regenera esta página. Solo se usan datos de esta temporada. Las horas están en horario peninsular español.<span id="m-cards"></span></p>
     <h3>Modelo de goles</h3>
-    <p>Cada equipo tiene un ataque y una defensa, y todos comparten una ventaja de local. Los goles esperados de un partido salen de combinar la media de la liga, el ataque de un equipo, la defensa del otro y, para el local, la ventaja de jugar en casa. Para estimar esos valores se mezclan al 50 % goles reales y xG, porque el xG depende menos del azar.</p>
+    <p>Cada equipo tiene un ataque y una defensa, y todos comparten una ventaja de local. Los goles esperados de un partido salen de combinar la media de la liga, el ataque de un equipo, la defensa del otro y, para el local, la ventaja de jugar en casa. Para estimar esos valores se mezclan goles reales y xG, porque el xG depende menos del azar; la versión por defecto los mezcla al 50 %, y el propio modelo puede cambiar a otra versión si predice mejor (ver Aprendizaje).</p>
     <p>Con pocos partidos, un equipo puede parecer mucho mejor o peor de lo que es, así que los valores se acercan a la media de la liga. Cuánto se acercan no está fijado a mano: se calcula con los propios datos según cuánto se diferencian de verdad los equipos. A medida que avanza la temporada, se encogen menos.</p>
     <p>La probabilidad de cada marcador sale de una distribución de Poisson, con la corrección de Dixon-Coles para los marcadores bajos (0-0, 1-0, 0-1 y 1-1), que es donde el Poisson simple se equivoca, y promediando sobre la incertidumbre de cada parámetro.</p>
     <h3>Estadísticas</h3>
-    <p>El mismo esquema de ataque y defensa se ajusta por separado para xG, tiros, tiros a puerta, córners, faltas, tarjetas y goles de la primera parte. Cada estadística tiene su propia ventaja de local y su propia variación: los córners varían de un partido a otro más de lo que daría el azar puro, y las faltas, menos. Así, cada valor esperado tiene en cuenta al rival y el campo.</p>
+    <p>El mismo esquema de ataque y defensa se ajusta por separado para xG, tiros, tiros a puerta, córners, faltas, tarjetas y goles de la primera parte. Cada estadística tiene su propia ventaja de local y su propia variación: los córners varían de un partido a otro más de lo que daría el azar puro, y las faltas, menos. Así, cada valor esperado tiene en cuenta al rival y el campo y, cuando se conoce el árbitro, también su efecto en tarjetas y faltas.</p>
     <h3>Error, señal y modos</h3>
     <p>El error es cuánto podría moverse una media solo por azar con los partidos jugados. Una diferencia es <b>clara</b> si supera dos errores, <b>posible</b> si supera uno y <b>ruido</b> si no llega. En el análisis de partido, el modo optimista da por buenas las diferencias de más de un error y los umbrales con al menos un 60 % de probabilidad; el prudente exige dos errores y un 70 %.</p>
     <p>El rango de una media no es lo mismo que lo que puede pasar en un partido: un equipo que promedia 5 córners puede sacar 1 o 10. Por eso el análisis separa el rango de la media de la probabilidad de superar cada línea en ese partido.</p>
     <h3>Rivales parecidos</h3>
     <p>Para un partido A–B se miran los partidos de A contra los equipos que están a pocos puestos de B en la clasificación actual, y al revés. Cada uno de esos partidos se compara con lo que esperaba el modelo, que ya tiene en cuenta el rival y el campo. La media de esas diferencias ajusta la estimación solo en la medida en que los datos de toda la liga demuestran que el rendimiento cambia de verdad según la zona de la tabla del rival. Si no lo demuestran, el cruce se muestra pero no mueve las cifras.</p>
     <h3>Simulación</h3>
-    <p>Se juega el resto de la liga 5.000 veces. En cada simulación se sortea la fuerza de cada equipo con su incertidumbre, más una variación extra porque los equipos cambian durante la temporada por lesiones, entrenadores o fichajes. Los empates a puntos se resuelven como en el artículo 10 de las normas de competición de la RFEF: entre dos equipos, la diferencia de goles en sus partidos; entre más de dos, los puntos y después la diferencia de goles en los partidos entre ellos; luego la diferencia de goles general y los goles a favor. El juego limpio se sustituye por un sorteo.</p>
+    <p>Se juega el resto de la liga <span id="m-sims">5.000</span> veces. En cada simulación se sortea la fuerza de cada equipo con su incertidumbre, más una variación extra porque los equipos cambian durante la temporada por lesiones, entrenadores o fichajes. <span id="m-tb"></span></p>
     <h3>Tendencias</h3>
-    <p>Una tendencia solo aparece si un equipo superó (o no llegó a) una línea en sus 5 últimos partidos, o en los 4 últimos seguidos; también contra todos los rivales parecidos al de hoy (al menos 2 partidos) y en sus últimos partidos en el mismo campo. Además, la línea tiene que ir más allá de lo que espera el modelo, que le da un 50 % o menos. Las mismas reglas, aplicadas a cada partido de la temporada con los datos anteriores a él, forman el historial de la pestaña. Con datos de esta temporada, las rachas a la baja tienden a romperse: el equipo vuelve a su nivel.</p>
+    <p>Una tendencia solo aparece si un equipo superó (o no llegó a) una línea en sus 5 últimos partidos, o en los 4 últimos seguidos; también contra todos los rivales parecidos al de hoy (al menos 2 partidos) y en sus últimos partidos en el mismo campo. Además, la línea tiene que ir más allá de lo que espera el modelo, que le da un 50 % o menos. Las mismas reglas, aplicadas a cada partido de la temporada con los datos anteriores a él, forman el historial de la pestaña, y ese historial corrige poco a poco la probabilidad que el modelo da a las tendencias nuevas.</p>
+    <h3>Aprendizaje</h3>
+    <p>En cada actualización el modelo se revisa con la prueba retrospectiva, en la que cada partido se predice solo con los anteriores. Con ella hace cuatro cosas: elige entre varias versiones del modelo de goles la que mejor ha predicho, pero solo cambia si la mejora supera el error, para no cambiar por azar; aprende cuánto pesar frente a las cuotas del mercado, buscando la mezcla que mejor habría predicho los partidos ya jugados; si el CSV trae el árbitro, estima cuánto se aparta cada uno en tarjetas y faltas, acercándolo a la media según los partidos que haya dirigido; y corrige la probabilidad de las tendencias según cuánto se han cumplido las anteriores, con un peso que crece con el número de casos. La pestaña Aprendizaje muestra qué ha aprendido y cómo cambia cada jornada.</p>
     <h3>Registro de predicciones</h3>
-    <p>En cada actualización se guardan en predictions.json las predicciones de los partidos de los próximos diez días. Se van renovando con los datos nuevos hasta el día del partido y a partir de ahí quedan congeladas. Cuando llega el resultado se evalúan frente a lo que pasó y frente a las cuotas de cierre. Los partidos anteriores al registro tienen predicciones reconstruidas, calculadas solo con los partidos previos a cada uno; se marcan aparte porque se hicieron con el código actual.</p>
+    <p>En cada actualización se guardan las predicciones de los partidos de los próximos diez días. Se van renovando con los datos nuevos hasta el día del partido y a partir de ahí quedan congeladas. Cuando llega el resultado se evalúan frente a lo que pasó y frente a las cuotas de cierre. Los partidos anteriores al registro tienen predicciones reconstruidas, calculadas solo con los partidos previos a cada uno; se marcan aparte porque se hicieron con el código actual.</p>
     <h3>Límites</h3>
-    <p>Con pocos partidos por equipo, casi todo tiene mucho error. El modelo no sabe nada de lesiones, alineaciones, rotaciones ni cambios de entrenador, y las casas de apuestas sí lo tienen en cuenta; por eso, en la prueba retrospectiva, el mercado predice mejor. Esto es una herramienta de análisis, no un consejo de apuestas.</p>
+    <p>Con pocos partidos por equipo, casi todo tiene mucho error. El modelo no sabe nada de lesiones, alineaciones, rotaciones ni cambios de entrenador, y las casas de apuestas sí lo tienen en cuenta; por eso, en la prueba retrospectiva, el mercado predice mejor el resultado. Esto es una herramienta de análisis, no un consejo de apuestas.</p>
     <h3>Glosario</h3>
     <dl>
       <dt>xG (goles esperados)</dt><dd>Calidad de las ocasiones: la probabilidad de gol de cada tiro según su distancia, su ángulo y el tipo de jugada, sumada en todo el partido.</dd>
       <dt>xPts (puntos esperados)</dt><dd>Los puntos que habría sumado un equipo si cada partido se hubiera decidido según el xG de los dos equipos.</dd>
       <dt>Log-loss y Brier</dt><dd>Miden lo buenas que han sido unas probabilidades; cuanto más bajas, mejor. Repartir un tercio a cada resultado da una log-loss de 1,10.</dd>
+      <dt>Prueba retrospectiva</dt><dd>Predecir cada partido ya jugado con un modelo ajustado solo con los partidos anteriores, como si se hubiera hecho en su momento.</dd>
       <dt>Margen de las casas</dt><dd>Las probabilidades que implican las cuotas suman más del 100 %. Ese exceso se quita repartiéndolo en proporción a cada resultado.</dd>
       <dt>Cuota de cierre</dt><dd>La última cuota antes del partido, la que incorpora más información.</dd>
       <dt>pp (puntos porcentuales)</dt><dd>Diferencia entre dos porcentajes: de 40 % a 45 % son 5 pp.</dd>

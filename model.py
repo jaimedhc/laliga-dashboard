@@ -15,7 +15,7 @@ import math
 import random
 from datetime import date, timedelta
 
-VERSION = "3.0"
+VERSION = "4.0"
 
 # Estadísticas que se modelan aparte de los goles (clave, nombre).
 STATS = [("g1", "Goles 1ª parte"), ("xg", "xG"), ("s", "Tiros"), ("st", "Tiros a puerta"),
@@ -426,10 +426,49 @@ def h2h(grp, G):
     return pt, dg
 
 
-def rank(n, pts, gd, gf, G, rnd=None):
-    """Orden final con los desempates del art. 10: entre dos, diferencia de goles en sus partidos;
-    entre más de dos, puntos y luego diferencia de goles en la mini-liga entre ellos; después
-    diferencia de goles general y goles a favor (el juego limpio se sustituye por sorteo)."""
+def h2h_away(grp, G):
+    """Puntos y goles marcados fuera de casa en los partidos entre los equipos del grupo."""
+    pt = {t: 0 for t in grp}
+    aw = {t: 0 for t in grp}
+    for t in grp:
+        for u in grp:
+            r = G[t][u] if t != u else None
+            if r is None:
+                continue
+            x, y = r
+            aw[u] += y
+            if x > y:
+                pt[t] += 3
+            elif x < y:
+                pt[u] += 3
+            else:
+                pt[t] += 1
+                pt[u] += 1
+    return pt, aw
+
+
+def rank(n, pts, gd, gf, G, rnd=None, rule="h2h"):
+    """Orden final.
+    rule='h2h' (LaLiga, art. 10 RFEF): entre dos, diferencia de goles en sus partidos; entre más de dos, puntos
+    y luego diferencia de goles en la mini-liga entre ellos; después diferencia de goles general y goles a favor.
+    rule='gd' (Premier League): diferencia de goles, goles a favor y después puntos y goles fuera en los partidos
+    entre ellos. En los dos casos el último criterio (juego limpio o partido de desempate) se sustituye por sorteo."""
+    tie = (lambda t: rnd.random()) if rnd else (lambda t: 0)
+    if rule == "gd":
+        order = sorted(range(n), key=lambda t: (-pts[t], -gd[t], -gf[t]))
+        key = lambda t: (pts[t], gd[t], gf[t])
+        out, k = [], 0
+        while k < n:
+            e = k
+            while e + 1 < n and key(order[e + 1]) == key(order[k]):
+                e += 1
+            grp = order[k:e + 1]
+            if len(grp) > 1:
+                pt, aw = h2h_away(grp, G)
+                grp = sorted(grp, key=lambda t: (-pt[t], -aw[t], tie(t)))
+            out += grp
+            k = e + 1
+        return out
     order = sorted(range(n), key=lambda t: -pts[t])
     out = []
     k = 0
@@ -440,7 +479,6 @@ def rank(n, pts, gd, gf, G, rnd=None):
         grp = order[k:e + 1]
         if len(grp) > 1:
             pt, dg = h2h(grp, G)
-            tie = (lambda t: rnd.random()) if rnd else (lambda t: 0)
             if len(grp) == 2:
                 grp = sorted(grp, key=lambda t: (-dg[t], -gd[t], -gf[t], tie(t)))
             else:
@@ -450,7 +488,7 @@ def rank(n, pts, gd, gf, G, rnd=None):
     return out
 
 
-def standings(played, teams):
+def standings(played, teams, rule="h2h"):
     n = len(teams)
     ix = {t: k for k, t in enumerate(teams)}
     rows = [{"t": t, "pj": 0, "w": 0, "d": 0, "l": 0, "gf": 0, "ga": 0, "pts": 0, "xpts": 0.0, "xn": 0, "form": ""}
@@ -482,7 +520,7 @@ def standings(played, teams):
             rows[j]["xpts"] += xa
             rows[i]["xn"] += 1
             rows[j]["xn"] += 1
-    order = rank(n, [r["pts"] for r in rows], [r["gf"] - r["ga"] for r in rows], [r["gf"] for r in rows], G)
+    order = rank(n, [r["pts"] for r in rows], [r["gf"] - r["ga"] for r in rows], [r["gf"] for r in rows], G, rule=rule)
     out = []
     for p, t in enumerate(order):
         r = rows[t]
@@ -516,7 +554,7 @@ def dc_sample(lh, la, rho, rnd):
             return x, y
 
 
-def simulate(p, teams, played, pending, sims=5000, seed=2026, drift=0.08):
+def simulate(p, teams, played, pending, sims=5000, seed=2026, drift=0.08, rule="h2h", ntop=4, nrel=3, neu=6):
     """Simula los partidos pendientes muchas veces, sorteando también la fuerza de cada equipo.
 
     drift añade una variación extra (desviación en escala logarítmica) porque la fuerza de los equipos
@@ -569,7 +607,7 @@ def simulate(p, teams, played, pending, sims=5000, seed=2026, drift=0.08):
             else:
                 pts[i] += 1
                 pts[j] += 1
-        for r, t in enumerate(rank(n, pts, gd, gf, G, rnd)):
+        for r, t in enumerate(rank(n, pts, gd, gf, G, rnd, rule)):
             pos[t][r] += 1
             ptsl[t].append(pts[t])
     out = []
@@ -578,7 +616,7 @@ def simulate(p, teams, played, pending, sims=5000, seed=2026, drift=0.08):
         q = lambda f: s[min(len(s) - 1, int(f * len(s)))]
         pr = [c / sims for c in pos[t]]
         out.append({"t": teams[t], "mean": sum(s) / sims, "p10": q(0.1), "p90": q(0.9), "pos": pr,
-                    "ch": pr[0], "t4": sum(pr[:4]), "t6": sum(pr[:6]), "rel": sum(pr[n - 3:])})
+                    "ch": pr[0], "t4": sum(pr[:ntop]), "t6": sum(pr[:neu]), "rel": sum(pr[n - nrel:])})
     return out
 
 
@@ -591,14 +629,17 @@ def brier(p, o):
     return sum((p[k] - (1 if k == o else 0)) ** 2 for k in range(3))
 
 
-def walk_forward_goals(played, teams, cfg=None, min_train=30):
-    """Cada partido se predice con un modelo ajustado solo con los partidos de días anteriores."""
-    out = []
+def walk_forward_goals(played, teams, cfg=None, min_train=30, step=1):
+    """Cada partido se predice con un modelo ajustado solo con los partidos de días anteriores (el modelo se
+    reajusta cuando hay al menos `step` partidos nuevos, para acotar el tiempo de cálculo a final de temporada)."""
+    out, p, last = [], None, -10 ** 9
     for d in sorted({m["date"] for m in played}):
         train = [m for m in played if m["date"] < d]
         if len(train) < min_train:
             continue
-        p = fit_goals(train, teams, cfg, ref=d)
+        if p is None or len(train) - last >= step:
+            p = fit_goals(train, teams, cfg, ref=d)
+            last = len(train)
         out += [(m, predict_goals(p, m["h"], m["a"])) for m in played if m["date"] == d]
     return out
 
@@ -680,17 +721,18 @@ def backtest_summary(wf):
 
 
 # ----------------------------------------------------------------- registro de predicciones
-def make_entry(pr, st, base, j, d, made, bf, mk=None, mo=None):
+def make_entry(pr, st, base, j, d, made, bf, mk=None, mo=None, pc=None, ref=None):
     r4 = lambda x: round(x, 4)
     return {"j": j, "date": d, "made": made, "bf": bf, "v": VERSION,
             "p": [r4(x) for x in pr["p"]], "e": [round(x, 3) for x in pr["e"]],
             "o25": r4(pr["ou"][2]), "bb": r4(pr["bb"]),
             "st": {k: round(v, 2) for k, v in (st or {}).items()},
             "sb": {k: round(v, 2) for k, v in (base or {}).items() if v is not None},
-            "mk": [r4(x) for x in mk] if mk else None, "mo": r4(mo) if mo is not None else None}
+            "mk": [r4(x) for x in mk] if mk else None, "mo": r4(mo) if mo is not None else None,
+            "pc": [r4(x) for x in pc] if pc else None, "ref": ref}
 
 
-def update_log(log, played, pending, gm, sms, wf_goals, wf_stats, today, horizon=10):
+def update_log(log, played, pending, gm, sms, wf_goals, wf_stats, today, horizon=10, blend=None, reff=None):
     """Añade predicciones al registro sin tocar nunca las de partidos ya jugados.
 
     - Partidos jugados sin predicción guardada: se reconstruyen con la prueba retrospectiva (bf=True).
@@ -710,9 +752,15 @@ def update_log(log, played, pending, gm, sms, wf_goals, wf_stats, today, horizon
         i, j = gm["ix"][f["h"]], gm["ix"][f["a"]]
         pr = predict_goals(gm, f["h"], f["a"])
         st = {k: stat_total(p, i, j)[0] for k, p in sms.items() if p}
+        rf = (reff or {}).get(mkey(f["h"], f["a"])) or {}
+        for k, v in rf.items():
+            if k in st:
+                st[k] *= v
         mo = implied(f.get("ou"))
-        E[mkey(f["h"], f["a"])] = make_entry(pr, st, base, f["j"], f["date"], today, False,
-                                             implied(f.get("odds")), mo[0] if mo else None)
+        mk = implied(f.get("odds"))
+        pc = pool(pr["p"], mk, blend) if (mk and blend is not None) else None
+        E[mkey(f["h"], f["a"])] = make_entry(pr, st, base, f["j"], f["date"], today, False, mk, mo[0] if mo else None,
+                                             pc, f.get("ref"))
     log["version"] = VERSION
     log["updated"] = today
     return log
@@ -728,17 +776,20 @@ def evaluate_log(log, played):
         o = outcome(m["hg"], m["ag"])
         r = {"h": m["h"], "a": m["a"], "j": m.get("j"), "d": m["date"], "hg": m["hg"], "ag": m["ag"], "o": o,
              "p": e["p"], "mk": implied(m.get("odds")), "bf": e.get("bf", False), "made": e.get("made"),
-             "o25": e.get("o25"), "tot": m["hg"] + m["ag"], "st": {}}
+             "o25": e.get("o25"), "tot": m["hg"] + m["ag"], "st": {}, "pc": e.get("pc")}
         for k, v in (e.get("st") or {}).items():
             obs = m.get(k)
             if obs is not None:
                 r["st"][k] = [v, sum(obs), (e.get("sb") or {}).get(k)]
         odds = m.get("odds")
         if odds:
-            edges = [e["p"][k] * odds[k] - 1 for k in range(3)]
-            kb = max(range(3), key=lambda k: edges[k])
-            if edges[kb] > 0.05:
-                r["bet"] = [kb, odds[kb], round(odds[kb] - 1 if kb == o else -1.0, 3)]
+            for key, pp in (("bet", e["p"]), ("betc", e.get("pc"))):
+                if not pp:
+                    continue
+                edges = [pp[k] * odds[k] - 1 for k in range(3)]
+                kb = max(range(3), key=lambda k: edges[k])
+                if edges[kb] > 0.05:
+                    r[key] = [kb, odds[kb], round(odds[kb] - 1 if kb == o else -1.0, 3)]
         rows.append(r)
     real = [r for r in rows if not r["bf"]]
     out = {"n": len(rows), "nreal": len(real), "all": agg(rows), "real": agg(real), "calib": calibration(rows),
@@ -749,13 +800,16 @@ def evaluate_log(log, played):
         a["j"] = j
         a["real"] = sum(1 for r in rj if not r["bf"])
         out["by_j"].append(a)
-    bets = [r["bet"] for r in rows if "bet" in r]
-    if bets:
-        pr = [b[2] for b in bets]
-        mp = mean(pr)
-        sd = math.sqrt(sum((x - mp) ** 2 for x in pr) / (len(pr) - 1)) if len(pr) > 1 else 0.0
-        out["bets"] = {"n": len(pr), "won": sum(1 for x in pr if x > 0), "profit": sum(pr), "roi": mp,
-                       "se": sd / math.sqrt(len(pr))}
+    for key, okey in (("bet", "bets"), ("betc", "betsc")):
+        bets = [r[key] for r in rows if key in r]
+        if bets:
+            pr = [b[2] for b in bets]
+            mp = mean(pr)
+            sd = math.sqrt(sum((x - mp) ** 2 for x in pr) / (len(pr) - 1)) if len(pr) > 1 else 0.0
+            out[okey] = {"n": len(pr), "won": sum(1 for x in pr if x > 0), "profit": sum(pr), "roi": mp,
+                         "se": sd / math.sqrt(len(pr))}
+    comb = [{"p": r["pc"], "o": r["o"], "mk": r["mk"]} for r in rows if r.get("pc")]
+    out["comb"] = agg(comb)
     st = {}
     for k, _ in STATS:
         tr = [r["st"][k] for r in rows if k in r["st"]]
@@ -846,7 +900,7 @@ def _classify(series, cross, same, m, V, strict=True):
     return None
 
 
-def trend_candidates(train, pos, models, h, a, strict=True):
+def trend_candidates(train, pos, models, h, a, strict=True, ref=None):
     """Tendencias claras de un partido h-a con los datos de train y la clasificación pos."""
     out = []
     for k in TREND_KEYS:
@@ -863,9 +917,12 @@ def trend_candidates(train, pos, models, h, a, strict=True):
             cross = [v for v, _, op in ser if op in near]
             same = [v for v, hm, _ in ser if hm == home][-3:]
             m, V, _ = stat_pred(p, ix[t], ix[o], 1 if home else 0)
+            rf = (ref or {}).get(k)
+            if rf:
+                m, V = m * rf, V * rf
             c = _classify([last], cross, same, m, V, strict)
             if c:
-                out.append(dict(side=side, k=k, m=m, V=V, last=last, series=[last], cross=cross, same=same, **c))
+                out.append(dict(side=side, k=k, m=m, V=V, rf=rf, last=last, series=[last], cross=cross, same=same, **c))
         sh, sa = _series(train, h, k, True), _series(train, a, k, True)
         if len(sh) >= 5 and len(sa) >= 5:
             series = [[v for v, _, _ in sh[-5:]], [v for v, _, _ in sa[-5:]]]
@@ -874,9 +931,12 @@ def trend_candidates(train, pos, models, h, a, strict=True):
             cross = [v for v, _, op in sh if op in nh] + [v for v, _, op in sa if op in na]
             same = [v for v, hm, _ in sh if hm][-3:] + [v for v, hm, _ in sa if not hm][-3:]
             m, V, _ = stat_total(p, ix[h], ix[a])
+            rf = (ref or {}).get(k)
+            if rf:
+                m, V = m * rf, V * rf
             c = _classify(series, cross, same, m, V, strict)
             if c:
-                out.append(dict(side="T", k=k, m=m, V=V, last=last, series=series, cross=cross, same=same, **c))
+                out.append(dict(side="T", k=k, m=m, V=V, rf=rf, last=last, series=series, cross=cross, same=same, **c))
     return out
 
 
@@ -910,3 +970,123 @@ def trend_backtest(played, teams, step=8, strict=True):
             s[1] += c["hit"]
             s[2] += c["pm"]
     return {"summ": {k: {"n": n, "hit": h / n, "model": p / n} for k, (n, h, p) in summ.items()}, "cases": cases}
+
+
+# ----------------------------------------------------------------- aprendizaje
+def paired(a, b):
+    """Media y error típico de la diferencia emparejada a - b."""
+    d = [x - y for x, y in zip(a, b)]
+    if len(d) < 2:
+        return None, None
+    m = sum(d) / len(d)
+    return m, math.sqrt(sum((x - m) ** 2 for x in d) / (len(d) - 1) / len(d))
+
+
+def select_config(played, teams, grid, prev=None, step=1):
+    """Prueba cada configuración del modelo de goles con la prueba retrospectiva (cada partido predicho solo con
+    los anteriores) y elige la de mejor log-loss. Para no cambiar por ruido, se mantiene la actual (la del día
+    anterior o, si no hay, la primera) salvo que otra la mejore en más de un error típico en los mismos partidos."""
+    res = {}
+    for key, name, cfg in grid:
+        wf = walk_forward_goals(played, teams, cfg, step=step)
+        lls = [ll(pr["p"], outcome(m["hg"], m["ag"])) for m, pr in wf]
+        res[key] = {"key": key, "name": name, "cfg": cfg, "wf": wf, "lls": lls, "ll": mean(lls)}
+    keys = [k for k, _, _ in grid]
+    cur = prev if prev in res else keys[0]
+    ok = [k for k in keys if res[k]["ll"] is not None]
+    if not ok:
+        return cur, res, "Todavía no hay partidos suficientes para comparar configuraciones."
+    best = min(ok, key=lambda k: res[k]["ll"])
+    chosen, why = cur, "se mantiene"
+    if best != cur and res[cur]["ll"] is not None:
+        dm, se = paired(res[best]["lls"], res[cur]["lls"])
+        if dm is not None and dm < -max(se, 0.002):
+            chosen, why = best, "cambia"
+    for k in ok:
+        dm, se = paired(res[k]["lls"], res[chosen]["lls"])
+        res[k]["d"], res[k]["se"] = dm, se
+    return chosen, res, why
+
+
+def pool(p, mk, a):
+    """Combinación logarítmica de dos predicciones: p elevado a a por mk elevado a 1-a, normalizado."""
+    q = [max(x, 1e-9) ** a * max(y, 1e-9) ** (1 - a) for x, y in zip(p, mk)]
+    t = sum(q)
+    return [x / t for x in q]
+
+
+def learn_blend(wf):
+    """Aprende cuánto pesa el modelo frente al mercado: el peso a que mejor predice, en la prueba retrospectiva,
+    los partidos con cuotas de cierre (a=0 es solo el mercado; a=1, solo el modelo)."""
+    rows = [(pr["p"], implied(m["odds"]), outcome(m["hg"], m["ag"])) for m, pr in wf if m.get("odds")]
+    if len(rows) < 20:
+        return {"a": 0.0 if rows else 1.0, "n": len(rows), "fit": False}
+    grid = [i / 20 for i in range(21)]
+    curve = {a: mean(ll(pool(p, mk, a), o) for p, mk, o in rows) for a in grid}
+    a = min(grid, key=lambda x: curve[x])
+    dm, se = paired([ll(pool(p, mk, a), o) for p, mk, o in rows], [ll(mk, o) for p, mk, o in rows])
+    return {"a": a, "n": len(rows), "fit": True, "ll": curve[a], "llm": curve[0.0], "llmod": curve[1.0], "d": dm, "se": se,
+            "curve": [[x, round(curve[x], 4)] for x in grid]}
+
+
+REF_KEYS = ["y", "f"]
+
+
+def referee_effects(played, E, key, phi, min_refs=5):
+    """Cuánto se aparta cada árbitro de lo esperado en la estadística key (total del partido).
+    Bayes empírico gamma-Poisson: el factor de cada árbitro se acerca a 1 según sus partidos y según cuánto
+    se diferencian de verdad los árbitros entre sí. Si los datos no muestran diferencias reales, todos valen 1."""
+    agg_ = {}
+    for m, e in zip(played, E):
+        r, v, ex = m.get("ref"), m.get(key), e.get(key)
+        if not r or v is None or not ex:
+            continue
+        a = agg_.setdefault(r, [0.0, 0.0, 0])
+        a[0] += v[0] + v[1]
+        a[1] += ex[0] + ex[1]
+        a[2] += 1
+    if len(agg_) < min_refs:
+        return None
+    rs = [(o / e, e) for o, e, _ in agg_.values() if e > 0]
+    W = sum(e for _, e in rs)
+    mr = sum(r * e for r, e in rs) / W
+    var = sum(e * (r - mr) ** 2 for r, e in rs) / W
+    noise = phi * len(rs) / W
+    tau2 = max(0.0, var - noise)
+    alpha = 1 / tau2 if tau2 > 1e-6 else None
+    refs = {r: {"f": ((alpha + o / phi) / (alpha + e / phi)) if alpha else 1.0, "n": n, "o": o, "e": e}
+            for r, (o, e, n) in agg_.items()}
+    return {"tau": math.sqrt(tau2), "refs": refs}
+
+
+def referee_backtest(played, teams, min_train=40, step=8):
+    """¿Mejora el árbitro la predicción? Para cada partido se estima el factor de su árbitro solo con partidos
+    anteriores y se compara el error del total con y sin él."""
+    out = {k: [] for k in REF_KEYS}
+    models, facs, last = None, None, -10 ** 9
+    for d in sorted({m["date"] for m in played}):
+        train = [m for m in played if m["date"] < d]
+        if len(train) < min_train:
+            continue
+        if len(train) - last >= step:
+            models = {k: fit_stat(train, teams, k) for k in REF_KEYS}
+            Et = [{k: [math.exp(lin(p, p["ix"][m["h"]], p["ix"][m["a"]], 1)[0]),
+                       math.exp(lin(p, p["ix"][m["a"]], p["ix"][m["h"]], 0)[0])] for k, p in models.items() if p}
+                  for m in train]
+            facs = {k: referee_effects(train, Et, k, models[k]["phi"]) for k in REF_KEYS if models.get(k)}
+            last = len(train)
+        for m in (x for x in played if x["date"] == d):
+            for k in REF_KEYS:
+                p, fe = models.get(k), facs.get(k)
+                if not p or not m.get(k) or not m.get("ref"):
+                    continue
+                base = stat_total(p, p["ix"][m["h"]], p["ix"][m["a"]])[0]
+                f = fe["refs"].get(m["ref"], {"f": 1.0})["f"] if fe else 1.0
+                obs = sum(m[k])
+                out[k].append((abs(base - obs), abs(base * f - obs)))
+    res = {}
+    for k, v in out.items():
+        if v:
+            dm, se = paired([b for _, b in v], [a for a, _ in v])
+            res[k] = {"n": len(v), "mae": mean(a for a, _ in v), "maer": mean(b for _, b in v), "d": dm, "se": se}
+    return res

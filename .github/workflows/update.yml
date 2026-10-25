@@ -9,11 +9,13 @@ on:
     paths:
       - "build.py"
       - "model.py"
+      - "leagues.py"
       - "app.js"
       - "style.css"
       - "template.html"
       - "calendario.json"
       - "fechas.json"
+      - "fechas_premier.json"
       - "players.py"
       - ".github/workflows/update.yml"
   workflow_dispatch:        # botón para ejecutarlo a mano
@@ -28,7 +30,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -39,7 +41,7 @@ jobs:
         continue-on-error: true
         env:
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
-      - name: Generar página y registro de predicciones
+      - name: Generar las páginas de cada liga y sus registros de predicciones
         run: python build.py
       - name: Guardar cambios
         run: |
@@ -50,3 +52,21 @@ jobs:
           git commit -m "Actualizar datos"
           git pull --rebase --autostash
           git push
+      - name: Borrar la rama de prueba de datos si sigue existiendo
+        continue-on-error: true
+        run: |
+          if git ls-remote --exit-code --heads origin sonda-datos >/dev/null; then
+            git push origin --delete sonda-datos
+          else
+            echo "No hay rama de prueba"
+          fi
+      - name: Comprobar que se han generado todas las ligas
+        run: |
+          python - <<'EOF'
+          import json, sys
+          estado = json.load(open("estado.json", encoding="utf-8"))
+          mal = {k: v.get("error") for k, v in estado.items() if not v.get("ok")}
+          for k, v in estado.items():
+              print(k, "OK" if v.get("ok") else "ERROR", v.get("n", ""), v.get("last", ""), v.get("error", ""))
+          sys.exit(1 if mal else 0)
+          EOF
