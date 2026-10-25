@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Premier League 2026-27</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Premier League 2026-27: clasificación, estadísticas, análisis de partidos y predicciones con datos solo de esta temporada, con un modelo que aprende cada jornada.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>/* Panel de datos: cabecera con resumen y pestañas; columnas que se apilan en móvil; tablas densas con cifras tabulares. */
+:root{
+  --bg:#EEF2F4;--s:#FFFFFF;--ink:#17262E;--mu:#5B6B74;--ln:#D8E0E4;--ln2:#E7ECEF;
+  --ac:#2347B5;--on-ac:#FFFFFF;--as:#DCE4F8;
+  --s1:#2347B5;--s2:#C2711C;--nt:#9AA5AB;--on1:#FFFFFF;--on2:#17262E;--on3:#17262E;
+  --up:#12794A;--upb:#E3F1EA;--dn:#B3261E;--dnb:#F7E3E1;--wr:#7A5200;--wrb:#F6ECD6;
+  --ucl:#2347B5;--uel:#7B93D6;--rel:#B3261E;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#10181D;--s:#18232A;--ink:#E7EEF1;--mu:#93A4AD;--ln:#2A3943;--ln2:#22303A;
+  --ac:#7C9BFF;--on-ac:#0D1630;--as:#25335F;
+  --s1:#6684EE;--s2:#BF7D33;--nt:#6E7C84;--on1:#0D1630;--on2:#1A1206;--on3:#0F171C;
+  --up:#4CC98A;--upb:#163A2A;--dn:#FF8A80;--dnb:#43201E;--wr:#E8B860;--wrb:#3A2E14;
+  --ucl:#7C9BFF;--uel:#4F66A8;--rel:#FF8A80;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#10181D;--s:#18232A;--ink:#E7EEF1;--mu:#93A4AD;--ln:#2A3943;--ln2:#22303A;
+  --ac:#7C9BFF;--on-ac:#0D1630;--as:#25335F;
+  --s1:#6684EE;--s2:#BF7D33;--nt:#6E7C84;--on1:#0D1630;--on2:#1A1206;--on3:#0F171C;
+  --up:#4CC98A;--upb:#163A2A;--dn:#FF8A80;--dnb:#43201E;--wr:#E8B860;--wrb:#3A2E14;
+  --ucl:#7C9BFF;--uel:#4F66A8;--rel:#FF8A80;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--sans)}
+[hidden]{display:none!important}
+.page{max-width:1240px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{text-wrap:balance}
+h1{font-size:26px;font-weight:600;margin:0;letter-spacing:-.01em}
+.sub{color:var(--mu);margin:2px 0 0;font-size:14px}
+.lgs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px;font-size:13px}
+.lgs:empty{display:none}
+.lgs a,.lgs span{padding:2px 11px;border-radius:99px;border:1px solid var(--ln);color:var(--mu);text-decoration:none;background:var(--s)}
+.lgs a:hover{color:var(--ac);border-color:var(--ac)}
+.lgs span{background:var(--ac);border-color:var(--ac);color:var(--on-ac);font-weight:500}
+details > summary{cursor:pointer;color:var(--ac);font-size:13px;margin-top:10px}
+details[open] > summary{margin-bottom:6px}
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;margin-bottom:16px}
+.tabs{display:flex;flex-wrap:wrap;gap:2px;background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:3px}
+.tabs button{font:inherit;font-size:14px;color:var(--mu);background:none;border:0;border-radius:7px;padding:7px 12px;cursor:pointer}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{background:var(--ac);color:var(--on-ac);font-weight:500}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.card{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:16px;margin-bottom:12px;min-width:0}
+.card h2{font-size:16px;font-weight:600;margin:0 0 12px}
+.card h3{font-size:14.5px;font-weight:600;margin:18px 0 8px}
+.card > h3:first-child{margin-top:0}
+.eq{display:grid;grid-template-columns:330px minmax(0,1fr);gap:12px;align-items:start}
+.eq > *{min-width:0}
+@media (max-width:900px){.eq{grid-template-columns:minmax(0,1fr)}}
+.th,.mh{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin-bottom:12px}
+.tn{font-size:22px;font-weight:600;margin:0}
+.sc{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:7px 8px;border-bottom:1px solid var(--ln2);text-align:left;vertical-align:top}
+th{font-weight:500;color:var(--mu);font-size:12.5px;white-space:nowrap;vertical-align:bottom}
+tbody tr:last-child td{border-bottom:0}
+table.num td:not(:first-child),table.num th:not(:first-child){text-align:right;white-space:nowrap}
+table.num td.l,table.num th.l,td.l{text-align:left!important}
+abbr{text-decoration:none;cursor:help}
+small,.mu{color:var(--mu)}
+small{font-size:12px}
+.b{font-weight:600}
+.note{color:var(--mu);font-size:13px;margin:10px 0 0;max-width:100ch}
+.legend{color:var(--mu);font-size:13px;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.sw.s1,.sw.q0{background:var(--s1)}.sw.s2,.sw.q2{background:var(--s2)}.sw.q1{background:var(--nt)}
+.sw.ucl{background:var(--ucl)}.sw.uel{background:var(--uel)}.sw.rel{background:var(--rel)}
+.lk{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+.lk:hover{color:var(--ac);text-decoration:underline;text-underline-offset:2px}
+.go{font:inherit;font-size:14px;color:var(--ac);background:var(--s);border:1px solid var(--ac);border-radius:8px;padding:6px 12px;cursor:pointer}
+.go:hover{background:var(--as)}
+table.lg td,table.lg th{padding:6px 7px}
+table.lg td:nth-child(n+3),table.lg th:nth-child(n+3){text-align:right}
+table.lg tr.on td,table.et tr.on td{background:var(--as)}
+table.lg tr.ucl td:first-child{box-shadow:inset 3px 0 var(--ucl)}
+table.lg tr.uel td:first-child{box-shadow:inset 3px 0 var(--uel)}
+table.lg tr.rel td:first-child{box-shadow:inset 3px 0 var(--rel)}
+table.sim tr.ucl td:first-child{box-shadow:inset 3px 0 var(--ucl)}
+table.sim tr.rel td:first-child{box-shadow:inset 3px 0 var(--rel)}
+select{font:inherit;font-size:14px;color:var(--ink);background:var(--s);border:1px solid var(--ln);border-radius:8px;padding:6px 8px;max-width:100%}
+#rk-sel{width:100%;margin-bottom:10px}
+.rk{display:grid;grid-template-columns:118px minmax(0,1fr) 84px;gap:8px;align-items:center;font-size:13px;padding:2px 0}
+.rk > span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rk > span:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.rk .bar{height:8px;background:var(--ln2);border-radius:4px;overflow:hidden}
+.rk .bar i{display:block;height:100%;background:var(--s1);border-radius:0 4px 4px 0}
+.rk.on{font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:12px}
+.tile{background:var(--s);border:1px solid var(--ln);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tile span{color:var(--mu);font-size:12.5px}
+.tile b{font-size:17px;font-weight:600;line-height:1.3}
+.tiles.sm{margin:0}
+.tiles.sm .tile{background:var(--bg);border-color:transparent}
+.form{display:flex;flex-wrap:wrap;gap:6px}
+.fm{font-style:normal;font-weight:600;font-size:13px;width:28px;height:28px;border-radius:6px;display:grid;place-items:center}
+.fm.W{background:var(--upb);color:var(--up)}.fm.D{background:var(--ln2);color:var(--mu)}.fm.L{background:var(--dnb);color:var(--dn)}
+.chip{display:inline-block;font-size:11.5px;font-weight:500;letter-spacing:.02em;padding:1px 8px;border-radius:99px;background:var(--ln2);color:var(--mu);white-space:nowrap;vertical-align:1px}
+.chip.clear{background:var(--upb);color:var(--up)}
+.chip.maybe,.chip.warn{background:var(--wrb);color:var(--wr)}
+.dv{font-size:12px;color:var(--mu)}
+.dv.b{color:var(--ink);font-weight:600}
+table.mt td{line-height:1.3}
+svg{display:block;width:100%;height:auto;min-width:480px;max-width:880px}
+svg .grid{stroke:var(--ln2);stroke-width:1}
+svg .ref{stroke:var(--mu);stroke-width:1;opacity:.55}
+svg .ax{fill:var(--mu);font:11px var(--sans)}
+svg .lab{fill:var(--ink);font:600 10.5px var(--mono)}
+svg .s1{fill:var(--s1)}svg .s2{fill:var(--s2)}
+svg .dot{fill:var(--s1);stroke:var(--s);stroke-width:2}
+svg .dot.on{fill:var(--s2)}
+svg .ln{fill:none;stroke:var(--s1);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+svg .an{fill:var(--ink);font:500 11.5px var(--sans)}
+svg .hc rect{fill:transparent}
+svg .hc .cx{stroke:var(--mu);stroke-width:1;opacity:0}
+svg .hc .hd{fill:var(--s1);stroke:var(--s);stroke-width:2;opacity:0}
+svg .hc:hover .cx{opacity:.5}
+svg .hc:hover .hd{opacity:1}
+.ctr{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:6px}
+.ctr label{color:var(--mu);font-size:14px;display:inline-flex;gap:6px;align-items:center}
+#fx-sel{flex:1 1 300px;min-width:0}
+.seg{display:inline-flex;border:1px solid var(--ln);border-radius:8px;overflow:hidden;background:var(--s)}
+.seg button{font:inherit;font-size:14px;color:var(--mu);background:none;border:0;padding:6px 12px;cursor:pointer}
+.seg button + button{border-left:1px solid var(--ln)}
+.seg button[aria-pressed="true"]{background:var(--ac);color:var(--on-ac)}
+.seg button:disabled{opacity:.5;cursor:not-allowed}
+.ck input{accent-color:var(--ac);width:16px;height:16px;margin:0}
+.pbs{display:grid;gap:8px}
+.pb{display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;gap:10px}
+.pbl{color:var(--mu);font-size:13px}
+.pbar{display:flex;gap:2px;height:28px}
+.pbar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12.5px;font-weight:600;min-width:0;overflow:hidden;white-space:nowrap}
+.pbar i:first-child{border-radius:6px 0 0 6px}.pbar i:last-child{border-radius:0 6px 6px 0}
+.pbar .q0{background:var(--s1);color:var(--on1)}.pbar .q1{background:var(--nt);color:var(--on3)}.pbar .q2{background:var(--s2);color:var(--on2)}
+.concl .cl{margin:0;padding-left:18px;display:grid;gap:7px}
+.concl .cl li{max-width:90ch}
+table.et td{line-height:1.35}
+table.et td.ln{font-size:12.5px;color:var(--mu)}
+table.vt td:first-child{min-width:210px}
+table.xt th:nth-child(6),table.xt td:nth-child(6){border-left:1px solid var(--ln)}
+.heat{display:inline-grid;grid-template-columns:repeat(20,9px);gap:1px;vertical-align:middle}
+.heat i{position:relative;display:block;height:16px;background:var(--ln2);border-radius:2px}
+.heat i::after{content:"";position:absolute;inset:0;border-radius:2px;background:var(--s1);opacity:var(--p)}
+.prose{max-width:860px}
+.prose h2{font-size:18px}
+.prose p,.prose dd{max-width:75ch}
+.prose dt{font-weight:600;margin-top:8px}
+.prose dd{margin:2px 0 0 0;color:var(--mu)}
+.foot{color:var(--mu);font-size:12.5px;margin-top:20px;max-width:100ch}
+@media (max-width:560px){
+  h1{font-size:22px}
+  .tabs{width:100%}
+  .tabs button{flex:1 1 auto;padding:7px 8px}
+  .card{padding:14px}
+  .pb{grid-template-columns:72px minmax(0,1fr)}
+}
+.tvs{display:inline-flex;gap:2px;vertical-align:middle}
+.tv{display:inline-block;min-width:22px;padding:1px 3px;border-radius:4px;font-size:12px;text-align:center;font-variant-numeric:tabular-nums}
+.tv.hit{background:var(--upb);color:var(--up)}.tv.miss{background:var(--dnb);color:var(--dn)}
+.tin{font:inherit;font-size:13px;color:var(--ink);background:var(--s);border:1px solid var(--ln);border-radius:6px;padding:3px 5px;text-align:right}
+table.tt td{vertical-align:middle}
+.story{max-width:90ch;margin:0 0 10px;line-height:1.55}
+.tvrow{display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 0 10px;align-items:center}
+.tvrow small{color:var(--mu);margin-right:4px}
+</style>
+<div class="page">
+<header class="top">
+  <div><nav class="lgs" id="lgs" aria-label="Liga"></nav><h1>Premier League 2026-27</h1><p class="sub" id="sub"></p></div>
+  <nav class="tabs" role="tablist" aria-label="Secciones">
+    <button role="tab" data-view="equipos" aria-selected="true">Equipos</button>
+    <button role="tab" data-view="partido" aria-selected="false">Análisis de partido</button>
+    <button role="tab" data-view="predicciones" aria-selected="false">Predicciones</button>
+    <button role="tab" data-view="tendencias" aria-selected="false">Tendencias</button>
+    <button role="tab" data-view="historial" aria-selected="false">Historial</button>
+    <button role="tab" data-view="aprendizaje" aria-selected="false">Aprendizaje</button>
+    <button role="tab" data-view="metodo" aria-selected="false">Método</button>
+  </nav>
+</header>
+<main>
+  <section id="v-equipos" class="eq">
+    <div>
+      <section class="card"><h2>Clasificación</h2><div id="tabla"></div></section>
+      <section class="card"><h2>Ranking por estadística</h2><select id="rk-sel" aria-label="Estadística del ranking"></select><div id="rank"></div></section>
+    </div>
+    <div id="team"></div>
+  </section>
+  <section id="v-partido" hidden><div id="c-partido"></div></section>
+  <section id="v-predicciones" hidden><div id="c-pred"></div></section>
+  <section id="v-tendencias" hidden><div id="c-tend"></div></section>
+  <section id="v-historial" hidden><div id="c-hist"></div></section>
+  <section id="v-aprendizaje" hidden><div id="c-learn"></div></section>
+  <section id="v-metodo" hidden class="card prose">
+    <h2>Cómo funciona</h2>
+    <h3>Datos</h3>
+    <p>Los resultados, las estadísticas de cada partido (tiros, córners, faltas, tarjetas), el xG<span id="m-ref"></span> y las cuotas de cierre salen del CSV de football-data.co.uk. Las fechas y cuotas de los próximos partidos salen de su archivo de próximos partidos, que se publica unos días antes de cada jornada; si un partido todavía no aparece, se usa <span id="m-cal">el calendario de la liga</span>. GitHub descarga todo dos veces al día y regenera esta página. Solo se usan datos de esta temporada. Las horas están en horario peninsular español.<span id="m-cards"></span></p>
+    <h3>Modelo de goles</h3>
+    <p>Cada equipo tiene un ataque y una defensa, y todos comparten una ventaja de local. Los goles esperados de un partido salen de combinar la media de la liga, el ataque de un equipo, la defensa del otro y, para el local, la ventaja de jugar en casa. Para estimar esos valores se mezclan goles reales y xG, porque el xG depende menos del azar; la versión por defecto los mezcla al 50 %, y el propio modelo puede cambiar a otra versión si predice mejor (ver Aprendizaje).</p>
+    <p>Con pocos partidos, un equipo puede parecer mucho mejor o peor de lo que es, así que los valores se acercan a la media de la liga. Cuánto se acercan no está fijado a mano: se calcula con los propios datos según cuánto se diferencian de verdad los equipos. A medida que avanza la temporada, se encogen menos.</p>
+    <p>La probabilidad de cada marcador sale de una distribución de Poisson, con la corrección de Dixon-Coles para los marcadores bajos (0-0, 1-0, 0-1 y 1-1), que es donde el Poisson simple se equivoca, y promediando sobre la incertidumbre de cada parámetro.</p>
+    <h3>Estadísticas</h3>
+    <p>El mismo esquema de ataque y defensa se ajusta por separado para xG, tiros, tiros a puerta, córners, faltas, tarjetas y goles de la primera parte. Cada estadística tiene su propia ventaja de local y su propia variación: los córners varían de un partido a otro más de lo que daría el azar puro, y las faltas, menos. Así, cada valor esperado tiene en cuenta al rival y el campo y, cuando se conoce el árbitro, también su efecto en tarjetas y faltas.</p>
+    <h3>Error, señal y modos</h3>
+    <p>El error es cuánto podría moverse una media solo por azar con los partidos jugados. Una diferencia es <b>clara</b> si supera dos errores, <b>posible</b> si supera uno y <b>ruido</b> si no llega. En el análisis de partido, el modo optimista da por buenas las diferencias de más de un error y los umbrales con al menos un 60 % de probabilidad; el prudente exige dos errores y un 70 %.</p>
+    <p>El rango de una media no es lo mismo que lo que puede pasar en un partido: un equipo que promedia 5 córners puede sacar 1 o 10. Por eso el análisis separa el rango de la media de la probabilidad de superar cada línea en ese partido.</p>
+    <h3>Rivales parecidos</h3>
+    <p>Para un partido A–B se miran los partidos de A contra los equipos que están a pocos puestos de B en la clasificación actual, y al revés. Cada uno de esos partidos se compara con lo que esperaba el modelo, que ya tiene en cuenta el rival y el campo. La media de esas diferencias ajusta la estimación solo en la medida en que los datos de toda la liga demuestran que el rendimiento cambia de verdad según la zona de la tabla del rival. Si no lo demuestran, el cruce se muestra pero no mueve las cifras.</p>
+    <h3>Simulación</h3>
+    <p>Se juega el resto de la liga <span id="m-sims">5.000</span> veces. En cada simulación se sortea la fuerza de cada equipo con su incertidumbre, más una variación extra porque los equipos cambian durante la temporada por lesiones, entrenadores o fichajes. <span id="m-tb"></span></p>
+    <h3>Tendencias</h3>
+    <p>Una tendencia solo aparece si un equipo superó (o no llegó a) una línea en sus 5 últimos partidos, o en los 4 últimos seguidos; también contra todos los rivales parecidos al de hoy (al menos 2 partidos) y en sus últimos partidos en el mismo campo. Además, la línea tiene que ir más allá de lo que espera el modelo, que le da un 50 % o menos. Las mismas reglas, aplicadas a cada partido de la temporada con los datos anteriores a él, forman el historial de la pestaña, y ese historial corrige poco a poco la probabilidad que el modelo da a las tendencias nuevas.</p>
+    <h3>Aprendizaje</h3>
+    <p>En cada actualización el modelo se revisa con la prueba retrospectiva, en la que cada partido se predice solo con los anteriores. Con ella hace cuatro cosas: elige entre varias versiones del modelo de goles la que mejor ha predicho, pero solo cambia si la mejora supera el error, para no cambiar por azar; aprende cuánto pesar frente a las cuotas del mercado, buscando la mezcla que mejor habría predicho los partidos ya jugados; si el CSV trae el árbitro, estima cuánto se aparta cada uno en tarjetas y faltas, acercándolo a la media según los partidos que haya dirigido; y corrige la probabilidad de las tendencias según cuánto se han cumplido las anteriores, con un peso que crece con el número de casos. La pestaña Aprendizaje muestra qué ha aprendido y cómo cambia cada jornada.</p>
+    <h3>Registro de predicciones</h3>
+    <p>En cada actualización se guardan las predicciones de los partidos de los próximos diez días. Se van renovando con los datos nuevos hasta el día del partido y a partir de ahí quedan congeladas. Cuando llega el resultado se evalúan frente a lo que pasó y frente a las cuotas de cierre. Los partidos anteriores al registro tienen predicciones reconstruidas, calculadas solo con los partidos previos a cada uno; se marcan aparte porque se hicieron con el código actual.</p>
+    <h3>Límites</h3>
+    <p>Con pocos partidos por equipo, casi todo tiene mucho error. El modelo no sabe nada de lesiones, alineaciones, rotaciones ni cambios de entrenador, y las casas de apuestas sí lo tienen en cuenta; por eso, en la prueba retrospectiva, el mercado predice mejor el resultado. Esto es una herramienta de análisis, no un consejo de apuestas.</p>
+    <h3>Glosario</h3>
+    <dl>
+      <dt>xG (goles esperados)</dt><dd>Calidad de las ocasiones: la probabilidad de gol de cada tiro según su distancia, su ángulo y el tipo de jugada, sumada en todo el partido.</dd>
+      <dt>xPts (puntos esperados)</dt><dd>Los puntos que habría sumado un equipo si cada partido se hubiera decidido según el xG de los dos equipos.</dd>
+      <dt>Log-loss y Brier</dt><dd>Miden lo buenas que han sido unas probabilidades; cuanto más bajas, mejor. Repartir un tercio a cada resultado da una log-loss de 1,10.</dd>
+      <dt>Prueba retrospectiva</dt><dd>Predecir cada partido ya jugado con un modelo ajustado solo con los partidos anteriores, como si se hubiera hecho en su momento.</dd>
+      <dt>Margen de las casas</dt><dd>Las probabilidades que implican las cuotas suman más del 100 %. Ese exceso se quita repartiéndolo en proporción a cada resultado.</dd>
+      <dt>Cuota de cierre</dt><dd>La última cuota antes del partido, la que incorpora más información.</dd>
+      <dt>pp (puntos porcentuales)</dt><dd>Diferencia entre dos porcentajes: de 40 % a 45 % son 5 pp.</dd>
+    </dl>
+  </section>
+</main>
+<footer class="foot" id="foot"></footer>
+</div>
+<script>window.DATA={"meta":{"gen":"2026-10-25 00:51 UTC","today":"2026-10-25","last":"2026-10-19","n":70,"ver":"4.0","fx":10,"pend":310,"sims":5000,"warn":[],"league":"premier","name":"Premier League","title":"Premier League 2026-27","zones":{"ucl":4,"uel":1,"rel":3},"tiebreak":"los empates a puntos se resuelven como en el reglamento de la Premier League: diferencia de goles, goles a favor y, después, los puntos y los goles fuera de casa en los partidos entre ellos (el partido de desempate se sustituye por un sorteo)","cards_note":"En Inglaterra, una doble amarilla cuenta solo como roja.","leagues":[{"key":"laliga","name":"LaLiga","url":"https://jaimedhc.github.io/laliga-dashboard/"},{"key":"premier","name":"Premier League","url":"https://jaimedhc.github.io/laliga-dashboard/premier.html"}],"sources":"football-data.co.uk (resultados, estadísticas, xG, árbitros y cuotas) y calendario abierto de openfootball (fechas y horas)","cal_label":"Fecha del calendario abierto","cal_fallback":"el calendario abierto de openfootball","refs":true},"teams":["Arsenal","Aston Villa","Bournemouth","Brentford","Brighton","Chelsea","Coventry","Crystal Palace","Everton","Fulham","Hull","Ipswich","Leeds","Liverpool","Man City","Man United","Newcastle","Nott'm Forest","Sunderland","Tottenham"],"names":["Arsenal","Aston Villa","Bournemouth","Brentford","Brighton","Chelsea","Coventry","Crystal Palace","Everton","Fulham","Hull","Ipswich","Leeds","Liverpool","Manchester City","Manchester United","Newcastle","Nottingham Forest","Sunderland","Tottenham"],"short":["ARS","AVL","BOU","BRE","BHA","CHE","COV","CRY","EVE","FUL","HUL","IPS","LEE","LIV","MCI","MUN","NEW","NFO","SUN","TOT"],"M":[["2026-08-21","21:00",1,0,6,3,0,2,0,1.88,0.2,20,4,6,1,8,2,10,13,1,1,0,0,1.2,6.72,14.0,1.55,2.37,"T Bramall"],["2026-08-22","13:30",1,10,15,2,0,2,0,1.01,1.83,8,21,4,5,1,6,10,9,2,1,0,0,8.49,5.11,1.34,1.55,2.38,"D England"],["2026-08-22","16:00",1,8,7,2,0,1,0,1.12,1.96,16,11,5,4,4,0,5,15,0,1,0,0,2.32,3.36,3.05,1.93,1.83,"P Tierney"],["2026-08-22","16:00",1,11,18,2,1,1,1,1.8,0.66,10,11,3,4,3,5,12,14,0,3,0,0,2.83,3.22,2.52,2.14,1.67,"F Hallam"],["2026-08-22","16:00",1,17,12,0,1,0,0,0.66,0.47,12,11,2,3,3,2,15,14,2,1,0,0,2.45,3.2,2.94,2.12,1.69,"R Jones"],["2026-08-22","18:30",1,3,19,3,0,2,0,3.88,0.57,26,9,8,4,7,3,17,14,1,1,0,0,1.99,3.71,3.39,1.65,2.18,"M Oliver"],["2026-08-23","15:00",1,4,1,4,0,4,0,3.77,0.28,21,6,6,0,5,2,12,11,2,3,0,1,2.07,3.41,3.52,1.93,1.82,"P Bankes"],["2026-08-23","15:00",1,14,2,2,1,0,1,2.36,0.63,13,5,6,4,8,3,11,11,1,2,0,0,1.44,4.78,6.36,1.52,2.45,"J Gillett"],["2026-08-23","17:30",1,16,13,2,2,1,0,1.57,2.98,13,27,4,7,2,6,16,15,5,3,0,0,3.66,3.82,1.92,1.49,2.58,"S Attwell"],["2026-08-24","21:00",1,9,5,2,3,1,2,1.35,1.7,14,18,6,6,6,4,12,7,2,3,0,0,3.57,3.5,2.02,1.84,1.91,"J Brooks"],["2026-08-28","21:00",2,7,14,1,4,0,1,0.66,2.21,9,18,1,9,2,6,8,11,1,2,0,0,4.96,4.13,1.62,1.63,2.21,"A Madley"],["2026-08-29","13:30",2,13,17,2,2,0,1,1.75,2.3,13,12,4,3,3,5,13,10,4,2,0,0,1.46,4.7,6.09,1.49,2.55,"S Barrott"],["2026-08-29","16:00",2,2,8,1,1,1,0,2.15,1.84,17,13,5,7,10,7,11,14,3,2,0,0,2.18,3.46,3.24,1.75,2.03,"C Kavanagh"],["2026-08-29","16:00",2,6,10,0,1,0,0,1.28,0.73,11,6,3,2,6,2,11,8,1,4,0,0,1.72,3.82,4.72,1.7,2.08,"J Smith"],["2026-08-29","18:30",2,19,16,0,2,0,0,1.04,0.75,17,11,6,2,9,7,15,9,1,2,0,0,2.15,3.67,3.06,1.6,2.26,"P Bankes"],["2026-08-30","15:00",2,5,4,4,3,3,1,2.93,1.4,17,15,6,6,4,7,6,12,1,3,0,0,1.83,3.83,3.89,1.59,2.29,"M Oliver"],["2026-08-30","15:00",2,12,3,1,1,0,1,1.43,1.56,12,22,2,5,5,6,5,13,0,4,0,0,2.74,3.4,2.48,1.78,1.98,"T Harrington"],["2026-08-30","15:00",2,18,9,1,0,0,0,2.02,0.95,12,11,4,0,3,4,10,15,0,2,0,0,2.22,3.29,3.28,2.0,1.76,"M Salisbury"],["2026-08-30","17:30",2,15,11,5,2,1,1,4.56,2.01,33,9,11,5,8,4,7,12,1,3,0,0,1.34,5.39,7.68,1.39,2.86,"C Pawson"],["2026-08-31","21:00",2,1,0,0,1,0,0,0.32,1.05,7,7,0,2,2,4,17,6,3,1,0,0,6.54,4.41,1.47,1.7,2.08,"J Gillett"],["2026-09-04","21:00",3,11,13,0,2,0,2,0.76,0.68,14,10,5,7,4,3,6,13,1,3,0,0,4.86,4.34,1.62,1.45,2.66,"D England"],["2026-09-05","13:30",3,16,2,2,2,1,2,0.71,1.37,8,17,2,5,4,3,19,17,2,3,0,0,2.12,3.64,3.22,1.58,2.32,"R Jones"],["2026-09-05","16:00",3,3,18,1,1,0,0,1.2,1.71,12,14,2,5,4,3,19,9,3,2,0,0,1.68,3.86,4.89,1.79,1.97,"T Bramall"],["2026-09-05","16:00",3,4,12,1,1,0,1,2.2,2.5,20,10,5,5,7,6,13,16,3,3,0,0,1.94,3.63,3.73,1.76,2.01,"S Attwell"],["2026-09-05","16:00",3,9,7,2,3,2,1,3.14,1.97,25,10,6,5,7,1,6,7,0,0,0,0,2.16,3.39,3.35,1.84,1.92,"S Barrott"],["2026-09-05","16:00",3,14,6,1,0,1,0,2.12,1.37,15,12,4,3,4,5,7,17,1,2,0,0,1.19,7.18,12.96,1.38,2.95,"P Tierney"],["2026-09-05","16:00",3,17,19,0,0,0,0,0.92,1.07,12,11,2,0,2,10,22,14,2,2,0,0,2.64,3.38,2.61,1.84,1.92,"C Pawson"],["2026-09-05","18:30",3,10,1,0,0,0,0,0.57,1.93,11,13,4,1,3,4,10,5,2,0,0,0,3.92,3.59,1.89,1.8,1.96,"M Oliver"],["2026-09-06","15:00",3,8,15,2,2,0,0,1.01,0.69,18,14,6,3,4,3,7,11,3,3,0,0,3.65,3.82,1.91,1.57,2.34,"J Brooks"],["2026-09-06","17:30",3,0,5,2,1,1,1,2.05,0.39,16,13,9,5,5,3,13,16,2,4,0,0,1.7,3.85,4.74,1.71,2.07,"C Kavanagh"],["2026-09-12","16:00",4,1,17,1,2,0,0,0.82,2.28,7,22,5,7,6,1,11,16,2,5,0,0,2.22,3.43,3.19,1.83,1.92,"A Madley"],["2026-09-12","16:00",4,2,3,2,2,1,1,1.75,0.5,20,8,10,2,2,1,10,13,5,1,0,0,2.29,3.59,2.91,1.69,2.17,"J Gillett"],["2026-09-12","16:00",4,5,10,2,2,1,2,0.9,1.38,12,14,7,5,10,4,7,12,1,5,0,0,1.21,6.67,11.96,1.42,2.78,"F Hallam"],["2026-09-12","16:00",4,7,11,2,3,1,2,0.61,1.68,11,12,4,6,6,3,6,16,1,3,1,0,2.1,3.62,3.27,1.66,2.16,"C Kavanagh"],["2026-09-12","16:00",4,13,9,0,0,0,0,1.28,0.68,14,10,3,4,5,8,11,8,0,1,0,0,1.5,4.58,5.74,1.47,2.61,"T Bramall"],["2026-09-12","18:30",4,19,8,0,0,0,0,0.69,1.11,14,12,2,3,5,6,14,8,0,2,0,0,1.98,3.63,3.59,1.72,2.07,"D England"],["2026-09-12","21:00",4,18,0,0,2,0,0,1.8,1.88,12,11,3,5,4,2,18,11,6,2,1,0,5.89,3.72,1.62,2.08,1.71,"J Brooks"],["2026-09-13","15:00",4,6,4,0,5,0,1,1.34,2.8,14,22,6,7,5,3,9,15,0,0,1,0,3.71,3.78,1.91,1.61,2.24,"T Harrington"],["2026-09-13","17:30",4,15,14,0,1,0,0,1.0,1.1,16,6,3,2,6,7,17,10,1,2,0,1,2.95,3.76,2.2,1.45,2.67,"M Oliver"],["2026-09-14","21:00",4,12,16,4,1,3,0,1.91,0.85,15,7,6,5,5,5,8,13,1,2,0,0,2.3,3.46,2.98,1.68,2.12,"M Salisbury"],["2026-09-18","21:00",5,3,5,3,0,0,0,2.65,0.85,13,12,6,2,4,12,10,7,2,0,0,0,2.53,3.63,2.58,1.49,2.54,"A Madley"],["2026-09-19","13:30",5,19,1,2,3,0,1,1.56,1.16,20,15,7,6,11,1,9,13,1,2,0,0,1.89,3.77,3.81,1.6,2.29,"S Barrott"],["2026-09-19","16:00",5,4,0,3,0,2,0,1.31,1.63,17,11,5,2,5,6,13,11,4,1,0,0,4.92,3.84,1.68,1.78,1.98,"D England"],["2026-09-19","16:00",5,8,11,1,0,1,0,2.24,1.44,21,13,2,4,4,4,6,12,2,1,0,1,1.74,3.85,4.43,1.67,2.14,"S Attwell"],["2026-09-19","16:00",5,16,10,2,1,2,0,1.44,1.59,12,22,5,4,4,7,4,10,1,4,0,0,1.59,4.29,5.05,1.55,2.38,"T Harrington"],["2026-09-19","18:30",5,17,6,0,1,0,0,1.1,0.67,24,10,3,3,6,2,12,10,2,0,0,0,1.63,3.93,5.21,1.73,2.04,"J Gillett"],["2026-09-20","15:00",5,2,13,0,1,0,0,0.79,1.65,9,12,2,3,3,3,11,13,1,2,0,0,3.11,3.66,2.15,1.55,2.39,"M Oliver"],["2026-09-20","15:00",5,12,7,0,0,0,0,1.31,1.06,13,12,2,4,4,3,10,12,2,3,0,0,1.66,3.95,4.93,1.69,2.1,"A Herczeg"],["2026-09-20","15:00",5,14,18,5,3,3,2,2.82,3.57,16,17,6,9,6,5,14,14,0,1,0,0,1.34,5.19,8.5,1.61,2.26,"R Jones"],["2026-09-20","17:30",5,9,15,1,1,0,0,1.62,1.6,12,29,6,6,3,13,9,5,3,0,0,0,3.49,3.74,1.98,1.57,2.33,"P Bankes"],["2026-10-10","13:30",6,0,12,2,1,0,0,2.33,0.62,13,11,6,5,2,4,12,20,1,4,0,0,1.44,4.44,7.02,1.78,1.97,"P Tierney"],["2026-10-10","16:00",6,1,3,2,2,1,1,2.28,1.06,20,14,7,4,2,2,7,24,2,5,0,0,2.52,3.56,2.61,1.63,2.21,"C Pawson"],["2026-10-10","16:00",6,5,2,5,1,2,0,1.1,1.38,10,9,6,4,1,7,7,15,0,4,0,0,1.8,3.93,3.95,1.54,2.38,"S Barrott"],["2026-10-10","16:00",6,11,9,2,1,0,0,1.15,1.81,11,13,5,5,2,5,8,10,2,4,0,0,2.96,3.43,2.33,1.74,2.03,"L Smith"],["2026-10-10","16:00",6,18,4,0,2,0,0,0.72,1.41,12,13,3,4,7,5,8,12,0,1,0,1,2.96,3.34,2.33,1.94,1.8,"T Bramall"],["2026-10-10","18:30",6,15,19,1,1,0,0,0.8,1.62,12,12,4,3,4,4,13,16,4,3,0,1,1.68,4.17,4.43,1.49,2.53,"S Attwell"],["2026-10-11","15:00",6,7,17,3,1,2,1,2.41,3.34,13,24,7,6,5,8,11,10,2,2,0,0,2.77,3.34,2.47,1.86,1.88,"P Bankes"],["2026-10-11","15:00",6,10,8,2,2,0,0,1.33,1.68,9,15,5,7,7,6,15,4,2,0,0,0,4.02,3.36,1.95,2.01,1.75,"M Salisbury"],["2026-10-11","17:30",6,13,14,0,3,0,0,0.94,1.29,13,15,6,4,5,6,19,14,4,2,1,0,3.36,3.69,2.05,1.62,2.22,"C Kavanagh"],["2026-10-12","21:00",6,6,16,4,1,1,0,1.43,1.84,9,19,6,6,2,6,3,10,1,1,0,0,3.54,3.72,1.97,1.58,2.31,"J Brooks"],["2026-10-17","13:30",7,8,5,0,2,0,0,0.43,1.47,6,18,5,7,5,7,8,15,3,4,0,0,2.84,3.54,2.32,1.65,2.18,"P Tierney"],["2026-10-17","16:00",7,3,13,1,2,1,0,0.88,1.64,10,21,2,5,3,9,7,13,4,3,2,0,2.67,3.58,2.43,1.54,2.41,"J Brooks"],["2026-10-17","16:00",7,9,10,1,0,1,0,1.38,0.16,18,5,6,0,10,2,13,11,2,2,1,0,1.62,4.0,5.01,1.7,2.08,"C Kavanagh"],["2026-10-17","16:00",7,14,11,3,2,2,1,3.53,1.66,19,8,6,3,2,3,8,16,1,2,0,0,1.23,6.72,10.15,1.31,3.3,"F Hallam"],["2026-10-17","18:30",7,16,1,0,1,0,1,0.99,1.57,16,15,1,3,4,5,14,11,6,2,0,0,2.14,3.74,3.05,1.5,2.5,"J Gillett"],["2026-10-18","15:00",7,2,18,2,0,1,0,4.23,0.07,29,3,6,0,5,3,16,7,3,2,0,1,2.05,3.21,3.82,2.27,1.59,"C Pawson"],["2026-10-18","15:00",7,4,7,5,0,3,0,2.0,0.77,17,5,9,1,8,5,13,11,2,1,0,0,1.42,4.83,6.62,1.52,2.46,"R Jones"],["2026-10-18","15:00",7,12,15,1,1,0,1,1.41,0.92,12,13,5,3,2,3,16,5,2,2,0,0,2.49,3.35,2.76,1.89,1.85,"D England"],["2026-10-18","17:30",7,17,0,0,1,0,0,0.9,1.14,14,9,2,1,8,6,14,8,1,1,0,0,6.55,4.16,1.49,1.86,1.88,"M Oliver"],["2026-10-19","21:00",7,19,6,3,1,1,0,0.87,0.82,16,12,5,1,4,4,15,14,1,3,0,0,1.53,4.47,5.43,1.52,2.42,"A Madley"]],"E":[[1.764,0.988,0.681,0.324,1.674,1.164,15.615,10.411,4.828,3.552,4.751,4.216,9.923,14.127,1.343,2.516,0.087,0.094],[1.387,1.32,0.681,0.377,1.455,1.409,11.692,16.213,4.527,4.218,4.29,5.364,10.812,9.079,2.497,1.541,0.102,0.088],[1.653,1.232,0.738,0.39,1.673,1.336,16.788,11.477,5.258,3.891,5.029,4.184,8.704,12.287,1.574,1.898,0.087,0.094],[1.74,1.381,0.78,0.498,1.701,1.475,13.376,13.272,4.55,4.192,4.237,4.48,12.558,10.625,1.548,2.289,0.101,0.101],[1.34,1.237,0.534,0.404,1.604,1.301,16.018,10.989,4.544,3.723,4.693,4.421,12.287,12.505,2.031,1.99,0.087,0.081],[1.728,1.102,0.801,0.312,1.616,1.281,15.432,13.688,4.54,4.039,4.469,5.308,13.936,11.479,2.189,1.769,0.1,0.087],[2.247,1.131,1.183,0.417,1.777,1.319,17.542,11.19,5.064,3.607,5.037,4.178,12.077,10.963,2.336,1.835,0.094,0.102],[2.038,1.29,0.851,0.528,1.694,1.411,12.653,12.467,4.727,4.082,4.939,4.554,11.051,14.617,1.335,2.474,0.101,0.088],[1.409,1.451,0.657,0.445,1.447,1.442,12.649,16.179,4.318,4.358,4.679,4.767,10.536,12.888,2.19,2.542,0.102,0.087],[1.513,1.536,0.703,0.642,1.6,1.34,14.037,13.737,5.122,4.196,5.344,4.945,10.982,9.246,2.241,1.615,0.093,0.081],[1.475,1.947,0.725,0.693,1.55,1.638,11.816,14.961,4.557,4.534,4.21,5.047,12.062,10.852,1.526,1.742,0.101,0.087],[1.527,1.137,0.559,0.349,1.563,1.34,14.25,13.265,4.614,3.657,4.859,4.588,12.324,12.054,2.007,2.336,0.093,0.095],[1.533,1.216,0.715,0.36,1.643,1.28,15.205,11.308,4.854,3.936,4.812,4.628,12.863,10.26,2.147,1.728,0.094,0.088],[1.317,1.227,0.546,0.466,1.494,1.283,13.127,12.851,4.631,3.896,4.661,4.293,8.784,11.158,1.128,2.193,0.101,0.081],[1.484,1.267,0.638,0.431,1.543,1.287,16.681,12.308,4.862,3.751,5.516,4.55,11.874,13.834,1.575,2.634,0.093,0.081],[1.724,1.91,1.066,0.745,1.569,1.505,13.927,13.822,4.744,4.606,5.224,5.049,9.619,12.564,1.518,2.676,0.102,0.087],[1.483,1.334,0.629,0.469,1.566,1.385,14.403,13.611,4.8,3.953,4.577,4.289,10.152,13.474,1.649,2.716,0.087,0.094],[1.472,1.32,0.628,0.435,1.598,1.465,13.905,13.497,4.616,3.864,4.589,4.994,9.372,13.186,1.371,1.946,0.1,0.094],[1.82,1.355,0.723,0.466,1.741,1.359,19.456,10.757,5.152,4.029,5.239,4.04,9.121,11.923,1.824,2.43,0.094,0.102],[1.242,1.431,0.617,0.426,1.392,1.442,12.3,13.198,4.162,4.035,4.168,4.562,13.268,11.687,2.497,2.411,0.101,0.081],[1.516,1.462,0.725,0.454,1.525,1.482,12.178,15.204,4.502,4.366,4.279,4.657,10.15,11.981,1.819,2.648,0.109,0.094],[1.509,1.486,0.693,0.611,1.455,1.478,11.706,15.699,4.396,4.363,4.597,4.705,11.707,12.117,1.737,2.607,0.094,0.081],[1.849,1.215,0.829,0.378,1.744,1.384,15.546,12.986,4.478,4.102,4.414,4.551,14.128,10.27,1.855,2.061,0.108,0.093],[2.04,1.188,1.041,0.435,1.719,1.347,16.372,11.114,5.04,3.717,5.026,4.447,11.552,12.002,1.982,1.77,0.094,0.095],[1.673,1.283,0.873,0.43,1.726,1.337,16.884,11.667,5.197,3.858,5.384,4.094,10.047,9.49,1.652,1.439,0.093,0.087],[2.142,1.1,0.892,0.352,1.789,1.269,16.668,10.602,4.981,3.794,5.049,4.242,10.416,13.255,1.377,1.743,0.093,0.094],[1.455,1.097,0.575,0.318,1.61,1.237,16.207,11.702,4.423,3.697,4.743,5.288,13.673,13.143,1.96,1.783,0.087,0.087],[1.415,1.164,0.734,0.414,1.494,1.323,13.638,12.351,4.535,3.897,4.382,4.334,11.354,9.55,2.747,1.605,0.087,0.094],[1.445,1.31,0.552,0.329,1.534,1.394,13.552,15.969,4.82,4.109,4.729,5.159,9.37,12.057,2.03,2.067,0.102,0.088],[1.73,1.331,0.676,0.627,1.651,1.225,13.057,12.192,5.111,3.932,4.861,4.902,10.504,13.476,1.926,2.96,0.087,0.088],[1.405,1.238,0.615,0.383,1.482,1.426,12.398,15.316,4.263,3.869,4.283,4.562,10.617,13.82,1.724,2.867,0.093,0.081],[1.571,1.446,0.752,0.512,1.657,1.352,16.175,11.69,5.047,3.821,4.814,4.247,10.119,13.651,2.042,2.07,0.087,0.101],[1.774,1.203,1.058,0.462,1.573,1.266,15.372,10.746,5.126,4.124,5.419,4.393,8.379,11.812,1.327,3.145,0.094,0.081],[1.712,1.55,0.858,0.623,1.668,1.483,13.983,13.326,4.879,4.395,4.249,4.297,9.295,11.076,1.676,1.884,0.101,0.087],[1.558,1.15,0.574,0.404,1.606,1.313,15.929,12.288,4.808,3.822,4.77,5.044,10.567,10.658,1.586,2.286,0.093,0.102],[1.283,1.218,0.47,0.355,1.476,1.316,14.418,13.323,4.584,3.963,5.471,4.724,13.562,11.268,1.553,2.188,0.101,0.081],[1.275,1.509,0.614,0.418,1.461,1.512,12.341,12.555,4.326,3.855,4.549,4.543,13.659,12.612,2.514,1.672,0.108,0.088],[1.28,1.948,0.55,0.751,1.491,1.525,11.893,16.529,4.286,4.351,4.493,4.935,10.084,11.869,1.29,1.866,0.109,0.087],[1.568,1.702,0.611,0.518,1.618,1.501,16.441,12.077,4.812,4.156,5.191,4.746,11.836,11.682,1.662,2.247,0.094,0.102],[1.673,1.167,0.81,0.4,1.623,1.282,15.665,12.164,4.896,3.853,4.612,4.502,11.298,12.431,1.758,2.729,0.087,0.081],[1.777,1.512,0.845,0.612,1.638,1.35,14.429,14.375,5.03,4.399,4.581,5.057,12.66,9.418,2.559,2.027,0.1,0.081],[1.361,1.208,0.558,0.405,1.51,1.3,15.309,12.198,4.609,3.697,5.332,4.096,12.966,12.906,2.026,2.298,0.093,0.087],[1.91,1.321,1.075,0.415,1.59,1.422,14.906,11.433,4.68,3.813,5.013,4.692,14.22,10.568,2.488,1.576,0.101,0.095],[1.619,1.304,0.695,0.423,1.655,1.365,16.188,11.818,5.102,4.014,4.882,4.235,8.377,13.096,1.809,2.049,0.094,0.094],[1.456,1.293,0.698,0.529,1.522,1.314,13.965,13.262,4.665,4.054,4.964,4.397,9.514,11.187,1.537,2.557,0.094,0.081],[1.526,1.117,0.612,0.323,1.655,1.239,18.121,10.494,4.63,3.638,4.751,4.332,11.734,11.305,1.597,1.736,0.087,0.087],[1.495,1.31,0.772,0.373,1.579,1.333,13.982,11.901,4.613,3.975,4.716,4.552,10.725,13.639,2.282,2.113,0.102,0.094],[1.721,1.187,0.878,0.407,1.687,1.322,15.267,11.373,5.055,3.894,4.641,4.069,10.913,11.236,1.594,2.1,0.087,0.087],[2.185,1.19,0.869,0.421,1.879,1.371,15.017,11.216,4.694,3.915,4.978,4.439,12.304,13.788,1.432,2.086,0.101,0.101],[1.463,1.363,0.653,0.363,1.582,1.395,13.63,16.234,4.764,4.074,5.062,5.048,10.816,9.312,2.13,1.566,0.109,0.081],[1.549,1.094,0.595,0.406,1.622,1.222,13.802,10.902,4.739,3.635,4.693,4.303,10.391,15.627,1.708,2.883,0.087,0.088],[1.412,1.47,0.603,0.533,1.534,1.431,14.502,14.584,4.657,3.972,4.299,4.299,9.273,14.086,1.71,3.202,0.093,0.093],[1.838,1.383,1.051,0.533,1.504,1.423,12.886,12.721,4.83,4.439,5.018,4.701,10.31,12.793,1.501,3.207,0.094,0.081],[1.618,1.374,0.741,0.519,1.588,1.468,13.462,14.529,4.697,4.274,4.272,5.068,9.402,10.403,1.297,2.272,0.093,0.094],[1.385,1.986,0.658,0.731,1.609,1.602,12.581,14.892,4.423,4.1,4.702,4.865,10.49,14.021,1.543,1.94,0.117,0.094],[1.634,1.118,0.586,0.326,1.61,1.265,17.942,11.712,4.723,3.899,5.227,5.062,11.404,13.284,1.843,2.205,0.087,0.102],[1.499,1.387,0.665,0.475,1.513,1.515,11.696,16.265,4.37,4.214,4.299,4.749,10.287,12.225,1.521,2.02,0.093,0.081],[1.334,1.174,0.619,0.362,1.461,1.339,12.845,13.49,4.51,4.177,4.497,4.999,11.876,8.338,2.106,1.528,0.094,0.088],[1.502,1.596,0.609,0.509,1.601,1.449,14.397,12.201,4.812,3.935,4.758,4.876,14.451,10.7,2.015,2.014,0.101,0.102],[1.511,1.329,0.646,0.458,1.545,1.322,14.96,13.761,4.784,3.926,4.519,4.558,10.213,11.872,1.534,2.146,0.093,0.081],[1.495,1.476,0.594,0.582,1.551,1.339,13.958,13.513,5.182,4.231,4.993,5.055,9.514,11.971,2.136,2.131,0.087,0.088],[1.611,1.286,0.77,0.345,1.564,1.391,14.153,14.876,4.43,4.272,4.458,4.73,11.419,11.581,2.18,2.384,0.117,0.087],[1.418,1.164,0.68,0.43,1.606,1.258,15.202,11.653,4.873,3.79,5.517,4.267,8.946,9.869,1.34,1.91,0.101,0.081],[2.275,1.308,1.037,0.496,1.883,1.362,16.165,10.859,5.192,3.984,5.052,4.133,9.708,13.832,1.673,1.972,0.101,0.094],[1.533,1.336,0.722,0.49,1.54,1.368,14.605,14.075,4.569,4.026,4.653,4.202,12.079,11.104,2.688,2.183,0.087,0.087],[1.715,1.237,0.83,0.409,1.762,1.327,15.357,10.389,4.663,3.816,4.67,4.38,13.27,12.096,1.942,1.827,0.094,0.101],[2.519,1.207,1.468,0.451,1.887,1.347,18.629,10.556,5.515,3.697,5.244,4.194,10.683,10.622,1.647,1.619,0.094,0.102],[1.505,1.262,0.657,0.343,1.546,1.379,12.324,15.825,4.634,4.112,4.364,5.016,11.747,11.026,2.056,2.287,0.102,0.081],[1.255,1.375,0.552,0.386,1.483,1.374,14.584,11.304,4.22,3.82,4.681,4.665,15.125,11.012,2.55,1.772,0.094,0.081],[1.408,1.146,0.561,0.337,1.507,1.263,16.163,11.57,4.673,3.723,5.385,4.272,11.844,12.772,1.352,1.934,0.093,0.087]],"fx":[[8,"2026-10-23","21:00",11,17,3,3.01,3.44,2.28,1.72,2.06,0.25,1.81,1.93,"T Bramall",0.86,0.9942],[8,"2026-10-24","13:30",1,14,3,4.73,4.26,1.62,1.5,2.49,1.0,1.78,1.99,"P Bankes",0.986,0.987],[8,"2026-10-24","16:00",0,8,3,1.43,4.41,7.27,1.8,1.94,-1.25,1.95,1.8,"T Harrington",0.9351,0.9853],[8,"2026-10-24","16:00",6,9,3,3.04,3.46,2.23,1.7,2.07,0.25,1.83,1.92,"A Herczeg",1.0404,0.9998],[8,"2026-10-24","18:30",5,19,3,1.69,4.12,4.35,1.5,2.5,-0.75,1.86,1.88,"C Kavanagh",1.1119,1.029],[8,"2026-10-25","15:00",7,16,3,2.86,3.58,2.28,1.57,2.3,0.25,1.79,1.96,"P Tierney",1.0125,1.0094],[8,"2026-10-25","15:00",10,3,3,4.6,3.92,1.69,1.63,2.19,0.75,1.92,1.82,"R Jones",0.9281,1.0288],[8,"2026-10-25","15:00",13,4,3,2.09,3.76,3.13,1.53,2.41,-0.25,1.8,1.93,"S Barrott",0.9232,0.9822],[8,"2026-10-25","15:00",15,2,3,2.1,3.63,3.19,1.6,2.26,-0.25,1.81,1.93,"J Gillett",1.0396,0.9925],[8,"2026-10-25","17:30",18,12,3,3.04,3.21,2.35,2.07,1.7,0.0,2.09,1.69,"S Attwell",1.169,1.0191],[9,"2026-10-31","13:30",5,15,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-10-31","16:00",2,12,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-10-31","16:00",3,17,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-10-31","16:00",6,18,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-10-31","16:00",10,11,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-10-31","16:00",14,4,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-10-31","18:30",19,7,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-10-31","21:00",1,9,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-11-01","17:30",13,0,1,null,null,null,null,null,null,null,null,null,null,null],[9,"2026-11-02","21:00",16,8,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",0,10,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",4,3,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",7,13,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",8,6,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",9,16,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",11,2,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",12,19,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",15,1,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",17,14,1,null,null,null,null,null,null,null,null,null,null,null],[10,"2026-11-07","16:00",18,5,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",1,18,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",2,17,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",3,8,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",5,12,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",6,7,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",10,4,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",13,15,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",14,9,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",16,0,1,null,null,null,null,null,null,null,null,null,null,null],[11,"2026-11-21","16:00",19,11,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",0,14,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",4,16,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",7,10,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",8,13,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",9,2,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",11,1,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",12,6,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",15,3,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",17,5,1,null,null,null,null,null,null,null,null,null,null,null],[12,"2026-11-28","16:00",18,19,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",1,8,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",2,4,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",3,0,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",5,7,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",6,11,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",10,17,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",13,18,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",14,12,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",16,15,1,null,null,null,null,null,null,null,null,null,null,null],[13,"2026-12-02","21:00",19,9,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",1,7,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",2,10,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",3,14,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",5,13,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",8,9,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",12,11,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",15,6,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",16,18,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",17,4,1,null,null,null,null,null,null,null,null,null,null,null],[14,"2026-12-05","16:00",19,0,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",0,2,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",4,8,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",6,1,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",7,15,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",9,3,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",10,19,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",11,16,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",13,12,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",14,5,1,null,null,null,null,null,null,null,null,null,null,null],[15,"2026-12-12","16:00",18,17,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",0,15,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",2,6,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",3,16,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",4,11,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",5,1,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",12,9,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",13,19,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",14,10,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",17,8,1,null,null,null,null,null,null,null,null,null,null,null],[16,"2026-12-19","16:00",18,7,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-26","13:30",1,12,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-26","16:00",8,18,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-26","16:00",9,4,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-26","16:00",11,3,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-26","16:00",19,2,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-26","18:30",10,13,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-26","21:00",16,14,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-27","15:00",6,5,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-27","17:30",15,17,1,null,null,null,null,null,null,null,null,null,null,null],[17,"2026-12-27","20:00",7,0,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-29","20:30",10,12,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-29","20:30",19,4,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-29","21:15",8,14,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-30","20:30",6,3,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-30","20:30",7,2,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-30","20:30",9,0,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-30","20:30",15,18,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-30","20:30",16,17,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-30","21:15",1,13,1,null,null,null,null,null,null,null,null,null,null,null],[18,"2026-12-30","21:15",11,5,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-01","21:00",12,8,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-02","13:30",4,15,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-02","16:00",0,11,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-02","16:00",3,7,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-02","16:00",13,6,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-02","16:00",17,9,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-02","16:00",18,10,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-02","18:30",2,1,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-03","15:00",5,16,1,null,null,null,null,null,null,null,null,null,null,null],[19,"2027-01-03","17:30",14,19,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-05","20:30",0,3,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-05","20:30",4,2,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-05","20:30",8,1,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-05","20:30",17,10,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-05","21:15",18,13,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-06","20:30",7,5,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-06","20:30",9,19,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-06","20:30",11,6,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-06","21:15",12,14,1,null,null,null,null,null,null,null,null,null,null,null],[20,"2027-01-07","21:00",15,16,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",1,15,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",2,11,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",3,4,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",5,18,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",6,8,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",10,0,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",13,7,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",14,17,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",16,9,1,null,null,null,null,null,null,null,null,null,null,null],[21,"2027-01-16","16:00",19,12,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",0,16,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",4,14,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",7,19,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",8,3,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",9,1,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",11,10,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",12,5,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",15,13,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",17,2,1,null,null,null,null,null,null,null,null,null,null,null],[22,"2027-01-23","16:00",18,6,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",1,11,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",2,9,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",3,15,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",5,17,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",6,12,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",10,7,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",13,8,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",14,0,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",16,4,1,null,null,null,null,null,null,null,null,null,null,null],[23,"2027-01-30","16:00",19,18,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",0,13,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",4,10,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",7,6,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",8,16,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",9,14,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",11,19,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",12,2,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",15,5,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",17,3,1,null,null,null,null,null,null,null,null,null,null,null],[24,"2027-02-06","16:00",18,1,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",1,2,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",6,13,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",7,3,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",8,12,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",9,17,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",10,18,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",11,0,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",15,4,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",16,5,1,null,null,null,null,null,null,null,null,null,null,null],[25,"2027-02-10","21:00",19,14,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",0,9,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",2,7,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",3,6,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",4,19,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",5,11,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",12,1,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",13,10,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",14,16,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",17,15,1,null,null,null,null,null,null,null,null,null,null,null],[26,"2027-02-20","16:00",18,8,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",1,5,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",6,2,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",7,18,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",8,17,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",9,12,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",10,14,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",11,4,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",15,0,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",16,3,1,null,null,null,null,null,null,null,null,null,null,null],[27,"2027-02-27","16:00",19,13,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",0,7,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",2,19,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",3,11,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",4,9,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",5,6,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",12,10,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",13,1,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",14,8,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",17,16,1,null,null,null,null,null,null,null,null,null,null,null],[28,"2027-03-03","21:00",18,15,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",1,10,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",2,16,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",5,0,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",6,14,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",7,9,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",12,4,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",13,11,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",15,8,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",18,3,1,null,null,null,null,null,null,null,null,null,null,null],[29,"2027-03-13","16:00",19,17,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",0,18,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",3,2,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",4,6,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",8,19,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",9,13,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",10,5,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",11,7,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",14,15,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",16,12,1,null,null,null,null,null,null,null,null,null,null,null],[30,"2027-03-20","16:00",17,1,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",1,4,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",2,14,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",5,9,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",6,0,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",7,8,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",12,17,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",13,16,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",15,10,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",18,11,1,null,null,null,null,null,null,null,null,null,null,null],[31,"2027-04-10","16:00",19,3,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",0,1,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",3,12,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",4,5,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",8,2,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",9,18,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",10,6,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",11,15,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",14,7,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",16,19,1,null,null,null,null,null,null,null,null,null,null,null],[32,"2027-04-17","16:00",17,13,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",1,6,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",2,0,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",3,9,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",5,14,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",8,4,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",12,13,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",15,7,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",16,11,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",17,18,1,null,null,null,null,null,null,null,null,null,null,null],[33,"2027-04-24","16:00",19,10,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",0,19,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",4,17,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",6,15,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",7,1,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",9,8,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",10,2,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",11,12,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",13,5,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",14,3,1,null,null,null,null,null,null,null,null,null,null,null],[34,"2027-05-01","16:00",18,16,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",2,15,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",3,1,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",4,18,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",8,10,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",9,11,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",12,0,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",14,13,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",16,6,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",17,7,1,null,null,null,null,null,null,null,null,null,null,null],[35,"2027-05-08","16:00",19,5,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",0,17,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",1,16,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",5,8,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",6,19,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",7,4,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",10,9,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",11,14,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",13,3,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",15,12,1,null,null,null,null,null,null,null,null,null,null,null],[36,"2027-05-15","16:00",18,2,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",2,5,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",3,10,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",4,13,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",8,0,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",9,6,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",12,18,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",14,1,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",16,7,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",17,11,1,null,null,null,null,null,null,null,null,null,null,null],[37,"2027-05-23","16:00",19,15,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",0,4,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",1,19,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",5,3,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",6,17,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",7,12,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",10,16,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",11,8,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",13,2,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",15,9,1,null,null,null,null,null,null,null,null,null,null,null],[38,"2027-05-30","17:00",18,14,1,null,null,null,null,null,null,null,null,null,null,null]],"table":[{"pos":1,"pj":7,"w":7,"d":0,"l":0,"gf":19,"ga":7,"pts":21,"xn":7,"form":"WWWWW","t":14,"xpts":13.09},{"pos":2,"pj":7,"w":6,"d":0,"l":1,"gf":11,"ga":5,"pts":18,"xn":7,"form":"WWLWW","t":0,"xpts":14.0},{"pos":3,"pj":7,"w":5,"d":1,"l":1,"gf":23,"ga":5,"pts":16,"xn":7,"form":"DWWWW","t":4,"xpts":12.2},{"pos":4,"pj":7,"w":4,"d":1,"l":2,"gf":17,"ga":13,"pts":13,"xn":7,"form":"LDLWW","t":5,"xpts":8.95},{"pos":5,"pj":7,"w":3,"d":3,"l":1,"gf":9,"ga":8,"pts":12,"xn":7,"form":"WDWLW","t":13,"xpts":11.28},{"pos":6,"pj":7,"w":2,"d":4,"l":1,"gf":13,"ga":8,"pts":10,"xn":7,"form":"DDWDL","t":3,"xpts":9.79},{"pos":7,"pj":7,"w":2,"d":4,"l":1,"gf":9,"ga":6,"pts":10,"xn":7,"form":"DWDLD","t":12,"xpts":9.72},{"pos":8,"pj":7,"w":2,"d":4,"l":1,"gf":8,"ga":7,"pts":10,"xn":7,"form":"DDWDL","t":8,"xpts":9.42},{"pos":9,"pj":7,"w":2,"d":3,"l":2,"gf":8,"ga":7,"pts":9,"xn":7,"form":"DDLDL","t":10,"xpts":7.01},{"pos":10,"pj":7,"w":3,"d":0,"l":4,"gf":11,"ga":15,"pts":9,"xn":7,"form":"LWLWL","t":11,"xpts":8.56},{"pos":11,"pj":7,"w":2,"d":2,"l":3,"gf":10,"ga":14,"pts":8,"xn":7,"form":"DLWLL","t":16,"xpts":7.25},{"pos":12,"pj":7,"w":2,"d":2,"l":3,"gf":7,"ga":11,"pts":8,"xn":7,"form":"DLWDW","t":1,"xpts":8.59},{"pos":13,"pj":7,"w":1,"d":4,"l":2,"gf":10,"ga":10,"pts":7,"xn":7,"form":"DLDDD","t":15,"xpts":9.91},{"pos":14,"pj":7,"w":2,"d":1,"l":4,"gf":9,"ga":17,"pts":7,"xn":7,"form":"WLDWL","t":7,"xpts":6.62},{"pos":15,"pj":7,"w":1,"d":3,"l":3,"gf":9,"ga":13,"pts":6,"xn":7,"form":"DDLLW","t":2,"xpts":11.4},{"pos":16,"pj":7,"w":1,"d":3,"l":3,"gf":6,"ga":10,"pts":6,"xn":7,"form":"DDLDW","t":19,"xpts":9.13},{"pos":17,"pj":7,"w":2,"d":0,"l":5,"gf":6,"ga":14,"pts":6,"xn":7,"form":"LLWWL","t":6,"xpts":7.04},{"pos":18,"pj":7,"w":1,"d":2,"l":4,"gf":7,"ga":10,"pts":5,"xn":7,"form":"LDDLW","t":9,"xpts":10.32},{"pos":19,"pj":7,"w":1,"d":2,"l":4,"gf":5,"ga":9,"pts":5,"xn":7,"form":"DWLLL","t":17,"xpts":11.42},{"pos":20,"pj":7,"w":1,"d":1,"l":5,"gf":6,"ga":14,"pts":4,"xn":7,"form":"DLLLL","t":18,"xpts":8.38}],"gm":{"mu":0.27967,"eta":0.17633,"vh0":0.00425,"va0":0.00513,"phi":0.47725,"sa":0.19072,"sd":0.13248,"rho":0.01,"w":0.5,"a":[0.06143,-0.09342,0.01355,0.08829,0.33648,0.15174,-0.1461,-0.02873,-0.08475,-0.0725,-0.12567,0.02754,-0.04424,-0.01042,0.25541,0.03243,-0.04563,-0.08351,-0.06745,-0.16447],"d":[0.14552,-0.01697,-0.00079,0.01774,0.06285,-0.03078,-0.05043,-0.13123,0.04212,0.00208,0.03439,-0.11043,0.07952,0.06763,0.03869,0.00323,-0.1031,0.02254,-0.07009,-0.00248],"va":[0.02005,0.02168,0.02023,0.01961,0.01724,0.01963,0.02212,0.02101,0.0208,0.02072,0.02155,0.0203,0.02073,0.02056,0.01767,0.0204,0.02094,0.02125,0.02143,0.02172],"vd":[0.01315,0.0126,0.01263,0.01298,0.0131,0.01249,0.01238,0.01204,0.01302,0.01283,0.01296,0.01229,0.01287,0.01286,0.01303,0.01284,0.01275,0.01309,0.01208,0.01295],"cx":{"g":{"tf":0.0,"ta":0.0,"s2":1.31065,"pf":0.39801,"pa":1.0},"g2":{"tf":0.0,"ta":0.0,"s2":0.73271,"pf":0.40299,"pa":1.0}}},"sm":{"g1":{"mu":-0.80658,"eta":0.46168,"vh0":0.01838,"va0":0.02969,"phi":0.94232,"sa":0.33947,"sd":0.2289,"rr":0.11244,"a":[-0.07251,-0.06825,0.15293,0.15091,0.48676,0.4086,-0.25248,0.009,-0.20119,-0.0325,0.00947,0.0907,-0.02661,-0.16506,0.1981,-0.16181,-0.00724,-0.17981,-0.07365,-0.26536],"d":[0.06913,-0.02625,0.01417,0.09277,-0.00041,-0.02517,-0.03296,-0.24191,0.14384,0.04594,0.00766,-0.18291,0.10179,0.06742,-0.01465,0.04854,-0.16103,0.07228,-0.00617,0.02793],"va":[0.08003,0.08027,0.07294,0.07285,0.06212,0.06822,0.08372,0.07786,0.07963,0.07572,0.07788,0.07581,0.07602,0.08169,0.06956,0.08188,0.07701,0.08084,0.07997,0.08294],"vd":[0.04245,0.04184,0.04238,0.04359,0.04287,0.0418,0.04206,0.0397,0.0438,0.04324,0.0426,0.04138,0.04328,0.0425,0.04337,0.04315,0.04253,0.04433,0.04119,0.04388],"tf":0.0,"ta":0.0,"s2":0.56769,"pf":0.42289,"pa":1.0},"xg":{"mu":0.31432,"eta":0.15064,"vh0":0.0038,"va0":0.00444,"phi":0.42548,"sa":0.10789,"sd":0.09828,"rr":-0.02385,"a":[0.03614,-0.0388,0.03851,0.02857,0.09398,-0.01599,-0.06735,-0.01809,-0.02627,0.00482,-0.07896,0.00337,-0.01833,0.01433,0.10289,0.02445,-0.04878,0.0248,0.00932,-0.06861],"d":[0.09546,-0.01575,0.04098,-0.00161,-0.00158,-0.00016,-0.01395,-0.07622,0.00677,0.00577,-0.00413,-0.06493,0.01746,0.04651,0.00843,0.01102,-0.03766,0.03291,-0.06275,0.01342],"va":[0.009,0.0092,0.00896,0.009,0.00883,0.00916,0.00925,0.00913,0.00907,0.00899,0.00923,0.00906,0.00908,0.00906,0.00879,0.00903,0.00917,0.00902,0.0091,0.00917],"vd":[0.00794,0.00778,0.00788,0.00785,0.00786,0.00778,0.00776,0.00764,0.00787,0.00785,0.00783,0.00768,0.00783,0.00784,0.00785,0.00784,0.00783,0.00792,0.00764,0.00787],"tf":0.0,"ta":0.0,"s2":0.60356,"pf":0.43284,"pa":0.18408},"s":{"mu":2.55425,"eta":0.11381,"vh0":0.00146,"va0":0.00166,"phi":1.49766,"sa":0.125,"sd":0.12137,"rr":-0.31975,"a":[-0.04158,-0.06308,0.04609,0.05828,0.12912,0.04194,-0.11597,-0.12135,0.0251,0.03077,-0.12259,-0.09206,-0.0699,0.07619,0.02368,0.20896,-0.05411,0.10726,-0.05969,-0.00705],"d":[0.09541,-0.06741,0.15382,-0.06928,0.07617,0.05712,-0.12173,-0.12753,-0.00747,-0.02389,-0.02258,-0.09112,0.00163,0.0764,0.07722,0.08659,-0.15327,0.08747,-0.01744,-0.01011],"va":[0.00802,0.0081,0.00758,0.00767,0.00718,0.00781,0.00837,0.00839,0.0077,0.00764,0.0082,0.00825,0.00803,0.00754,0.00766,0.007,0.00801,0.00728,0.0082,0.00766],"vd":[0.00791,0.00728,0.00813,0.00739,0.00812,0.0077,0.00709,0.00701,0.00761,0.00755,0.00744,0.00712,0.00746,0.00778,0.0079,0.00799,0.00719,0.00812,0.00742,0.00746],"tf":0.0,"ta":0.0,"s2":18.13093,"pf":0.29851,"pa":0.0398},"st":{"mu":1.38536,"eta":0.16557,"vh0":0.0031,"va0":0.00367,"phi":1.02704,"sa":0.08746,"sd":0.0995,"rr":0.10176,"a":[0.00626,-0.04945,0.03088,-0.0096,0.06776,0.05911,-0.04239,-0.02466,0.02007,0.00849,-0.0426,0.00649,-0.01928,0.02975,0.03748,0.02978,-0.03509,-0.03572,-0.0109,-0.02636],"d":[0.0754,-0.00348,0.03517,-0.03699,0.05311,-0.07417,-0.01723,-0.08871,0.00196,0.01044,-0.02424,-0.05868,0.00135,0.05299,0.0096,-0.00172,-0.05682,0.05148,0.04221,0.02833],"va":[0.00624,0.00632,0.00617,0.00624,0.00613,0.0062,0.00631,0.00628,0.00616,0.00618,0.00627,0.00625,0.00623,0.00621,0.00617,0.00621,0.00627,0.00627,0.00628,0.00624],"vd":[0.00777,0.00764,0.00771,0.0076,0.00778,0.00748,0.00761,0.00745,0.00767,0.00768,0.00759,0.0075,0.00767,0.00772,0.00768,0.00763,0.0076,0.00779,0.00767,0.00775],"tf":0.0,"ta":0.73122,"s2":4.10023,"pf":1.0,"pa":0.00995},"c":{"mu":1.52778,"eta":0.03062,"vh0":0.0034,"va0":0.00354,"phi":1.13894,"sa":0.12859,"sd":0.07141,"rr":-0.14396,"a":[0.00346,-0.11266,0.00041,-0.05598,0.07198,0.08019,-0.07057,-0.10878,0.03006,0.09817,-0.06734,-0.09677,-0.05016,0.01351,0.06429,0.10067,-0.00749,0.00346,-0.02518,0.12874],"d":[0.01831,0.0135,0.02561,-0.01273,-0.01467,-0.01949,0.00345,-0.02679,-0.01236,0.00949,-0.05133,0.00299,0.01572,0.00783,0.01208,0.03484,-0.02046,-0.00885,0.01768,0.00517],"va":[0.0112,0.01157,0.01118,0.01143,0.01095,0.0109,0.01143,0.0116,0.01107,0.01082,0.01146,0.01158,0.01136,0.01117,0.011,0.01083,0.01123,0.0112,0.01132,0.01072],"vd":[0.00446,0.00445,0.00445,0.00444,0.00446,0.00443,0.00443,0.00442,0.00444,0.00446,0.0044,0.00443,0.00446,0.00445,0.00447,0.00446,0.00445,0.00446,0.00445,0.00446],"tf":0.0,"ta":0.0,"s2":5.01608,"pf":1.0,"pa":1.0},"f":{"mu":2.47194,"eta":-0.07315,"vh0":0.00124,"va0":0.00116,"phi":0.9651,"sa":0.10798,"sd":0.13558,"rr":-0.07462,"a":[-0.06931,-0.03262,0.0547,0.11735,0.03664,-0.09026,-0.04306,-0.06424,-0.16827,-0.02479,-0.02514,-0.00045,0.05787,0.11642,-0.02084,-0.08316,0.03683,0.09832,-0.00364,0.10764],"d":[-0.21922,-0.05588,-0.02455,0.13904,0.04477,-0.02229,0.03462,0.06674,-0.10083,0.15745,0.18282,0.10505,-0.01146,0.08087,-0.15553,-0.00698,0.03205,0.00367,-0.13198,-0.11834],"va":[0.00605,0.00601,0.0057,0.00548,0.00568,0.00622,0.00591,0.00611,0.00649,0.00612,0.006,0.00586,0.00578,0.00567,0.00605,0.00616,0.00586,0.00556,0.00592,0.00565],"vd":[0.00635,0.00687,0.00714,0.00773,0.00761,0.00724,0.00735,0.0076,0.00688,0.00806,0.00839,0.00791,0.00715,0.0075,0.00659,0.0073,0.00725,0.00722,0.00668,0.00678],"tf":0.0,"ta":0.0,"s2":9.18975,"pf":0.12438,"pa":0.29353},"y":{"mu":0.75644,"eta":-0.17996,"vh0":0.00584,"va0":0.00499,"phi":0.75032,"sa":0.17775,"sd":0.23251,"rr":0.16636,"a":[-0.14585,0.00639,0.18397,0.13814,0.00281,-0.0034,-0.16611,-0.11894,-0.04248,0.00571,0.16456,-0.04273,-0.02991,0.15862,-0.12072,-0.03388,0.1429,0.02735,0.0132,-0.13966],"d":[-0.33221,-0.26933,0.16709,0.04643,0.15566,-0.22493,0.1356,0.08048,-0.00354,0.27378,0.28982,-0.05859,-0.10465,-0.06459,0.03459,-0.174,-0.01769,0.0385,0.0966,-0.06903],"va":[0.02075,0.01996,0.01855,0.01852,0.0194,0.02037,0.02106,0.02112,0.02042,0.01995,0.01834,0.02042,0.02004,0.01922,0.0211,0.02053,0.01904,0.01919,0.02004,0.02084],"vd":[0.02324,0.02333,0.02865,0.02726,0.02998,0.02362,0.02913,0.02887,0.02696,0.03042,0.03141,0.02673,0.02549,0.02588,0.02743,0.02546,0.0262,0.02841,0.02862,0.02594],"tf":0.0,"ta":0.0,"s2":1.30261,"pf":1.0,"pa":1.0},"r":{"mu":-2.4151,"eta":0.0699,"vh0":0.14182,"va0":0.15239,"phi":0.95496,"sa":0.26424,"sd":0.27821,"rr":-0.09033,"a":[-0.04512,0.02543,-0.04661,0.09571,0.02603,-0.04666,0.02486,0.0249,-0.04657,0.02339,-0.04524,0.02383,-0.04658,0.02599,0.0234,-0.04562,-0.04615,-0.04557,0.09512,0.02547],"d":[-0.02677,0.05058,-0.02685,0.05053,-0.10489,0.05059,0.05007,0.0505,-0.02842,0.05063,-0.0279,-0.02636,0.05008,-0.10439,-0.02684,-0.10504,0.05008,0.05058,-0.02629,0.0501],"va":[0.06686,0.06662,0.06677,0.06636,0.06666,0.06676,0.06658,0.06659,0.06677,0.06649,0.06685,0.06652,0.06677,0.06665,0.06649,0.06683,0.0668,0.06683,0.06632,0.06662],"vd":[0.07339,0.07372,0.0734,0.07372,0.07313,0.07372,0.07375,0.07372,0.07351,0.07371,0.07347,0.07337,0.07375,0.0731,0.0734,0.07314,0.07375,0.07372,0.07336,0.07375],"tf":0.0,"ta":0.0,"s2":0.09656,"pf":1.0,"pa":1.0}},"sim":[[67.28,54,80,0.159,0.6494,0.7396,0.0022,[0.159,0.1848,0.178,0.1276,0.0902,0.0638,0.0486,0.0348,0.0328,0.0236,0.0156,0.0126,0.0094,0.0056,0.0058,0.0038,0.0018,0.0012,0.0008,0.0002]],[47.81,36,60,0.002,0.0524,0.0926,0.19,[0.002,0.0088,0.0164,0.0252,0.0402,0.0454,0.0508,0.049,0.0578,0.0584,0.0632,0.066,0.0684,0.0646,0.0626,0.0666,0.0646,0.066,0.0656,0.0584]],[49.42,37,61,0.0036,0.071,0.1182,0.142,[0.0036,0.0122,0.0226,0.0326,0.0472,0.0548,0.062,0.0588,0.0666,0.0694,0.0662,0.0648,0.059,0.0634,0.064,0.0592,0.0516,0.0546,0.0462,0.0412]],[55.77,43,69,0.024,0.218,0.304,0.0416,[0.024,0.0502,0.0642,0.0796,0.086,0.0824,0.0864,0.0746,0.0702,0.0624,0.0582,0.0502,0.0476,0.0396,0.0324,0.0284,0.022,0.0186,0.0144,0.0086]],[71.44,59,84,0.321,0.8164,0.8732,0.001,[0.321,0.2426,0.1534,0.0994,0.0568,0.0384,0.0238,0.021,0.0142,0.0082,0.0062,0.0054,0.0046,0.0016,0.001,0.0008,0.0006,0.0002,0.0006,0.0002]],[60.77,48,73,0.0576,0.3906,0.4962,0.0138,[0.0576,0.0954,0.1152,0.1224,0.1056,0.0934,0.0788,0.0684,0.0522,0.0418,0.0378,0.0298,0.0266,0.0224,0.0156,0.011,0.0122,0.0068,0.0036,0.0034]],[43.22,32,55,0.0006,0.0216,0.0338,0.338,[0.0006,0.002,0.0056,0.0134,0.0122,0.0212,0.0278,0.0316,0.0358,0.0458,0.047,0.0532,0.0538,0.067,0.0756,0.0802,0.0892,0.1104,0.0974,0.1302]],[45.55,34,58,0.0014,0.0364,0.0596,0.2518,[0.0014,0.006,0.0112,0.0178,0.0232,0.0314,0.0374,0.0424,0.046,0.0516,0.052,0.0582,0.0588,0.0734,0.0764,0.0772,0.0838,0.0778,0.088,0.086]],[51.12,39,63,0.0082,0.0998,0.1534,0.0976,[0.0082,0.0172,0.031,0.0434,0.0536,0.066,0.0674,0.068,0.0678,0.0656,0.0636,0.0684,0.0646,0.06,0.0518,0.0554,0.0504,0.0432,0.0338,0.0206]],[45.2,33,58,0.0014,0.035,0.0614,0.2598,[0.0014,0.0048,0.0112,0.0176,0.0264,0.0306,0.0338,0.0456,0.0496,0.048,0.0538,0.055,0.0628,0.0654,0.0752,0.081,0.078,0.0908,0.0864,0.0826]],[48.84,37,61,0.0034,0.0654,0.1064,0.1438,[0.0034,0.0106,0.0216,0.0298,0.041,0.0516,0.0518,0.0576,0.0664,0.0682,0.0678,0.068,0.0732,0.0626,0.062,0.0588,0.0618,0.0536,0.0506,0.0396]],[49.37,37,62,0.0036,0.0782,0.1272,0.1502,[0.0036,0.0148,0.0256,0.0342,0.049,0.048,0.0554,0.0576,0.0598,0.064,0.068,0.065,0.065,0.0678,0.061,0.0558,0.0552,0.052,0.0522,0.046]],[53.66,42,66,0.011,0.1632,0.2342,0.0628,[0.011,0.0326,0.0526,0.067,0.071,0.0792,0.0768,0.0732,0.066,0.0654,0.064,0.0632,0.0546,0.0454,0.0422,0.0392,0.0338,0.0278,0.0192,0.0158]],[56.61,44,69,0.0236,0.2376,0.3294,0.0346,[0.0236,0.048,0.0744,0.0916,0.0918,0.0876,0.0832,0.0804,0.0622,0.0648,0.0572,0.045,0.0392,0.0382,0.0336,0.0236,0.021,0.0168,0.0108,0.007]],[73.01,61,85,0.3668,0.8344,0.8944,0.0004,[0.3668,0.2352,0.1466,0.0858,0.06,0.0342,0.0224,0.0162,0.0146,0.0068,0.003,0.0026,0.0016,0.0014,0.0016,0.0006,0.0002,0.0004,0.0,0.0]],[51.32,39,64,0.0084,0.1126,0.1752,0.1024,[0.0084,0.0208,0.033,0.0504,0.0626,0.0654,0.0668,0.0668,0.0706,0.0676,0.059,0.0654,0.058,0.052,0.0572,0.0478,0.0458,0.0396,0.0344,0.0284]],[45.45,33,58,0.0012,0.039,0.0616,0.2538,[0.0012,0.0048,0.0118,0.0212,0.0226,0.0326,0.0336,0.0398,0.0452,0.046,0.0634,0.0622,0.0638,0.0662,0.0726,0.0756,0.0836,0.0778,0.089,0.087]],[45.42,33,58,0.002,0.036,0.0624,0.2516,[0.002,0.0038,0.0114,0.0188,0.0264,0.0316,0.0392,0.0412,0.049,0.0556,0.054,0.0554,0.0662,0.0704,0.0744,0.0716,0.0774,0.079,0.0814,0.0912]],[43.42,31,56,0.0008,0.0222,0.0398,0.3324,[0.0008,0.0026,0.008,0.0108,0.0176,0.0232,0.028,0.039,0.0388,0.041,0.0518,0.058,0.0618,0.064,0.0624,0.0784,0.0814,0.0876,0.1142,0.1306]],[43.18,32,55,0.0004,0.0208,0.0374,0.3302,[0.0004,0.0028,0.0062,0.0114,0.0166,0.0192,0.026,0.034,0.0344,0.0458,0.0482,0.0516,0.061,0.069,0.0726,0.085,0.0856,0.0958,0.1114,0.123]]],"bt":{"n":40,"acc":0.45,"ll":1.0633,"br":0.6422,"nm":40,"llm":1.0034,"brm":0.6016,"accm":0.525,"llb":1.0239,"llmod":1.0633,"dll":0.0599,"dse":0.0432,"pd":0.2438,"fd":0.25,"calib":[{"lo":0.0,"hi":0.2,"p":0.19678976443521326,"f":0.0,"n":1},{"lo":0.2,"hi":0.4,"p":0.2925205975865632,"f":0.2808988764044944,"n":89},{"lo":0.4,"hi":0.6,"p":0.4589625683453551,"f":0.5,"n":30}],"by_j":[{"n":10,"acc":0.2,"ll":1.1702,"br":0.7166,"nm":10,"llm":1.1649,"brm":0.7255,"accm":0.4,"llb":1.161,"llmod":1.1702,"dll":0.0052,"dse":0.0768,"pd":0.244,"fd":0.4,"j":4},{"n":10,"acc":0.5,"ll":1.0802,"br":0.6518,"nm":10,"llm":1.085,"brm":0.6534,"accm":0.5,"llb":1.0673,"llmod":1.0802,"dll":-0.0047,"dse":0.1178,"pd":0.2442,"fd":0.2,"j":5},{"n":10,"acc":0.5,"ll":1.0375,"br":0.625,"nm":10,"llm":1.0388,"brm":0.6269,"accm":0.4,"llb":1.0322,"llmod":1.0375,"dll":-0.0012,"dse":0.0728,"pd":0.2469,"fd":0.3,"j":6},{"n":10,"acc":0.6,"ll":0.9654,"br":0.5754,"nm":10,"llm":0.7249,"brm":0.4005,"accm":0.8,"llb":0.8352,"llmod":0.9654,"dll":0.2405,"dse":0.0496,"pd":0.2401,"fd":0.1,"j":7}],"ou":{"n":40,"ll":0.7045688394331837,"llm":0.663766348443363}},"var":[{"key":"base","name":"Goles y xG al 50 %","chosen":true,"d":0.0,"se":0.0,"n":40,"ll":1.0633,"llm":1.0034,"dll":0.0599,"dse":0.0432,"acc":0.45,"pd":0.2438,"fd":0.25},{"key":"goles","name":"Solo goles","chosen":false,"d":-0.0085,"se":0.0175,"n":40,"ll":1.0548,"llm":1.0034,"dll":0.0514,"dse":0.0439,"acc":0.475,"pd":0.2412,"fd":0.25},{"key":"goles75","name":"Más peso a los goles (75 %)","chosen":false,"d":-0.0063,"se":0.0099,"n":40,"ll":1.0571,"llm":1.0034,"dll":0.0537,"dse":0.0425,"acc":0.525,"pd":0.2427,"fd":0.25},{"key":"xg75","name":"Más peso al xG (75 %)","chosen":false,"d":0.0101,"se":0.0095,"n":40,"ll":1.0734,"llm":1.0034,"dll":0.07,"dse":0.0459,"acc":0.45,"pd":0.2441,"fd":0.25},{"key":"reciente","name":"Más peso a lo reciente (vida media 90 días)","chosen":false,"d":0.01,"se":0.0072,"n":40,"ll":1.0733,"llm":1.0034,"dll":0.0699,"dse":0.0451,"acc":0.45,"pd":0.245,"fd":0.25},{"key":"sin_dc","name":"Sin corrección de empates","chosen":false,"d":-0.0034,"se":0.0026,"n":40,"ll":1.0599,"llm":1.0034,"dll":0.0565,"dse":0.0433,"acc":0.45,"pd":0.2363,"fd":0.25}],"log":{"n":40,"nreal":0,"all":{"n":40,"acc":0.45,"ll":1.0633,"br":0.6422,"nm":40,"llm":1.0034,"brm":0.6016,"accm":0.525,"llb":1.0239,"llmod":1.0633,"dll":0.0599,"dse":0.0432,"pd":0.2438,"fd":0.25},"real":null,"comb":null,"calib":[{"lo":0.0,"hi":0.2,"p":0.1968,"f":0.0,"n":1},{"lo":0.2,"hi":0.4,"p":0.29252359550561796,"f":0.2808988764044944,"n":89},{"lo":0.4,"hi":0.6,"p":0.4589633333333333,"f":0.5,"n":30}],"by_j":[{"n":10,"acc":0.2,"ll":1.1701,"br":0.7166,"nm":10,"llm":1.1649,"brm":0.7255,"accm":0.4,"llb":1.161,"llmod":1.1701,"dll":0.0052,"dse":0.0768,"pd":0.244,"fd":0.4,"j":4,"real":0},{"n":10,"acc":0.5,"ll":1.0802,"br":0.6518,"nm":10,"llm":1.085,"brm":0.6534,"accm":0.5,"llb":1.0673,"llmod":1.0802,"dll":-0.0047,"dse":0.1178,"pd":0.2442,"fd":0.2,"j":5,"real":0},{"n":10,"acc":0.5,"ll":1.0375,"br":0.625,"nm":10,"llm":1.0388,"brm":0.6269,"accm":0.4,"llb":1.0322,"llmod":1.0375,"dll":-0.0012,"dse":0.0728,"pd":0.2469,"fd":0.3,"j":6,"real":0},{"n":10,"acc":0.6,"ll":0.9654,"br":0.5754,"nm":10,"llm":0.7249,"brm":0.4005,"accm":0.8,"llb":0.8352,"llmod":0.9654,"dll":0.2405,"dse":0.0496,"pd":0.2401,"fd":0.1,"j":7,"real":0}],"bets":{"n":36,"won":9,"profit":-4.74,"roi":-0.13166666666666668,"se":0.26680725460734966},"betsc":null,"stats":{"g1":{"n":40,"mae":1.0735,"maeb":1.072,"bias":0.28250000000000003},"xg":{"n":40,"mae":0.8332499999999999,"maeb":0.79075,"bias":0.16175},"s":{"n":40,"mae":4.92875,"maeb":4.3015,"bias":0.2762500000000002},"st":{"n":40,"mae":2.8057499999999997,"maeb":2.629,"bias":-0.034749999999999906},"c":{"n":40,"mae":2.86225,"maeb":2.81675,"bias":-0.37525},"f":{"n":40,"mae":3.786,"maeb":3.597,"bias":0.6070000000000001},"y":{"n":40,"mae":1.81175,"maeb":1.7535,"bias":-0.10225000000000004},"r":{"n":40,"mae":0.373,"maeb":0.35875,"bias":-0.154}},"rows":[{"j":7,"d":"2026-10-19","hg":3,"ag":1,"o":0,"bf":true,"made":"2026-10-19","o25":0.4662,"tot":4,"st":{"g1":[0.95,1,1.19],"xg":[2.89,1.69,2.99],"s":[27.94,28,27.49],"st":[8.63,6,8.77],"c":[9.92,8,9.41],"f":[23.96,29,22.97],"y":[3.22,4,3.99],"r":[0.21,0,0.19]},"h":19,"a":6,"p":[0.4094,0.2608,0.3299],"pc":null,"mk":[0.6157,0.2108,0.1735],"bet":[2,5.43,-1.0],"betc":null},{"j":7,"d":"2026-10-18","hg":2,"ag":0,"o":0,"bf":true,"made":"2026-10-18","o25":0.559,"tot":2,"st":{"g1":[1.32,1,1.19],"xg":[3.05,4.300000000000001,3.01],"s":[24.35,32,27.64],"st":[8.86,6,8.95],"c":[9.19,8,9.34],"f":[26.26,23,23.15],"y":[3.65,5,3.9],"r":[0.18,1,0.15]},"h":2,"a":18,"p":[0.4073,0.2422,0.3505],"pc":null,"mk":[0.4597,0.2936,0.2467],"bet":[2,3.82,-1.0],"betc":null},{"j":7,"d":"2026-10-18","hg":5,"ag":0,"o":0,"bf":true,"made":"2026-10-18","o25":0.6915,"tot":5,"st":{"g1":[1.64,3,1.19],"xg":[3.28,2.77,3.01],"s":[30.9,22,27.64],"st":[9.23,10,8.95],"c":[9.22,13,9.34],"f":[20.74,24,23.15],"y":[3.37,3,3.9],"r":[0.2,0,0.15]},"h":4,"a":7,"p":[0.574,0.1968,0.2292],"pc":null,"mk":[0.6629,0.1949,0.1422],"bet":[2,6.62,-1.0],"betc":null},{"j":7,"d":"2026-10-18","hg":1,"ag":1,"o":1,"bf":true,"made":"2026-10-18","o25":0.5521,"tot":2,"st":{"g1":[1.15,1,1.19],"xg":[3.02,2.33,3.01],"s":[29.12,25,27.64],"st":[9.0,8,8.95],"c":[9.82,5,9.34],"f":[23.41,21,23.15],"y":[4.51,4,3.9],"r":[0.18,0,0.15]},"h":12,"a":15,"p":[0.4133,0.2435,0.3432],"pc":null,"mk":[0.378,0.281,0.341],"bet":null,"betc":null},{"j":7,"d":"2026-10-18","hg":0,"ag":1,"o":2,"bf":true,"made":"2026-10-18","o25":0.5391,"tot":1,"st":{"g1":[1.13,0,1.19],"xg":[2.99,2.04,3.01],"s":[26.64,23,27.64],"st":[8.63,3,8.95],"c":[9.07,14,9.34],"f":[27.5,22,23.15],"y":[4.85,2,3.9],"r":[0.17,0,0.15]},"h":17,"a":0,"p":[0.3552,0.2469,0.3979],"pc":null,"mk":[0.1435,0.2259,0.6307],"bet":[0,6.55,-1.0],"betc":null},{"j":7,"d":"2026-10-17","hg":0,"ag":2,"o":2,"bf":true,"made":"2026-10-17","o25":0.6026,"tot":2,"st":{"g1":[1.36,0,1.19],"xg":[3.01,1.9,3.01],"s":[28.48,24,27.64],"st":[9.38,12,8.95],"c":[10.04,12,9.34],"f":[21.71,23,23.15],"y":[4.01,7,3.9],"r":[0.17,0,0.15]},"h":8,"a":5,"p":[0.4201,0.2418,0.3382],"pc":null,"mk":[0.3304,0.2651,0.4045],"bet":[0,2.84,-1.0],"betc":null},{"j":7,"d":"2026-10-17","hg":1,"ag":2,"o":2,"bf":true,"made":"2026-10-17","o25":0.5719,"tot":3,"st":{"g1":[1.21,1,1.19],"xg":[3.06,2.52,3.01],"s":[29.5,31,27.64],"st":[9.02,7,8.95],"c":[9.02,12,9.34],"f":[23.25,20,23.15],"y":[4.28,7,3.9],"r":[0.17,2,0.15]},"h":3,"a":13,"p":[0.4586,0.2454,0.296],"pc":null,"mk":[0.3515,0.2622,0.3863],"bet":[0,2.67,-1.0],"betc":null},{"j":7,"d":"2026-10-17","hg":1,"ag":0,"o":0,"bf":true,"made":"2026-10-17","o25":0.5322,"tot":1,"st":{"g1":[1.21,1,1.19],"xg":[3.0,1.5399999999999998,3.01],"s":[27.43,23,27.64],"st":[9.02,6,8.95],"c":[9.66,12,9.34],"f":[17.54,24,23.15],"y":[3.21,4,3.9],"r":[0.16,1,0.15]},"h":9,"a":10,"p":[0.4056,0.2585,0.3359],"pc":null,"mk":[0.5786,0.2343,0.1871],"bet":[2,5.01,-1.0],"betc":null},{"j":7,"d":"2026-10-17","hg":3,"ag":2,"o":0,"bf":true,"made":"2026-10-17","o25":0.6459,"tot":5,"st":{"g1":[1.41,3,1.19],"xg":[3.15,5.1899999999999995,3.01],"s":[27.02,27,27.64],"st":[9.31,9,8.95],"c":[9.58,5,9.34],"f":[23.62,24,23.15],"y":[3.87,3,3.9],"r":[0.2,0,0.15]},"h":14,"a":11,"p":[0.5314,0.2202,0.2484],"pc":null,"mk":[0.7667,0.1403,0.0929],"bet":[2,10.15,-1.0],"betc":null},{"j":7,"d":"2026-10-17","hg":0,"ag":1,"o":2,"bf":true,"made":"2026-10-17","o25":0.5845,"tot":1,"st":{"g1":[1.33,1,1.19],"xg":[2.96,2.56,3.01],"s":[28.41,31,27.64],"st":[9.0,4,8.95],"c":[8.83,9,9.34],"f":[24.21,25,23.15],"y":[4.59,8,3.9],"r":[0.17,0,0.15]},"h":16,"a":1,"p":[0.4344,0.2448,0.3208],"pc":null,"mk":[0.4398,0.2516,0.3086],"bet":null,"betc":null},{"j":6,"d":"2026-10-12","hg":4,"ag":1,"o":0,"bf":true,"made":"2026-10-12","o25":0.528,"tot":5,"st":{"g1":[1.22,1,1.19],"xg":[2.94,3.27,3.01],"s":[28.9,28,27.64],"st":[8.94,12,8.95],"c":[9.26,8,9.34],"f":[23.36,13,23.15],"y":[3.79,2,3.9],"r":[0.17,0,0.15]},"h":6,"a":16,"p":[0.3625,0.2599,0.3776],"pc":null,"mk":[0.2668,0.2539,0.4794],"bet":[0,3.54,2.54],"betc":null},{"j":6,"d":"2026-10-11","hg":3,"ag":1,"o":0,"bf":true,"made":"2026-10-11","o25":0.5258,"tot":4,"st":{"g1":[1.18,3,1.26],"xg":[2.94,5.75,3.01],"s":[27.39,37,27.84],"st":[8.52,13,8.74],"c":[8.0,13,9.38],"f":[23.17,21,22.82],"y":[3.78,4,3.76],"r":[0.15,0,0.12]},"h":7,"a":17,"p":[0.3945,0.2598,0.3458],"pc":null,"mk":[0.3389,0.2811,0.3801],"bet":[0,2.77,1.77],"betc":null},{"j":6,"d":"2026-10-11","hg":2,"ag":2,"o":1,"bf":true,"made":"2026-10-11","o25":0.4904,"tot":4,"st":{"g1":[1.28,0,1.26],"xg":[2.89,3.01,3.01],"s":[27.56,24,27.84],"st":[8.56,12,8.74],"c":[9.12,13,9.38],"f":[19.96,19,22.82],"y":[3.78,2,3.76],"r":[0.15,0,0.12]},"h":10,"a":8,"p":[0.3977,0.2684,0.3339],"pc":null,"mk":[0.2349,0.281,0.4842],"bet":[0,4.02,-1.0],"betc":null},{"j":6,"d":"2026-10-11","hg":0,"ag":3,"o":2,"bf":true,"made":"2026-10-11","o25":0.603,"tot":3,"st":{"g1":[1.33,0,1.26],"xg":[3.21,2.23,3.01],"s":[26.67,28,27.84],"st":[8.85,10,8.74],"c":[9.76,11,9.38],"f":[23.49,33,22.82],"y":[3.66,6,3.76],"r":[0.15,1,0.12]},"h":13,"a":14,"p":[0.3841,0.242,0.3739],"pc":null,"mk":[0.2817,0.2565,0.4617],"bet":[0,3.36,-1.0],"betc":null},{"j":6,"d":"2026-10-10","hg":2,"ag":1,"o":0,"bf":true,"made":"2026-10-10","o25":0.513,"tot":3,"st":{"g1":[1.29,0,1.26],"xg":[2.97,2.95,3.01],"s":[25.39,24,27.84],"st":[8.49,11,8.74],"c":[9.41,6,9.38],"f":[25.42,32,22.82],"y":[4.56,5,3.76],"r":[0.15,0,0.12]},"h":0,"a":12,"p":[0.4321,0.2568,0.3111],"pc":null,"mk":[0.6538,0.2121,0.1341],"bet":[2,7.02,-1.0],"betc":null},{"j":6,"d":"2026-10-10","hg":2,"ag":2,"o":1,"bf":true,"made":"2026-10-10","o25":0.5541,"tot":4,"st":{"g1":[1.23,2,1.26],"xg":[3.01,3.34,3.01],"s":[27.9,34,27.84],"st":[8.73,11,8.74],"c":[8.65,4,9.38],"f":[21.51,31,22.82],"y":[4.0,7,3.76],"r":[0.15,0,0.12]},"h":1,"a":3,"p":[0.3042,0.2457,0.45],"pc":null,"mk":[0.3741,0.2648,0.3612],"bet":[2,2.61,-1.0],"betc":null},{"j":6,"d":"2026-10-10","hg":5,"ag":1,"o":0,"bf":true,"made":"2026-10-10","o25":0.5934,"tot":6,"st":{"g1":[1.66,2,1.26],"xg":[2.97,2.48,3.01],"s":[26.78,19,27.84],"st":[9.4,10,8.74],"c":[10.21,8,9.38],"f":[24.04,22,22.82],"y":[4.51,4,3.76],"r":[0.14,0,0.12]},"h":5,"a":2,"p":[0.4405,0.2379,0.3216],"pc":null,"mk":[0.5225,0.2393,0.2381],"bet":[2,3.95,-1.0],"betc":null},{"j":6,"d":"2026-10-10","hg":2,"ag":1,"o":0,"bf":true,"made":"2026-10-10","o25":0.5735,"tot":3,"st":{"g1":[1.44,0,1.26],"xg":[3.12,2.96,3.01],"s":[29.04,24,27.84],"st":[9.14,10,8.74],"c":[9.52,7,9.38],"f":[19.64,18,22.82],"y":[3.35,6,3.76],"r":[0.16,0,0.12]},"h":11,"a":9,"p":[0.4307,0.243,0.3263],"pc":null,"mk":[0.3191,0.2754,0.4054],"bet":[0,2.96,1.96],"betc":null},{"j":6,"d":"2026-10-10","hg":0,"ag":2,"o":2,"bf":true,"made":"2026-10-10","o25":0.6897,"tot":2,"st":{"g1":[1.59,0,1.26],"xg":[3.47,2.13,3.01],"s":[28.78,25,27.84],"st":[8.85,7,8.74],"c":[9.37,12,9.38],"f":[25.45,20,22.82],"y":[3.89,1,3.76],"r":[0.17,1,0.12]},"h":18,"a":4,"p":[0.3304,0.2168,0.4528],"pc":null,"mk":[0.3168,0.2808,0.4025],"bet":[2,2.33,1.33],"betc":null},{"j":6,"d":"2026-10-10","hg":1,"ag":1,"o":1,"bf":true,"made":"2026-10-10","o25":0.5447,"tot":2,"st":{"g1":[1.11,0,1.26],"xg":[3.04,2.42,3.01],"s":[32.98,24,27.84],"st":[8.97,7,8.74],"c":[11.82,8,9.38],"f":[23.63,29,22.82],"y":[3.64,7,3.76],"r":[0.15,1,0.12]},"h":15,"a":19,"p":[0.52,0.2383,0.2417],"pc":null,"mk":[0.5611,0.2261,0.2128],"bet":[2,4.43,-1.0],"betc":null},{"j":5,"d":"2026-09-20","hg":0,"ag":1,"o":2,"bf":true,"made":"2026-09-20","o25":0.5597,"tot":1,"st":{"g1":[1.62,0,1.26],"xg":[3.01,2.44,2.96],"s":[27.48,21,27.18],"st":[9.47,5,8.69],"c":[9.2,6,9.05],"f":[24.4,24,23.46],"y":[4.52,3,3.92],"r":[0.15,0,0.13]},"h":2,"a":13,"p":[0.4152,0.2418,0.3431],"pc":null,"mk":[0.3034,0.2578,0.4388],"bet":[0,3.11,-1.0],"betc":null},{"j":5,"d":"2026-09-20","hg":0,"ag":0,"o":1,"bf":true,"made":"2026-09-20","o25":0.6188,"tot":0,"st":{"g1":[1.38,0,1.26],"xg":[3.05,2.37,2.96],"s":[27.1,25,27.18],"st":[8.92,6,8.69],"c":[8.68,7,9.05],"f":[22.53,22,23.46],"y":[3.62,5,3.92],"r":[0.16,0,0.13]},"h":12,"a":7,"p":[0.5618,0.2116,0.2266],"pc":null,"mk":[0.5692,0.2392,0.1916],"bet":[2,4.93,-1.0],"betc":null},{"j":5,"d":"2026-09-20","hg":5,"ag":3,"o":0,"bf":true,"made":"2026-09-20","o25":0.5231,"tot":8,"st":{"g1":[0.96,5,1.26],"xg":[3.05,6.39,2.96],"s":[24.73,33,27.18],"st":[7.88,15,8.69],"c":[9.26,11,9.05],"f":[25.23,28,23.46],"y":[4.05,1,3.92],"r":[0.17,0,0.13]},"h":14,"a":18,"p":[0.5147,0.2392,0.2461],"pc":null,"mk":[0.7063,0.1824,0.1113],"bet":[2,8.5,-1.0],"betc":null},{"j":5,"d":"2026-09-20","hg":1,"ag":1,"o":1,"bf":true,"made":"2026-09-20","o25":0.6003,"tot":2,"st":{"g1":[1.29,0,1.26],"xg":[3.13,3.22,2.96],"s":[30.53,41,27.18],"st":[8.96,12,8.69],"c":[9.82,16,9.05],"f":[21.37,14,23.46],"y":[3.53,3,3.92],"r":[0.16,0,0.13]},"h":9,"a":15,"p":[0.3554,0.2329,0.4117],"pc":null,"mk":[0.2706,0.2525,0.4769],"bet":[0,3.49,-1.0],"betc":null},{"j":5,"d":"2026-09-19","hg":2,"ag":3,"o":2,"bf":true,"made":"2026-09-19","o25":0.3931,"tot":5,"st":{"g1":[0.92,1,1.26],"xg":[2.83,2.7199999999999998,2.96],"s":[25.58,35,27.18],"st":[7.71,13,8.69],"c":[9.6,12,9.05],"f":[24.43,22,23.46],"y":[3.79,3,3.92],"r":[0.16,0,0.13]},"h":19,"a":1,"p":[0.3888,0.2984,0.3127],"pc":null,"mk":[0.5007,0.251,0.2484],"bet":[2,3.81,2.81],"betc":null},{"j":5,"d":"2026-09-19","hg":3,"ag":0,"o":0,"bf":true,"made":"2026-09-19","o25":0.6575,"tot":3,"st":{"g1":[1.79,2,1.26],"xg":[3.21,2.94,2.96],"s":[28.34,28,27.18],"st":[8.95,7,8.69],"c":[9.22,11,9.05],"f":[24.96,24,23.46],"y":[4.16,5,3.92],"r":[0.19,0,0.13]},"h":4,"a":0,"p":[0.4544,0.2273,0.3183],"pc":null,"mk":[0.1919,0.2459,0.5621],"bet":[0,4.92,3.92],"betc":null},{"j":5,"d":"2026-09-19","hg":1,"ag":0,"o":0,"bf":true,"made":"2026-09-19","o25":0.5639,"tot":1,"st":{"g1":[1.39,1,1.26],"xg":[2.98,3.68,2.96],"s":[27.75,34,27.18],"st":[9.69,6,8.69],"c":[9.35,8,9.05],"f":[22.48,18,23.46],"y":[3.9,3,3.92],"r":[0.16,1,0.13]},"h":8,"a":11,"p":[0.4438,0.2495,0.3067],"pc":null,"mk":[0.5421,0.245,0.2129],"bet":[2,4.43,-1.0],"betc":null},{"j":5,"d":"2026-09-19","hg":2,"ag":1,"o":0,"bf":true,"made":"2026-09-19","o25":0.519,"tot":3,"st":{"g1":[1.42,2,1.26],"xg":[2.86,3.0300000000000002,2.96],"s":[26.16,34,27.18],"st":[8.49,9,8.69],"c":[9.05,11,9.05],"f":[23.63,14,23.46],"y":[4.5,5,3.92],"r":[0.15,0,0.13]},"h":16,"a":10,"p":[0.3909,0.2635,0.3456],"pc":null,"mk":[0.5933,0.2199,0.1868],"bet":[2,5.05,-1.0],"betc":null},{"j":5,"d":"2026-09-19","hg":0,"ag":1,"o":2,"bf":true,"made":"2026-09-19","o25":0.5013,"tot":1,"st":{"g1":[0.97,0,1.26],"xg":[2.94,1.77,2.96],"s":[26.61,34,27.18],"st":[8.14,6,8.69],"c":[8.61,8,9.05],"f":[24.94,22,23.46],"y":[3.89,2,3.92],"r":[0.16,0,0.13]},"h":17,"a":6,"p":[0.5321,0.2508,0.2171],"pc":null,"mk":[0.5788,0.2401,0.1811],"bet":[2,5.21,4.21],"betc":null},{"j":5,"d":"2026-09-18","hg":3,"ag":0,"o":0,"bf":true,"made":"2026-09-18","o25":0.6648,"tot":3,"st":{"g1":[2.2,0,1.26],"xg":[3.07,3.5,2.96],"s":[30.55,25,27.18],"st":[10.41,8,8.69],"c":[9.31,16,9.05],"f":[23.17,17,23.46],"y":[4.45,2,3.92],"r":[0.15,0,0.13]},"h":3,"a":5,"p":[0.437,0.2268,0.3363],"pc":null,"mk":[0.3735,0.2603,0.3662],"bet":[0,2.53,1.53],"betc":null},{"j":4,"d":"2026-09-14","hg":4,"ag":1,"o":0,"bf":true,"made":"2026-09-14","o25":0.5273,"tot":5,"st":{"g1":[1.22,3,1.26],"xg":[2.97,2.76,2.96],"s":[27.92,22,27.18],"st":[8.56,11,8.69],"c":[9.4,10,9.05],"f":[25.99,21,23.46],"y":[4.52,3,3.92],"r":[0.16,0,0.13]},"h":12,"a":16,"p":[0.4203,0.2596,0.3201],"pc":null,"mk":[0.4104,0.2728,0.3168],"bet":null,"betc":null},{"j":4,"d":"2026-09-13","hg":0,"ag":5,"o":2,"bf":true,"made":"2026-09-13","o25":0.5924,"tot":5,"st":{"g1":[1.63,1,1.33],"xg":[3.23,4.14,3.07],"s":[27.11,36,27.43],"st":[8.16,13,8.5],"c":[9.76,8,8.97],"f":[22.51,24,23.43],"y":[4.15,0,3.87],"r":[0.08,1,0.03]},"h":6,"a":4,"p":[0.2912,0.2469,0.4619],"pc":null,"mk":[0.2548,0.2501,0.495],"bet":[0,3.71,-1.0],"betc":null},{"j":4,"d":"2026-09-13","hg":0,"ag":1,"o":2,"bf":true,"made":"2026-09-13","o25":0.6704,"tot":1,"st":{"g1":[1.36,0,1.33],"xg":[3.3,2.1,3.07],"s":[31.92,22,27.43],"st":[10.13,5,8.5],"c":[9.82,13,8.97],"f":[22.32,27,23.43],"y":[3.94,3,3.87],"r":[0.08,1,0.03]},"h":15,"a":14,"p":[0.4145,0.232,0.3536],"pc":null,"mk":[0.32,0.251,0.429],"bet":[0,2.95,-1.0],"betc":null},{"j":4,"d":"2026-09-12","hg":1,"ag":2,"o":2,"bf":true,"made":"2026-09-12","o25":0.4432,"tot":3,"st":{"g1":[1.24,0,1.33],"xg":[2.93,3.0999999999999996,3.07],"s":[23.32,29,27.43],"st":[5.67,12,8.5],"c":[7.93,7,8.97],"f":[23.83,27,23.43],"y":[3.99,7,3.87],"r":[0.08,0,0.03]},"h":1,"a":17,"p":[0.3791,0.2745,0.3464],"pc":null,"mk":[0.4268,0.2762,0.297],"bet":[2,3.19,2.19],"betc":null},{"j":4,"d":"2026-09-12","hg":2,"ag":2,"o":1,"bf":true,"made":"2026-09-12","o25":0.5871,"tot":4,"st":{"g1":[1.54,2,1.33],"xg":[3.19,2.25,3.07],"s":[29.1,28,27.43],"st":[9.48,12,8.5],"c":[9.98,3,8.97],"f":[24.74,23,23.43],"y":[4.1,6,3.87],"r":[0.08,0,0.03]},"h":2,"a":3,"p":[0.4004,0.2381,0.3615],"pc":null,"mk":[0.4124,0.2631,0.3245],"bet":[2,2.91,-1.0],"betc":null},{"j":4,"d":"2026-09-12","hg":2,"ag":2,"o":1,"bf":true,"made":"2026-09-12","o25":0.5774,"tot":4,"st":{"g1":[1.69,3,1.33],"xg":[3.07,2.28,3.07],"s":[27.8,26,27.43],"st":[9.58,12,8.5],"c":[8.21,14,8.97],"f":[22.05,19,23.43],"y":[4.23,6,3.87],"r":[0.08,0,0.03]},"h":5,"a":10,"p":[0.5262,0.2279,0.2458],"pc":null,"mk":[0.7797,0.1414,0.0789],"bet":[2,11.96,-1.0],"betc":null},{"j":4,"d":"2026-09-12","hg":2,"ag":3,"o":2,"bf":true,"made":"2026-09-12","o25":0.6315,"tot":5,"st":{"g1":[1.57,3,1.33],"xg":[3.25,2.29,3.07],"s":[26.68,23,27.43],"st":[10.12,10,8.5],"c":[7.73,9,8.97],"f":[21.31,22,23.43],"y":[3.32,4,3.87],"r":[0.08,1,0.03]},"h":7,"a":11,"p":[0.4666,0.2243,0.3091],"pc":null,"mk":[0.45,0.261,0.289],"bet":null,"betc":null},{"j":4,"d":"2026-09-12","hg":0,"ag":0,"o":1,"bf":true,"made":"2026-09-12","o25":0.6392,"tot":0,"st":{"g1":[1.55,0,1.33],"xg":[3.29,1.96,3.07],"s":[30.64,24,27.43],"st":[9.61,7,8.5],"c":[9.06,13,8.97],"f":[21.77,19,23.43],"y":[4.11,1,3.87],"r":[0.08,0,0.03]},"h":13,"a":9,"p":[0.5281,0.2152,0.2567],"pc":null,"mk":[0.6294,0.2061,0.1645],"bet":[2,5.74,-1.0],"betc":null},{"j":4,"d":"2026-09-12","hg":0,"ag":0,"o":1,"bf":true,"made":"2026-09-12","o25":0.4822,"tot":0,"st":{"g1":[1.2,0,1.33],"xg":[3.0,1.8,3.07],"s":[27.98,26,27.43],"st":[8.69,5,8.5],"c":[10.68,11,8.97],"f":[25.36,22,23.43],"y":[3.77,2,3.87],"r":[0.08,0,0.03]},"h":19,"a":8,"p":[0.3533,0.264,0.3827],"pc":null,"mk":[0.4769,0.2601,0.263],"bet":[2,3.59,-1.0],"betc":null},{"j":4,"d":"2026-09-12","hg":0,"ag":2,"o":2,"bf":true,"made":"2026-09-12","o25":0.5065,"tot":2,"st":{"g1":[1.32,0,1.33],"xg":[2.94,3.6799999999999997,3.07],"s":[24.57,23,27.43],"st":[7.46,8,8.5],"c":[8.85,6,8.97],"f":[26.39,29,23.43],"y":[3.85,8,3.87],"r":[0.08,1,0.03]},"h":18,"a":0,"p":[0.3766,0.2579,0.3655],"pc":null,"mk":[0.1608,0.2546,0.5846],"bet":[0,5.89,-1.0],"betc":null}]},"tb":{"summ":{"muy+":{"n":1,"hit":1.0,"model":0.3276},"all":{"n":1,"hit":1.0,"model":0.3276}},"cases":[{"side":"H","k":"f","over":true,"tier":"muy","L":11.5,"d":"2026-10-18","h":4,"a":7,"obs":13,"hit":true,"pm":0.3276}]},"tr":[{"side":"H","k":"f","over":true,"tier":"muy","L":9.5,"j":8,"d":"2026-10-25","h":10,"a":3,"m":9.684,"V":10.721,"pm":0.4975,"rf":1.0288,"ref":"R Jones","series":[[10,12,10,15,11]],"cross":[12,15],"same":[10,10,15]},{"side":"A","k":"f","over":true,"tier":"muy","L":11.5,"j":8,"d":"2026-10-25","h":13,"a":4,"m":11.212,"V":12.669,"pm":0.4444,"rf":0.9822,"ref":"S Barrott","series":[[13,15,13,12,13]],"cross":[12,13],"same":[12,15,12]},{"side":"A","k":"s","over":true,"tier":"una","L":10.5,"j":9,"d":"2026-10-31","h":2,"a":12,"m":10.375,"V":17.474,"pm":0.4503,"rf":null,"ref":null,"series":[[10,15,13,11,12]],"cross":[13,12],"same":[11,10,11]},{"side":"H","k":"y","over":true,"tier":"una","L":1.5,"j":9,"d":"2026-10-31","h":1,"a":9,"m":1.401,"V":1.165,"pm":0.4085,"rf":null,"ref":null,"series":[[0,2,2,2,2]],"cross":[2,2],"same":[3,2,2]},{"side":"A","k":"f","over":false,"tier":"una","L":8.5,"j":9,"d":"2026-11-02","h":16,"a":8,"m":9.768,"V":10.859,"pm":0.3705,"rf":null,"ref":null,"series":[[7,8,6,4,8]],"cross":[7,6,4],"same":[14,8,4]}],"tbf":{"una-":{"n":7,"hit":0.5714,"model":0.4989},"all":{"n":13,"hit":0.6154,"model":0.4763},"una+":{"n":5,"hit":0.6,"model":0.4742},"muy+":{"n":1,"hit":1.0,"model":0.3276}},"learn":{"chosen":"base","why":"se mantiene","blend":{"a":0.0,"n":40,"fit":true,"ll":1.0034,"llm":1.0034,"llmod":1.0633,"d":-0.0,"se":0.0,"curve":[[0.0,1.0034],[0.05,1.0043],[0.1,1.0055],[0.15,1.0068],[0.2,1.0083],[0.25,1.0101],[0.3,1.012],[0.35,1.0142],[0.4,1.0166],[0.45,1.0192],[0.5,1.022],[0.55,1.0251],[0.6,1.0284],[0.65,1.0319],[0.7,1.0357],[0.75,1.0396],[0.8,1.0439],[0.85,1.0484],[0.9,1.0531],[0.95,1.0581],[1.0,1.0633]]},"hist":[{"date":"2026-10-25","n":70,"cfg":"base","a":0.0,"fit":true,"ll":1.0633,"llm":1.0034,"llb":1.0034}],"ref":{"y":{"tau":0.1618,"bt":{"n":30,"mae":1.6518,"maer":1.6347,"d":-0.017,"se":0.0513},"on":true,"refs":[["S Attwell",1.169,4,24.0,16.4],["J Brooks",1.155,5,28.0,20.4],["C Kavanagh",1.112,5,25.0,19.6],["L Smith",1.075,1,6.0,3.6],["C Pawson",1.073,4,20.0,16.7],["J Smith",1.053,1,5.0,3.3],["J Gillett",1.04,5,23.0,21.0],["A Herczeg",1.04,1,5.0,3.7],["P Tierney",1.012,4,16.0,15.5],["A Madley",1.006,4,16.0,15.7],["F Hallam",1.001,3,12.0,12.0],["P Bankes",0.986,4,15.0,15.6],["D England",0.946,5,18.0,20.7],["T Harrington",0.935,3,9.0,11.6],["R Jones",0.928,4,12.0,15.1],["S Barrott",0.923,4,13.0,16.5],["M Salisbury",0.889,3,7.0,11.4],["T Bramall",0.86,4,9.0,15.1],["M Oliver",0.83,6,16.0,25.1]]},"f":{"tau":0.039,"bt":{"n":30,"mae":4.0716,"maer":4.0704,"d":-0.0012,"se":0.0155},"on":true,"refs":[["R Jones",1.029,4,117.0,96.0],["C Kavanagh",1.029,5,133.0,111.4],["S Attwell",1.019,4,107.0,93.1],["C Pawson",1.017,4,109.0,96.6],["P Tierney",1.009,4,99.0,92.2],["F Hallam",1.003,3,69.0,66.9],["A Herczeg",1.0,1,22.0,22.1],["J Smith",0.999,1,19.0,19.9],["M Salisbury",0.998,3,65.0,66.5],["A Madley",0.997,4,92.0,94.0],["L Smith",0.997,1,18.0,19.8],["T Bramall",0.994,4,90.0,94.2],["M Oliver",0.993,6,137.0,142.5],["J Gillett",0.993,5,115.0,120.6],["D England",0.987,5,105.0,114.4],["P Bankes",0.987,4,82.0,91.4],["T Harrington",0.985,3,56.0,66.3],["S Barrott",0.982,4,80.0,92.9],["J Brooks",0.981,5,99.0,113.0]]}}},"pl":{}};</script>
+<script>/* Panel de una liga (LaLiga, Premier League...). build.py genera los datos en window.DATA; este archivo los pinta. */
+"use strict";
+(function () {
+const D = window.DATA;
+const T = D.teams, NM = D.names, SH = D.short, NT = T.length;
+
+/* ---------------------------------------------------------------- formato */
+const NF = d => new Intl.NumberFormat('es-ES', {minimumFractionDigits: d, maximumFractionDigits: d});
+const N0 = NF(0), N1 = NF(1), N2 = NF(2), N3 = NF(3);
+const ok = v => v != null && isFinite(v);
+const f0 = v => ok(v) ? N0.format(v) : '–';
+const f1 = v => ok(v) ? N1.format(v) : '–';
+const f2 = v => ok(v) ? N2.format(v) : '–';
+const f3 = v => ok(v) ? N3.format(v) : '–';
+const pc = p => !ok(p) ? '–' : p < 0.005 ? '<1\u00a0%' : p > 0.995 ? '>99\u00a0%' : Math.round(p * 100) + '\u00a0%';  // espacio que no se parte
+const pf = p => ok(p) ? Math.round(p * 100) + '\u00a0%' : '–';  // frecuencias observadas: aquí 100 % es exacto
+const sgn = (v, f) => !ok(v) ? '–' : (f(Math.abs(v)) === f(0) ? '' : v > 0 ? '+' : '−') + f(Math.abs(v));
+const sg0 = v => sgn(v, f0), sg1 = v => sgn(v, f1), sg2 = v => sgn(v, f2), sg3 = v => sgn(v, f3);
+const ppt = v => sgn(v * 100, f0) + ' pp';
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+const nb = t => esc(t).replace(/ %/g, '\u00a0%');  // «50 %» no se parte entre líneas
+const DOW = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
+const fd = iso => iso ? iso.slice(8, 10) + '/' + iso.slice(5, 7) : '–';
+const fdl = iso => iso ? DOW[new Date(iso + 'T12:00:00Z').getUTCDay()] + '\u00a0' + fd(iso) : '–';
+const nm = i => esc(NM[i]);
+const $ = id => document.getElementById(id);
+const mean = a => a.length ? a.reduce((s, x) => s + x, 0) / a.length : null;
+const vr = a => { if (a.length < 2) return null; const m = mean(a); return a.reduce((s, x) => s + (x - m) ** 2, 0) / (a.length - 1); };
+const num = a => a.filter(ok);
+const card = (title, body, cls = '') => `<section class="card ${cls}">${title ? `<h2>${title}</h2>` : ''}${body}</section>`;
+const note = t => `<p class="note">${t}</p>`;
+const tbl = (head, rows, cls = '') => `<div class="sc"><table class="${cls}"><thead><tr>${head.map(h => Array.isArray(h) ? `<th class="${h[1]}">${h[0]}</th>` : `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+const LEVELS = {clear: 'Clara', maybe: 'Posible', noise: 'Ruido'};
+const level = (d, e) => !ok(d) || !(e > 0) ? 'noise' : Math.abs(d) > 2 * e ? 'clear' : Math.abs(d) > e ? 'maybe' : 'noise';
+const chip = lv => `<span class="chip ${lv}">${LEVELS[lv]}</span>`;
+
+/* ---------------------------------------------------------------- datos */
+const VARS = [
+  {k: 'g', n: 'Goles', low: 'goles', fl: 'Goles a favor', al: 'Goles en contra'},
+  {k: 'g1', n: 'Goles 1ª parte', low: 'goles en la 1ª parte', fl: 'Goles 1ª parte a favor', al: 'Goles 1ª parte en contra'},
+  {k: 'g2', n: 'Goles 2ª parte', low: 'goles en la 2ª parte', fl: 'Goles 2ª parte a favor', al: 'Goles 2ª parte en contra'},
+  {k: 'xg', n: 'xG', low: 'xG', fl: 'xG a favor', al: 'xG en contra', cont: true},
+  {k: 's', n: 'Tiros', low: 'tiros', fl: 'Tiros', al: 'Tiros del rival'},
+  {k: 'st', n: 'Tiros a puerta', low: 'tiros a puerta', fl: 'Tiros a puerta', al: 'Tiros a puerta del rival'},
+  {k: 'c', n: 'Córners', low: 'córners', fl: 'Córners', al: 'Córners del rival'},
+  {k: 'f', n: 'Faltas', low: 'faltas', fl: 'Faltas cometidas', al: 'Faltas recibidas'},
+  {k: 'y', n: 'Amarillas', low: 'amarillas', fl: 'Amarillas', al: 'Amarillas del rival'},
+  {k: 'r', n: 'Rojas', low: 'rojas', fl: 'Rojas', al: 'Rojas del rival'},
+];
+const VK = Object.fromEntries(VARS.map(v => [v.k, v]));
+const SK = ['g1', 'xg', 's', 'st', 'c', 'f', 'y', 'r'], EK = ['g', 'g1', 'xg', 's', 'st', 'c', 'f', 'y', 'r'];
+const M = D.M.map((r, idx) => {
+  const m = {idx, d: r[0], tm: r[1], j: r[2], h: r[3], a: r[4], hg: r[5], ag: r[6], v: {g: [r[5], r[6]]}, e: {},
+    odds: ok(r[23]) ? r.slice(23, 26) : null, ou: ok(r[26]) ? r.slice(26, 28) : null, ref: r[28] || null};
+  SK.forEach((k, q) => { const x = r[7 + 2 * q], y = r[8 + 2 * q]; m.v[k] = ok(x) && ok(y) ? [x, y] : null; });
+  m.v.g2 = m.v.g1 ? [m.hg - m.v.g1[0], m.ag - m.v.g1[1]] : null;
+  const e = D.E[idx] || [];
+  EK.forEach((k, q) => { const x = e[2 * q], y = e[2 * q + 1]; m.e[k] = ok(x) && ok(y) ? [x, y] : null; });
+  m.e.g2 = m.e.g && m.e.g1 ? [m.e.g[0] - m.e.g1[0], m.e.g[1] - m.e.g1[1]] : null;
+  return m;
+});
+const G = T.map(() => []);
+M.forEach(m => [0, 1].forEach(s => {
+  const t = s ? m.a : m.h, o = s ? m.h : m.a, g = {m, home: !s, t, o, f: {}, a: {}, ef: {}, ea: {}};
+  VARS.forEach(({k}) => {
+    const v = m.v[k], e = m.e[k];
+    g.f[k] = v ? v[s] : null; g.a[k] = v ? v[1 - s] : null;
+    g.ef[k] = e ? e[s] : null; g.ea[k] = e ? e[1 - s] : null;
+  });
+  g.gf = g.f.g; g.ga = g.a.g; g.res = g.gf > g.ga ? 'W' : g.gf < g.ga ? 'L' : 'D';
+  G[t].push(g);
+}));
+const ST = {};  // media de la liga y variación de un partido a otro dentro de cada equipo
+VARS.forEach(({k}) => {
+  const per = G.map(gs => num(gs.map(g => g.f[k])));
+  ST[k] = {mu: mean(per.flat()), w: mean(per.filter(a => a.length > 1).map(vr)) || 0};
+});
+const PTSV = vr(G.flat().map(g => g.res === 'W' ? 3 : g.res === 'D' ? 1 : 0)) || 1.5;  // variación de los puntos por partido en la liga
+const TB = D.table, ROW = {};
+TB.forEach(r => { ROW[r.t] = r; });
+const POS = T.map((_, i) => ROW[i].pos);
+/* Próximos partidos: [jornada, fecha, hora, local, visitante, fuente de la fecha, cuotas 1X2, +/-2,5, hándicap, árbitro, factor del árbitro en amarillas y faltas] */
+const FX = D.fx.map(r => ({j: r[0], d: r[1], tm: r[2], h: r[3], a: r[4], src: r[5],
+  odds: ok(r[6]) ? r.slice(6, 9) : null, ou: ok(r[9]) ? r.slice(9, 11) : null, ah: ok(r[11]) && ok(r[12]) ? r.slice(11, 14) : null,
+  ref: r[14] || null, rf: {y: ok(r[15]) ? r[15] : 1, f: ok(r[16]) ? r[16] : 1}, past: r[1] < D.meta.today}));
+const implied = o => { if (!o) return null; const inv = o.map(x => 1 / x), s = inv[0] + inv[1] + inv[2]; return inv.map(x => x / s); };
+const implied2 = o => { if (!o) return null; const a = 1 / o[0], b = 1 / o[1]; return a / (a + b); };
+/* Lo aprendido (build.py y model.learn_blend): el peso del modelo frente al mercado que mejor predice en la prueba retrospectiva. */
+const LN = D.learn || {}, LB = LN.blend || {}, BA = LB.fit ? LB.a : null;
+const pool = (p, mk, a) => { const q = p.map((x, k) => Math.pow(Math.max(x, 1e-9), a) * Math.pow(Math.max(mk[k], 1e-9), 1 - a)), s = q[0] + q[1] + q[2]; return q.map(x => x / s); };
+const blendOn = () => BA != null && BA > 0 && BA < 1;  // solo merece una barra propia si mezcla de verdad
+const ZN = D.meta.zones || {ucl: 4, uel: 2, rel: 3};
+const hasRf = f => f && f.ref && (Math.abs(f.rf.y - 1) >= 0.005 || Math.abs(f.rf.f - 1) >= 0.005);
+const rfPct = f => [['y', 'amarillas'], ['f', 'faltas']].filter(([k]) => Math.abs(f.rf[k] - 1) >= 0.005)
+  .map(([k, l]) => `un ${Math.round(Math.abs(f.rf[k] - 1) * 100)}\u00a0% ${f.rf[k] > 1 ? 'más' : 'menos'} de ${l}`).join(' y ');
+const rfTxt = f => [['y', 'amarillas'], ['f', 'faltas']].filter(([k]) => Math.abs(f.rf[k] - 1) >= 0.005).map(([k, l]) => `${l} ×${f2(f.rf[k])}`).join(', ');
+
+/* ---------------------------------------------------------------- modelos (idénticos a model.py) */
+const GM = D.gm, SM = D.sm;
+const GH = [[-2.0201828704560856, 0.011257411327720691], [-0.9585724646138185, 0.22207592200561265], [0, 0.5333333333333333],
+  [0.9585724646138185, 0.22207592200561265], [2.0201828704560856, 0.011257411327720691]];
+const lin = (p, i, j, home) => [p.mu + (home ? p.eta : 0) + p.a[i] - p.d[j], (home ? p.vh0 : p.va0) + p.va[i] + p.vd[j]];
+function pmf(l, K) { const o = [Math.exp(-l)]; for (let k = 1; k <= K; k++) o.push(o[k - 1] * l / k); return o; }
+function scoreMatrix(i, j, K = 10) {
+  const [lh, vh] = lin(GM, i, j, 1), [la, va] = lin(GM, j, i, 0), rho = GM.rho || 0;
+  const sh = Math.sqrt(2 * vh), sa = Math.sqrt(2 * va);
+  const X = Array.from({length: K + 1}, () => new Array(K + 1).fill(0));
+  for (const [xi, wi] of GH) {
+    const l1 = Math.exp(lh + sh * xi), p1 = pmf(l1, K);
+    for (const [xj, wj] of GH) {
+      const l2 = Math.exp(la + sa * xj), p2 = pmf(l2, K), ww = wi * wj;
+      for (let x = 0; x <= K; x++) { const c = ww * p1[x], row = X[x]; for (let y = 0; y <= K; y++) row[y] += c * p2[y]; }
+      if (rho) {
+        X[0][0] += ww * p1[0] * p2[0] * (Math.max(1 - l1 * l2 * rho, 0) - 1);
+        X[0][1] += ww * p1[0] * p2[1] * (Math.max(1 + l1 * rho, 0) - 1);
+        X[1][0] += ww * p1[1] * p2[0] * (Math.max(1 + l2 * rho, 0) - 1);
+        X[1][1] += ww * p1[1] * p2[1] * (Math.max(1 - rho, 0) - 1);
+      }
+    }
+  }
+  let s = 0; X.forEach(r => r.forEach(v => { s += v; }));
+  return X.map(r => r.map(v => v / s));
+}
+function summarize(X) {
+  const K = X.length - 1; let pH = 0, pD = 0, pA = 0, eh = 0, ea = 0, bb = 0;
+  const tot = new Array(2 * K + 1).fill(0), hx = new Array(K + 1).fill(0), ay = new Array(K + 1).fill(0), cells = [];
+  for (let x = 0; x <= K; x++) for (let y = 0; y <= K; y++) {
+    const q = X[x][y];
+    if (x > y) pH += q; else if (x === y) pD += q; else pA += q;
+    eh += x * q; ea += y * q; tot[x + y] += q; hx[x] += q; ay[y] += q; if (x && y) bb += q; cells.push([q, x, y]);
+  }
+  cells.sort((u, v) => v[0] - u[0]);
+  const P = [pH, pD, pA], fav = P.indexOf(Math.max(pH, pD, pA));
+  const fs = cells.find(c => (c[1] > c[2] ? 0 : c[1] === c[2] ? 1 : 2) === fav);
+  const varOf = (d, m) => d.reduce((s, v, k) => s + v * (k - m) ** 2, 0);
+  const dd = new Map(); for (let x = 0; x <= K; x++) for (let y = 0; y <= K; y++) dd.set(x - y, (dd.get(x - y) || 0) + X[x][y]);
+  return {p: P, e: [eh, ea], V: [varOf(hx, eh), varOf(ay, ea), varOf(tot, eh + ea)], bb, tot, hx, ay, dd,
+    ou: [0.5, 1.5, 2.5, 3.5, 4.5].map(L => over(tot, L)), top: cells.slice(0, 6).map(c => [c[1], c[2], c[0]]), fs: [fs[1], fs[2], fs[0]]};
+}
+const over = (dist, L) => dist.reduce((s, v, k) => s + (k > L ? v : 0), 0);
+const PCACHE = new Map();
+function predict(i, j) { const k = i * 64 + j; if (!PCACHE.has(k)) PCACHE.set(k, summarize(scoreMatrix(i, j))); return PCACHE.get(k); }
+/* Media esperada (m), varianza en un partido (V) y error de la media (e) de la estadística k del equipo i contra j. */
+function sPred(k, i, j, home) {
+  if (k === 'g') {
+    const pr = home ? predict(i, j) : predict(j, i), s = home ? 0 : 1, v = lin(GM, i, j, home)[1], m = pr.e[s];
+    return {m, V: pr.V[s], e: m * Math.sqrt(Math.exp(v) - 1)};
+  }
+  if (k === 'g2') {
+    const g = sPred('g', i, j, home), g1 = sPred('g1', i, j, home);
+    if (!g1) return null;
+    const m = Math.max(g.m - g1.m, 0.01);
+    return {m, V: Math.max(g.V - g1.V, m), e: m * g.e / g.m};
+  }
+  const p = SM[k]; if (!p) return null;
+  const [l, v] = lin(p, i, j, home), m = Math.exp(l + v / 2), e2 = m * m * (Math.exp(v) - 1);
+  return {m, V: p.phi * m + e2, e: Math.sqrt(e2)};
+}
+/* Valor esperado frente a un rival medio en campo neutral (para comparar equipos). */
+function neutral(k, i, side) {
+  if (k === 'g2') { const g = neutral('g', i, side), g1 = neutral('g1', i, side); return ok(g) && ok(g1) ? g - g1 : null; }
+  const p = k === 'g' ? GM : SM[k]; if (!p) return null;
+  return Math.exp(p.mu + p.eta / 2 + (side === 'f' ? p.a[i] : -p.d[i]));
+}
+function Phi(z) {
+  const t = 1 / (1 + 0.2316419 * Math.abs(z)), d = 0.3989422804014327 * Math.exp(-z * z / 2);
+  const p = d * t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+  return z > 0 ? 1 - p : p;
+}
+/* Probabilidad de superar la línea L (p. ej. 9,5) con media m y varianza V. */
+function pOver(x, L, cont) {
+  const m = x.m, V = x.V;
+  if (!(m > 0)) return 0;
+  if (cont) { const s2 = Math.log(1 + V / (m * m)), mu = Math.log(m) - s2 / 2; return L <= 0 ? 1 : 1 - Phi((Math.log(L) - mu) / Math.sqrt(s2)); }
+  const K = Math.floor(L);
+  if (K < 0) return 1;
+  if (V > m * 1.02) {
+    const r = m * m / (V - m), q = m / (r + m); let pk = Math.pow(1 - q, r), c = pk;
+    for (let k = 1; k <= K; k++) { pk *= (k - 1 + r) / k * q; c += pk; }
+    return Math.max(0, 1 - c);
+  }
+  if (V >= m * 0.98) { let pk = Math.exp(-m), c = pk; for (let k = 1; k <= K; k++) { pk *= m / k; c += pk; } return Math.max(0, 1 - c); }
+  return 1 - Phi((K + 0.5 - m) / Math.sqrt(V));
+}
+const perMatchSd = (k, m) => Math.sqrt(Math.max(m, 0.05) * ((k === 'g' || k === 'g1' || k === 'g2') ? 1 : (SM[k] ? SM[k].phi : 1)));
+
+/* ---------------------------------------------------------------- rivales parecidos */
+const CX = k => k === 'g' || k === 'g2' ? GM.cx[k] : SM[k] || null;
+const near = (o, ex, win) => T.map((_, i) => i).filter(i => i !== o && i !== ex && Math.abs(POS[i] - POS[o]) <= win);
+/* Cómo rinde t contra los equipos cercanos en la tabla a o, comparado con lo que esperaba el modelo. */
+function cross(t, o, win) {
+  const set = near(o, t, win), S = new Set(set), gs = G[t].filter(g => S.has(g.o)), rows = {};
+  VARS.forEach(({k}) => {
+    const c = CX(k); if (!c) return;
+    const one = (vals, tau) => {
+      const n = vals.length; if (!n) return {n: 0, adj: 0, av: 0};
+      const r = mean(vals), e = Math.sqrt(c.s2 / n), w = tau > 0 ? tau / (tau + c.s2 / n) : 0;
+      return {n, r, e, w, adj: w * r, av: w * c.s2 / n};
+    };
+    const gf = gs.filter(g => ok(g.f[k]) && ok(g.ef[k])), ga = gs.filter(g => ok(g.a[k]) && ok(g.ea[k]));
+    rows[k] = {f: one(gf.map(g => g.f[k] - g.ef[k]), c.tf), a: one(ga.map(g => g.a[k] - g.ea[k]), c.ta),
+      obs: mean(gf.map(g => g.f[k])), exp: mean(gf.map(g => g.ef[k])), obsA: mean(ga.map(g => g.a[k])), expA: mean(ga.map(g => g.ea[k]))};
+  });
+  const lo = Math.max(1, POS[o] - win), hi = Math.min(NT, POS[o] + win);
+  return {set, gs, rows, lo, hi};
+}
+
+/* ---------------------------------------------------------------- vista: equipos */
+const ST_ = {sel: TB[0].t, rk: 'g:f', mode: 'opt', win: 2, useX: true, fx: null, jsel: 'next', hreal: false};
+const zone = p => p <= ZN.ucl ? 'ucl' : p <= ZN.ucl + ZN.uel ? 'uel' : p > NT - ZN.rel ? 'rel' : '';
+function renderTable() {
+  $('tabla').innerHTML = tbl(['#', 'Equipo', '<abbr title="Partidos jugados">PJ</abbr>', '<abbr title="Diferencia de goles">DG</abbr>', 'Pts',
+    '<abbr title="Puntos esperados según el xG de cada partido">xPts</abbr>'],
+    TB.map(r => `<tr class="${zone(r.pos)} ${r.t === ST_.sel ? 'on' : ''}"><td>${r.pos}</td><td><button class="lk" data-team="${r.t}">${nm(r.t)}</button></td>` +
+      `<td>${r.pj}</td><td>${sg0(r.gf - r.ga)}</td><td><b>${r.pts}</b></td><td>${r.xn ? f1(r.xpts) : '–'}</td></tr>`), 'lg') +
+    `<p class="legend"><span class="sw ucl"></span>Champions <span class="sw uel"></span>Europa <span class="sw rel"></span>Descenso</p>`;
+}
+const RKS = VARS.flatMap(v => [[v.k + ':f', v.fl], [v.k + ':a', v.al]]);
+function renderRank() {
+  const [k, side] = ST_.rk.split(':'), mu = ST[k].mu;
+  const rows = T.map((_, i) => {
+    const vals = num(G[i].map(g => side === 'f' ? g.f[k] : g.a[k])), n = vals.length;
+    return {i, v: mean(vals), n, e: n ? Math.sqrt(ST[k].w / n) : null};
+  }).filter(r => r.n).sort((x, y) => y.v - x.v);
+  const mx = Math.max(...rows.map(r => r.v)) || 1;
+  $('rank').innerHTML = `<p class="note">Media de la liga: ${f1(mu)} por partido. En negrita, los equipos que se alejan de la media más de dos errores.</p>` +
+    rows.map((r, p) => `<div class="rk ${r.i === ST_.sel ? 'on' : ''}"><span>${p + 1}. ${nm(r.i)}</span><span class="bar"><i style="width:${(r.v / mx * 100).toFixed(1)}%"></i></span>` +
+      `<span class="${level(r.v - mu, r.e) === 'clear' ? 'b' : ''}">${f1(r.v)} <small>±${f1(r.e)}</small></span></div>`).join('');
+}
+function nextFixture(i) { return FX.filter(f => (f.h === i || f.a === i)).sort((x, y) => (x.past - y.past) || (x.d < y.d ? -1 : 1)).find(f => !f.past) || null; }
+function goalsChart(gs) {
+  const n = gs.length, W = 640, H = 200, B = 34, top = 18, mx = Math.max(3, ...gs.flatMap(g => [g.gf, g.ga])), bw = (W - 20) / Math.max(n, 1);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Goles a favor y en contra en cada partido">`;
+  for (let v = 0; v <= mx; v++) { const y = H - B - (H - B - top) * v / mx; s += `<line class="grid" x1="20" x2="${W}" y1="${y}" y2="${y}"/><text class="ax" x="14" y="${y + 4}" text-anchor="end">${v}</text>`; }
+  gs.forEach((g, i) => {
+    const x0 = 20 + i * bw, b = Math.min(bw * 0.32, 26), h1 = (H - B - top) * g.gf / mx, h2 = (H - B - top) * g.ga / mx, cx = x0 + bw / 2;
+    const t = `${fd(g.m.d)} ${g.home ? 'vs' : 'en'} ${NM[g.o]}: ${g.gf}-${g.ga}`;
+    s += `<g><title>${esc(t)}</title><rect class="s1" x="${cx - b - 1}" y="${H - B - h1}" width="${b}" height="${Math.max(h1, 0.01)}" rx="2"/>` +
+      `<rect class="s2" x="${cx + 1}" y="${H - B - h2}" width="${b}" height="${Math.max(h2, 0.01)}" rx="2"/>` +
+      `<text class="ax" x="${cx}" y="${H - B + 14}" text-anchor="middle">${SH[g.o]}</text><text class="ax" x="${cx}" y="${H - B + 27}" text-anchor="middle">${g.home ? 'C' : 'F'}</text></g>`;
+  });
+  return s + '</svg>';
+}
+function renderTeam() {
+  const i = ST_.sel, gs = G[i], r = ROW[i], n = gs.length;
+  if (!n) { $('team').innerHTML = card(nm(i), note('Aún no ha jugado ningún partido.')); return; }
+  const H = gs.filter(g => g.home), A = gs.filter(g => !g.home);
+  const sum = (k, side = 'f') => num(gs.map(g => g[side][k])).reduce((s, x) => s + x, 0);
+  const cnt = f => gs.filter(f).length;
+  const nx = nextFixture(i);
+  const kp = [['Posición', `${r.pos}º · ${r.pts} pts`], ['Balance', `${r.w}G ${r.d}E ${r.l}P`], ['Goles', `${r.gf} a favor · ${r.ga} en contra`],
+    ['xG', `${f1(sum('xg'))} a favor · ${f1(sum('xg', 'a'))} en contra`], ['Tarjetas', `${sum('y')} ${sum('y') === 1 ? 'amarilla' : 'amarillas'} · ${sum('r')} ${sum('r') === 1 ? 'roja' : 'rojas'}`]];
+  const pts = gs.map(g => g.res === 'W' ? 3 : g.res === 'D' ? 1 : 0), shots = sum('s') || 1;
+  const E = (x, m) => { const q = (x + 2) / (m + 4); return '±' + Math.round(Math.sqrt(q * (1 - q) / (m + 4)) * 100) + ' pp'; };  // Agresti-Coull: no da 0 con 9 de 9
+  const c0 = cnt(g => g.ga === 0), c1 = cnt(g => g.gf === 0), c2 = cnt(g => g.gf > 0 && g.ga > 0), c3 = cnt(g => g.gf + g.ga > 2);
+  const mk = gs.filter(g => g.m.odds), exp = mk.reduce((s, g) => { const q = implied(g.m.odds); return s + 3 * q[g.home ? 0 : 2] + q[1]; }, 0);
+  const ptsM = mk.reduce((s, g) => s + (g.res === 'W' ? 3 : g.res === 'D' ? 1 : 0), 0);
+  const gx = gs.filter(g => ok(g.f.xg)), gmx = gx.reduce((s, g) => s + g.gf - g.f.xg, 0);
+  const adv = [['Puntos por partido', f2(r.pts / n), '±' + f2(Math.sqrt(PTSV / n))], ['Victorias', pf(r.w / n), E(r.w, n)],
+    ['Portería a cero', `${c0} de ${n}`, ''], ['Sin marcar', `${c1} de ${n}`, ''], ['Ambos marcan', pf(c2 / n), E(c2, n)],
+    ['Más de 2,5 goles', pf(c3 / n), E(c3, n)], ['Tiros a puerta / tiros', pf(sum('st') / shots), E(sum('st'), shots)],
+    ['Goles por tiro', pf(sum('g') / shots), E(sum('g'), shots)],
+    ['Goles menos xG', sg1(gmx), gx.length > 1 ? '±' + f1(Math.sqrt(vr(gx.map(g => g.gf - g.f.xg)) * gx.length)) : ''],
+    ['Puntos frente a las cuotas', mk.length ? `${ptsM} reales · ${f1(exp)} esperados` : '–', '']];
+  const form = gs.slice(-10).map(g => `<i class="fm ${g.res}" title="${esc(`${fd(g.m.d)} ${g.home ? 'vs' : 'en'} ${NM[g.o]} ${g.gf}-${g.ga}`)}">${{W: 'G', D: 'E', L: 'P'}[g.res]}</i>`).join('');
+  const varRows = VARS.flatMap(v => ['f', 'a'].map(side => {
+    const vals = num(gs.map(g => g[side][v.k])), m = mean(vals), sd = Math.sqrt(vr(vals) || 0), e = vals.length ? Math.sqrt(ST[v.k].w / vals.length) : null;
+    const d = ok(m) ? m - ST[v.k].mu : null, lv = level(d, e);
+    return `<tr><td>${side === 'f' ? v.fl : v.al}</td><td>${f1(m)}</td><td>${f1(sd)}</td><td>±${f1(e)}</td><td>${sg1(d)}</td><td>${chip(lv)}</td><td>${f1(neutral(v.k, i, side))}</td></tr>`;
+  }));
+  const avg = (arr, k, side = 'f') => mean(num(arr.map(g => g[side][k])));
+  const avgRows = VARS.map(v => `<tr><td>${v.n}</td><td>${f1(avg(gs, v.k))}</td><td>${f1(avg(gs, v.k, 'a'))}</td><td>${f1(avg(H, v.k))}</td><td>${f1(avg(A, v.k))}</td><td>${f1(avg(H, v.k, 'a'))}</td><td>${f1(avg(A, v.k, 'a'))}</td></tr>`);
+  const cell = (g, k) => {
+    const f = g.f[k], a = g.a[k]; if (!ok(f) || !ok(a)) return '<td>–</td>';
+    const show = x => k === 'xg' ? f1(x) : x;
+    if (!ok(g.ef[k])) return `<td>${show(f)}-${show(a)}</td>`;
+    const d1 = f - g.ef[k], d2 = a - g.ea[k], z1 = d1 / perMatchSd(k, g.ef[k]), z2 = d2 / perMatchSd(k, g.ea[k]);
+    return `<td>${show(f)}-${show(a)}<br><span class="dv ${Math.max(Math.abs(z1), Math.abs(z2)) >= 2 ? 'b' : ''}" title="${esc(`${sg1(z1)} / ${sg1(z2)} desviaciones`)}">${sg1(d1)} / ${sg1(d2)}</span></td>`;
+  };
+  const mrows = gs.slice().reverse().map(g => {
+    const q = implied(g.m.odds);
+    return `<tr><td>${fd(g.m.d)}</td><td>${g.m.j || ''}</td><td class="l">${g.home ? 'Casa' : 'Fuera'}</td><td class="l">${nm(g.o)}</td><td><b>${g.gf}-${g.ga}</b>${g.m.v.g1 ? ` <span class="mu">(${g.f.g1}-${g.a.g1})</span>` : ''}</td>` +
+      ['xg', 's', 'st', 'c', 'f', 'y', 'r'].map(k => cell(g, k)).join('') + `<td>${q ? pc(q[g.home ? 0 : 2]) : '–'}</td></tr>`;
+  });
+  $('team').innerHTML = `<div class="th"><h2 class="tn">${nm(i)}</h2>${nx ? `<button class="go" data-fx="${nx.h}-${nx.a}">Analizar ${nm(nx.h)} – ${nm(nx.a)} · ${fdl(nx.d)} →</button>` : ''}</div>
+    <div class="tiles">${kp.map(k => `<div class="tile"><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}</div>
+    ${card('Forma (últimos 10)', `<div class="form">${form}</div>`)}
+    ${card('Goles por partido', `<div class="sc">${goalsChart(gs)}</div><p class="legend"><span class="sw s1"></span>A favor <span class="sw s2"></span>En contra · C = en casa, F = fuera</p>`)}
+    ${card('Resumen avanzado', `<div class="tiles sm">${adv.map(k => `<div class="tile"><span>${k[0]}</span><b>${k[1]}</b><small>${k[2]}</small></div>`).join('')}</div>`)}
+    ${card('Variación y señal de cada estadística', tbl(['', 'Media', 'Desv. típica', 'Error de la media', 'Frente a la liga', 'Señal', 'Esperable ajustado'], varRows, 'num') +
+      note('<b>Desv. típica</b>: cuánto varía de un partido a otro. <b>Error de la media</b>: cuánto podría moverse su media solo por azar. <b>Señal</b>: clara si la diferencia con la liga supera dos errores, posible si supera uno (siendo optimistas) y ruido si no. <b>Esperable ajustado</b>: lo que el modelo espera contra un rival medio en campo neutral, ya corregido por la dificultad de los rivales y acercado a la media según lo que demuestran los datos.'))}
+    ${card('Promedios por partido', tbl(['', 'Equipo', 'Rival', 'Equipo en casa', 'Equipo fuera', 'Rival cuando juega en casa', 'Rival cuando juega fuera'], avgRows, 'num'))}
+    ${card('Partidos', tbl(['Fecha', 'J', ['Lugar', 'l'], ['Rival', 'l'], 'Resultado', 'xG', 'Tiros', 'A puerta', 'Córners', 'Faltas', 'Amarillas', 'Rojas', 'Gana según cuotas'], mrows, 'num mt') +
+      note('Cada celda muestra el equipo y el rival. Debajo, la diferencia con lo que esperaba el modelo para ese partido (equipo / rival). En negrita, desviaciones de dos o más (al pasar el cursor se ven en desviaciones típicas).'))}
+    ${squadHtml(i)}`;
+}
+const AL = {Alaves: ['alaves'], 'Ath Bilbao': ['athletic'], 'Ath Madrid': ['atletico'], Betis: ['betis'], Celta: ['celta'], Espanol: ['espanyol'],
+  'La Coruna': ['coruna', 'deportivo'], Santander: ['racing'], Sociedad: ['sociedad'], Vallecano: ['vallecano', 'rayo'], 'Real Madrid': ['real madrid']};
+const nz = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+let ps = 'min';
+function squadHtml(i) {
+  const keys = AL[T[i]] || [nz(T[i])], k = Object.keys(D.pl || {}).find(n => keys.some(a => nz(n).includes(a))), sq = k ? D.pl[k] : null;
+  if (!sq || !sq.length) return '';
+  const POSN = {Goalkeeper: 'POR', Defender: 'DEF', Midfielder: 'MED', Attacker: 'DEL'};
+  const a = sq.slice().sort((x, y) => ps === 'n' ? x.n.localeCompare(y.n, 'es') : (y[ps] - x[ps]) || (y.min - x.min));
+  const H = [['n', 'Jugador'], ['pj', 'PJ'], ['min', 'Min'], ['g', 'Goles'], ['a', 'Asist.'], ['y', 'Amarillas'], ['r', 'Rojas']];
+  return card('Plantilla', tbl(H.map(h => `<button class="lk" data-ps="${h[0]}">${h[1]}${ps === h[0] ? ' ↓' : ''}</button>`),
+    a.map(p => `<tr><td>${esc(p.n)} <span class="mu">${POSN[p.pos] || ''}</span></td><td>${p.pj}</td><td>${p.min}</td><td>${p.g}</td><td>${p.a}</td><td>${p.y}</td><td>${p.r}</td></tr>`), 'num'));
+}
+function renderEquipos() { renderTable(); renderRank(); renderTeam(); }
+
+/* ---------------------------------------------------------------- vista: análisis de partido */
+const MODES = {opt: {z: 1, thr: 0.6, name: 'Optimista', desc: '±1 error · umbrales con al menos 60 %'},
+  pru: {z: 2, thr: 0.7, name: 'Prudente', desc: '±2 errores · umbrales con al menos 70 %'}};
+const fxKey = f => f.h + '-' + f.a;
+const byDate = (x, y) => (x.d < y.d ? -1 : x.d > y.d ? 1 : (x.tm || '') < (y.tm || '') ? -1 : 1);
+const upcoming = () => FX.filter(f => !f.past).sort(byDate);
+const SRC = {3: 'Fecha y hora de football-data', 2: 'Fecha corregida a mano', 1: 'Fecha y hora del calendario abierto'};
+const statusOf = f => f.past ? '<span class="chip warn">Fecha pasada sin resultado: aplazado o pendiente de datos</span>'
+  : `<span class="chip">${esc(SRC[f.src] || D.meta.cal_label || 'Fecha del calendario oficial')}</span>`;
+function fixtureSelect(cur) {
+  const groups = [], seen = {};
+  upcoming().forEach(f => { const g = 'Jornada ' + f.j; if (!seen[g]) { seen[g] = []; groups.push([g, seen[g]]); } seen[g].push(f); });
+  const past = FX.filter(f => f.past);
+  if (past.length) groups.push(['Fecha pasada sin resultado', past]);
+  return `<select id="fx-sel" aria-label="Partido">${groups.map(([g, fs]) => `<optgroup label="${g}">${fs.map(f =>
+    `<option value="${fxKey(f)}" ${fxKey(f) === cur ? 'selected' : ''}>${f.past ? 'J' + f.j + ' · ' : fdl(f.d) + (f.tm ? ' ' + f.tm : '') + ' · '}${nm(f.h)} – ${nm(f.a)}</option>`).join('')}</optgroup>`).join('')}</select>`;
+}
+const probBar = (p, label) => `<div class="pb"><span class="pbl">${label}</span><div class="pbar">${p.map((x, k) =>
+  `<i class="q${k}" style="width:${(x * 100).toFixed(2)}%" title="${['Local', 'Empate', 'Visitante'][k]}: ${pc(x)}">${x >= 0.14 ? pc(x) : ''}</i>`).join('')}</div></div>`;
+/* El factor del árbitro (rf) multiplica la media y la varianza, igual que en model.trend_candidates. */
+const scaleP = (x, q) => q === 1 || !x ? x : {m: x.m * q, V: x.V * q, e: x.e * q};
+function estimates(h, a, win, useX, rf) {
+  const pr = predict(h, a), cH = cross(h, a, win), cA = cross(a, h, win), est = {};
+  VARS.forEach(({k}) => {
+    const q = rf && ok(rf[k]) ? rf[k] : 1;
+    const H = scaleP(sPred(k, h, a, 1), q), A = scaleP(sPred(k, a, h, 0), q), rH = cH.rows[k], rA = cA.rows[k];
+    if (!H || !A) return;
+    const on = useX && rH && rA;
+    const addH = on ? rH.f.adj + rA.a.adj : 0, avH = on ? rH.f.av + rA.a.av : 0;
+    const addA = on ? rA.f.adj + rH.a.adj : 0, avA = on ? rA.f.av + rH.a.av : 0;
+    const Hm = Math.max(H.m + addH, 0.001), Am = Math.max(A.m + addA, 0.001), He = Math.sqrt(H.e ** 2 + avH), Ae = Math.sqrt(A.e ** 2 + avA);
+    const p = SM[k] || {rr: 0, phi: 1};
+    const TV = k === 'g' ? pr.V[2] + avH + avA : Math.max(H.V + avH + A.V + avA + 2 * (p.rr || 0) * (p.phi || 1) * Math.sqrt(Hm * Am), 1e-6);
+    est[k] = {H: {m: Hm, e: He, V: H.V + avH}, A: {m: Am, e: Ae, V: A.V + avA}, T: {m: Hm + Am, e: Math.hypot(He, Ae), V: TV},
+      adj: Math.abs(addH) + Math.abs(addA), w: on ? Math.max(rH.f.w || 0, rA.a.w || 0, rA.f.w || 0, rH.a.w || 0) : 0, rf: q};
+  });
+  return {pr, cH, cA, est};
+}
+/* Total esperado de una estadística en un partido pendiente (con el árbitro, si se conoce) y su desviación típica. */
+function totalOf(k, f) {
+  const q = f.rf && ok(f.rf[k]) ? f.rf[k] : 1, A = scaleP(sPred(k, f.h, f.a, 1), q), B = scaleP(sPred(k, f.a, f.h, 0), q);
+  if (!A || !B) return null;
+  const p = SM[k] || {rr: 0, phi: 1}, m = A.m + B.m;
+  return {m, sd: Math.sqrt(A.V + B.V + 2 * (p.rr || 0) * (p.phi || 1) * Math.sqrt(A.m * B.m)), q};
+}
+function lineP(X, k, side, L) {
+  const x = X.est[k][side];
+  if (k === 'g' && X.est.g.adj < 0.02) return over(side === 'H' ? X.pr.hx : side === 'A' ? X.pr.ay : X.pr.tot, L);
+  return pOver(x, L, VK[k].cont);
+}
+function umbral(X, k, side, thr) {
+  const x = X.est[k][side], sd = Math.sqrt(x.V), lo = Math.max(0.5, Math.floor(x.m - 3 * sd) + 0.5), hi = Math.floor(x.m + 3 * sd) + 0.5;
+  let up = null, dn = null;
+  for (let L = lo; L <= hi; L += 1) { const p = lineP(X, k, side, L); if (p >= thr) up = {L, p}; if (!dn && 1 - p >= thr) dn = {L, p: 1 - p}; }
+  return {up, dn};
+}
+const lineTxt = L => f1(L).replace(',0', '');
+/* Media según solo los rivales parecidos: lo que hizo t contra los parecidos a o y lo que concedió o contra los parecidos a t. */
+function crossMean(X, k, side) {
+  const one = (cT, cO) => {
+    const a = cT.rows[k], b = cO.rows[k]; if (!a || !b) return null;
+    const n1 = a.f.n, n2 = b.a.n; if (!n1 && !n2) return null;
+    return {m: ((n1 ? a.obs * n1 : 0) + (n2 ? b.obsA * n2 : 0)) / (n1 + n2), n: n1 + n2};
+  };
+  const H = one(X.cH, X.cA), A = one(X.cA, X.cH);
+  if (side === 'H') return H; if (side === 'A') return A;
+  return H && A ? {m: H.m + A.m, n: Math.min(H.n, A.n)} : null;
+}
+/* Probabilidad de superar L según el modelo y según los rivales parecidos; la prudente es la menor de las dos. */
+function bothOver(X, k, side, L) {
+  const pm = lineP(X, k, side, L), c = crossMean(X, k, side), x = X.est[k][side];
+  const px = c ? pOver({m: Math.max(c.m, 0.01), V: x.V * Math.max(c.m, 0.01) / x.m}, L, VK[k].cont) : null;
+  return {pm, px, over: px == null ? pm : Math.min(pm, px), under: px == null ? 1 - pm : Math.min(1 - pm, 1 - px)};
+}
+const LEVELS3 = [['Muy prudente', 0.85], ['Prudente', 0.70], ['Optimista', 0.60]];
+function prudentHtml(X, h, a) {
+  const cell = (k, side, thr) => {
+    const x = X.est[k][side], sd = Math.sqrt(x.V), lo = Math.max(0.5, Math.floor(x.m - 4 * sd) + 0.5), hi = Math.floor(x.m + 4 * sd) + 0.5;
+    let up = null, dn = null;
+    for (let L = lo; L <= hi; L += 1) { const b = bothOver(X, k, side, L); if (b.over >= thr) up = {L, p: b.over}; if (!dn && b.under >= thr) dn = {L, p: b.under}; }
+    const fmt = (t, o) => `${t} ${lineTxt(o.L)} <small>(${pc(o.p)} · cuota justa ${f2(1 / o.p)})</small>`;
+    return [up ? fmt('más de', up) : '', dn ? fmt('menos de', dn) : ''].filter(Boolean).join('<br>') || '–';
+  };
+  const rowsDef = [['g', 'T', 'Goles (total)'], ['c', 'T', 'Córners (total)'], ['y', 'T', 'Amarillas (total)'], ['st', 'T', 'Tiros a puerta (total)'],
+    ['s', 'T', 'Tiros (total)'], ['f', 'T', 'Faltas (total)'], ['g', 'H', 'Goles ' + NM[h]], ['g', 'A', 'Goles ' + NM[a]],
+    ['c', 'H', 'Córners ' + NM[h]], ['c', 'A', 'Córners ' + NM[a]], ['y', 'H', 'Amarillas ' + NM[h]], ['y', 'A', 'Amarillas ' + NM[a]]];
+  const rows = rowsDef.filter(([k]) => X.est[k]).map(([k, side, lab]) => {
+    const c = crossMean(X, k, side), m = X.est[k][side].m;
+    const agree = c ? (Math.abs(c.m - m) <= Math.max(0.15 * m, 0.5) ? '<span class="chip clear">Coinciden</span>' : `<span class="chip maybe">${c.m > m ? 'Parecidos: más' : 'Parecidos: menos'}</span>`) : '<span class="chip">Sin cruce</span>';
+    return `<tr><td class="l">${esc(lab)}</td><td>${f1(m)}</td><td>${c ? `${f1(c.m)} <small>(${c.n} p.)</small>` : '–'}</td><td>${agree}</td>${LEVELS3.map(([, t]) => `<td>${cell(k, side, t)}</td>`).join('')}</tr>`;
+  });
+  return card('Umbrales prudentes: modelo y rivales parecidos', tbl([['Estadística', 'l'], 'Esperado (modelo)', 'Rivales parecidos', 'Acuerdo',
+    'Muy prudente (85 %)', 'Prudente (70 %)', 'Optimista (60 %)'], rows, 'num et') +
+    note(`Una línea aparece solo si la cumplen a la vez el modelo y lo que han hecho los dos equipos contra rivales parecidos (se toma la menor de las dos probabilidades); si no hay partidos en el cruce, solo el modelo. "Rivales parecidos" mezcla lo que cada equipo hizo contra los parecidos al otro y lo que el otro concedió contra los parecidos a él; con pocos partidos es muy inestable. La <b>cuota justa</b> es la que correspondería a esa probabilidad: solo tendría sentido si una casa pagara claramente más (por su margen, al menos un 5-10 % más). Una línea muy probable paga muy poco, y que algo sea probable no lo convierte en buena apuesta.`));
+}
+/* ---------------------------------------------------------------- cara a cara y hándicaps */
+const normDist = (mu, sd) => { const m = new Map(), s = Math.max(sd, 0.3);
+  for (let d = Math.floor(mu - 6 * s); d <= Math.ceil(mu + 6 * s); d++) { const q = Phi((d + 0.5 - mu) / s) - Phi((d - 0.5 - mu) / s); if (q > 1e-7) m.set(d, q); } return m; };
+const flip = dist => { const m = new Map(); dist.forEach((q, d) => m.set(-d, q)); return m; };
+function settle(dist, h) { let w = 0, p = 0, l = 0; dist.forEach((q, d) => { const v = d + h; if (Math.abs(v) < 1e-9) p += q; else if (v > 0) w += q; else l += q; }); return {w, p, l}; }
+/* Hándicap asiático h sobre la diferencia (equipo − rival): líneas de cuarto se reparten en dos mitades. */
+function ah(dist, h) {
+  const parts = Math.abs(Math.round(h * 4)) % 2 === 1 ? [h - 0.25, h + 0.25] : [h]; let w = 0, p = 0, l = 0;
+  parts.forEach(x => { const s = settle(dist, x); w += s.w / parts.length; p += s.p / parts.length; l += s.l / parts.length; });
+  return {w, p, l, fair: w > 0 ? 1 + l / w : 1e9};
+}
+const hTxt = h => (h > 0 ? '+' : h < 0 ? '−' : '') + f2(Math.abs(h)).replace(/,00$/, '').replace(/(,\d)0$/, '$1');
+const fairTxt = x => isFinite(x) && x < 100 ? f2(x) : '–';
+function h2hHtml(X, f) {
+  const h = f.h, a = f.a, md = MODES[ST_.mode], NMx = s => NM[s === 'H' ? h : a];
+  const keys = [['g', 'goles'], ['xg', 'xG'], ['s', 'tiros'], ['st', 'tiros a puerta'], ['c', 'córners'], ['y', 'amarillas'], ['f', 'faltas']];
+  const rows = [], good = [], clash = [];
+  keys.forEach(([k, lab]) => {
+    const E = X.est[k], rH = X.cH.rows[k], rA = X.cA.rows[k]; if (!E || !rH || !rA) return;
+    const pH = crossMean(X, k, 'H'), pA = crossMean(X, k, 'A'), dm = E.H.m - E.A.m;
+    const distM = k === 'g' ? X.pr.dd : normDist(dm, Math.sqrt(E.H.V + E.A.V));
+    let distX = null, dx = null;
+    if (pH && pA) {
+      const VH = E.H.V * pH.m / E.H.m, VA = E.A.V * pA.m / E.A.m;
+      dx = pH.m - pA.m; distX = normDist(dx, Math.sqrt(VH + VA + VH / pH.n + VA / pA.n));
+    }
+    const fav = (dx != null ? dx : dm) >= 0 ? 'H' : 'A', und = fav === 'H' ? 'A' : 'H';
+    const dM = fav === 'H' ? distM : flip(distM), dX = distX ? (fav === 'H' ? distX : flip(distX)) : null;
+    const both = hh => { const m = ah(dM, hh), x = dX ? ah(dX, hh) : null; const w = x ? Math.min(m.w, x.w) : m.w, l = x ? Math.max(m.l, x.l) : m.l; return {m, x, w, l, fair: w > 0 ? 1 + l / w : 1e9}; };
+    const more = both(-0.5), agree = !dX || (dm >= 0) === (dx >= 0);
+    let best = null, safe = null;
+    if (!VK[k].cont) for (let hh = -0.5; hh >= -40; hh -= 1) { const b = both(hh); if (b.w >= md.thr) best = {hh, ...b}; if (b.w >= 0.85) safe = {hh, ...b}; if (b.w < 0.5) break; }
+    const cell = b => b ? `${esc(NMx(fav))} ${hTxt(b.hh)} <small>(${pc(b.w)} · cuota justa ${fairTxt(b.fair)})</small>` : '–';
+    rows.push(`<tr><td class="l">${VK[k].n}</td><td>${f1(rH.obs)} <small>(${rH.f.n})</small></td><td>${f1(rA.obs)} <small>(${rA.f.n})</small></td>` +
+      `<td>${f1(rH.obsA)}</td><td>${f1(rA.obsA)}</td><td>${dx != null ? sg1(dx) : '–'}</td><td>${sg1(dm)}</td>` +
+      `<td>${agree ? `<b>${esc(NMx(fav))}</b> ${more.x ? pc(more.x.w) + ' / ' : ''}${pc(more.m.w)}` : '<span class="chip maybe">No coinciden</span>'}</td>` +
+      `<td>${agree ? cell(best) : '–'}</td><td>${agree ? cell(safe) : '–'}</td></tr>`);
+    if (!agree) clash.push(lab);
+    else if (more.w >= md.thr) good.push([more.w, `<b>${esc(NMx(fav))}</b> debería tener más ${lab} que el ${esc(NMx(und))}: contra rivales parecidos ${esc(NMx(fav))} hace ${f1((fav === 'H' ? rH : rA).obs)} y ${esc(NMx(und))} ${f1((fav === 'H' ? rA : rH).obs)}; proyección para este partido ${f1(fav === 'H' ? pH && pH.m : pA && pA.m)} frente a ${f1(fav === 'H' ? pA && pA.m : pH && pH.m)}. Probabilidad ${more.x ? pc(more.x.w) + ' según el cruce y ' : ''}${pc(more.m.w)} según el modelo.` +
+        (best ? ` Hándicap ${md.name.toLowerCase()}: <b>${esc(NMx(fav))} ${hTxt(best.hh)} ${lab}</b> (${pc(best.w)}, cuota justa ${fairTxt(best.fair)}).` : '')]);
+  });
+  good.sort((x, y) => y[0] - x[0]);
+  const warn = [];
+  const vH = X.cH.gs, vA = X.cA.gs;
+  if (vH.length && vH.every(g => !g.home)) warn.push(`Todos los partidos del cruce del ${esc(NM[h])} fueron fuera de casa y hoy juega en casa.`);
+  if (vA.length && vA.every(g => g.home)) warn.push(`Todos los partidos del cruce del ${esc(NM[a])} fueron en casa y hoy juega fuera.`);
+  const n1 = vH.length, n2 = vA.length;
+  return card('Cara a cara con rivales parecidos', `<p class="note" style="margin-top:0">${esc(NM[h])}: ${n1} partidos contra rivales parecidos al ${esc(NM[a])} · ${esc(NM[a])}: ${n2} contra rivales parecidos al ${esc(NM[h])}. Ventana ±${ST_.win} puestos; modo ${md.name.toLowerCase()} (${Math.round(md.thr * 100)}\u00a0%).</p>` +
+    (warn.length ? `<p class="note"><span class="chip warn">Atención</span> ${warn.join(' ')}</p>` : '') +
+    `<h3>Conclusiones</h3>` + (good.length ? `<ul class="cl">${good.map(x => `<li>${x[1]}</li>`).join('')}</ul>` : note('Ninguna estadística cumple a la vez el cruce y el modelo con la probabilidad exigida.')) +
+    (clash.length ? note(`El cruce y el modelo no coinciden en quién tendrá más ${clash.join(', ')}: ahí no hay conclusión.`) : '') +
+    `<h3>Detalle</h3>` + tbl([['Estadística', 'l'], `${esc(NM[h])} hace`, `${esc(NM[a])} hace`, `${esc(NM[h])} concede`, `${esc(NM[a])} concede`,
+      'Local − visitante (cruce)', 'Local − visitante (modelo)', 'Quién más (cruce / modelo)', `Hándicap ${md.name.toLowerCase()}`, 'Hándicap muy prudente (85 %)'], rows, 'num et') +
+    note(`"Hace" y "concede" son medias contra los rivales parecidos al otro equipo (entre paréntesis, partidos). La diferencia del cruce proyecta cada equipo mezclando lo que hace él contra los parecidos al rival y lo que el rival concede contra los parecidos a él. Las probabilidades del hándicap son las menores entre cruce y modelo, para ser prudentes. Un hándicap −1,5 significa ganar esa estadística por 2 o más. La cuota justa es la que corresponde a esa probabilidad: solo hay valor si una casa paga claramente más.`));
+}
+function ahGoalsHtml(X, f) {
+  const dd = X.pr.dd, lines = [-1.5, -1.25, -1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5];
+  const mk = f.ah, rows = lines.map(hh => {
+    const H = ah(dd, hh), A = ah(flip(dd), -hh), isM = mk && Math.abs(mk[0] - hh) < 1e-9;
+    return `<tr class="${isM ? 'on' : ''}"><td class="l">${esc(NM[f.h])} ${hTxt(hh)} · ${esc(NM[f.a])} ${hTxt(-hh)}</td><td>${pc(H.w)}</td><td>${H.p > 0.001 ? pc(H.p) : '–'}</td><td>${pc(H.l)}</td><td>${fairTxt(H.fair)}</td><td>${fairTxt(A.fair)}</td>` +
+      `<td>${isM ? `${f2(mk[1])} / ${f2(mk[2])}` : ''}</td></tr>`;
+  });
+  let mtxt = 'football-data todavía no ha publicado el hándicap asiático de este partido.';
+  if (mk) {
+    const H = ah(dd, mk[0]), A = ah(flip(dd), -mk[0]), evH = H.w * (mk[1] - 1) - H.l, evA = A.w * (mk[2] - 1) - A.l;
+    mtxt = `Línea del mercado: ${esc(NM[f.h])} ${hTxt(mk[0])} a ${f2(mk[1])} y ${esc(NM[f.a])} ${hTxt(-mk[0])} a ${f2(mk[2])}. Con las probabilidades del modelo, apostar 1 € daría de media ${sgn(evH * 100, f0)} céntimos al ${esc(NM[f.h])} y ${sgn(evA * 100, f0)} al ${esc(NM[f.a])}. Recuerda que en la prueba retrospectiva el modelo ha sido peor que el mercado: un valor positivo aquí es más probablemente un error del modelo que de la casa.`;
+  }
+  return card('Hándicap asiático (goles)', tbl([['Línea', 'l'], 'Gana local', 'Nulo', 'Pierde local', 'Cuota justa local', 'Cuota justa visitante', 'Mercado (local / visitante)'], rows, 'num et') +
+    note(`${mtxt} En las líneas de cuarto (,25 y ,75) la apuesta se reparte entre las dos líneas vecinas; "nulo" es la probabilidad de que se devuelva el dinero.`));
+}
+function renderPartido() {
+  const f = FX.find(x => fxKey(x) === ST_.fx) || upcoming()[0] || FX[0];
+  if (!f) { $('c-partido').innerHTML = card('', note('No quedan partidos pendientes.')); return; }
+  ST_.fx = fxKey(f);
+  const h = f.h, a = f.a, md = MODES[ST_.mode], z = md.z, X = estimates(h, a, ST_.win, ST_.useX, f.rf), pr = X.pr, est = X.est;
+  const mk = implied(f.odds), mo = implied2(f.ou), names = [NM[h], 'Empate', NM[a]], pcb = mk && blendOn() ? pool(pr.p, mk, BA) : null;
+  /* conclusiones */
+  const C = {res: [], dif: [], lin: [], cx: []};
+  const fav = pr.p.indexOf(Math.max(...pr.p));
+  C.res.push(`Según el modelo, ${fav === 1 ? 'el empate es el resultado más probable' : `el favorito es el ${esc(names[fav])}`}: ${esc(NM[h])} ${pc(pr.p[0])}, empate ${pc(pr.p[1])}, ${esc(NM[a])} ${pc(pr.p[2])}. Goles esperados ${f1(pr.e[0])} – ${f1(pr.e[1])}.`);
+  if (mk) {
+    const dd = pr.p.map((x, k) => x - mk[k]), kk = dd.map(Math.abs).indexOf(Math.max(...dd.map(Math.abs)));
+    C.res.push(`El mercado da ${esc(NM[h])} ${pc(mk[0])}, empate ${pc(mk[1])}, ${esc(NM[a])} ${pc(mk[2])}. La mayor diferencia está en ${kk === 1 ? 'el empate' : 'la victoria del ' + esc(names[kk])} (${ppt(dd[kk])}).`);
+    if (BA === 0) C.res.push(`Lo aprendido hasta hoy: en la prueba retrospectiva (${LB.n} partidos con cuotas de cierre), el mercado por sí solo predice el resultado mejor que cualquier mezcla con el modelo. Así que esa diferencia se explica antes por un error del modelo que por un fallo de las casas, y para el 1X2 la mejor estimación es la del mercado.`);
+    else if (pcb) C.res.push(`Combinando como ha aprendido (${pf(BA)} modelo, ${pf(1 - BA)} mercado): ${esc(NM[h])} ${pc(pcb[0])}, empate ${pc(pcb[1])}, ${esc(NM[a])} ${pc(pcb[2])}. Es la combinación que mejor ha predicho los partidos ya jugados.`);
+    else if (BA === 1) C.res.push(`Lo aprendido hasta hoy: en la prueba retrospectiva (${LB.n} partidos con cuotas de cierre), el modelo por sí solo ha predicho el resultado mejor que cualquier mezcla con el mercado.`);
+  } else C.res.push('No hay cuotas publicadas todavía para este partido; football-data las suele publicar unos días antes.');
+  if (hasRf(f)) C.res.push(`Árbitro: ${esc(f.ref)}. En sus partidos de esta temporada ha habido ${rfPct(f)} de lo esperado (cifra ya acercada a la media según cuántos ha dirigido); las estimaciones de este partido lo incluyen.`);
+  else if (f.ref) C.res.push(`Árbitro: ${esc(f.ref)}. Con sus partidos de esta temporada no se aparta de lo esperado en tarjetas ni faltas, así que no cambia las estimaciones.`);
+  if (mo != null) C.res.push(`Más de 2,5 goles: modelo ${pc(pr.ou[2])}, mercado ${pc(mo)}.`);
+  ['g', 'xg', 's', 'st', 'c', 'f', 'y'].forEach(k => {
+    const E = est[k]; if (!E) return;
+    const dm = E.H.m - E.A.m, de = Math.hypot(E.H.e, E.A.e), lv = level(dm, de);
+    if ((lv === 'clear') || (lv === 'maybe' && z === 1)) {
+      const [w, l] = dm > 0 ? [h, a] : [a, h];
+      C.dif.push([Math.abs(dm) / de, `${chip(lv)} <b>${esc(NM[w])}</b>: más ${VK[k].low} que el ${esc(NM[l])} (${f1(Math.max(E.H.m, E.A.m))} frente a ${f1(Math.min(E.H.m, E.A.m))}; diferencia ${f1(Math.abs(dm))} ± ${f1(de)}).`]);
+    }
+  });
+  C.dif.sort((x, y) => y[0] - x[0]);
+  [['g', 'goles'], ['c', 'córners'], ['y', 'amarillas'], ['st', 'tiros a puerta'], ['s', 'tiros'], ['f', 'faltas']].forEach(([k, lab]) => {
+    if (!est[k]) return;
+    const u = umbral(X, k, 'T', md.thr), parts = [];
+    if (u.up) parts.push(`más de ${lineTxt(u.up.L)} (${pc(u.up.p)})`);
+    if (u.dn) parts.push(`menos de ${lineTxt(u.dn.L)} (${pc(u.dn.p)})`);
+    if (parts.length) C.lin.push(`Total de ${lab}: ${parts.join(' y ')}. Esperado ${f1(est[k].T.m)}.`);
+    if (k === 'g' || k === 'c') ['H', 'A'].forEach(s => {
+      const v = umbral(X, k, s, md.thr);
+      if (v.up) C.lin.push(`${esc(NM[s === 'H' ? h : a])}: más de ${lineTxt(v.up.L)} ${lab} (${pc(v.up.p)}).`);
+    });
+  });
+  [[X.cH, h, a], [X.cA, a, h]].forEach(([c, t, o]) => VARS.forEach(({k}) => {
+    const r = c.rows[k]; if (!r) return;
+    [['f', 'más', 'menos', VK[k].low], ['a', 'más', 'menos', VK[k].low + ' en contra']].forEach(([side, mas, menos, lab]) => {
+      const q = r[side]; if (!q.n) return;
+      const lv = level(q.r, q.e);
+      if (lv === 'clear' || (lv === 'maybe' && z === 1))
+        C.cx.push([Math.abs(q.r) / q.e, `${chip(lv)} Contra rivales parecidos al ${esc(NM[o])} (${q.n} ${q.n === 1 ? 'partido' : 'partidos'}), el <b>${esc(NM[t])}</b> ha tenido ${f1(Math.abs(q.r))} ${q.r > 0 ? mas : menos} ${esc(lab)} de lo que esperaba el modelo (± ${f1(q.e)}).`]);
+    });
+  }));
+  C.cx.sort((x, y) => y[0] - x[0]);
+  const nCross = X.cH.gs.length + X.cA.gs.length;
+  const li = arr => `<ul class="cl">${arr.map(x => `<li>${Array.isArray(x) ? x[1] : x}</li>`).join('')}</ul>`;
+  const concl = `<h3>Resultado</h3>${li(C.res)}
+    <h3>Diferencias entre los dos equipos</h3>${C.dif.length ? li(C.dif) : note(`Ninguna diferencia entre los dos equipos supera ${z === 1 ? 'un error' : 'dos errores'}.`)}
+    <h3>Umbrales del partido</h3>${C.lin.length ? li(C.lin) : note('Ninguna línea alcanza la probabilidad mínima.')}
+    <h3>Rivales parecidos</h3>${C.cx.length ? li(C.cx.slice(0, 8)) : note(nCross ? `Con ${nCross} partidos en el cruce, nada se aparta de lo que ya espera el modelo más allá del error${z === 1 ? ' (ni siendo optimistas)' : ''}.` : 'Ninguno de los dos ha jugado todavía contra rivales de esa zona de la tabla.')}`;
+  /* tabla de estimaciones */
+  const rng = x => `${f1(x.m)} <small>${f1(Math.max(x.m - z * x.e, 0))}–${f1(x.m + z * x.e)}</small>`;
+  const erows = VARS.map(v => {
+    const E = est[v.k]; if (!E) return '';
+    const L0 = Math.floor(E.T.m) + 0.5, lines = v.cont ? '–' : [L0 - 1, L0, L0 + 1].filter(L => L > 0).map(L => `+${lineTxt(L)}: ${pc(lineP(X, v.k, 'T', L))}`).join(' · ');
+    return `<tr><td>${v.n}</td><td>${rng(E.H)}</td><td>${rng(E.A)}</td><td>${rng(E.T)}</td><td class="ln">${lines}</td></tr>`;
+  });
+  const wmax = Math.max(0, ...Object.values(est).map(E => E.w || 0));
+  /* tablas del cruce */
+  const crossBlock = (c, t, o) => {
+    const list = c.gs.length ? tbl(['Fecha', ['Lugar', 'l'], ['Rival (puesto actual)', 'l'], 'Resultado', 'xG', 'Córners', 'Amarillas'], c.gs.map(g =>
+      `<tr><td>${fd(g.m.d)}</td><td class="l">${g.home ? 'Casa' : 'Fuera'}</td><td class="l">${nm(g.o)} (${POS[g.o]}º)</td><td><b>${g.gf}-${g.ga}</b></td><td>${f1(g.f.xg)}-${f1(g.a.xg)}</td><td>${f0(g.f.c)}-${f0(g.a.c)}</td><td>${f0(g.f.y)}-${f0(g.a.y)}</td></tr>`), 'num') : '';
+    const rows = VARS.map(v => {
+      const r = c.rows[v.k]; if (!r || !r.f.n) return '';
+      const one = (q, obs, ex) => q.n ? `<td>${f1(obs)}</td><td>${f1(ex)}</td><td>${sg1(q.r)} <small>±${f1(q.e)}</small></td><td>${chip(level(q.r, q.e))}</td>` : '<td colspan="4">–</td>';
+      return `<tr><td>${v.n}</td>${one(r.f, r.obs, r.exp)}${one(r.a, r.obsA, r.expA)}</tr>`;
+    }).filter(Boolean);
+    return `<h3>${nm(t)} contra rivales parecidos al ${nm(o)} <span class="mu">(puestos ${c.lo}º a ${c.hi}º: ${c.set.map(nm).join(', ')})</span></h3>` +
+      (c.gs.length ? list + tbl(['', 'Real', 'Esperado', 'Diferencia', 'Señal', 'Real', 'Esperado', 'Diferencia', 'Señal'], rows, 'num xt') +
+        '<p class="note">Las cuatro primeras columnas son lo que hizo el equipo y las cuatro siguientes lo que le hicieron sus rivales.</p>'
+        : note(`${nm(t)} aún no ha jugado contra ninguno de ellos.`));
+  };
+  const head = `<div class="mh"><div><h2 class="tn">${nm(h)} – ${nm(a)}</h2><p class="sub">Jornada ${f.j} · ${fdl(f.d)}${f.tm ? ' · ' + f.tm : ''}${f.ref ? ' · árbitro ' + esc(f.ref) : ''} ${statusOf(f)}</p></div></div>`;
+  const ctr = `<div class="ctr">${fixtureSelect(ST_.fx)}
+    <label>Rivales parecidos <select id="win-sel">${[2, 3, 4].map(v => `<option value="${v}" ${v === ST_.win ? 'selected' : ''}>±${v} puestos</option>`).join('')}</select></label>
+    <div class="seg" role="group" aria-label="Nivel de exigencia">${Object.entries(MODES).map(([k, m]) => `<button data-mode="${k}" aria-pressed="${k === ST_.mode}" title="${m.desc}">${m.name}</button>`).join('')}</div>
+    <label class="ck"><input type="checkbox" id="x-chk" ${ST_.useX ? 'checked' : ''}> Ajustar con rivales parecidos</label></div>
+    <p class="note">${md.name}: rangos de ±${z} ${z === 1 ? 'error' : 'errores'} y umbrales con al menos ${Math.round(md.thr * 100)}\u00a0% de probabilidad.</p>`;
+  const sum = `<div class="pbs">${probBar(pr.p, 'Modelo')}${mk ? probBar(mk, 'Mercado') : ''}${pcb ? probBar(pcb, 'Combinada') : ''}</div>
+    <p class="legend"><span class="sw q0"></span>${nm(h)} <span class="sw q1"></span>Empate <span class="sw q2"></span>${nm(a)}</p>
+    <div class="tiles sm"><div class="tile"><span>Goles esperados</span><b>${f1(pr.e[0])} – ${f1(pr.e[1])}</b></div>
+    <div class="tile"><span>Marcador más probable</span><b>${pr.top[0][0]}-${pr.top[0][1]}</b><small>${pc(pr.top[0][2])} · luego ${pr.top.slice(1, 3).map(t => `${t[0]}-${t[1]} ${pc(t[2])}`).join(', ')}</small></div>
+    <div class="tile"><span>Más de 2,5 goles</span><b>${pc(pr.ou[2])}</b>${mo != null ? `<small>mercado ${pc(mo)}</small>` : ''}</div>
+    <div class="tile"><span>Ambos marcan</span><b>${pc(pr.bb)}</b></div></div>`;
+  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + h2hHtml(X, f) + ahGoalsHtml(X, f) + prudentHtml(X, h, a) + card('Conclusiones', concl, 'concl') +
+    card('Estimaciones y umbrales', tbl(['', esc(NM[h]), esc(NM[a]), 'Total', 'Probabilidad de superar la línea (total)'], erows, 'num et') +
+      note(`Cada celda da la media esperada y, en pequeño, su rango con ±${z} ${z === 1 ? 'error' : 'errores'}: lo que cabe esperar de media, no de un partido concreto. Las probabilidades de la derecha sí son para este partido e incluyen la variación normal entre partidos. ` +
+        (hasRf(f) ? `Las amarillas y las faltas incluyen el efecto del árbitro (${rfTxt(f)}). ` : '') +
+        `${!ST_.useX ? 'El ajuste con rivales parecidos está desactivado.' : wmax < 0.01
+          ? 'El cruce con rivales parecidos no mueve estas cifras: con los datos de toda la liga, ninguna estadística muestra que el rendimiento cambie según la zona de la tabla del rival más de lo que daría el azar (prueba de permutación). Empezará a pesar solo si los datos llegan a demostrarlo.'
+          : `El cruce con rivales parecidos pesa como mucho un ${Math.round(wmax * 100)}\u00a0%, y solo en ${VARS.filter(v => { const c = CX(v.k); return c && (c.tf > 0 || c.ta > 0); }).map(v => v.low).join(', ')}: las estadísticas en las que los datos de toda la liga demuestran ese efecto.`}`)) +
+    card('Cruce con rivales parecidos', crossBlock(X.cH, h, a) + crossBlock(X.cA, a, h) +
+      note('El esperado es lo que el modelo preveía en esos mismos partidos, teniendo en cuenta el rival y si se jugaba en casa. La diferencia muestra si el equipo rinde por encima o por debajo de lo previsto contra ese tipo de rival. Se usa la clasificación actual.'));
+}
+
+/* ---------------------------------------------------------------- vista: predicciones */
+function nextList() {
+  const up = upcoming(), js = [...new Set(up.map(f => f.j))].slice(0, 2), first = up.length ? up[0].d : null;
+  return FX.filter(f => f.past).concat(up.filter(f => js.includes(f.j) || f.d === first));
+}
+function renderPred() {
+  const js = [...new Set(upcoming().map(f => f.j))].sort((x, y) => x - y);
+  const list = ST_.jsel === 'next' ? nextList() : FX.filter(f => String(f.j) === ST_.jsel).sort(byDate);
+  const bon = blendOn();
+  const rows = list.map(f => {
+    const pr = predict(f.h, f.a), mk = implied(f.odds), mo = implied2(f.ou), cb = mk && bon ? pool(pr.p, mk, BA) : null;
+    let dif = '–';
+    if (mk) { const d = pr.p.map((x, k) => x - mk[k]), k = d.map(Math.abs).indexOf(Math.max(...d.map(Math.abs))); dif = `${['1', 'X', '2'][k]} ${ppt(d[k])}`; }
+    return `<tr><td class="l"><button class="lk" data-fx="${fxKey(f)}">${nm(f.h)} – ${nm(f.a)}</button></td><td>${f.past ? `J${f.j} · ${fd(f.d)} <span class="chip warn">pasada</span>` : `J${f.j} · ${fdl(f.d)}${f.tm ? ' ' + f.tm : ''}`}</td>` +
+      `<td>${pr.p.map(pc).join(' · ')}</td><td>${mk ? mk.map(pc).join(' · ') : '–'}</td>${bon ? `<td>${cb ? cb.map(pc).join(' · ') : '–'}</td>` : ''}<td>${dif}</td><td>${f1(pr.e[0])} – ${f1(pr.e[1])}</td>` +
+      `<td>${pc(pr.ou[2])}${mo != null ? ` <small>(${pc(mo)})</small>` : ''}</td><td>${pc(pr.bb)}</td><td>${pr.fs[0]}-${pr.fs[1]} <small>${pc(pr.fs[2])}</small></td></tr>`;
+  });
+  const SKS = ['xg', 's', 'st', 'c', 'f', 'y', 'r'];
+  const srows = list.map(f => `<tr><td class="l">${nm(f.h)} – ${nm(f.a)}${hasRf(f) ? `<br><small>Árbitro ${esc(f.ref)}: ${rfTxt(f)}</small>` : ''}</td>${SKS.map(k => {
+    const t = totalOf(k, f); if (!t) return '<td>–</td>';
+    return `<td>${f1(t.m)} <small>${f1(Math.max(t.m - t.sd, 0))}–${f1(t.m + t.sd)}</small></td>`;
+  }).join('')}</tr>`);
+  const learnTxt = BA === 0 ? ` Lo aprendido hasta hoy: el mercado por sí solo predice el resultado mejor que cualquier mezcla con el modelo (${LB.n} partidos con cuotas de cierre en la prueba retrospectiva), así que para el 1X2 la mejor estimación es la del mercado. El modelo aporta lo que el mercado no da: las estadísticas, los partidos sin cuotas, la simulación y las tendencias.`
+    : bon ? ` La columna <b>Combinada</b> mezcla modelo y mercado con el peso aprendido (${pf(BA)} modelo), el que mejor ha predicho los partidos ya jugados.`
+    : BA === 1 ? ' Lo aprendido hasta hoy: el modelo por sí solo ha predicho el resultado mejor que cualquier mezcla con el mercado.' : '';
+  const sel = `<div class="ctr"><label>Partidos <select id="j-sel"><option value="next" ${ST_.jsel === 'next' ? 'selected' : ''}>Próximos</option>${js.map(j => `<option value="${j}" ${String(j) === ST_.jsel ? 'selected' : ''}>Jornada ${j}</option>`).join('')}</select></label></div>`;
+  const b = D.bt;
+  const sim = D.sim.map((s, t) => ({t, s})).sort((x, y) => y.s[0] - x.s[0]);
+  const heat = p => `<i style="--p:${Math.min(1, p * 2.2).toFixed(3)}" title="${pc(p)}"></i>`;
+  const srows2 = sim.map(({t, s}) => `<tr><td class="l">${nm(t)}</td><td>${ROW[t].pts}</td><td>${f0(s[0])} <small>${s[1]}–${s[2]}</small></td>` +
+    `<td>${pc(s[3])}</td><td>${pc(s[4])}</td><td>${pc(s[5])}</td><td>${pc(s[6])}</td><td><span class="heat" title="Probabilidad de cada puesto final">${s[7].map((p, k) => heat(p).replace('title="', `title="${k + 1}º: `)).join('')}</span></td></tr>`);
+  $('c-pred').innerHTML = sel +
+    card('Partidos', tbl(['Partido', 'Cuándo', 'Modelo 1 · X · 2', 'Mercado 1 · X · 2', ...(bon ? ['Combinada 1 · X · 2'] : []), 'Mayor diferencia', 'Goles esperados', '+2,5 goles (mercado)', 'Ambos marcan', 'Marcador'], rows, 'num pt') +
+      note(`Pulsa un partido para analizarlo. El mercado son las cuotas medias de football-data sin su margen; aparecen unos días antes de cada jornada. ${b && ok(b.dll) ? `En la prueba retrospectiva (${b.n} partidos), el modelo tiene una log-loss ${f2(b.llmod)} frente a ${f2(b.llm)} del mercado (diferencia ${sg2(b.dll)} ± ${f2(b.dse)}; más baja es mejor), así que las diferencias con las cuotas no deben leerse como errores de las casas.` : ''}${learnTxt}`)) +
+    card('Estadísticas esperadas (total del partido)', tbl(['Partido', 'xG', 'Tiros', 'A puerta', 'Córners', 'Faltas', 'Amarillas', 'Rojas'], srows, 'num') +
+      note(`Valor esperado y, en pequeño, el rango de una desviación típica de un partido: cubre aproximadamente dos de cada tres partidos.${D.meta.refs ? ' Cuando ya se conoce el árbitro, las amarillas y las faltas incluyen su efecto.' : ''}`)) +
+    card('Simulación del resto de la liga', tbl(['Equipo', 'Pts', 'Pts finales (80 %)', 'Campeón', `Top ${ZN.ucl}`, `Top ${ZN.ucl + ZN.uel}`, 'Descenso', `Puesto final: 1º → ${NT}º`], srows2, 'num sim') +
+      note(`${D.meta.sims} temporadas simuladas con los partidos pendientes. En cada una se sortea también la fuerza de cada equipo, con su incertidumbre y una variación extra porque los equipos cambian durante la temporada. ${cap(D.meta.tiebreak || '')}. El rango de puntos cubre el 80 % de las simulaciones; descenso son los ${ZN.rel} últimos puestos.`)) +
+    card('Fuerza de cada equipo', `<div class="sc">${strengthChart()}</div>` + tbl(['Equipo', 'Ataque', 'Defensa (goles encajados)'],
+      T.map((_, i) => i).sort((x, y) => (GM.a[y] + GM.d[y]) - (GM.a[x] + GM.d[x])).map(i => `<tr><td class="l">${nm(i)}</td><td>×${f2(Math.exp(GM.a[i]))} <small>±${f2(Math.exp(GM.a[i]) * Math.sqrt(GM.va[i]))}</small></td><td>×${f2(Math.exp(-GM.d[i]))} <small>±${f2(Math.exp(-GM.d[i]) * Math.sqrt(GM.vd[i]))}</small></td></tr>`), 'num') +
+      note(`Frente a un equipo medio: ataque ×1,20 son un 20 % más de goles; en defensa, menos de 1 es encajar menos. Ventaja de local: +${f0((Math.exp(GM.eta) - 1) * 100)}\u00a0% de goles. Diferencia típica entre equipos estimada con los datos: ±${f0((Math.exp(GM.sa) - 1) * 100)}\u00a0% en ataque y ±${f0((Math.exp(GM.sd) - 1) * 100)}\u00a0% en defensa. Corrección de marcadores bajos (Dixon-Coles): ${f2(GM.rho)}.`));
+}
+function strengthChart() {
+  const W = 640, H = 360, L = 52, R = 18, Tp = 18, B = 40;
+  const xs = GM.a.map(Math.exp), ys = GM.d.map(d => Math.exp(-d));
+  const xr = [Math.min(...xs, 0.9) * 0.95, Math.max(...xs, 1.1) * 1.03], yr = [Math.min(...ys, 0.9) * 0.95, Math.max(...ys, 1.1) * 1.03];
+  const X = v => L + (v - xr[0]) / (xr[1] - xr[0]) * (W - L - R), Y = v => Tp + (v - yr[0]) / (yr[1] - yr[0]) * (H - Tp - B);
+  const ticks = r => { const out = [], st = (r[1] - r[0]) > 1 ? 0.5 : 0.2; for (let v = Math.ceil(r[0] / st) * st; v <= r[1] + 1e-9; v += st) out.push(+v.toFixed(2)); return out; };
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Ataque frente a defensa de cada equipo">`;
+  ticks(xr).forEach(v => { s += `<line class="grid" x1="${X(v)}" x2="${X(v)}" y1="${Tp}" y2="${H - B}"/><text class="ax" x="${X(v)}" y="${H - B + 16}" text-anchor="middle">×${f1(v)}</text>`; });
+  ticks(yr).forEach(v => { s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ax" x="${L - 8}" y="${Y(v) + 4}" text-anchor="end">×${f1(v)}</text>`; });
+  s += `<line class="ref" x1="${X(1)}" x2="${X(1)}" y1="${Tp}" y2="${H - B}"/><line class="ref" x1="${L}" x2="${W - R}" y1="${Y(1)}" y2="${Y(1)}"/>`;
+  s += `<text class="ax" x="${W - R}" y="${H - 6}" text-anchor="end">Ataque: goles marcados frente a un equipo medio →</text><text class="ax" x="${L}" y="12">↑ Defensa: menos goles encajados</text>`;
+  const pts = xs.map((x, i) => ({i, x: X(x), y: Y(ys[i])})).sort((u, v) => u.y - v.y), placed = [];
+  pts.forEach(p => {
+    let ly = p.y - 9;
+    while (placed.some(q => Math.abs(q.x - p.x) < 30 && Math.abs(q.y - ly) < 12)) ly += 12;
+    placed.push({x: p.x, y: ly});
+    s += `<g><title>${esc(NM[p.i])}: ataque ×${f2(xs[p.i])}, defensa ×${f2(ys[p.i])}</title><circle class="dot" cx="${p.x}" cy="${p.y}" r="5"/><text class="lab" x="${p.x}" y="${ly}" text-anchor="middle">${SH[p.i]}</text></g>`;
+  });
+  return s + '</svg>';
+}
+
+/* ---------------------------------------------------------------- vista: historial */
+const LL = (p, o) => -Math.log(Math.max(p[o], 1e-9));
+function aggJs(rows) {
+  if (!rows.length) return null;
+  const wm = rows.filter(r => r.mk), d = wm.map(r => LL(r.p, r.o) - LL(r.mk, r.o));
+  return {n: rows.length, acc: mean(rows.map(r => r.p.indexOf(Math.max(...r.p)) === r.o ? 1 : 0)), ll: mean(rows.map(r => LL(r.p, r.o))),
+    nm: wm.length, accm: wm.length ? mean(wm.map(r => r.mk.indexOf(Math.max(...r.mk)) === r.o ? 1 : 0)) : null,
+    llm: wm.length ? mean(wm.map(r => LL(r.mk, r.o))) : null, llmod: wm.length ? mean(wm.map(r => LL(r.p, r.o))) : null,
+    dll: d.length ? mean(d) : null, dse: d.length > 1 ? Math.sqrt(vr(d) / d.length) : null};
+}
+function renderHist() {
+  const Lg = D.log, real = ST_.hreal && Lg.nreal > 0, rows = Lg.rows.filter(r => !real || !r.bf), A = aggJs(rows);
+  const tog = `<div class="ctr"><div class="seg" role="group" aria-label="Qué predicciones">
+    <button data-hreal="0" aria-pressed="${!real}">Todas (${Lg.n})</button><button data-hreal="1" aria-pressed="${real}" ${Lg.nreal ? '' : 'disabled'}>Guardadas antes del partido (${Lg.nreal})</button></div></div>
+    ${note(Lg.nreal ? 'Las predicciones guardadas antes del partido son la prueba limpia. Las reconstruidas se calcularon después, pero solo con los partidos anteriores a cada uno.' : 'Todavía no se ha jugado ningún partido con predicción guardada antes de empezar: el registro arrancó con esta versión. De momento todas son reconstruidas, calculadas solo con los partidos anteriores a cada uno.')}`;
+  if (!A) { $('c-hist').innerHTML = tog + card('', note('Aún no hay predicciones evaluadas.')); return; }
+  const bets = rows.filter(r => r.bet).map(r => r.bet[2]), bm = mean(bets), bse = bets.length > 1 ? Math.sqrt(vr(bets) / bets.length) : null;
+  const betsC = rows.filter(r => r.betc).map(r => r.betc[2]), nC = rows.filter(r => r.pc).length;
+  const C = aggJs(rows.filter(r => r.pc && r.mk).map(r => ({...r, p: r.pc})));
+  const tiles = [['Partidos evaluados', `${A.n}`, real ? 'guardados antes del partido' : `${Lg.nreal} guardados antes · ${Lg.n - Lg.nreal} reconstruidos`],
+    ['Aciertos del favorito', pc(A.acc), A.nm ? `mercado ${pc(A.accm)}` : ''],
+    ['Log-loss (más bajo es mejor)', `${f2(A.llmod != null ? A.llmod : A.ll)} frente a ${f2(A.llm)}`, A.dll != null ? `modelo − mercado ${sg2(A.dll)} ± ${f2(A.dse)} · ${LEVELS[level(A.dll, A.dse)].toLowerCase()}` : ''],
+    ...(C ? [['Combinada aprendida', `${f2(C.llmod)} frente a ${f2(C.llm)}`, `${C.n} partidos · combinada − mercado ${sg3(C.dll)}${C.dse != null ? ' ± ' + f3(C.dse) : ''}`]] : []),
+    ['Apuestas simuladas', bets.length ? `${sg1(bets.reduce((s, x) => s + x, 0))} u. en ${bets.length}` : 'ninguna', bets.length ? `rentabilidad ${sgn(bm * 100, f0)}\u00a0% ± ${f0((bse || 0) * 100)}\u00a0%` : '']];
+  const js = [...new Set(rows.map(r => r.j).filter(Boolean))].sort((x, y) => x - y);
+  const jrows = js.map(j => { const rj = rows.filter(r => r.j === j), a = aggJs(rj);
+    return `<tr><td>J${j}</td><td>${a.n}</td><td>${rj.filter(r => !r.bf).length}</td><td>${pc(a.acc)}</td><td>${f2(a.llmod != null ? a.llmod : a.ll)}</td><td>${f2(a.llm)}</td><td>${a.dll != null ? sg2(a.dll) : '–'}</td></tr>`; });
+  const bins = [0, 0.2, 0.4, 0.6, 0.8].map(lo => ({lo, s: 0, h: 0, n: 0}));
+  rows.forEach(r => r.p.forEach((p, k) => { const b = bins[Math.min(4, Math.floor(p * 5))]; b.s += p; b.h += r.o === k ? 1 : 0; b.n++; }));
+  const crows = bins.filter(b => b.n).map(b => `<tr><td>${f0(b.lo * 100)}–${f0(b.lo * 100 + 20)}\u00a0%</td><td>${b.n}</td><td>${pc(b.s / b.n)}</td><td>${pf(b.h / b.n)}</td><td>±${f0(Math.sqrt((b.s / b.n) * (1 - b.s / b.n) / b.n) * 100)} pp</td></tr>`);
+  const skeys = ['xg', 's', 'st', 'c', 'f', 'y', 'r'];
+  const strows = skeys.map(k => { const tr = rows.filter(r => r.st && r.st[k]).map(r => r.st[k]); if (!tr.length) return '';
+    const mae = mean(tr.map(([p, o]) => Math.abs(p - o))), base = tr.filter(t => ok(t[2])), maeb = base.length ? mean(base.map(([, o, b]) => Math.abs(b - o))) : null, bias = mean(tr.map(([p, o]) => p - o));
+    return `<tr><td>${VK[k].n}</td><td>${tr.length}</td><td>${f2(mae)}</td><td>${f2(maeb)}</td><td>${ok(maeb) ? sg0((mae / maeb - 1) * 100) + '\u00a0%' : '–'}</td><td>${sg2(bias)}</td></tr>`; }).filter(Boolean);
+  const mrows = rows.slice(0, 60).map(r => {
+    const hit = r.p.indexOf(Math.max(...r.p)) === r.o;
+    return `<tr><td>${fd(r.d)}</td><td>${r.j ? 'J' + r.j : ''}</td><td class="l">${nm(r.h)} – ${nm(r.a)}</td><td><b>${r.hg}-${r.ag}</b></td><td>${r.p.map(pc).join(' · ')}</td><td>${r.mk ? r.mk.map(pc).join(' · ') : '–'}</td>` +
+      `<td><span class="chip ${hit ? 'clear' : 'noise'}">${hit ? 'Acierto' : 'Fallo'}</span></td><td>${r.bet ? `${['1', 'X', '2'][r.bet[0]]} a ${f2(r.bet[1])}: ${sg2(r.bet[2])}` : '–'}</td><td>${r.bf ? 'Reconstruida' : 'Guardada ' + fd(r.made)}</td></tr>`;
+  });
+  const b = D.bt;
+  $('c-hist').innerHTML = tog + `<div class="tiles">${tiles.map(t => `<div class="tile"><span>${t[0]}</span><b>${t[1]}</b><small>${t[2]}</small></div>`).join('')}</div>` +
+    card('Por jornada', tbl(['Jornada', 'Partidos', 'Guardadas antes', 'Aciertos', 'Log-loss modelo', 'Log-loss mercado', 'Diferencia'], jrows, 'num') +
+      note('Log-loss: castiga dar poca probabilidad a lo que pasó; repartir un tercio a cada resultado da 1,10. Una diferencia positiva significa que el modelo fue peor que el mercado.')) +
+    card('Calibración', tbl(['Probabilidad dada', 'Casos', 'Media predicha', 'Frecuencia real', 'Error'], crows, 'num') +
+      note('Si el modelo está bien calibrado, lo que predice al 30 % ocurre cerca del 30 % de las veces. Cada partido aporta tres casos (1, X y 2).')) +
+    card('Apuestas simuladas', note(bets.length ? `Regla: apostar 1 unidad al resultado con más valor cuando la probabilidad del modelo por la cuota de cierre supera 1,05. Resultado: ${sg2(bets.reduce((s, x) => s + x, 0))} unidades en ${bets.length} apuestas (${bets.filter(x => x > 0).length} ganadas), rentabilidad ${sgn(bm * 100, f0)}\u00a0% por apuesta con un error de ±${f0((bse || 0) * 100)}\u00a0%. Con tan pocas apuestas el resultado es casi todo azar; harían falta cientos para saber si hay ventaja real. Es una simulación sin dinero, no una recomendación.` : 'Ninguna predicción cumple la regla de valor.') +
+      note(!nC ? 'Con la probabilidad combinada (la mezcla aprendida de modelo y mercado) todavía no hay partidos jugados: se guarda desde esta versión para los partidos con cuotas.'
+        : betsC.length ? `Con la probabilidad combinada aprendida, la misma regla habría hecho ${betsC.length} apuestas: ${sg2(betsC.reduce((s, x) => s + x, 0))} unidades (${betsC.filter(x => x > 0).length} ganadas).`
+        : `Con la probabilidad combinada aprendida, ninguno de los ${nC} partidos cumple la regla de valor: si el peso aprendido del modelo es bajo, la combinada se parece al mercado, y el margen de las casas se come cualquier ventaja.`)) +
+    card('Estadísticas: error de los totales', strows.length ? tbl(['Estadística', 'Partidos', 'Error medio del modelo', 'Error usando la media de la liga', 'Cambio del error', 'Sesgo medio'], strows, 'num') +
+      note('Error medio absoluto del total del partido. El cambio del error compara con predecir simplemente la media de la liga; un valor negativo indica que el modelo se equivoca menos. El sesgo positivo indica que el modelo esperaba más de lo que hubo.') : note('Sin datos todavía.')) +
+    (b ? card('Prueba retrospectiva del modelo actual', note(`Cada partido desde que hay al menos 30 jugados se predice con un modelo ajustado solo con los partidos de días anteriores (${b.n} partidos). Log-loss: modelo ${f2(b.llmod)}, mercado ${f2(b.llm)}, mezcla 50/50 ${f2(b.llb)}${LB.fit ? `, mezcla aprendida (${pf(LB.a)} modelo) ${f2(LB.ll)}` : ''}. Empates: el modelo dio de media un ${pc(b.pd)} y hubo un ${pc(b.fd)}.${b.ou ? ` Más de 2,5 goles: log-loss ${f2(b.ou.ll)} el modelo y ${f2(b.ou.llm)} el mercado.` : ''}`) +
+      `<p class="note"><button class="go" data-view="aprendizaje">Ver qué versión del modelo predice mejor y qué ha aprendido →</button></p>`) : '') +
+    card('Partidos evaluados', tbl(['Fecha', 'J', ['Partido', 'l'], 'Resultado', 'Modelo 1 · X · 2', 'Mercado', '', 'Apuesta simulada', 'Predicción'], mrows, 'num'));
+}
+
+/* ---------------------------------------------------------------- vista: tendencias */
+/* Las tendencias las detecta build.py (model.trend_candidates); aquí solo se presentan y se evalúan las líneas. */
+const TKN = {s: 'tiros', st: 'tiros a puerta', c: 'córners', y: 'amarillas', f: 'faltas'};
+const TSt = {fx: 'all', odds: {}};
+try { const sv = JSON.parse(localStorage.getItem('tend-odds2') || '{}'); if (sv && typeof sv === 'object') TSt.odds = sv; } catch (e) { /* sin almacenamiento */ }
+const saveOdds = () => { try { localStorage.setItem('tend-odds2', JSON.stringify(TSt.odds)); } catch (e) { /* sin almacenamiento */ } };
+const lapl = (h, n) => (h + 1) / (n + 2);  // frecuencia suavizada: con 2 de 2 no da 100 %
+function pOverPy(m, V, L) {  // igual que model.p_over, para que la página y Python den lo mismo
+  const k = Math.floor(L); if (k < 0) return 1;
+  let pk, c;
+  if (V > m * 1.02) { const r = m * m / (V - m), q = m / (r + m); pk = Math.pow(1 - q, r); c = pk; for (let i = 1; i <= k; i++) { pk *= (i - 1 + r) / i * q; c += pk; } }
+  else { pk = Math.exp(-m); c = pk; for (let i = 1; i <= k; i++) { pk *= m / i; c += pk; } }
+  return Math.min(1, Math.max(0, 1 - c));
+}
+const TIER = {muy: ['Muy clara', 'clear'], una: ['Clara', 'maybe']};
+/* Aprendizaje de las tendencias: cuánto se han cumplido las anteriores en la misma dirección frente a lo que esperaba el modelo.
+   La corrección se hace en escala logit con un peso n/(n+20), y la frecuencia se suaviza hacia lo esperado: con pocos casos casi no cambia nada. */
+const lgt = p => Math.log(p / (1 - p)), expit = z => 1 / (1 + Math.exp(-z));
+function trendStats(over) {
+  const S = (D.tb || {}).summ || {}, ss = (over ? ['muy+', 'una+'] : ['muy-', 'una-']).map(k => S[k]).filter(Boolean);
+  const n = ss.reduce((s, x) => s + x.n, 0);
+  if (!n) return {n: 0, w: 0, shift: 0};
+  const hits = ss.reduce((s, x) => s + Math.round(x.hit * x.n), 0), model = Math.min(0.98, Math.max(0.02, ss.reduce((s, x) => s + x.model * x.n, 0) / n));
+  const w = n / (n + 20), hr = Math.min(0.98, Math.max(0.02, (hits + 2 * model) / (n + 2)));
+  return {n, hits, hit: hits / n, model, w, shift: w * (lgt(hr) - lgt(model))};
+}
+const TCOR = {true: trendStats(true), false: trendStats(false)};
+const corrP = (p, over) => { const c = TCOR[over]; return c.shift ? expit(lgt(Math.min(Math.max(p, 1e-6), 1 - 1e-6)) + c.shift) : p; };
+const lineLab = (over, L, k) => `${over ? 'más' : 'menos'} de ${lineTxt(L)} ${TKN[k]}`;
+const trFx = r => FX.find(f => f.h === r.h && f.a === r.a) || {h: r.h, a: r.a, d: r.d, j: r.j, tm: '', past: r.d < D.meta.today};
+const vchips = (vals, ok_) => `<span class="tvs">${vals.map(v => `<span class="tv ${ok_(v) ? 'hit' : 'miss'}">${f0(v)}</span>`).join('')}</span>`;
+const nOf = (arr, ok_) => arr.filter(ok_).length;
+const enumTxt = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' y ' + a[a.length - 1] : String(a[0]);
+function trendBlock(r) {
+  const f = trFx(r), fk = fxKey(f), over = r.over, okAt = L => over ? (v => v > L) : (v => v < L), ok0 = okAt(r.L);
+  const who = r.side === 'T' ? 'Total del partido' : NM[r.side === 'H' ? r.h : r.a];
+  const rival = r.side === 'H' ? NM[r.a] : r.side === 'A' ? NM[r.h] : null;
+  const campo = r.side === 'H' ? 'en casa' : r.side === 'A' ? 'fuera' : '(el local en casa y el visitante fuera)';
+  const all = r.series.flat();
+  let story;
+  if (r.side === 'T') {
+    story = `Los últimos 5 partidos del ${esc(NM[r.h])} terminaron con ${enumTxt(r.series[0])} ${TKN[r.k]} y los del ${esc(NM[r.a])} con ${enumTxt(r.series[1])}: ${nOf(all, ok0)} de 10 cumplen la línea.`;
+  } else {
+    const s0 = r.series[0], n = nOf(s0, ok0);
+    story = `En sus últimos 5 partidos hizo ${enumTxt(s0)} ${TKN[r.k]}: ${n === 5 ? 'los 5 cumplen la línea' : `cumplen la línea los ${n} más recientes`}.`;
+  }
+  const tcr = TCOR[over], cTxt = Math.abs(corrP(r.pm, over) - r.pm) >= 0.005 ? `, ${pc(corrP(r.pm, over))} después de corregirlo con el historial de las tendencias ${over ? 'al alza' : 'a la baja'}` : '';
+  story += ` Contra rivales parecidos al ${r.side === 'T' ? 'otro equipo' : esc(rival)}: ${nOf(r.cross, ok0)} de ${r.cross.length} (${enumTxt(r.cross)}).` +
+    ` En sus últimos partidos ${campo}: ${nOf(r.same, ok0)} de ${r.same.length}.` +
+    ` El modelo espera ${f1(r.m)} y le da un ${pc(r.pm)}${cTxt}${r.pm < 0.4 ? ': la racha va claramente más allá de lo que espera' : ''}.` +
+    (r.ref && ok(r.rf) ? ` Árbitro: ${esc(r.ref)}` + (Math.abs(r.rf - 1) < 0.005 ? `, que no se aparta de lo esperado en ${TKN[r.k]}.`
+      : `, que en sus partidos ha tenido un ${f0(Math.abs(r.rf - 1) * 100)}\u00a0% ${r.rf > 1 ? 'más' : 'menos'} de ${TKN[r.k]} de lo esperado (ya acercado a la media según cuántos ha dirigido); está incluido en lo que espera el modelo.`) : '');
+  const pmAt = L => corrP(over ? pOverPy(r.m, r.V, L) : 1 - pOverPy(r.m, r.V, L), over);
+  const lines = [];
+  for (let L = r.L, q = 0; q < 7 && L >= 0.5; q++, L += over ? -1 : 1) {
+    lines.push(L); if (pmAt(L) >= 0.9) break;
+  }
+  const rows = lines.map(L => {
+    const okL = okAt(L), pmL = pmAt(L);
+    const hl = nOf(all, okL), hc = nOf(r.cross, okL), hs = nOf(r.same, okL);
+    const pr = lapl(hl + hc, all.length + r.cross.length), pp = Math.min(pmL, pr);
+    const key = `${fk}|${r.side}|${r.k}|${over ? '+' : '-'}|${L}`, odds = TSt.odds[key], ev = ok(odds) ? pp * odds - 1 : null;
+    const evc = ok(ev) ? `<span class="chip ${ev > 0.05 ? 'clear' : ev > 0 ? 'maybe' : 'noise'}">${sgn(ev * 100, f0)} cént.</span>` : '–';
+    return `<tr class="${L === r.L ? 'on' : ''}"><td class="l">${lineLab(over, L, r.k)}</td><td>${hl}/${all.length}</td><td>${hc}/${r.cross.length}</td><td>${hs}/${r.same.length}</td>` +
+      `<td>${pc(pmL)}</td><td>${pc(pr)}</td><td><b>${pc(pp)}</b></td><td>${fairTxt(1 / pp)}</td>` +
+      `<td><input class="tin to" data-key="${key}" type="number" step="0.01" min="1.01" value="${ok(odds) ? odds : ''}" placeholder="cuota" aria-label="Cuota de la casa para ${lineLab(over, L, r.k)}" style="width:5.6em"></td><td>${evc}</td></tr>`;
+  });
+  const [tl, tc] = TIER[r.tier];
+  return `<section class="card trend"><div class="th"><h2 style="margin:0">${esc(who)}: ${lineLab(over, r.L, r.k)}</h2><span class="chip ${tc}">${tl}</span></div>
+    <p class="sub" style="margin:-6px 0 10px">${nm(f.h)} – ${nm(f.a)} · ${f.past ? `J${f.j}, aplazado sin fecha nueva` : `J${f.j} · ${fdl(f.d)}${f.tm ? ' ' + f.tm : ''}`}</p>
+    <p class="story">${story}</p>
+    <div class="tvrow">${r.side === 'T' ? `<span><small>${esc(SH[r.h])}</small> ${vchips(r.series[0], ok0)}</span><span><small>${esc(SH[r.a])}</small> ${vchips(r.series[1], ok0)}</span>` : `<span><small>Últimos 5</small> ${vchips(r.series[0], ok0)}</span>`}
+      <span><small>Parecidos</small> ${vchips(r.cross, ok0)}</span><span><small>Mismo campo</small> ${vchips(r.same, ok0)}</span></div>
+    ${tbl([['Línea', 'l'], 'Últimos', 'Parecidos', 'Mismo campo', 'Modelo', 'Racha', 'Prudente', 'Cuota justa', 'Cuota de la casa', 'Valor por 1 €'], rows, 'num et tt')}
+    ${note(`La primera fila es la línea de la propia racha; las siguientes son más seguras. Escribe la cuota que te ofrecen en la línea que te interese.${tcr.w >= 0.005 ? ` La columna Modelo ya está corregida con el historial de ${tcr.n} ${tcr.n === 1 ? 'tendencia' : 'tendencias'} ${over ? 'al alza' : 'a la baja'} de esta temporada (peso ${pf(tcr.w)}).` : ''}`)}</section>`;
+}
+function renderTend() {
+  const TR = D.tr || [], TBs = (D.tb || {}).summ || {}, cases = (D.tb || {}).cases || [], F = D.tbf || {};
+  const fxs = [...new Map(TR.map(r => { const f = trFx(r); return [fxKey(f), f]; })).values()];
+  const list = TR.filter(r => TSt.fx === 'all' || fxKey(trFx(r)) === TSt.fx).sort((x, y) => (x.tier === 'muy' ? 0 : 1) - (y.tier === 'muy' ? 0 : 1) || (x.d < y.d ? -1 : 1));
+  const sAll = TBs.all;
+  const ctr = fxs.length > 1 ? `<div class="ctr"><label>Partido <select id="t-fx"><option value="all">Todos (${TR.length})</option>${fxs.map(f => `<option value="${fxKey(f)}" ${fxKey(f) === TSt.fx ? 'selected' : ''}>${nm(f.h)} – ${nm(f.a)}</option>`).join('')}</select></label></div>` : '';
+  const intro = card('Qué cuenta como tendencia', `<p class="story" style="margin-top:0">Solo aparece una tendencia si se cumple todo esto a la vez:</p><ul class="cl">
+    <li>El equipo superó (o no llegó a) la línea en sus <b>5 últimos partidos</b> (muy clara) o en los <b>4 últimos seguidos</b> (clara).</li>
+    <li>También en <b>todos</b> sus partidos contra rivales parecidos al de hoy (a ±2 puestos en la clasificación; al menos 2 partidos).</li>
+    <li>También en sus últimos partidos en el <b>mismo campo</b> que hoy (al menos 2; en las claras se permite una excepción).</li>
+    <li>La línea va <b>más allá de lo que espera el modelo</b>, que le da un 50 % o menos. Si el modelo ya la da por probable, no es una tendencia sino lo normal, y las casas la pagarán como tal.</li></ul>`);
+  const empty = card('', note(`No hay ninguna tendencia clara en los próximos partidos. Es lo normal: con estas condiciones salen pocas${sAll ? ` (${sAll.n} en toda la temporada)` : ''}. Cuando aparezca alguna, saldrá aquí.`));
+  const LAB = {'muy+': 'Muy clara · más de', 'muy-': 'Muy clara · menos de', 'una+': 'Clara · más de', 'una-': 'Clara · menos de', all: 'Todas'};
+  const hrows = ['muy+', 'muy-', 'una+', 'una-', 'all'].filter(k => TBs[k]).map(k => { const s = TBs[k], hh = Math.round(s.hit * s.n), q = (hh + 2) / (s.n + 4), e = Math.sqrt(q * (1 - q) / (s.n + 4));
+    return `<tr class="${k === 'all' ? 'on' : ''}"><td class="l">${LAB[k]}</td><td>${s.n}</td><td>${Math.round(s.hit * s.n)}</td><td>${pf(s.hit)} <small>±${f0(e * 100)} pp</small></td><td>${pc(s.model)}</td></tr>`; });
+  const crows = cases.map(c => { const who = c.side === 'T' ? 'Total' : NM[c.side === 'H' ? c.h : c.a];
+    return `<tr><td>${fd(c.d)}</td><td class="l">${nm(c.h)} – ${nm(c.a)}</td><td class="l">${esc(who)}: ${lineLab(c.over, c.L, c.k)} <span class="chip ${TIER[c.tier][1]}">${TIER[c.tier][0]}</span></td><td>${f0(c.obs)}</td>` +
+      `<td><span class="chip ${c.hit ? 'clear' : 'noise'}">${c.hit ? 'Se cumplió' : 'No se cumplió'}</span></td><td>${pc(c.pm)}</td></tr>`; });
+  const comb = keys => { const ss = keys.map(k => F[k]).filter(Boolean), n = ss.reduce((s, x) => s + x.n, 0);
+    return n ? {n, hit: ss.reduce((s, x) => s + x.hit * x.n, 0) / n, model: ss.reduce((s, x) => s + x.model * x.n, 0) / n} : null; };
+  const fUp = comb(['muy+', 'una+']), fDn = comb(['muy-', 'una-']);
+  const flex = F.all ? `Como referencia, con una definición más flexible (la excepción puede ser cualquier partido y basta con que la racha llegue a lo que espera el modelo) habrían salido ${F.all.n} casos y se habrían cumplido el ${pf(F.all.hit)}, cuando el modelo esperaba un ${pc(F.all.model)}` +
+    (fDn ? `. Las rachas a la baja solo se mantuvieron el ${pf(fDn.hit)} de las veces, cuando el modelo esperaba un ${pc(fDn.model)}: un equipo que encadena partidos con pocos tiros, córners o tarjetas suele volver a su nivel` : '') +
+    (fUp ? `. Las rachas al alza se mantuvieron el ${pf(fUp.hit)} (el modelo esperaba un ${pc(fUp.model)}), pero con solo ${fUp.n} casos` : '') + '.' : '';
+  const verdict = sAll ? (sAll.n < 30 ? `Con ${sAll.n} ${sAll.n === 1 ? 'caso' : 'casos'} todavía no se puede saber si estas tendencias aciertan más que el modelo: la diferencia puede ser azar. El historial se rellena solo cada jornada.`
+    : Math.abs(sAll.hit - sAll.model) > 2 * Math.sqrt(sAll.hit * (1 - sAll.hit) / sAll.n) ? (sAll.hit > sAll.model ? 'Con estos casos, las tendencias se cumplen claramente más de lo que esperaba el modelo.' : 'Con estos casos, las tendencias se cumplen claramente menos de lo que esperaba el modelo.')
+      : 'Con estos casos, las tendencias se cumplen más o menos lo que esperaba el modelo: no aportan información extra.') : '';
+  const hist = card('Cómo les ha ido esta temporada', note(`Cada caso se detectó con los datos anteriores a su partido, igual que se detectan ahora. ${verdict}`) +
+    (hrows.length ? tbl([['Tipo', 'l'], 'Casos', 'Se cumplieron', 'Porcentaje', 'El modelo esperaba'], hrows, 'num') : '') +
+    (crows.length ? tbl(['Fecha', ['Partido', 'l'], ['Tendencia', 'l'], 'Resultado', '', 'El modelo daba'], crows, 'num') : note('Todavía no se ha detectado ninguna.')) + (flex ? note(flex) : ''));
+  $('c-tend').innerHTML = ctr + (list.length ? list.map(trendBlock).join('') : empty) + hist + intro.replace(/<\/section>$/, note('<b>Racha</b>: veces que se cumplió en los partidos de la tendencia (últimos, rivales parecidos), suavizada para que 5 de 5 no cuente como 100 %. <b>Prudente</b>: la menor entre el modelo y la racha. <b>Cuota justa</b>: la que corresponde a la probabilidad prudente; solo hay valor si la casa paga claramente más. Las cuotas que escribes se guardan solo en este navegador. Esto es un análisis, no una recomendación de apuesta.') + '</section>');
+}
+
+/* ---------------------------------------------------------------- vista: aprendizaje */
+const niceStep = (range, n) => { const raw = range / n, p = Math.pow(10, Math.floor(Math.log10(raw))); return [1, 2, 2.5, 5, 10].map(x => x * p).find(x => x >= raw); };
+/* Una sola serie: línea de 2 px, rejilla fina, puntos destacados con etiqueta y una columna de lectura por posición
+   (al pasar el cursor aparecen la línea vertical y el valor). Todos los valores están también en la tabla de debajo. */
+function lineSvg(o) {
+  const ys = o.ys, n = ys.length, W = 640, H = 236, L = 58, R = 30, Tp = 30, B = 46;
+  let lo = Math.min(...ys), up = Math.max(...ys);
+  const pad = (up - lo) * 0.15 || Math.max(Math.abs(up) * 0.02, 0.005);
+  lo = o.y0 != null ? Math.min(o.y0, lo) : lo - pad; up = o.y1 != null ? Math.max(o.y1, up) : up + pad;
+  const X = i => n > 1 ? L + i / (n - 1) * (W - L - R) : (L + W - R) / 2, Y = v => Tp + (up - v) / (up - lo) * (H - Tp - B);
+  const st = niceStep(up - lo, 4), r1 = v => v.toFixed(1);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.aria)}">`;
+  for (let k = Math.ceil(lo / st - 1e-9); k * st <= up + 1e-9; k++) {
+    const v = k * st || 0;  // || 0 evita el «−0»
+    s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${r1(Y(v))}" y2="${r1(Y(v))}"/><text class="ax" x="${L - 8}" y="${r1(Y(v) + 4)}" text-anchor="end">${o.fy(v)}</text>`;
+  }
+  o.xt.forEach(i => { s += `<text class="ax" x="${r1(X(i))}" y="${H - B + 17}" text-anchor="middle">${esc(o.xl(i))}</text>`; });
+  if (o.xtitle) s += `<text class="ax" x="${W - R}" y="${H - 6}" text-anchor="end">${esc(o.xtitle)}</text>`;
+  if (o.ytitle) s += `<text class="ax" x="${L}" y="14">${esc(o.ytitle)}</text>`;
+  s += `<polyline class="ln" points="${ys.map((v, i) => r1(X(i)) + ',' + r1(Y(v))).join(' ')}"/>`;
+  const cw = n > 1 ? (W - L - R) / (n - 1) : 48;
+  ys.forEach((v, i) => { s += `<g class="hc"><title>${esc(o.tip(i))}</title><rect x="${r1(X(i) - cw / 2)}" y="${Tp}" width="${r1(cw)}" height="${H - Tp - B}"/>` +
+    `<line class="cx" x1="${r1(X(i))}" x2="${r1(X(i))}" y1="${Tp}" y2="${H - B}"/><circle class="hd" cx="${r1(X(i))}" cy="${r1(Y(v))}" r="4"/></g>`; });
+  (o.hi || []).forEach(([i, txt, anc, below]) => {
+    const x = X(i), y = Y(ys[i]), dx = anc === 'start' ? 4 : anc === 'end' ? -4 : 0;
+    s += `<circle class="dot" cx="${r1(x)}" cy="${r1(y)}" r="5"/><text class="an" x="${r1(x + dx)}" y="${r1(below ? y + 21 : y - 11)}" text-anchor="${anc || 'middle'}">${esc(txt)}</text>`;
+  });
+  return s + '</svg>';
+}
+const WHY = {'se mantiene': 'se mantiene: ninguna otra la mejora más allá del error', 'cambia': 'ha cambiado: otra versión la mejoraba más allá del error'};
+const RKN = {y: 'amarillas', f: 'faltas'};
+function refVerdict(bt) {
+  if (!bt || !bt.n) return 'todavía no hay partidos suficientes para comprobarlo';
+  return bt.d < -2 * bt.se ? 'tenerlo en cuenta mejora la predicción claramente' : bt.d < -bt.se ? 'parece mejorar algo, pero todavía dentro de lo que podría ser azar'
+    : bt.d > bt.se ? 'tenerlo en cuenta empeoraba la predicción' : 'todavía no se nota diferencia: hacen falta más partidos';
+}
+function renderLearn() {
+  const V = D.var || [], ch = V.find(v => v.chosen) || null, why = WHY[LN.why] || LN.why || '';
+  const vname = k => nb((V.find(v => v.key === k) || {}).name || k);
+  const R = LN.ref || {}, rk = Object.keys(R), tu = TCOR[true], td = TCOR[false], tn = tu.n + td.n;
+  const tiles = [['Versión del modelo de goles', ch ? nb(ch.name) : '–', esc(why)],
+    ['Peso del modelo frente al mercado (1X2)', LB.fit ? pf(LB.a) : '–', LB.fit ? `aprendido con ${LB.n} partidos con cuotas` : `faltan partidos con cuotas (${LB.n || 0} de 20)`],
+    ['Árbitros', rk.length ? rk.map(k => `±${f0(R[k].tau * 100)}\u00a0% ${RKN[k]}`).join(' · ') : 'sin datos', rk.length ? 'diferencia real entre árbitros, sin el azar' : 'el CSV de esta liga no trae el árbitro'],
+    ['Tendencias', `${tn} ${tn === 1 ? 'caso' : 'casos'}`, tn ? `peso de la corrección: ${pf(Math.max(tu.w, td.w))}` : 'aún no se corrige nada']];
+  const intro = note(`Cada vez que se actualiza la página, el modelo vuelve a predecir toda la temporada como si fuera la primera vez (cada partido solo con los anteriores) y ajusta cuatro cosas según lo que mejor habría funcionado. Esto es lo que ha aprendido con ${D.meta.n} partidos jugados.`);
+  /* 1. versión del modelo */
+  const vrows = V.map(v => `<tr class="${v.chosen ? 'on' : ''}"><td class="l">${nb(v.name)}${v.chosen ? ' <span class="chip clear">Elegida</span>' : ''}</td><td>${v.n || '–'}</td><td>${f3(v.ll)}</td>` +
+    `<td>${v.chosen ? '–' : `${sg3(v.d)} <small>±${f3(v.se)}</small>`}</td><td>${ok(v.dll) ? `${sg3(v.dll)} <small>±${f3(v.dse)}</small>` : '–'}</td><td>${pc(v.acc)}</td><td>${pc(v.pd)} / ${pc(v.fd)}</td></tr>`);
+  const c1 = card('1. Qué versión del modelo predice mejor', note(`En cada actualización se repite la prueba retrospectiva con ${V.length} versiones del modelo de goles. El modelo se queda con la que usa salvo que otra la mejore en esos mismos partidos por más de un error típico (y al menos 0,002 de log-loss), para no cambiar por azar. Hoy usa <b>${ch ? nb(ch.name) : '–'}</b> y ${esc(why)}.`) +
+    (V.length ? tbl([['Versión', 'l'], 'Partidos', 'Log-loss', 'Frente a la elegida', 'Frente al mercado', 'Aciertos', 'Empates predichos / reales'], vrows, 'num et vt') : '') +
+    note('Log-loss: más bajo es mejor. Las dos diferencias se calculan partido a partido; negativo significa que esa versión predijo mejor. Con diferencias menores que su error, cambiar de versión sería perseguir el azar.'));
+  /* 2. modelo frente al mercado */
+  let c2body;
+  if (!LB.fit) c2body = note(`Para aprenderlo hacen falta al menos 20 partidos con cuotas de cierre en la prueba retrospectiva (hay ${LB.n || 0}). Mientras tanto no se mezcla.`);
+  else {
+    const cv = LB.curve || [], ia = cv.findIndex(c => Math.abs(c[0] - LB.a) < 1e-9), last = cv.length - 1;
+    const hi = [];
+    if (ia !== 0) hi.push([0, 'Solo mercado', 'start', false]);
+    if (ia !== last) hi.push([last, 'Solo modelo', 'end', false]);
+    hi.push([ia, ia === 0 ? 'Elegida: solo mercado' : ia === last ? 'Elegida: solo modelo' : `Elegida: ${pf(LB.a)} modelo`, ia === 0 ? 'start' : ia === last ? 'end' : 'middle', true]);
+    const chart = cv.length > 1 ? `<div class="sc">${lineSvg({ys: cv.map(c => c[1]), aria: 'Log-loss de cada mezcla de modelo y mercado', fy: f3,
+      xt: [0, 0.25, 0.5, 0.75, 1].map(x => Math.round(x * last)), xl: i => pf(cv[i][0]), xtitle: 'Peso del modelo en la mezcla →', ytitle: 'Log-loss (más bajo es mejor)',
+      tip: i => `${pf(cv[i][0])} modelo y ${pf(1 - cv[i][0])} mercado: log-loss ${f3(cv[i][1])}`, hi})}</div>` : '';
+    const concl = LB.a === 0 ? `Hoy gana el 0 %: el mercado por sí solo (log-loss ${f3(LB.llm)}) predice el resultado mejor que el modelo por sí solo (${f3(LB.llmod)}) y que cualquier mezcla. Añadir el modelo empeora la predicción, aunque sea poco. Por eso, en el 1X2 la mejor estimación es la del mercado y las diferencias entre modelo y cuotas no son una señal de valor. El modelo sigue siendo útil para lo que el mercado no da: estadísticas, partidos sin cuotas, simulación y tendencias. El peso se recalcula en cada actualización: si el modelo mejora con más partidos, subirá solo.`
+      : LB.a === 1 ? `Hoy gana el 100 %: el modelo por sí solo (log-loss ${f3(LB.llmod)}) predice mejor que el mercado (${f3(LB.llm)}) y que cualquier mezcla. Con pocos partidos puede ser azar; el peso se recalcula en cada actualización.`
+      : `Hoy gana el ${pf(LB.a)}: la mezcla (log-loss ${f3(LB.ll)}) mejora al mercado por sí solo (${f3(LB.llm)}) en ${f3(-LB.d)} ± ${f3(LB.se)} por partido${-LB.d > 2 * LB.se ? ', más de dos errores' : ', todavía dentro del error'}. Es la probabilidad «Combinada» que aparece en Predicciones y en el análisis de cada partido.`;
+    c2body = note(`Se prueban todas las mezclas entre el modelo y las cuotas de cierre sin margen, del 0 % al 100 % de peso del modelo, en los ${LB.n} partidos de la prueba retrospectiva con cuotas. La mezcla es logarítmica (multiplica las probabilidades elevadas a su peso y las vuelve a repartir) y gana la de menor log-loss.`) +
+      chart + `<p class="story" style="margin-top:12px">${concl}</p>` +
+      (cv.length ? `<details><summary>Ver los valores</summary>${tbl(['Peso del modelo', 'Log-loss'], cv.map(c => `<tr class="${Math.abs(c[0] - LB.a) < 1e-9 ? 'on' : ''}"><td>${pf(c[0])}</td><td>${f3(c[1])}</td></tr>`), 'num et')}</details>` : '');
+  }
+  const c2 = card('2. Cuánto fiarse del modelo frente al mercado (1X2)', c2body);
+  /* 3. árbitros */
+  let c3body;
+  if (!rk.length) c3body = note('El CSV de football-data de esta liga no trae el árbitro de cada partido, así que aquí no se puede aprender su efecto.');
+  else {
+    const byName = new Map();
+    rk.forEach(k => R[k].refs.forEach(([who, f, n, o, e]) => { const x = byName.get(who) || {n: 0}; x[k] = {f, o, e, n}; x.n = Math.max(x.n, n); byName.set(who, x); }));
+    const list = [...byName.entries()].sort((p, q) => ((q[1].y || q[1].f || {}).f || 1) - ((p[1].y || p[1].f || {}).f || 1));
+    const head = [['Árbitro', 'l'], 'Partidos', ...rk.flatMap(k => [`${cap(RKN[k])} por partido`, 'Esperadas', 'Factor'])];
+    const rows = list.map(([who, x]) => `<tr><td class="l">${esc(who)}</td><td>${x.n}</td>` + rk.map(k => { const q = x[k]; return q ? `<td>${f1(q.o / q.n)}</td><td>${f1(q.e / q.n)}</td><td><b>×${f2(q.f)}</b></td>` : '<td>–</td><td>–</td><td>–</td>'; }).join('') + '</tr>');
+    c3body = rk.map(k => { const r = R[k], bt = r.bt; return `<p class="story" style="margin:0 0 8px"><b>${cap(RKN[k])}</b>: los árbitros se diferencian de verdad en un ±${f0(r.tau * 100)}\u00a0% (lo que queda al quitar el azar). ` +
+      (bt && bt.n ? `En la prueba retrospectiva (${bt.n} partidos), el error medio del total pasa de ${f2(bt.mae)} a ${f2(bt.maer)} al tener en cuenta al árbitro (${sg3(bt.d)} ± ${f3(bt.se)}): ${refVerdict(bt)}.` : `${cap(refVerdict(bt))}.`) +
+      (r.on === false ? ' Por eso, de momento, no se aplica.' : ' Se aplica a los partidos con árbitro ya designado.') + '</p>'; }).join('') +
+      tbl(head, rows, 'num et') +
+      note(`El factor multiplica lo que espera el modelo para ese partido. Sale de comparar lo que ha pasado en sus partidos con lo que esperaba el modelo (que ya tiene en cuenta a los equipos), acercado a 1 según los partidos que haya dirigido. ${esc(D.meta.cards_note || '')}`);
+  }
+  const c3 = card('3. Efecto del árbitro', c3body);
+  /* 4. tendencias */
+  const tl = (c, lab) => c.n ? `<li><b>${lab}</b>: ${c.hits} de ${c.n} ${c.hits === 1 ? 'se cumplió' : 'se cumplieron'} (${pf(c.hit)}), cuando el modelo esperaba un ${pc(c.model)}. Peso de la corrección: ${pf(c.w)}; una línea a la que el modelo da un 40 % pasa a ${pc(expit(lgt(0.4) + c.shift))}.</li>`
+    : `<li><b>${lab}</b>: todavía ningún caso, así que no se corrige nada.</li>`;
+  const c4 = card('4. Cuánto se cumplen las tendencias', note('Las tendencias de la temporada, detectadas con los datos anteriores a cada partido, enseñan si las rachas se mantienen más o menos de lo que espera el modelo. Con eso se corrige la probabilidad del modelo en las tendencias nuevas, con un peso que crece con los casos: n/(n+20).') +
+    `<ul class="cl">${tl(tu, 'Al alza')}${tl(td, 'A la baja')}</ul>`);
+  /* 5. evolución */
+  const H = (LN.hist || []).slice().sort((p, q) => p.date < q.date ? -1 : 1);
+  const hrows = H.slice(-20).reverse().map(x => `<tr><td>${fdl(x.date)}</td><td>${x.n}</td><td class="l">${vname(x.cfg)}</td><td>${x.fit ? pf(x.a) : '–'}</td><td>${f3(x.ll)}</td><td>${f3(x.llm)}</td><td>${f3(x.llb)}</td></tr>`);
+  const hchart = H.length >= 5 ? `<div class="sc">${lineSvg({ys: H.map(x => (x.fit ? x.a : 0) * 100), y0: 0, y1: 100, aria: 'Peso del modelo frente al mercado en cada actualización', fy: v => f0(v) + '\u00a0%',
+    xt: [...new Set(Array.from({length: Math.min(H.length, 5)}, (_, k, a) => Math.round(k * (H.length - 1) / (Math.min(H.length, 5) - 1))))], xl: i => fd(H[i].date), ytitle: 'Peso del modelo frente al mercado',
+    tip: i => `${fdl(H[i].date)}: peso del modelo ${pf(H[i].a)} · ${(V.find(v => v.key === H[i].cfg) || {}).name || H[i].cfg} · ${H[i].n} partidos`, hi: [[H.length - 1, `Hoy: ${pf(H[H.length - 1].a)}`, 'end', H[H.length - 1].a > 0.5]]})}</div>` : '';
+  const c5 = card('5. Cómo cambia cada jornada', (hchart || note(H.length ? `El registro del aprendizaje empezó el ${fdl(H[0].date)}; con cada actualización se añade una fila y, a partir de cinco, un gráfico.` : 'Todavía no hay registro del aprendizaje.')) +
+    (hrows.length ? tbl(['Fecha', 'Partidos', ['Versión', 'l'], 'Peso del modelo', 'Log-loss modelo', 'Log-loss mercado', 'Log-loss combinada'], hrows, 'num et') : '') +
+    note('Log-loss del modelo sobre todos los partidos de la prueba retrospectiva; la del mercado y la de la combinada, sobre los que tienen cuotas de cierre.'));
+  $('c-learn').innerHTML = intro.replace('class="note"', 'class="note" style="margin:0 0 10px"') +
+    `<div class="tiles">${tiles.map(t => `<div class="tile"><span>${t[0]}</span><b>${t[1]}</b><small>${t[2]}</small></div>`).join('')}</div>` + c1 + c2 + c3 + c4 + c5;
+}
+
+/* ---------------------------------------------------------------- arranque */
+const VIEWS = ['equipos', 'partido', 'predicciones', 'tendencias', 'historial', 'aprendizaje', 'metodo'];
+const rendered = {};
+function show(view, scroll) {
+  if (!VIEWS.includes(view)) view = 'equipos';
+  VIEWS.forEach(v => { $('v-' + v).hidden = v !== view; const b = document.querySelector(`[data-view="${v}"]`); if (b) b.setAttribute('aria-selected', String(v === view)); });
+  if (view === 'equipos') renderEquipos(); else if (view === 'partido') renderPartido(); else if (view === 'predicciones') renderPred(); else if (view === 'historial') renderHist();
+  else if (view === 'tendencias') renderTend(); else if (view === 'aprendizaje') renderLearn();
+  rendered[view] = true;
+  try { history.replaceState(null, '', '#' + view); } catch (e) { /* sin historial */ }
+  if (scroll) window.scrollTo({top: 0});
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b || b.disabled) return;
+  const d = b.dataset;
+  if (d.view) show(d.view, !b.closest('.tabs'));
+  else if (d.team != null) { ST_.sel = +d.team; renderEquipos(); if (window.innerWidth < 900) $('team').scrollIntoView({block: 'start'}); }
+  else if (d.fx) { ST_.fx = d.fx; show('partido', true); }
+  else if (d.ps) { ps = d.ps; renderTeam(); }
+  else if (d.mode) { ST_.mode = d.mode; renderPartido(); }
+  else if (d.hreal != null) { ST_.hreal = d.hreal === '1'; renderHist(); }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.id === 'rk-sel') { ST_.rk = t.value; renderRank(); }
+  else if (t.id === 'fx-sel') { ST_.fx = t.value; renderPartido(); }
+  else if (t.id === 'win-sel') { ST_.win = +t.value; renderPartido(); }
+  else if (t.id === 'x-chk') { ST_.useX = t.checked; renderPartido(); }
+  else if (t.id === 'j-sel') { ST_.jsel = t.value; renderPred(); }
+  else if (t.id === 't-fx') { TSt.fx = t.value; renderTend(); }
+  else if (t.classList.contains('to')) { const v = parseFloat(String(t.value).replace(',', '.')); if (ok(v) && v > 1) TSt.odds[t.dataset.key] = v; else delete TSt.odds[t.dataset.key]; saveOdds(); renderTend(); }
+});
+$('rk-sel').innerHTML = RKS.map(([v, l]) => `<option value="${v}">${l} por partido</option>`).join('');
+const m = D.meta;
+$('sub').textContent = `${m.n} partidos · datos hasta el ${fdl(m.last)} · actualizado ${m.gen}`;
+/* Cambio de liga: en la web publicada se navega en la misma pestaña; desde una copia en otro sitio se abre la web en otra. */
+const LGS = m.leagues || [], siteHost = (() => { try { return new URL(LGS[0].url).hostname; } catch (e) { return ''; } })(), sameSite = location.hostname === siteHost;
+$('lgs').innerHTML = LGS.length > 1 ? LGS.map(l => l.key === m.league ? `<span aria-current="page">${esc(l.name)}</span>`
+  : `<a href="${esc(l.url)}"${sameSite ? '' : ' target="_blank" rel="noopener"'}>${esc(l.name)}</a>`).join('') : '';
+$('m-cal').textContent = m.cal_fallback || 'el calendario de la liga';
+$('m-ref').textContent = m.refs ? ', el árbitro' : '';
+$('m-cards').textContent = m.cards_note ? ' ' + m.cards_note : '';
+$('m-sims').textContent = f0(m.sims || 5000);
+$('m-tb').textContent = m.tiebreak ? cap(m.tiebreak) + '.' : '';
+$('foot').innerHTML = `Datos: ${esc(m.sources || 'football-data.co.uk')}. Horas en horario peninsular español. Modelo ${esc(m.ver)}. ` +
+  (m.fx ? `Cuotas de ${m.fx} próximos partidos.` : 'Sin cuotas de próximos partidos en esta actualización.') + (m.warn.length ? '<br>' + m.warn.map(esc).join('<br>') : '');
+const h0 = (location.hash || '').slice(1);
+show(VIEWS.includes(h0) ? h0 : 'equipos');
+window.__app = {predict, sPred, pOver, cross, estimates, totalOf, pool, corrP, TCOR, BA, M, G, FX, POS};
+})();
+</script>
+
+</html>
