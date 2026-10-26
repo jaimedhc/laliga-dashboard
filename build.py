@@ -417,7 +417,7 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
             rnd(s["rel"], 4), [rnd(x, 4) for x in s["pos"]]] for s in sim]
     TB = [{**{k: r[k] for k in ("pos", "pj", "w", "d", "l", "gf", "ga", "pts", "xn", "form")},
            "t": ti[r["t"]], "xpts": round(r["xpts"], 2)} for r in table]
-    rows = [{**{k: r[k] for k in ("j", "d", "hg", "ag", "o", "bf", "made", "o25", "tot", "st")},
+    rows = [{**{k: r[k] for k in ("j", "d", "hg", "ag", "o", "bf", "made", "o25", "tot", "st", "fs", "bbp", "rg")},
              "h": ti[r["h"]], "a": ti[r["a"]], "p": r["p"], "pc": r.get("pc"),
              "mk": [round(x, 4) for x in r["mk"]] if r["mk"] else None,
              "bet": r.get("bet"), "betc": r.get("betc")} for r in ev["rows"]]

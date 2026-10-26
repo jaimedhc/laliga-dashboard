@@ -15,7 +15,7 @@ import math
 import random
 from datetime import date, timedelta
 
-VERSION = "4.0"
+VERSION = "4.1"
 
 # Estadísticas que se modelan aparte de los goles (clave, nombre).
 STATS = [("g1", "Goles 1ª parte"), ("xg", "xG"), ("s", "Tiros"), ("st", "Tiros a puerta"),
@@ -283,7 +283,9 @@ def summarize(M):
     over = lambda dist, L: sum(v for k, v in enumerate(dist) if k > L)
     fav = max(range(3), key=lambda k: (pH, pD, pA)[k])
     fs = next(c for c in cells if outcome(c[1], c[2]) == fav)
-    return {"p": [pH, pD, pA], "e": [eh, ea], "ou": [over(tot, L) for L in (0.5, 1.5, 2.5, 3.5, 4.5)],
+    var = lambda dist, m: sum(v * (k - m) ** 2 for k, v in enumerate(dist))
+    return {"p": [pH, pD, pA], "e": [eh, ea], "V": [var(hx, eh), var(ay, ea), var(tot, eh + ea)],
+            "ou": [over(tot, L) for L in (0.5, 1.5, 2.5, 3.5, 4.5)],
             "bb": bb, "th": [over(hx, L) for L in (0.5, 1.5, 2.5)], "ta": [over(ay, L) for L in (0.5, 1.5, 2.5)],
             "top": [[c[1], c[2], c[0]] for c in cells[:6]], "fs": [fs[1], fs[2], fs[0]]}
 
@@ -660,8 +662,9 @@ def walk_forward_stats(played, teams, min_train=30, step=8):
             if m["date"] != d:
                 continue
             i, j = teams.index(m["h"]), teams.index(m["a"])
-            pred = {k: stat_total(p, i, j)[0] for k, p in models.items() if p}
-            out[mkey(m["h"], m["a"])] = {"pred": pred, "base": base}
+            tt = {k: stat_total(p, i, j) for k, p in models.items() if p}
+            out[mkey(m["h"], m["a"])] = {"pred": {k: t[0] for k, t in tt.items()}, "sd": {k: math.sqrt(t[1]) for k, t in tt.items()},
+                                         "base": base}
     return out
 
 
@@ -721,11 +724,28 @@ def backtest_summary(wf):
 
 
 # ----------------------------------------------------------------- registro de predicciones
-def make_entry(pr, st, base, j, d, made, bf, mk=None, mo=None, pc=None, ref=None):
+def entry_sd(pr, sd):
+    """Desviación típica de un partido de cada total: la de las estadísticas y la de los goles."""
+    out = {k: v for k, v in (sd or {}).items() if v is not None}
+    if pr.get("V"):
+        out["g"] = math.sqrt(pr["V"][2])
+    return {k: round(v, 2) for k, v in out.items()}
+
+
+def score_for(pr, p):
+    """Marcador previsto: el más probable entre los que dan el resultado favorito de p."""
+    fav = max(range(3), key=lambda k: p[k])
+    c = next((c for c in pr.get("top", []) if outcome(c[0], c[1]) == fav), None)
+    c = c or pr["fs"]
+    return [c[0], c[1], round(c[2], 4)]
+
+
+def make_entry(pr, st, base, j, d, made, bf, mk=None, mo=None, pc=None, ref=None, sd=None):
     r4 = lambda x: round(x, 4)
     return {"j": j, "date": d, "made": made, "bf": bf, "v": VERSION,
             "p": [r4(x) for x in pr["p"]], "e": [round(x, 3) for x in pr["e"]],
             "o25": r4(pr["ou"][2]), "bb": r4(pr["bb"]),
+            "fs": [pr["fs"][0], pr["fs"][1], r4(pr["fs"][2])], "sd": entry_sd(pr, sd),
             "st": {k: round(v, 2) for k, v in (st or {}).items()},
             "sb": {k: round(v, 2) for k, v in (base or {}).items() if v is not None},
             "mk": [r4(x) for x in mk] if mk else None, "mo": r4(mo) if mo is not None else None,
@@ -741,9 +761,17 @@ def update_log(log, played, pending, gm, sms, wf_goals, wf_stats, today, horizon
     E = log.setdefault("entries", {})
     for m, pr in wf_goals:
         k = mkey(m["h"], m["a"])
+        ws = wf_stats.get(k, {})
         if k not in E:
-            ws = wf_stats.get(k, {})
-            E[k] = make_entry(pr, ws.get("pred"), ws.get("base"), m.get("j"), m["date"], m["date"], True)
+            E[k] = make_entry(pr, ws.get("pred"), ws.get("base"), m.get("j"), m["date"], m["date"], True, sd=ws.get("sd"))
+        else:
+            # entradas de versiones anteriores, sin rango ni marcador: se completan con la prueba retrospectiva,
+            # que solo usa partidos anteriores; la media y las probabilidades guardadas no se tocan
+            e = E[k]
+            if "sd" not in e:
+                e["sd"] = entry_sd(pr, ws.get("sd"))
+            if "fs" not in e:
+                e["fs"] = score_for(pr, e["p"])
     lim = (date.fromisoformat(today) + timedelta(days=horizon)).isoformat()
     base = {k: mean(sum(m[k]) for m in played if m.get(k) is not None) for k, _ in STATS}
     for f in pending:
@@ -751,19 +779,83 @@ def update_log(log, played, pending, gm, sms, wf_goals, wf_stats, today, horizon
             continue
         i, j = gm["ix"][f["h"]], gm["ix"][f["a"]]
         pr = predict_goals(gm, f["h"], f["a"])
-        st = {k: stat_total(p, i, j)[0] for k, p in sms.items() if p}
+        tt = {k: stat_total(p, i, j) for k, p in sms.items() if p}
+        st = {k: t[0] for k, t in tt.items()}
+        sd = {k: math.sqrt(t[1]) for k, t in tt.items()}
         rf = (reff or {}).get(mkey(f["h"], f["a"])) or {}
         for k, v in rf.items():
             if k in st:
                 st[k] *= v
+                sd[k] *= math.sqrt(v)  # el árbitro multiplica la media y la varianza
         mo = implied(f.get("ou"))
         mk = implied(f.get("odds"))
         pc = pool(pr["p"], mk, blend) if (mk and blend is not None) else None
         E[mkey(f["h"], f["a"])] = make_entry(pr, st, base, f["j"], f["date"], today, False, mk, mo[0] if mo else None,
-                                             pc, f.get("ref"))
+                                             pc, f.get("ref"), sd)
     log["version"] = VERSION
     log["updated"] = today
     return log
+
+
+RANGE_KEYS = ["g", "xg", "s", "st", "c", "f", "y", "r"]
+
+
+def range_of(m, sd):
+    """El rango que enseña la página: media ± una desviación típica de un partido, con un decimal."""
+    return round(max(m - sd, 0.0), 1), round(m + sd, 1)
+
+
+def _cdf(m, V, k):
+    """P(X <= k) para un recuento con media m y varianza V: binomial negativa si varía más que un Poisson, normal si varía menos
+    (salvo medias pequeñas) y Poisson en el resto. Igual que pOver en app.js."""
+    if k < 0:
+        return 0.0
+    if V > m * 1.02:
+        r = m * m / (V - m)
+        q = m / (r + m)
+        pk = (1 - q) ** r
+        c = pk
+        for i in range(1, k + 1):
+            pk *= (i - 1 + r) / i * q
+            c += pk
+        return min(1.0, c)
+    if V >= m * 0.98 or m < 5:  # con medias pequeñas (rojas) la normal se equivoca: Poisson
+        pk = math.exp(-m)
+        c = pk
+        for i in range(1, k + 1):
+            pk *= m / i
+            c += pk
+        return min(1.0, c)
+    return 0.5 * (1 + math.erf((k + 0.5 - m) / math.sqrt(2 * V)))
+
+
+def coverage(m, sd, lo, hi, cont=False):
+    """Probabilidad, según el propio modelo, de que el total real caiga dentro de [lo, hi]."""
+    V = max(sd * sd, 1e-9)
+    if m <= 0:
+        return 1.0 if lo <= 0 else 0.0
+    if cont:  # xG: lognormal con esa media y varianza
+        s2 = math.log(1 + V / (m * m))
+        mu, s = math.log(m) - s2 / 2, math.sqrt(s2)
+        F = lambda x: 0.0 if x <= 0 else 0.5 * (1 + math.erf((math.log(x) - mu) / (s * math.sqrt(2))))
+        return max(0.0, F(hi) - F(lo))
+    a, b = math.ceil(lo - 1e-9), math.floor(hi + 1e-9)
+    return 0.0 if b < a else max(0.0, _cdf(m, V, b) - _cdf(m, V, a - 1))
+
+
+def ranges_eval(e, m):
+    """Para cada total del partido: [media, desde, hasta, real, probabilidad de caer dentro según el modelo]."""
+    sd, means = e.get("sd") or {}, dict(e.get("st") or {})
+    if e.get("e"):
+        means["g"] = e["e"][0] + e["e"][1]
+    out = {}
+    for k in RANGE_KEYS:
+        obs = m["hg"] + m["ag"] if k == "g" else (sum(m[k]) if m.get(k) is not None else None)
+        if obs is None or k not in means or not sd.get(k):
+            continue
+        lo, hi = range_of(means[k], sd[k])
+        out[k] = [round(means[k], 2), lo, hi, round(obs, 2), round(coverage(means[k], sd[k], lo, hi, k == "xg"), 3)]
+    return out
 
 
 def evaluate_log(log, played):
@@ -776,7 +868,8 @@ def evaluate_log(log, played):
         o = outcome(m["hg"], m["ag"])
         r = {"h": m["h"], "a": m["a"], "j": m.get("j"), "d": m["date"], "hg": m["hg"], "ag": m["ag"], "o": o,
              "p": e["p"], "mk": implied(m.get("odds")), "bf": e.get("bf", False), "made": e.get("made"),
-             "o25": e.get("o25"), "tot": m["hg"] + m["ag"], "st": {}, "pc": e.get("pc")}
+             "o25": e.get("o25"), "tot": m["hg"] + m["ag"], "st": {}, "pc": e.get("pc"),
+             "fs": e.get("fs"), "bbp": e.get("bb"), "rg": ranges_eval(e, m)}
         for k, v in (e.get("st") or {}).items():
             obs = m.get(k)
             if obs is not None:
