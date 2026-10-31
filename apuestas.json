@@ -23,6 +23,9 @@
    "patas": [{"tipo": "ganador", "estadistica": "corners", "equipo": "local"},
              {"tipo": "ganador", "estadistica": "tiros", "equipo": "local"}]},
   {"liga": "laliga", "partido": "Sevilla|Osasuna", "texto": "Resultado: gana el Sevilla", "cuota": 1.84, "importe": 15,
-   "patas": [{"tipo": "resultado", "equipo": "local"}]}
+   "patas": [{"tipo": "resultado", "equipo": "local"}]},
+  {"liga": "laliga", "partido": "Levante|Ath Madrid", "texto": "Resultado: gana el Atlético / Ganador de tiros: Atlético", "cuota": 1.76, "importe": 15,
+   "patas": [{"tipo": "resultado", "equipo": "visitante"},
+             {"tipo": "ganador", "estadistica": "tiros", "equipo": "visitante"}]}
  ]
 }
