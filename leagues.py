@@ -20,8 +20,15 @@ LEAGUES = {
                          "diferencia de goles en los partidos entre ellos; después, la diferencia de goles general y los goles a "
                          "favor (el juego limpio se sustituye por un sorteo)",
         "zones": {"ucl": 4, "uel": 2, "rel": 3},
-        "sources": "football-data.co.uk (resultados, estadísticas, xG y cuotas), calendario de la RFEF y calendario "
-                   "abierto de openfootball (fechas y horas)",
+        "sources": "football-data.co.uk (resultados, estadísticas, xG y cuotas), calendario de la RFEF, fechas y horas "
+                   "anunciadas de TheSportsDB y calendario abierto de openfootball",
+        "tsdb_id": "4335",  # TheSportsDB: fechas y horas en cuanto se anuncian
+        "tsdb_names": {"Deportivo Alavés": "Alaves", "Athletic Bilbao": "Ath Bilbao", "Atlético Madrid": "Ath Madrid",
+                       "Barcelona": "Barcelona", "Real Betis": "Betis", "Celta Vigo": "Celta", "Elche": "Elche",
+                       "Espanyol": "Espanol", "Getafe": "Getafe", "Deportivo de A Coruña": "La Coruna", "Levante": "Levante",
+                       "Málaga": "Malaga", "Osasuna": "Osasuna", "Real Madrid": "Real Madrid",
+                       "Racing de Santander": "Santander", "Sevilla": "Sevilla", "Real Sociedad": "Sociedad",
+                       "Valencia": "Valencia", "Rayo Vallecano": "Vallecano", "Villarreal": "Villarreal"},
         "cal_label": "Fecha del calendario de la RFEF",
         "cal_fallback": "el calendario abierto de openfootball y, si falta, el de la RFEF",
         "of_time_offset": 0,  # el calendario abierto de LaLiga ya da la hora española
@@ -60,8 +67,15 @@ LEAGUES = {
                          "goles a favor y, después, los puntos y los goles fuera de casa en los partidos entre ellos (el partido "
                          "de desempate se sustituye por un sorteo)",
         "zones": {"ucl": 4, "uel": 1, "rel": 3},
-        "sources": "football-data.co.uk (resultados, estadísticas, xG, árbitros y cuotas) y calendario abierto de "
-                   "openfootball (fechas y horas)",
+        "sources": "football-data.co.uk (resultados, estadísticas, xG, árbitros y cuotas), fechas y horas anunciadas de "
+                   "TheSportsDB y calendario abierto de openfootball",
+        "tsdb_id": "4328",
+        "tsdb_names": {"Arsenal": "Arsenal", "Aston Villa": "Aston Villa", "Bournemouth": "Bournemouth", "Brentford": "Brentford",
+                       "Brighton and Hove Albion": "Brighton", "Chelsea": "Chelsea", "Coventry City": "Coventry",
+                       "Crystal Palace": "Crystal Palace", "Everton": "Everton", "Fulham": "Fulham", "Hull City": "Hull",
+                       "Ipswich Town": "Ipswich", "Leeds United": "Leeds", "Liverpool": "Liverpool", "Manchester City": "Man City",
+                       "Manchester United": "Man United", "Newcastle United": "Newcastle", "Nottingham Forest": "Nott'm Forest",
+                       "Sunderland": "Sunderland", "Tottenham Hotspur": "Tottenham"},
         "cal_label": "Fecha del calendario abierto",
         "cal_fallback": "el calendario abierto de openfootball",
         "of_time_offset": 1,  # el calendario abierto inglés da la hora británica

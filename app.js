@@ -316,7 +316,7 @@ const MODES = {opt: {z: 1, thr: 0.6, name: 'Optimista', desc: '±1 error · umbr
 const fxKey = f => f.h + '-' + f.a;
 const byDate = (x, y) => (x.d < y.d ? -1 : x.d > y.d ? 1 : (x.tm || '') < (y.tm || '') ? -1 : 1);
 const upcoming = () => FX.filter(f => !f.past).sort(byDate);
-const SRC = {3: 'Fecha y hora de football-data', 2: 'Fecha corregida a mano', 1: 'Fecha y hora del calendario abierto'};
+const SRC = {4: 'Fecha y hora anunciadas', 3: 'Fecha y hora de football-data', 2: 'Fecha corregida a mano', 1: 'Fecha del calendario abierto'};
 const statusOf = f => f.past ? '<span class="chip warn">Fecha pasada sin resultado: aplazado o pendiente de datos</span>'
   : `<span class="chip">${esc(SRC[f.src] || D.meta.cal_label || 'Fecha del calendario oficial')}</span>`;
 function fixtureSelect(cur) {

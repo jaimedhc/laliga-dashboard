@@ -29,6 +29,7 @@ cada jornada. Solo usa datos de esta temporada.
 ## Cómo se actualiza
 
 - Dos veces al día (mañana y tarde) y cada vez que subes alguno de los archivos de la tabla.
+- Las fechas y horas de las próximas jornadas se ponen solas en cuanto la liga las anuncia (TheSportsDB) y, unos días antes, se confirman con football-data.
 - A mano: pestaña **Actions > Actualizar dashboard > Run workflow**.
 - Si una liga falla, las demás se actualizan igual y la que falla conserva su página anterior; la ejecución
   sale en rojo en Actions para que se vea.

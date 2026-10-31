@@ -12,8 +12,9 @@ import re
 import sys
 import time
 import traceback
+import unicodedata
 import urllib.request
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
@@ -225,9 +226,70 @@ def get_calendar(key, L, warn):
     return base, ofmap
 
 
-def pending_list(cal, played_keys, fx, over, ofmap):
-    """Partidos pendientes y de dónde sale su fecha: 3 = football-data (con cuotas), 2 = corregida a mano,
-    1 = calendario abierto, 0 = calendario oficial de la jornada."""
+def madrid_time(dt):
+    """De hora UTC a hora peninsular española (horario de verano europeo: del último domingo de marzo al de octubre)."""
+    def last_sunday(month):
+        d = date(dt.year, month, 31)
+        return d - timedelta(days=(d.weekday() + 1) % 7)
+    start = datetime(*last_sunday(3).timetuple()[:3], 1, tzinfo=timezone.utc)
+    end = datetime(*last_sunday(10).timetuple()[:3], 1, tzinfo=timezone.utc)
+    return dt + timedelta(hours=2 if start <= dt < end else 1)
+
+
+def _nz(x):
+    return "".join(c for c in unicodedata.normalize("NFD", x or "") if unicodedata.category(c) != "Mn").lower().strip()
+
+
+def tsdb_schedule(L, cal, played_keys, warn):
+    """Fechas y horas anunciadas de las próximas jornadas (TheSportsDB): {(local, visitante): (fecha, hora española)}.
+    Una jornada cuyo horario aún no se ha anunciado aparece con casi todos los partidos a la misma hora: se ignora."""
+    lid = L.get("tsdb_id")
+    if not lid:
+        return {}
+    lim = (date.fromisoformat(TODAY) + timedelta(days=35)).isoformat()
+    rounds = sorted({j for j, d, h, a in cal if (h, a) not in played_keys and d <= lim})
+    alias = {_nz(k): v for k, v in L.get("tsdb_names", {}).items()}
+    alias.update({_nz(v): v for v in L.get("tsdb_names", {}).values()})
+    alias.update({_nz(k): v for k, v in L.get("names", {}).items()})
+    alias.update({_nz(v): k for k, v in L.get("names", {}).items()})
+    out, unknown, fails = {}, set(), 0
+    for r in rounds:
+        url = f"https://www.thesportsdb.com/api/v1/json/123/eventsround.php?id={lid}&r={r}&s={L['season'][:4]}-20{L['season'][5:]}"
+        txt = read(ENV(f"TSDB_{lid}_{r}") or url, required=False)  # la variable sirve para probar en local
+        try:
+            evs = (json.loads(txt) if txt else {}).get("events") or []
+        except ValueError:
+            evs = []
+        if not evs:
+            fails += 1
+            continue
+        stamps = [e.get("strTimestamp") for e in evs]
+        if max(stamps.count(t) for t in set(stamps)) >= 0.8 * len(evs):
+            continue  # horario sin anunciar
+        for e in evs:
+            if (e.get("strPostponed") or "").lower() == "yes" or (e.get("strStatus") or "NS") not in ("NS", "Not Started", "TBD"):
+                continue
+            h, a = alias.get(_nz(e.get("strHomeTeam"))), alias.get(_nz(e.get("strAwayTeam")))
+            if not h or not a:
+                unknown |= {x for x, y in ((e.get("strHomeTeam"), h), (e.get("strAwayTeam"), a)) if not y}
+                continue
+            try:
+                ts = datetime.fromisoformat((e.get("strTimestamp") or "").replace("Z", "")[:19]).replace(tzinfo=timezone.utc)
+            except ValueError:
+                continue
+            loc = madrid_time(ts)
+            out[(h, a)] = (loc.date().isoformat(), loc.strftime("%H:%M"))
+        time.sleep(1)  # la clave gratuita admite pocas consultas por minuto
+    if unknown:
+        warn.append("Equipos de TheSportsDB sin traducir: " + ", ".join(sorted(unknown)))
+    if rounds and fails == len(rounds):
+        warn.append("No se pudieron leer las fechas y horas de TheSportsDB; se usan las del calendario.")
+    return out
+
+
+def pending_list(cal, played_keys, fx, over, ofmap, tsmap=None):
+    """Partidos pendientes y de dónde sale su fecha, de más a menos prioridad: 3 = football-data (con cuotas),
+    4 = fechas y horas anunciadas (TheSportsDB), 2 = corregida a mano, 1 = calendario abierto, 0 = calendario oficial."""
     out = []
     for j, d, h, a in cal:
         if (h, a) in played_keys:
@@ -240,6 +302,9 @@ def pending_list(cal, played_keys, fx, over, ofmap):
         o = over.get(model.mkey(h, a))
         if o:
             date_, tm, src = o, "", 2
+        t = (tsmap or {}).get((h, a))
+        if t:
+            date_, tm, src = t[0], t[1], 4
         if f:
             date_, tm, src = f["date"], f["time"], 3
         out.append({"j": j, "date": date_, "cal": d, "time": tm, "h": h, "a": a, "src": src,
@@ -321,7 +386,8 @@ def build_league(key, L, fixtures_text):
         warn.append(f"{miss} partidos sin xG o sin estadísticas completas (se usan solo los datos disponibles)")
     fx = load_fixtures(fixtures_text, L["div"])
     over = {k: v for k, v in jload(p_in(L["dates"]), {}).items() if not k.startswith("_")}
-    pend = pending_list(cal, {(m["h"], m["a"]) for m in played}, fx, over, ofmap)
+    pkeys = {(m["h"], m["a"]) for m in played}
+    pend = pending_list(cal, pkeys, fx, over, ofmap, tsdb_schedule(L, cal, pkeys, warn))
     log = jload(p_out(L["log"]), {})
     prev_cfg = (log.get("learning") or [{}])[-1].get("cfg")
 
