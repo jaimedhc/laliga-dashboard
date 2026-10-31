@@ -1,0 +1,28 @@
+{
+ "_como": "Cada apuesta: liga (laliga o premier), partido (Local|Visitante con los nombres del CSV), texto (como la anotaste), cuota, importe y patas. Una combinada tiene varias patas. Tipos de pata: {\"tipo\": \"mas\" o \"menos\", \"estadistica\": \"tiros\", \"equipo\": \"local\", \"visitante\" o \"total\", \"linea\": 13.5}; {\"tipo\": \"ganador\", \"estadistica\": \"corners\", \"equipo\": \"local\" o \"visitante\"} (quién tiene más; un empate en la estadística pierde); {\"tipo\": \"resultado\", \"equipo\": \"local\", \"empate\" o \"visitante\"}. Estadísticas: goles, tiros, tiros a puerta, corners, faltas, amarillas, rojas.",
+ "apuestas": [
+  {"liga": "laliga", "partido": "Getafe|Vallecano", "texto": "Número de tiros del Rayo +13,5", "cuota": 2.70, "importe": 15,
+   "patas": [{"tipo": "mas", "estadistica": "tiros", "equipo": "visitante", "linea": 13.5}]},
+  {"liga": "laliga", "partido": "Vallecano|Elche", "texto": "Número de tiros del Rayo +15,5", "cuota": 1.80, "importe": 15,
+   "patas": [{"tipo": "mas", "estadistica": "tiros", "equipo": "local", "linea": 15.5}]},
+  {"liga": "laliga", "partido": "Valencia|Villarreal", "texto": "Ganador de tiros: Villarreal", "cuota": 1.50, "importe": 15,
+   "patas": [{"tipo": "ganador", "estadistica": "tiros", "equipo": "visitante"}]},
+  {"liga": "laliga", "partido": "Ath Madrid|La Coruna", "texto": "Número de tiros del Atlético +17,5", "cuota": 1.56, "importe": 15,
+   "patas": [{"tipo": "mas", "estadistica": "tiros", "equipo": "local", "linea": 17.5}]},
+  {"liga": "laliga", "partido": "Celta|Betis", "texto": "Ganador de tiros: Betis", "cuota": 1.62, "importe": 15,
+   "patas": [{"tipo": "ganador", "estadistica": "tiros", "equipo": "visitante"}]},
+  {"liga": "laliga", "partido": "Ath Bilbao|Getafe", "texto": "Número de tiros del Athletic +15,5", "cuota": 1.78, "importe": 15,
+   "patas": [{"tipo": "mas", "estadistica": "tiros", "equipo": "local", "linea": 15.5}]},
+  {"liga": "laliga", "partido": "Sociedad|Levante", "texto": "Ganador de córners: Real Sociedad / Número de tiros +24,5", "cuota": 1.70, "importe": 15,
+   "patas": [{"tipo": "ganador", "estadistica": "corners", "equipo": "local"},
+             {"tipo": "mas", "estadistica": "tiros", "equipo": "total", "linea": 24.5}]},
+  {"liga": "laliga", "partido": "Barcelona|Real Madrid", "texto": "Ganador de tiros a puerta: Barça / Ganador de córners: Barça", "cuota": 1.82, "importe": 15,
+   "patas": [{"tipo": "ganador", "estadistica": "tiros a puerta", "equipo": "local"},
+             {"tipo": "ganador", "estadistica": "corners", "equipo": "local"}]},
+  {"liga": "laliga", "partido": "Sevilla|Osasuna", "texto": "Ganador de córners: Sevilla / Ganador de tiros: Sevilla", "cuota": 1.72, "importe": 15,
+   "patas": [{"tipo": "ganador", "estadistica": "corners", "equipo": "local"},
+             {"tipo": "ganador", "estadistica": "tiros", "equipo": "local"}]},
+  {"liga": "laliga", "partido": "Sevilla|Osasuna", "texto": "Resultado: gana el Sevilla", "cuota": 1.84, "importe": 15,
+   "patas": [{"tipo": "resultado", "equipo": "local"}]}
+ ]
+}

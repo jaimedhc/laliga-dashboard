@@ -361,6 +361,16 @@ def build_league(key, L, fixtures_text):
         variants.append({"key": k, "name": name, "chosen": k == chosen, "d": rnd(res[k].get("d"), 4), "se": rnd(res[k].get("se"), 4),
                          **{q: rnd(s.get(q), 4) for q in ("n", "ll", "llm", "dll", "dse", "acc", "pd", "fd")}})
     wfs = model.walk_forward_stats(played, teams)
+    # apuestas del usuario (apuestas.json): se comprueban con los datos reales y con lo que daba el modelo
+    mine = [b for b in jload(p_in("apuestas.json"), {}).get("apuestas", []) if b.get("liga", "laliga") == key]
+    try:
+        bets = model.evaluate_bets(mine, played, pend, teams, cfg, gm, sms) if mine else []
+    except Exception as e:  # noqa: BLE001  (un error en las apuestas no debe tumbar la página)
+        warn.append(f"No se pudieron evaluar las apuestas: {e}")
+        bets = []
+    for b in bets:
+        if b.get("error"):
+            warn.append(f"Apuesta {b['i'] + 1} ({b.get('texto', '')}): {b['error']}")
     trends_bt = model.trend_backtest(played, teams)
     trends_flex = model.trend_backtest(played, teams, strict=False)["summ"]
     t3 = time.time()
@@ -376,7 +386,7 @@ def build_league(key, L, fixtures_text):
     payload = build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn,
                             trends_bt, trends_live(played, pend, pos, sms, reff), trends_flex,
                             {"chosen": chosen, "why": why, "blend": blend, "hist": log["learning"], "refx": refx,
-                             "ref_bt": ref_bt, "ref_on": ref_on, "reff": reff})
+                             "ref_bt": ref_bt, "ref_on": ref_on, "reff": reff}, bets)
     fragment = render(payload, L)
     write(p_out(L["out"]), full_document(fragment))
     if ART_DIR:
@@ -384,7 +394,7 @@ def build_league(key, L, fixtures_text):
     print(f"OK {key}: {len(played)} partidos hasta {played[-1]['date']}, {len(pend)} pendientes, {len(fx)} con cuotas, "
           f"configuración «{chosen}» ({why}), peso del modelo frente al mercado {blend['a']:.2f}, "
           f"árbitros: {', '.join(k + ('' if k in ref_on else ' (sin aplicar)') for k in refx) or 'sin datos'}, "
-          f"registro con {len(log['entries'])} predicciones. "
+          f"registro con {len(log['entries'])} predicciones, {len(bets)} apuestas. "
           f"Tiempos: modelos {t1 - t0:.1f}s, simulación {t2 - t1:.1f}s, pruebas {t3 - t2:.1f}s, total {time.time() - t0:.1f}s")
     for w in warn:
         print(f"Aviso {key}:", w)
@@ -392,7 +402,7 @@ def build_league(key, L, fixtures_text):
 
 
 def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn,
-                  trends_bt, trends_now, trends_flex, learn):
+                  trends_bt, trends_now, trends_flex, learn, bets=()):
     ti = {t: k for k, t in enumerate(teams)}
     M = []
     for m in played:
@@ -456,6 +466,7 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
                   "blend": {**rdict({q: v for q, v in b.items() if q != "curve"}), "curve": b.get("curve")},
                   "hist": [rdict(h) for h in learn["hist"][-120:]], "ref": REF},
         "pl": jload(p_in(L["players"]), {}).get("teams", {}) if L.get("players") else {},
+        "bets": [{**b, "h": ti.get(b.get("h")), "a": ti.get(b.get("a"))} for b in bets],
     }
 
 

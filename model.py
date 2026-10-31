@@ -1183,3 +1183,210 @@ def referee_backtest(played, teams, min_train=40, step=8):
             dm, se = paired([b for _, b in v], [a for a, _ in v])
             res[k] = {"n": len(v), "mae": mean(a for a, _ in v), "maer": mean(b for _, b in v), "d": dm, "se": se}
     return res
+
+
+# ----------------------------------------------------------------- apuestas del usuario
+# Cada apuesta tiene una o varias patas (una combinada tiene varias). Tipos de pata:
+#   {"tipo": "mas" | "menos", "estadistica": "tiros", "equipo": "local" | "visitante" | "total", "linea": 13.5}
+#   {"tipo": "ganador", "estadistica": "corners", "equipo": "local" | "visitante" | "empate"}   (quién tiene más)
+#   {"tipo": "resultado", "equipo": "local" | "empate" | "visitante"}
+BET_STATS = {"goles": "g", "tiros": "s", "tiros a puerta": "st", "corners": "c", "córners": "c", "faltas": "f",
+             "amarillas": "y", "rojas": "r", "xg": "xg"}
+_SIDE = {"local": 0, "empate": 1, "visitante": 2}
+
+
+def _phi(z):
+    return 0.5 * (1 + math.erf(z / math.sqrt(2)))
+
+
+def leg_key(leg):
+    return "g" if leg["tipo"] == "resultado" else BET_STATS[leg["estadistica"].strip().lower()]
+
+
+def _pick(leg, v):
+    return v[0] + v[1] if leg["equipo"] == "total" else v[0 if leg["equipo"] == "local" else 1]
+
+
+def leg_outcome(leg, v):
+    """'gana', 'pierde' o 'nula' con los valores reales [local, visitante] de su estadística.
+    En «ganador» un empate en la estadística pierde (mercado de tres opciones), salvo que se apostara al empate."""
+    t = leg["tipo"]
+    if t in ("mas", "menos"):
+        x, L = _pick(leg, v), leg["linea"]
+        if x == L:
+            return "nula"
+        return "gana" if (x > L) == (t == "mas") else "pierde"
+    d, w = v[0] - v[1], leg["equipo"]
+    ok_ = d == 0 if w == "empate" else (d > 0 if w == "local" else d < 0)
+    return "gana" if ok_ else "pierde"
+
+
+def _leg_y(leg, v):
+    """Cantidad que crece cuando la pata se acerca a cumplirse (None si no es monótona, como el empate)."""
+    t, w = leg["tipo"], leg["equipo"]
+    if t in ("mas", "menos"):
+        x = _pick(leg, v)
+        return x if t == "mas" else -x
+    if w == "empate":
+        return None
+    return v[0] - v[1] if w == "local" else v[1] - v[0]
+
+
+def leg_prob(leg, gm, sms, h, a):
+    """Probabilidad de que la pata se cumpla según el modelo (sin contar la nula)."""
+    ih, ia, k, t, w = gm["ix"][h], gm["ix"][a], leg_key(leg), leg["tipo"], leg["equipo"]
+    if k == "g":
+        M = score_matrix(gm, ih, ia)
+        cells = [(x, y, q) for x, row in enumerate(M) for y, q in enumerate(row)]
+        if t in ("mas", "menos"):
+            L = leg["linea"]
+            val = lambda x, y: x + y if w == "total" else (x if w == "local" else y)
+            return sum(q for x, y, q in cells if (val(x, y) > L if t == "mas" else val(x, y) < L))
+        return sum(q for x, y, q in cells if (x == y if w == "empate" else (x > y if w == "local" else x < y)))
+    p = sms[k]
+    mh, vh, _ = stat_pred(p, ih, ia, 1)
+    ma, va, _ = stat_pred(p, ia, ih, 0)
+    cov = p["rr"] * p["phi"] * math.sqrt(mh * ma)
+    if t in ("mas", "menos"):
+        m, V = (mh + ma, vh + va + 2 * cov) if w == "total" else ((mh, vh) if w == "local" else (ma, va))
+        L = leg["linea"]
+        up = p_over(m, V, L)
+        if t == "mas":
+            return up
+        eq = p_over(m, V, L - 1) - up if float(L).is_integer() else 0.0
+        return max(0.0, 1 - up - eq)
+    mu, sd = mh - ma, math.sqrt(max(vh + va - 2 * cov, 1e-6))  # diferencia local − visitante, con corrección de continuidad
+    if w == "local":
+        return 1 - _phi((0.5 - mu) / sd)
+    if w == "visitante":
+        return _phi((-0.5 - mu) / sd)
+    return _phi((0.5 - mu) / sd) - _phi((-0.5 - mu) / sd)
+
+
+def _chol(R):
+    n = len(R)
+    L = [[0.0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(i + 1):
+            s_ = R[i][j] - sum(L[i][k] * L[j][k] for k in range(j))
+            L[i][j] = math.sqrt(max(s_, 1e-9)) if i == j else s_ / L[j][j]
+    return L
+
+
+def joint_prob(ps, R, n=40000, seed=11):
+    """Probabilidad de que se cumplan todas las patas: cada una con su probabilidad y unidas por una cópula normal
+    con las correlaciones R (las patas de una combinada suelen ir juntas: quien saca más córners suele tirar más)."""
+    if len(ps) == 1:
+        return ps[0]
+    from statistics import NormalDist
+    nd = NormalDist()
+    th = [nd.inv_cdf(min(max(1 - q, 1e-9), 1 - 1e-9)) for q in ps]
+    L = _chol(R)
+    rnd = random.Random(seed)
+    hit = 0
+    for _ in range(n):
+        z = [rnd.gauss(0, 1) for _ in ps]
+        if all(sum(L[i][j] * z[j] for j in range(i + 1)) > th[i] for i in range(len(ps))):
+            hit += 1
+    return hit / n
+
+
+def leg_corr(legs, train, E):
+    """Correlación entre las patas, con lo que se apartó cada partido anterior de lo que esperaba el modelo."""
+    n = len(legs)
+    R = [[1.0 if i == j else 0.0 for j in range(n)] for i in range(n)]
+    res = []
+    for leg in legs:
+        k = leg_key(leg)
+        r = []
+        for m, e in zip(train, E):
+            v = [m["hg"], m["ag"]] if k == "g" else m.get(k)
+            if v is None or not e.get(k):
+                r.append(None)
+                continue
+            yo, ye = _leg_y(leg, v), _leg_y(leg, e[k])
+            r.append(None if yo is None or ye is None else yo - ye)
+        res.append(r)
+    for i in range(n):
+        for j in range(i):
+            pr = [(x, y) for x, y in zip(res[i], res[j]) if x is not None and y is not None]
+            if len(pr) > 10:
+                c = corr([x for x, _ in pr], [y for _, y in pr])
+                R[i][j] = R[j][i] = max(-0.9, min(0.9, c))
+    return R
+
+
+def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=None):
+    """Comprueba cada apuesta con el partido real y calcula lo que le daba el modelo antes del partido
+    (ajustado solo con los partidos anteriores) o, si aún no se ha jugado, con el modelo de hoy."""
+    byk = {(m["h"], m["a"]): m for m in played}
+    pend = {(f["h"], f["a"]): f for f in pending}
+    cache = {}
+    out = []
+    for n_, b in enumerate(bets):
+        r = {"i": n_, "texto": b.get("texto", ""), "cuota": b["cuota"], "importe": b.get("importe", 15), "patas": [],
+             "fecha": b.get("fecha")}
+        try:
+            h, a = [x.strip() for x in b["partido"].split("|")]
+            if h not in teams or a not in teams:
+                raise ValueError(f"equipo desconocido en «{b['partido']}»")
+            r.update(h=h, a=a)
+            m = byk.get((h, a))
+            legs = b["patas"]
+            for leg in legs:
+                leg_key(leg)  # valida la estadística
+            if m:
+                r.update(fecha=m["date"], j=m.get("j"))
+                d = m["date"]
+                if d not in cache:
+                    train = [x for x in played if x["date"] < d]
+                    g_ = fit_goals(train, teams, cfg, ref=d)
+                    s_ = {k: fit_stat(train, teams, k) for k in ("s", "st", "c", "f", "y", "r", "xg")}
+                    cache[d] = (train, g_, s_, expectations(train, g_, s_))
+                train, g_, s_, E = cache[d]
+                r["modelo"] = "antes"
+            else:
+                f = pend.get((h, a))
+                if not f:
+                    raise ValueError(f"no encuentro el partido {h}-{a}")
+                r.update(fecha=f["date"], j=f.get("j"))
+                if "hoy" not in cache:
+                    cache["hoy"] = (played, gm_now, sms_now, expectations(played, gm_now, sms_now))
+                train, g_, s_, E = cache["hoy"]
+                r["modelo"] = "hoy"
+            ps = []
+            for leg in legs:
+                k = leg_key(leg)
+                q = {**leg, "k": k, "p": round(leg_prob(leg, g_, s_, h, a), 4)}
+                if m:
+                    v = [m["hg"], m["ag"]] if k == "g" else m.get(k)
+                    q["obs"] = [round(x, 2) for x in v] if v else None
+                    q["res"] = leg_outcome(leg, v) if v else None
+                ps.append(q["p"])
+                r["patas"].append(q)
+            R = leg_corr(legs, train, E) if len(legs) > 1 else [[1.0]]
+            r["p"] = round(joint_prob(ps, R), 4)
+            r["pind"] = round(math.prod(ps), 4)
+            r["rho"] = [round(R[i][j], 2) for i in range(len(legs)) for j in range(i)]
+            if m:
+                rs = [q.get("res") for q in r["patas"]]
+                if None in rs:
+                    r["estado"] = "sin datos"
+                elif "pierde" in rs:
+                    r["estado"] = "perdida"
+                elif "nula" in rs:
+                    r["estado"] = "nula"
+                else:
+                    r["estado"] = "ganada"
+            else:
+                r["estado"] = "pendiente"
+            st = r["importe"]
+            r["devuelto"] = {"ganada": st * r["cuota"], "perdida": 0.0, "nula": st}.get(r["estado"])
+            if r["devuelto"] is not None:
+                r["devuelto"] = round(r["devuelto"], 2)
+                r["beneficio"] = round(r["devuelto"] - st, 2)
+            r["ev"] = round(st * (r["p"] * r["cuota"] - 1), 2)
+        except (KeyError, ValueError, TypeError) as e:
+            r["estado"], r["error"] = "error", str(e)
+        out.append(r)
+    return out

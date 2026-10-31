@@ -16,6 +16,7 @@ on:
       - "calendario.json"
       - "fechas.json"
       - "fechas_premier.json"
+      - "apuestas.json"
       - "players.py"
       - ".github/workflows/update.yml"
   workflow_dispatch:        # botón para ejecutarlo a mano

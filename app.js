@@ -865,6 +865,81 @@ function renderTend() {
   $('c-tend').innerHTML = ctr + (list.length ? list.map(trendBlock).join('') : empty) + hist + intro.replace(/<\/section>$/, note('<b>Racha</b>: veces que se cumplió en los partidos de la tendencia (últimos, rivales parecidos), suavizada para que 5 de 5 no cuente como 100 %. <b>Prudente</b>: la menor entre el modelo y la racha. <b>Cuota justa</b>: la que corresponde a la probabilidad prudente; solo hay valor si la casa paga claramente más. Las cuotas que escribes se guardan solo en este navegador. Esto es un análisis, no una recomendación de apuesta.') + '</section>');
 }
 
+/* ---------------------------------------------------------------- vista: mis apuestas */
+/* Las apuestas salen de apuestas.json; build.py (model.evaluate_bets) las comprueba con los datos y calcula lo que daba el modelo. */
+const BSN = {g: 'goles', s: 'tiros', st: 'tiros a puerta', c: 'córners', f: 'faltas', y: 'amarillas', r: 'rojas', xg: 'xG'};
+const eur = v => ok(v) ? `${sgn(v, f2)} €` : '–', eur0 = v => ok(v) ? `${f2(v)} €` : '–';
+const BST = {ganada: ['Ganada', 'clear'], perdida: ['Perdida', 'bad'], nula: ['Nula', ''], pendiente: ['Pendiente', ''], 'sin datos': ['Sin datos', 'warn'], error: ['Revisar', 'warn']};
+function legTxt(b, q) {  // qué pasó en cada pata
+  const st = BSN[q.k] || q.k, v = q.obs, team = w => nm(w === 'local' ? b.h : b.a);
+  if (!v) return `${esc(cap(st))}: pendiente`;
+  const show = x => q.k === 'xg' ? f1(x) : f0(x);
+  let t;
+  if (q.tipo === 'mas' || q.tipo === 'menos') t = q.equipo === 'total' ? `${show(v[0] + v[1])} ${st} en el partido` : `${team(q.equipo)}: ${show(v[q.equipo === 'local' ? 0 : 1])} ${st}`;
+  else if (q.tipo === 'resultado') t = `${v[0]}-${v[1]}`;
+  else t = `${cap(st)} ${show(v[0])}-${show(v[1])}${v[0] === v[1] && q.equipo !== 'empate' ? ' (empate)' : ''}`;
+  return `${q.res === 'nula' ? '<span class="tv">=</span>' : mark(q.res === 'gana')} ${t}`;
+}
+const btype = b => b.patas.length > 1 ? 'Combinadas' : b.patas[0].tipo === 'resultado' ? 'Resultado del partido' : b.patas[0].tipo === 'ganador' ? 'Quién tiene más (ganador de una estadística)'
+  : b.patas[0].equipo === 'total' ? 'Total del partido (más o menos de)' : 'Estadística de un equipo (más o menos de)';
+function renderBets() {
+  const B = (D.bets || []).filter(b => b.estado !== 'error'), bad = (D.bets || []).filter(b => b.estado === 'error');
+  if (!B.length) {
+    $('c-bets').innerHTML = card('Mis apuestas', note(`Todavía no hay apuestas en esta liga. Pásamelas por el chat (partido, apuesta, cuota e importe) y aparecerán aquí, comprobadas solas con los datos de cada partido.`) +
+      (bad.length ? note(bad.map(b => `Apuesta «${esc(b.texto)}»: ${esc(b.error)}`).join('<br>')) : ''));
+    return;
+  }
+  const done = B.filter(b => ok(b.beneficio)), won = done.filter(b => b.estado === 'ganada'), pend = B.filter(b => b.estado === 'pendiente');
+  const staked = done.reduce((x, b) => x + b.importe, 0), ret = done.reduce((x, b) => x + b.devuelto, 0), prof = ret - staked;
+  const evd = done.reduce((x, b) => x + (b.ev || 0), 0), oddsM = mean(done.map(b => b.cuota)), pexp = done.reduce((x, b) => x + (b.p || 0), 0);
+  const stake0 = [...new Set(B.map(b => b.importe))];
+  const tiles = [['Apostado', eur0(staked), `${done.length} ${done.length === 1 ? 'apuesta resuelta' : 'apuestas resueltas'}${stake0.length === 1 ? ` de ${f0(stake0[0])} €` : ''}${pend.length ? ` · ${pend.length} ${pend.length === 1 ? 'pendiente' : 'pendientes'}` : ''}`],
+    ['Beneficio', eur(prof), `devuelto ${eur0(ret)}`],
+    ['Rentabilidad', staked ? `${sgn(prof / staked * 100, f0)} %` : '–', 'beneficio por euro apostado'],
+    ['Acertadas', `${won.length} de ${done.length}`, `el modelo esperaba ${f1(pexp)} · cuota media ${f2(oddsM)}`],
+    ['Lo que valían según el modelo', eur(evd), 'beneficio medio esperado antes de jugarse']];
+  /* beneficio acumulado */
+  const ord = done.slice().sort((x, y) => x.fecha < y.fecha ? -1 : x.fecha > y.fecha ? 1 : x.i - y.i);
+  let acc = 0; const cum = ord.map(b => (acc += b.beneficio));
+  const chart = cum.length >= 2 ? `<div class="sc">${lineSvg({ys: [0, ...cum], aria: 'Beneficio acumulado de las apuestas', fy: v => f0(v) + ' €',
+    xt: [...new Set([0, Math.round(cum.length / 2), cum.length])], xl: i => i ? fd(ord[i - 1].fecha) : 'inicio',
+    tip: i => i ? `${fdl(ord[i - 1].fecha)} · ${ord[i - 1].texto}: ${eur(ord[i - 1].beneficio)} → acumulado ${eur(cum[i - 1])}` : 'Antes de la primera apuesta: 0 €',
+    hi: [[cum.length, `Ahora: ${eur(cum[cum.length - 1])}`, 'end', (cum.length > 1 ? cum[cum.length - 2] : 0) > cum[cum.length - 1]]]})}</div>` : '';  // etiqueta por el lado libre de la línea
+  /* tabla */
+  const list = pend.slice().sort((x, y) => x.fecha < y.fecha ? -1 : 1).concat(ord.slice().reverse());
+  const betRow = b => { const [tl, tc] = BST[b.estado] || [b.estado, ''], combo = b.patas.length > 1;
+    return `<div class="br"><div><div><span class="bt">${nm(b.h)} – ${nm(b.a)}</span> <small>${fdl(b.fecha)}</small></div>` +
+      `<div>${esc(b.texto)} <span class="bm">· cuota ${f2(b.cuota)} · ${eur0(b.importe)}</span></div>` +
+      `<div class="bx">${b.patas.map(q => `<span>${legTxt(b, q)}</span>`).join('')}</div>` +
+      `<div class="bm">${b.modelo === 'hoy' ? 'Modelo de hoy' : 'Modelo antes del partido'}: ${pc(b.p)}${combo ? ` (${pc(b.pind)} si las patas fueran independientes)` : ''} · cuota justa ${fairTxt(1 / b.p)} · valor ${eur(b.ev)}</div></div>` +
+      `<div class="bs"><span class="chip ${tc}">${tl}</span><b>${ok(b.beneficio) ? eur(b.beneficio) : ''}</b></div></div>`; };
+  /* resumen de cada jornada: apuestas, acertadas, beneficio y lo que esperaba el modelo */
+  const jsum = g => { const d = g.filter(b => ok(b.beneficio)), st = d.reduce((x, b) => x + b.importe, 0), pr = d.reduce((x, b) => x + b.beneficio, 0);
+    return {n: g.length, nd: d.length, won: d.filter(b => b.estado === 'ganada').length, st, pr, ev: d.reduce((x, b) => x + (b.ev || 0), 0), pe: d.reduce((x, b) => x + (b.p || 0), 0), np: g.length - d.length}; };
+  const jks = [...new Set(B.map(b => b.j || 0))].sort((x, y) => y - x), jg = j => B.filter(b => (b.j || 0) === j);
+  const jOrd = jks.slice().sort((x, y) => { const px = jsum(jg(x)).np ? 0 : 1, py = jsum(jg(y)).np ? 0 : 1; return px - py || (px === 0 ? x - y : y - x); });
+  const rows = jOrd.map(j => { const g = jg(j).sort((x, y) => x.fecha < y.fecha ? 1 : x.fecha > y.fecha ? -1 : y.i - x.i), q = jsum(g);
+    const head = [q.nd ? `${q.won} de ${q.nd} acertadas` : '', q.nd ? `<b>${eur(q.pr)}</b>` : '', q.np ? `${q.np} ${q.np === 1 ? 'pendiente' : 'pendientes'}` : ''].filter(Boolean).join(' · ');
+    return `<h3 class="bj">${j ? 'Jornada ' + j : 'Sin jornada'} <span class="mu">· ${q.n} ${q.n === 1 ? 'apuesta' : 'apuestas'} · ${head}</span></h3>${g.map(betRow).join('')}`; });
+  const jrowsB = jks.map(j => { const q = jsum(jg(j));
+    return `<tr><td>${j ? 'J' + j : '–'}</td><td>${q.n}</td><td>${q.nd ? `${q.won} de ${q.nd}` : '–'}<br><small>${q.nd ? `esperado ${f1(q.pe)}` : ''}</small></td><td>${eur0(q.st)}</td><td><b>${q.nd ? eur(q.pr) : '–'}</b></td><td>${q.st ? `${sgn(q.pr / q.st * 100, f0)} %` : '–'}</td><td>${q.nd ? eur(q.ev) : '–'}</td><td>${q.np || ''}</td></tr>`; });
+  /* por tipo */
+  const types = [...new Set(done.map(btype))];
+  const trows = types.map(t => { const g = done.filter(b => btype(b) === t), st = g.reduce((x, b) => x + b.importe, 0), pr = g.reduce((x, b) => x + b.beneficio, 0);
+    return `<tr><td class="l">${t}</td><td>${g.length}</td><td>${g.filter(b => b.estado === 'ganada').length}</td><td>${eur0(st)}</td><td><b>${eur(pr)}</b></td><td>${sgn(pr / st * 100, f0)} %</td><td>${eur(g.reduce((x, b) => x + (b.ev || 0), 0))}</td></tr>`; });
+  const luck = prof - evd;
+  $('c-bets').innerHTML = `<div class="tiles">${tiles.map(t => `<div class="tile"><span>${t[0]}</span><b>${t[1]}</b><small>${t[2]}</small></div>`).join('')}</div>` +
+    card('Beneficio acumulado', chart + `<p class="story" style="margin:10px 0 0">${done.length ? `Llevas ${eur(prof)} con ${done.length} apuestas (${won.length} acertadas). Según el modelo, antes de jugarse valían ${eur(evd)} en total, así que ${Math.abs(luck) < 0.5 ? 'el resultado es justo lo esperado' : luck > 0 ? `vas ${eur0(luck)} por encima de lo esperado: buena parte puede ser suerte, porque con tan pocas apuestas la variación es enorme` : `vas ${eur0(-luck)} por debajo de lo esperado: con tan pocas apuestas eso es sobre todo mala suerte`}.` : ''}</p>`) +
+    card('Por jornada', tbl(['Jornada', 'Apuestas', 'Acertadas', 'Apostado', 'Beneficio', 'Rentabilidad', 'Esperado según el modelo', 'Pendientes'], jrowsB, 'num et') +
+      note('«Esperado» en acertadas es la suma de las probabilidades que daba el modelo; en euros, lo que valían las apuestas según el modelo antes de jugarse.')) +
+    card('Apuestas', rows.join('') +
+      note('<b>Ganador de una estadística</b>: si los dos equipos empatan en esa estadística, la apuesta se da por perdida, como en un mercado de tres opciones (local, empate, visitante); si tu casa anula la apuesta en caso de empate, dímelo y lo cambio. <b>Modelo antes del partido</b>: la probabilidad de que saliera la apuesta con un modelo ajustado solo con los partidos anteriores. En las combinadas se tiene en cuenta que las patas van juntas (un equipo que saca más córners suele tirar más), con la relación medida en los partidos anteriores. <b>Valor</b>: lo que ganarías de media con esa apuesta, importe × (probabilidad × cuota − 1); positivo significa que la cuota pagaba más de lo que valía. Recuerda que en el 1X2 el mercado predice mejor que el modelo.') +
+      (bad.length ? note('<span class="chip warn">Revisar</span> ' + bad.map(b => `«${esc(b.texto)}»: ${esc(b.error)}`).join('<br>')) : '')) +
+    (types.length > 1 ? card('Por tipo de apuesta', tbl([['Tipo', 'l'], 'Apuestas', 'Acertadas', 'Apostado', 'Beneficio', 'Rentabilidad', 'Esperado según el modelo'], trows, 'num') +
+      note('Con tan pocas apuestas por tipo, la rentabilidad cambia mucho de una semana a otra. Lo que más dice es la última columna: si el modelo ve valor en un tipo de apuesta de forma repetida.')) : '') +
+    card('Cómo añadir apuestas', note('Pásamelas por el chat como hasta ahora (partido, apuesta, cuota e importe) y las añado. También puedes editar apuestas.json en GitHub: cada apuesta lleva el partido, la cuota, el importe y sus patas, y al guardar la página se actualiza sola. En cuanto football-data publica las estadísticas del partido, cada apuesta se marca como ganada o perdida.'));
+}
+
 /* ---------------------------------------------------------------- vista: aprendizaje */
 const niceStep = (range, n) => { const raw = range / n, p = Math.pow(10, Math.floor(Math.log10(raw))); return [1, 2, 2.5, 5, 10].map(x => x * p).find(x => x >= raw); };
 /* Una sola serie: línea de 2 px, rejilla fina, puntos destacados con etiqueta y una columna de lectura por posición
@@ -971,13 +1046,13 @@ function renderLearn() {
 }
 
 /* ---------------------------------------------------------------- arranque */
-const VIEWS = ['equipos', 'partido', 'predicciones', 'tendencias', 'historial', 'aprendizaje', 'metodo'];
+const VIEWS = ['equipos', 'partido', 'predicciones', 'tendencias', 'apuestas', 'historial', 'aprendizaje', 'metodo'];
 const rendered = {};
 function show(view, scroll) {
   if (!VIEWS.includes(view)) view = 'equipos';
   VIEWS.forEach(v => { $('v-' + v).hidden = v !== view; const b = document.querySelector(`[data-view="${v}"]`); if (b) b.setAttribute('aria-selected', String(v === view)); });
   if (view === 'equipos') renderEquipos(); else if (view === 'partido') renderPartido(); else if (view === 'predicciones') renderPred(); else if (view === 'historial') renderHist();
-  else if (view === 'tendencias') renderTend(); else if (view === 'aprendizaje') renderLearn();
+  else if (view === 'tendencias') renderTend(); else if (view === 'aprendizaje') renderLearn(); else if (view === 'apuestas') renderBets();
   rendered[view] = true;
   try { history.replaceState(null, '', '#' + view); } catch (e) { /* sin historial */ }
   if (scroll) window.scrollTo({top: 0});

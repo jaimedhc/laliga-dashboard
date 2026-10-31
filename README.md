@@ -18,6 +18,7 @@ cada jornada. Solo usa datos de esta temporada.
 | `template.html`, `style.css`, `app.js` | La página: estructura, estilos y lógica. `build.py` los une en cada página. |
 | `calendario.json` | Calendario de LaLiga de la RFEF (base y respaldo). |
 | `fechas.json`, `fechas_premier.json` | Fechas corregidas a mano de partidos movidos (opcional). |
+| `apuestas.json` | Tus apuestas (partido, cuota, importe y patas). Se comprueban solas con los datos de cada partido en la pestaña **Mis apuestas**. |
 | `players.py` | Jugadores de LaLiga desde API-Football (solo funciona con un plan de pago; si no, no hace nada). |
 | `.github/workflows/update.yml` | La tarea automática. |
 | `index.html`, `premier.html` | Las páginas generadas. **No las edites**: se reescriben en cada actualización. |
@@ -44,6 +45,18 @@ En cada actualización repite la prueba retrospectiva (cada partido predicho sol
 4. Corrige la probabilidad de las tendencias con lo que se han cumplido las anteriores.
 
 Todo se ve en la pestaña **Aprendizaje** y queda guardado en el registro de cada liga.
+
+## Mis apuestas
+
+Cada apuesta de `apuestas.json` lleva la liga, el partido (`"Local|Visitante"` con los nombres del CSV), el texto, la cuota,
+el importe y sus patas (una combinada tiene varias). Tipos de pata:
+
+- `{"tipo": "mas", "estadistica": "tiros", "equipo": "local", "linea": 15.5}` (también `"menos"`, y `"equipo": "visitante"` o `"total"`)
+- `{"tipo": "ganador", "estadistica": "corners", "equipo": "local"}`: quién tiene más; un empate en la estadística pierde
+- `{"tipo": "resultado", "equipo": "local"}` (o `"empate"`, `"visitante"`)
+
+Estadísticas: goles, tiros, tiros a puerta, corners, faltas, amarillas, rojas. La página marca cada apuesta como ganada o perdida
+en cuanto football-data publica el partido, y muestra lo que le daba el modelo antes de jugarse.
 
 ## Corregir una fecha
 
