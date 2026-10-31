@@ -1190,6 +1190,7 @@ def referee_backtest(played, teams, min_train=40, step=8):
 #   {"tipo": "mas" | "menos", "estadistica": "tiros", "equipo": "local" | "visitante" | "total", "linea": 13.5}
 #   {"tipo": "ganador", "estadistica": "corners", "equipo": "local" | "visitante" | "empate"}   (quién tiene más)
 #   {"tipo": "resultado", "equipo": "local" | "empate" | "visitante"}
+#   {"tipo": "handicap", "equipo": "local" | "visitante", "linea": 3.5}   (hándicap asiático de goles; líneas enteras o ,5)
 BET_STATS = {"goles": "g", "tiros": "s", "tiros a puerta": "st", "corners": "c", "córners": "c", "faltas": "f",
              "amarillas": "y", "rojas": "r", "xg": "xg"}
 _SIDE = {"local": 0, "empate": 1, "visitante": 2}
@@ -1200,7 +1201,9 @@ def _phi(z):
 
 
 def leg_key(leg):
-    return "g" if leg["tipo"] == "resultado" else BET_STATS[leg["estadistica"].strip().lower()]
+    if leg["tipo"] == "handicap" and (leg["linea"] * 4) % 2:
+        raise ValueError("hándicap de cuarto (,25 o ,75): todavía no se puede comprobar")
+    return "g" if leg["tipo"] in ("resultado", "handicap") else BET_STATS[leg["estadistica"].strip().lower()]
 
 
 def _pick(leg, v):
@@ -1217,6 +1220,9 @@ def leg_outcome(leg, v):
             return "nula"
         return "gana" if (x > L) == (t == "mas") else "pierde"
     d, w = v[0] - v[1], leg["equipo"]
+    if t == "handicap":
+        x = (d if w == "local" else -d) + leg["linea"]
+        return "nula" if x == 0 else "gana" if x > 0 else "pierde"
     ok_ = d == 0 if w == "empate" else (d > 0 if w == "local" else d < 0)
     return "gana" if ok_ else "pierde"
 
@@ -1242,6 +1248,8 @@ def leg_prob(leg, gm, sms, h, a):
             L = leg["linea"]
             val = lambda x, y: x + y if w == "total" else (x if w == "local" else y)
             return sum(q for x, y, q in cells if (val(x, y) > L if t == "mas" else val(x, y) < L))
+        if t == "handicap":
+            return sum(q for x, y, q in cells if ((x - y) if w == "local" else (y - x)) + leg["linea"] > 0)
         return sum(q for x, y, q in cells if (x == y if w == "empate" else (x > y if w == "local" else x < y)))
     p = sms[k]
     mh, vh, _ = stat_pred(p, ih, ia, 1)

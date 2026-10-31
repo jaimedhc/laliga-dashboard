@@ -877,10 +877,11 @@ function legTxt(b, q) {  // qué pasó en cada pata
   let t;
   if (q.tipo === 'mas' || q.tipo === 'menos') t = q.equipo === 'total' ? `${show(v[0] + v[1])} ${st} en el partido` : `${team(q.equipo)}: ${show(v[q.equipo === 'local' ? 0 : 1])} ${st}`;
   else if (q.tipo === 'resultado') t = `${v[0]}-${v[1]}`;
+  else if (q.tipo === 'handicap') t = `${team(q.equipo)} ${hTxt(q.linea)}: ${v[0]}-${v[1]}`;
   else t = `${cap(st)} ${show(v[0])}-${show(v[1])}${v[0] === v[1] && q.equipo !== 'empate' ? ' (empate)' : ''}`;
   return `${q.res === 'nula' ? '<span class="tv">=</span>' : mark(q.res === 'gana')} ${t}`;
 }
-const btype = b => b.patas.length > 1 ? 'Combinadas' : b.patas[0].tipo === 'resultado' ? 'Resultado del partido' : b.patas[0].tipo === 'ganador' ? 'Quién tiene más (ganador de una estadística)'
+const btype = b => b.patas.length > 1 ? 'Combinadas' : b.patas[0].tipo === 'resultado' ? 'Resultado del partido' : b.patas[0].tipo === 'handicap' ? 'Hándicap asiático' : b.patas[0].tipo === 'ganador' ? 'Quién tiene más (ganador de una estadística)'
   : b.patas[0].equipo === 'total' ? 'Total del partido (más o menos de)' : 'Estadística de un equipo (más o menos de)';
 function renderBets() {
   const B = (D.bets || []).filter(b => b.estado !== 'error'), bad = (D.bets || []).filter(b => b.estado === 'error');

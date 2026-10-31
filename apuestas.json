@@ -1,5 +1,5 @@
 {
- "_como": "Cada apuesta: liga (laliga o premier), partido (Local|Visitante con los nombres del CSV), texto (como la anotaste), cuota, importe y patas. Una combinada tiene varias patas. Tipos de pata: {\"tipo\": \"mas\" o \"menos\", \"estadistica\": \"tiros\", \"equipo\": \"local\", \"visitante\" o \"total\", \"linea\": 13.5}; {\"tipo\": \"ganador\", \"estadistica\": \"corners\", \"equipo\": \"local\" o \"visitante\"} (quién tiene más; un empate en la estadística pierde); {\"tipo\": \"resultado\", \"equipo\": \"local\", \"empate\" o \"visitante\"}. Estadísticas: goles, tiros, tiros a puerta, corners, faltas, amarillas, rojas.",
+ "_como": "Cada apuesta: liga (laliga o premier), partido (Local|Visitante con los nombres del CSV), texto (como la anotaste), cuota, importe y patas. Una combinada tiene varias patas. Tipos de pata: {\"tipo\": \"mas\" o \"menos\", \"estadistica\": \"tiros\", \"equipo\": \"local\", \"visitante\" o \"total\", \"linea\": 13.5}; {\"tipo\": \"ganador\", \"estadistica\": \"corners\", \"equipo\": \"local\" o \"visitante\"} (quién tiene más; un empate en la estadística pierde); {\"tipo\": \"resultado\", \"equipo\": \"local\", \"empate\" o \"visitante\"}; {\"tipo\": \"handicap\", \"equipo\": \"visitante\", \"linea\": 3.5} (hándicap asiático de goles). Estadísticas: goles, tiros, tiros a puerta, corners, faltas, amarillas, rojas.",
  "apuestas": [
   {"liga": "laliga", "partido": "Getafe|Vallecano", "texto": "Número de tiros del Rayo +13,5", "cuota": 2.70, "importe": 15,
    "patas": [{"tipo": "mas", "estadistica": "tiros", "equipo": "visitante", "linea": 13.5}]},
@@ -26,6 +26,13 @@
    "patas": [{"tipo": "resultado", "equipo": "local"}]},
   {"liga": "laliga", "partido": "Levante|Ath Madrid", "texto": "Resultado: gana el Atlético / Ganador de tiros: Atlético", "cuota": 1.76, "importe": 15,
    "patas": [{"tipo": "resultado", "equipo": "visitante"},
-             {"tipo": "ganador", "estadistica": "tiros", "equipo": "visitante"}]}
+             {"tipo": "ganador", "estadistica": "tiros", "equipo": "visitante"}]},
+  {"liga": "laliga", "partido": "Betis|Malaga", "texto": "Resultado: Betis / Córners totales +8,5 / Tiros a puerta del Betis +5,5", "cuota": 2.45, "importe": 15,
+   "patas": [{"tipo": "resultado", "equipo": "local"},
+             {"tipo": "mas", "estadistica": "corners", "equipo": "total", "linea": 8.5},
+             {"tipo": "mas", "estadistica": "tiros a puerta", "equipo": "local", "linea": 5.5}]},
+  {"liga": "laliga", "partido": "Barcelona|Alaves", "texto": "Hándicap asiático Alavés +3,5 / Tiros a puerta del Alavés +1,5", "cuota": 1.98, "importe": 15,
+   "patas": [{"tipo": "handicap", "equipo": "visitante", "linea": 3.5},
+             {"tipo": "mas", "estadistica": "tiros a puerta", "equipo": "visitante", "linea": 1.5}]}
  ]
 }
