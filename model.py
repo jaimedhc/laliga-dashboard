@@ -1238,11 +1238,12 @@ def _leg_y(leg, v):
     return v[0] - v[1] if w == "local" else v[1] - v[0]
 
 
-def leg_prob(leg, gm, sms, h, a):
-    """Probabilidad de que la pata se cumpla según el modelo (sin contar la nula)."""
+def leg_prob(leg, gm, sms, h, a, M=None):
+    """Probabilidad de que la pata se cumpla según el modelo (sin contar la nula). M: matriz de marcadores a usar
+    en las patas de goles (por defecto, la del modelo)."""
     ih, ia, k, t, w = gm["ix"][h], gm["ix"][a], leg_key(leg), leg["tipo"], leg["equipo"]
     if k == "g":
-        M = score_matrix(gm, ih, ia)
+        M = M or score_matrix(gm, ih, ia)
         cells = [(x, y, q) for x, row in enumerate(M) for y, q in enumerate(row)]
         if t in ("mas", "menos"):
             L = leg["linea"]
@@ -1269,6 +1270,71 @@ def leg_prob(leg, gm, sms, h, a):
     if w == "visitante":
         return _phi((-0.5 - mu) / sd)
     return _phi((0.5 - mu) / sd) - _phi((-0.5 - mu) / sd)
+
+
+def _pois(l, K=10):
+    out = [math.exp(-l)]
+    for k in range(1, K + 1):
+        out.append(out[-1] * l / k)
+    return out
+
+
+def _ah_q(M, h):
+    """Parte de victoria del local con hándicap asiático h (las líneas de cuarto se reparten en dos mitades): w / (w + l)."""
+    parts = [h - 0.25, h + 0.25] if (h * 4) % 2 else [h]
+    w = l = 0.0
+    for x, row in enumerate(M):
+        for y, q in enumerate(row):
+            for c in parts:
+                v = x - y + c
+                if v > 1e-9:
+                    w += q / len(parts)
+                elif v < -1e-9:
+                    l += q / len(parts)
+    return w / (w + l) if w + l else 0.5
+
+
+def market_matrix(odds, ou=None, ah=None):
+    """Marcadores según las cuotas: los goles esperados de cada equipo (Poisson) que mejor reproducen el 1X2, el
+    más/menos 2,5 y el hándicap asiático del mercado, ya sin margen. Sirve para las patas de goles cuando lo aprendido
+    dice que el mercado predice mejor que el modelo."""
+    p1 = implied(odds)
+    if not p1:
+        return None
+    po = implied(ou)
+    pa = implied(ah[1:3]) if ah and ah[0] is not None and ah[1] and ah[2] else None
+
+    def M_(lh, la):
+        a_, b_ = _pois(lh), _pois(la)
+        return [[x * y for y in b_] for x in a_]
+
+    def err(lh, la):
+        M = M_(lh, la)
+        pH = sum(q for x, r in enumerate(M) for y, q in enumerate(r) if x > y)
+        pD = sum(M[x][x] for x in range(len(M)))
+        e = (pH - p1[0]) ** 2 + (pD - p1[1]) ** 2 + (1 - pH - pD - p1[2]) ** 2
+        if po:
+            e += (sum(q for x, r in enumerate(M) for y, q in enumerate(r) if x + y > 2.5) - po[0]) ** 2
+        if pa:
+            e += (_ah_q(M, ah[0]) - pa[0]) ** 2
+        return e
+
+    best = min(((err(lh, la), lh, la) for lh in [0.2 + 0.1 * i for i in range(48)] for la in [0.1 + 0.1 * i for i in range(40)]))
+    _, lh0, la0 = best
+    best = min(((err(lh, la), lh, la) for lh in [max(0.05, lh0 + 0.01 * i) for i in range(-10, 11)]
+                for la in [max(0.05, la0 + 0.01 * i) for i in range(-10, 11)]))
+    M = M_(best[1], best[2])
+    t = sum(map(sum, M))
+    return [[q / t for q in r] for r in M]
+
+
+def pool_matrix(Mm, Mk, a):
+    """Mezcla de dos matrices de marcadores con el peso aprendido (a=0: solo el mercado)."""
+    if a <= 0:
+        return Mk
+    M = [[max(x, 1e-12) ** a * max(y, 1e-12) ** (1 - a) for x, y in zip(r1, r2)] for r1, r2 in zip(Mm, Mk)]
+    t = sum(map(sum, M))
+    return [[q / t for q in r] for r in M]
 
 
 def _chol(R):
@@ -1368,11 +1434,19 @@ def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=N
             for leg in legs:
                 k = leg_key(leg)
                 q = {**leg, "k": k, "p": round(leg_prob(leg, g_, s_, h, a), 4)}
-                mk = implied(row.get("odds")) if leg["tipo"] == "resultado" and blend is not None else None
-                if mk:
+                mk = implied(row.get("odds")) if k == "g" and blend is not None else None
+                if mk and leg["tipo"] == "resultado":  # el 1X2 del mercado, tal cual
                     q["pm"] = q["p"]
                     q["p"] = round(pool(predict_goals(g_, h, a)["p"], mk, blend)[_SIDE[leg["equipo"]]], 4)
                     q["src"] = "mercado" if blend == 0 else "combinada"
+                elif mk:  # otras patas de goles: marcadores ajustados a las cuotas del partido
+                    if "mm" not in r:
+                        r["mm"] = market_matrix(row.get("odds"), row.get("ou"), row.get("ah"))
+                    if r["mm"]:
+                        Mx = pool_matrix(score_matrix(g_, g_["ix"][h], g_["ix"][a]), r["mm"], blend)
+                        q["pm"] = q["p"]
+                        q["p"] = round(leg_prob(leg, g_, s_, h, a, Mx), 4)
+                        q["src"] = "mercado" if blend == 0 else "combinada"
                 if m:
                     v = [m["hg"], m["ag"]] if k == "g" else m.get(k)
                     q["obs"] = [round(x, 2) for x in v] if v else None
@@ -1403,5 +1477,6 @@ def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=N
             r["ev"] = round(st * (r["p"] * r["cuota"] - 1), 2)
         except (KeyError, ValueError, TypeError) as e:
             r["estado"], r["error"] = "error", str(e)
+        r.pop("mm", None)
         out.append(r)
     return out
