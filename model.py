@@ -1316,9 +1316,10 @@ def leg_corr(legs, train, E):
     return R
 
 
-def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=None):
+def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=None, blend=None):
     """Comprueba cada apuesta con el partido real y calcula lo que le daba el modelo antes del partido
-    (ajustado solo con los partidos anteriores) o, si aún no se ha jugado, con el modelo de hoy."""
+    (ajustado solo con los partidos anteriores) o, si aún no se ha jugado, con el modelo de hoy. En el resultado (1X2)
+    se usa lo aprendido frente al mercado (blend: peso del modelo; 0 es fiarse solo de las cuotas)."""
     byk = {(m["h"], m["a"]): m for m in played}
     pend = {(f["h"], f["a"]): f for f in pending}
     cache = {}
@@ -1332,6 +1333,7 @@ def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=N
                 raise ValueError(f"equipo desconocido en «{b['partido']}»")
             r.update(h=h, a=a)
             m = byk.get((h, a))
+            row = m or pend.get((h, a)) or {}
             legs = b["patas"]
             for leg in legs:
                 leg_key(leg)  # valida la estadística
@@ -1358,6 +1360,11 @@ def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=N
             for leg in legs:
                 k = leg_key(leg)
                 q = {**leg, "k": k, "p": round(leg_prob(leg, g_, s_, h, a), 4)}
+                mk = implied(row.get("odds")) if leg["tipo"] == "resultado" and blend is not None else None
+                if mk:
+                    q["pm"] = q["p"]
+                    q["p"] = round(pool(predict_goals(g_, h, a)["p"], mk, blend)[_SIDE[leg["equipo"]]], 4)
+                    q["src"] = "mercado" if blend == 0 else "combinada"
                 if m:
                     v = [m["hg"], m["ag"]] if k == "g" else m.get(k)
                     q["obs"] = [round(x, 2) for x in v] if v else None

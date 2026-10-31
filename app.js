@@ -897,7 +897,7 @@ function renderBets() {
     ['Beneficio', eur(prof), `devuelto ${eur0(ret)}`],
     ['Rentabilidad', staked ? `${sgn(prof / staked * 100, f0)} %` : '–', 'beneficio por euro apostado'],
     ['Acertadas', `${won.length} de ${done.length}`, `el modelo esperaba ${f1(pexp)} · cuota media ${f2(oddsM)}`],
-    ['Lo que valían según el modelo', eur(evd), 'beneficio medio esperado antes de jugarse']];
+    ['Lo que valían según la estimación', eur(evd), 'beneficio medio esperado antes de jugarse']];
   /* beneficio acumulado */
   const ord = done.slice().sort((x, y) => x.fecha < y.fecha ? -1 : x.fecha > y.fecha ? 1 : x.i - y.i);
   let acc = 0; const cum = ord.map(b => (acc += b.beneficio));
@@ -911,7 +911,8 @@ function renderBets() {
     return `<div class="br"><div><div><span class="bt">${nm(b.h)} – ${nm(b.a)}</span> <small>${fdl(b.fecha)}</small></div>` +
       `<div>${esc(b.texto)} <span class="bm">· cuota ${f2(b.cuota)} · ${eur0(b.importe)}</span></div>` +
       `<div class="bx">${b.patas.map(q => `<span>${legTxt(b, q)}</span>`).join('')}</div>` +
-      `<div class="bm">${b.modelo === 'hoy' ? 'Modelo de hoy' : 'Modelo antes del partido'}: ${pc(b.p)}${combo ? ` (${pc(b.pind)} si las patas fueran independientes)` : ''} · cuota justa ${fairTxt(1 / b.p)} · valor ${eur(b.ev)}</div></div>` +
+      `<div class="bm">${b.modelo === 'hoy' ? 'Estimación de hoy' : 'Estimación antes del partido'}: ${pc(b.p)}${combo ? ` (${pc(b.pind)} si las patas fueran independientes)` : ''} · cuota justa ${fairTxt(1 / b.p)} · valor ${eur(b.ev)}` +
+      `${b.patas.some(q => q.src) ? `<br>Resultado con la probabilidad ${b.patas.find(q => q.src).src === 'mercado' ? 'del mercado' : 'combinada de modelo y mercado'} (${pc(b.patas.find(q => q.src).p)}; el modelo solo daba ${pc(b.patas.find(q => q.src).pm)})` : ''}</div></div>` +
       `<div class="bs"><span class="chip ${tc}">${tl}</span><b>${ok(b.beneficio) ? eur(b.beneficio) : ''}</b></div></div>`; };
   /* resumen de cada jornada: apuestas, acertadas, beneficio y lo que esperaba el modelo */
   const jsum = g => { const d = g.filter(b => ok(b.beneficio)), st = d.reduce((x, b) => x + b.importe, 0), pr = d.reduce((x, b) => x + b.beneficio, 0);
@@ -929,11 +930,11 @@ function renderBets() {
     return `<tr><td class="l">${t}</td><td>${g.length}</td><td>${g.filter(b => b.estado === 'ganada').length}</td><td>${eur0(st)}</td><td><b>${eur(pr)}</b></td><td>${sgn(pr / st * 100, f0)} %</td><td>${eur(g.reduce((x, b) => x + (b.ev || 0), 0))}</td></tr>`; });
   const luck = prof - evd;
   $('c-bets').innerHTML = `<div class="tiles">${tiles.map(t => `<div class="tile"><span>${t[0]}</span><b>${t[1]}</b><small>${t[2]}</small></div>`).join('')}</div>` +
-    card('Beneficio acumulado', chart + `<p class="story" style="margin:10px 0 0">${done.length ? `Llevas ${eur(prof)} con ${done.length} apuestas (${won.length} acertadas). Según el modelo, antes de jugarse valían ${eur(evd)} en total, así que ${Math.abs(luck) < 0.5 ? 'el resultado es justo lo esperado' : luck > 0 ? `vas ${eur0(luck)} por encima de lo esperado: buena parte puede ser suerte, porque con tan pocas apuestas la variación es enorme` : `vas ${eur0(-luck)} por debajo de lo esperado: con tan pocas apuestas eso es sobre todo mala suerte`}.` : ''}</p>`) +
+    card('Beneficio acumulado', chart + `<p class="story" style="margin:10px 0 0">${done.length ? `Llevas ${eur(prof)} con ${done.length} apuestas (${won.length} acertadas). Según la estimación, antes de jugarse valían ${eur(evd)} en total, así que ${Math.abs(luck) < 0.5 ? 'el resultado es justo lo esperado' : luck > 0 ? `vas ${eur0(luck)} por encima de lo esperado: buena parte puede ser suerte, porque con tan pocas apuestas la variación es enorme` : `vas ${eur0(-luck)} por debajo de lo esperado: con tan pocas apuestas eso es sobre todo mala suerte`}.` : ''}</p>`) +
     card('Por jornada', tbl(['Jornada', 'Apuestas', 'Acertadas', 'Apostado', 'Beneficio', 'Rentabilidad', 'Esperado según el modelo', 'Pendientes'], jrowsB, 'num et') +
       note('«Esperado» en acertadas es la suma de las probabilidades que daba el modelo; en euros, lo que valían las apuestas según el modelo antes de jugarse.')) +
     card('Apuestas', rows.join('') +
-      note('<b>Ganador de una estadística</b>: si los dos equipos empatan en esa estadística, la apuesta se da por perdida, como en un mercado de tres opciones (local, empate, visitante); si tu casa anula la apuesta en caso de empate, dímelo y lo cambio. <b>Modelo antes del partido</b>: la probabilidad de que saliera la apuesta con un modelo ajustado solo con los partidos anteriores. En las combinadas se tiene en cuenta que las patas van juntas (un equipo que saca más córners suele tirar más), con la relación medida en los partidos anteriores. <b>Valor</b>: lo que ganarías de media con esa apuesta, importe × (probabilidad × cuota − 1); positivo significa que la cuota pagaba más de lo que valía. Recuerda que en el 1X2 el mercado predice mejor que el modelo.') +
+      note('<b>Ganador de una estadística</b>: si los dos equipos empatan en esa estadística, la apuesta se da por perdida, como en un mercado de tres opciones (local, empate, visitante); si tu casa anula la apuesta en caso de empate, dímelo y lo cambio. <b>Estimación antes del partido</b>: la probabilidad de que saliera la apuesta con un modelo ajustado solo con los partidos anteriores (en las pendientes, con el de hoy). Para el resultado (1X2) se usa la probabilidad del mercado, o la mezcla aprendida, porque el modelo ha aprendido que las cuotas predicen mejor el resultado. En las combinadas se tiene en cuenta que las patas van juntas (un equipo que saca más córners suele tirar más), con la relación medida en los partidos anteriores. <b>Valor</b>: lo que ganarías de media con esa apuesta, importe × (probabilidad × cuota − 1); positivo significa que la cuota pagaba más de lo que valía. Recuerda que en el 1X2 el mercado predice mejor que el modelo.') +
       (bad.length ? note('<span class="chip warn">Revisar</span> ' + bad.map(b => `«${esc(b.texto)}»: ${esc(b.error)}`).join('<br>')) : '')) +
     (types.length > 1 ? card('Por tipo de apuesta', tbl([['Tipo', 'l'], 'Apuestas', 'Acertadas', 'Apostado', 'Beneficio', 'Rentabilidad', 'Esperado según el modelo'], trows, 'num') +
       note('Con tan pocas apuestas por tipo, la rentabilidad cambia mucho de una semana a otra. Lo que más dice es la última columna: si el modelo ve valor en un tipo de apuesta de forma repetida.')) : '') +

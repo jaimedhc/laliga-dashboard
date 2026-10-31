@@ -364,7 +364,7 @@ def build_league(key, L, fixtures_text):
     # apuestas del usuario (apuestas.json): se comprueban con los datos reales y con lo que daba el modelo
     mine = [b for b in jload(p_in("apuestas.json"), {}).get("apuestas", []) if b.get("liga", "laliga") == key]
     try:
-        bets = model.evaluate_bets(mine, played, pend, teams, cfg, gm, sms) if mine else []
+        bets = model.evaluate_bets(mine, played, pend, teams, cfg, gm, sms, blend["a"] if blend.get("fit") else None) if mine else []
     except Exception as e:  # noqa: BLE001  (un error en las apuestas no debe tumbar la página)
         warn.append(f"No se pudieron evaluar las apuestas: {e}")
         bets = []
