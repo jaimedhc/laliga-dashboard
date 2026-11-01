@@ -55,7 +55,7 @@ el importe y sus patas (una combinada tiene varias). Tipos de pata:
 - `{"tipo": "mas", "estadistica": "tiros", "equipo": "local", "linea": 15.5}` (también `"menos"`, y `"equipo": "visitante"` o `"total"`)
 - `{"tipo": "ganador", "estadistica": "corners", "equipo": "local"}`: quién tiene más; un empate en la estadística pierde
 - `{"tipo": "resultado", "equipo": "local"}` (o `"empate"`, `"visitante"`)
-- `{"tipo": "handicap", "equipo": "visitante", "linea": 3.5}`: hándicap asiático de goles (líneas enteras o de ,5)
+- `{"tipo": "handicap", "equipo": "visitante", "linea": 3.5}`: hándicap asiático de goles (líneas enteras o de ,5); con `"estadistica": "corners"` (u otra), de esa estadística
 
 Estadísticas: goles, tiros, tiros a puerta, corners, faltas, amarillas, rojas. La página marca cada apuesta como ganada o perdida
 en cuanto football-data publica el partido, y muestra lo que le daba el modelo antes de jugarse.

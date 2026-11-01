@@ -1190,7 +1190,8 @@ def referee_backtest(played, teams, min_train=40, step=8):
 #   {"tipo": "mas" | "menos", "estadistica": "tiros", "equipo": "local" | "visitante" | "total", "linea": 13.5}
 #   {"tipo": "ganador", "estadistica": "corners", "equipo": "local" | "visitante" | "empate"}   (quién tiene más)
 #   {"tipo": "resultado", "equipo": "local" | "empate" | "visitante"}
-#   {"tipo": "handicap", "equipo": "local" | "visitante", "linea": 3.5}   (hándicap asiático de goles; líneas enteras o ,5)
+#   {"tipo": "handicap", "equipo": "local" | "visitante", "linea": 3.5}   (hándicap asiático de goles; líneas enteras o ,5;
+#    con "estadistica": "corners", de esa estadística)
 BET_STATS = {"goles": "g", "tiros": "s", "tiros a puerta": "st", "corners": "c", "córners": "c", "faltas": "f",
              "amarillas": "y", "rojas": "r", "xg": "xg"}
 _SIDE = {"local": 0, "empate": 1, "visitante": 2}
@@ -1203,7 +1204,9 @@ def _phi(z):
 def leg_key(leg):
     if leg["tipo"] == "handicap" and (leg["linea"] * 4) % 2:
         raise ValueError("hándicap de cuarto (,25 o ,75): todavía no se puede comprobar")
-    return "g" if leg["tipo"] in ("resultado", "handicap") else BET_STATS[leg["estadistica"].strip().lower()]
+    if leg["tipo"] == "resultado" or (leg["tipo"] == "handicap" and not leg.get("estadistica")):
+        return "g"
+    return BET_STATS[leg["estadistica"].strip().lower()]
 
 
 def _pick(leg, v):
@@ -1265,6 +1268,10 @@ def leg_prob(leg, gm, sms, h, a, M=None):
         eq = p_over(m, V, L - 1) - up if float(L).is_integer() else 0.0
         return max(0.0, 1 - up - eq)
     mu, sd = mh - ma, math.sqrt(max(vh + va - 2 * cov, 1e-6))  # diferencia local − visitante, con corrección de continuidad
+    if t == "handicap":  # gana si (equipo − rival) + línea > 0
+        L = leg["linea"]
+        c = 0.5 if float(L).is_integer() else 0.0  # con línea entera, la igualdad es nula
+        return 1 - _phi((-L + c - mu) / sd) if w == "local" else _phi((L - c - mu) / sd)
     if w == "local":
         return 1 - _phi((0.5 - mu) / sd)
     if w == "visitante":

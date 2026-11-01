@@ -877,7 +877,7 @@ function legTxt(b, q) {  // qué pasó en cada pata
   let t;
   if (q.tipo === 'mas' || q.tipo === 'menos') t = q.equipo === 'total' ? `${show(v[0] + v[1])} ${st} en el partido` : `${team(q.equipo)}: ${show(v[q.equipo === 'local' ? 0 : 1])} ${st}`;
   else if (q.tipo === 'resultado') t = `${v[0]}-${v[1]}`;
-  else if (q.tipo === 'handicap') t = `${team(q.equipo)} ${hTxt(q.linea)}: ${v[0]}-${v[1]}`;
+  else if (q.tipo === 'handicap') t = `${q.k === 'g' ? '' : cap(st) + ': '}${team(q.equipo)} ${hTxt(q.linea)}, ${show(v[0])}-${show(v[1])}`;
   else t = `${cap(st)} ${show(v[0])}-${show(v[1])}${v[0] === v[1] && q.equipo !== 'empate' ? ' (empate)' : ''}`;
   return `${q.res === 'nula' ? '<span class="tv">=</span>' : mark(q.res === 'gana')} ${t}`;
 }
