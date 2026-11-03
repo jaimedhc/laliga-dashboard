@@ -5,6 +5,7 @@ Pruebas con archivos locales: CSV_<LIGA> (p. ej. CSV_LALIGA), OF_<LIGA> (calenda
 TODAY (AAAA-MM-DD), OUT_DIR, ARTIFACT_DIR, SIMS, LEAGUES (lista separada por comas).
 """
 import csv
+import email.utils
 import io
 import json
 import os
@@ -13,7 +14,9 @@ import sys
 import time
 import traceback
 import unicodedata
+import urllib.parse
 import urllib.request
+import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta, timezone
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -287,6 +290,122 @@ def tsdb_schedule(L, cal, played_keys, warn):
     return out
 
 
+# ----------------------------------------------------------------- novedades: bajas, dudas y titulares
+AV_ST = {"biwenger": {"injured": "lesionado", "doubt": "duda", "sanctioned": "sancionado", "warned": "apercibido"},
+         "fpl": {"i": "lesionado", "d": "duda", "s": "sancionado", "n": "no disponible"}}
+POS4 = {1: "POR", 2: "DEF", 3: "MED", 4: "DEL"}
+NEWS_WORDS = {"es": "(lesión OR lesiones OR baja OR bajas OR convocatoria OR duda OR sancionado)",
+              "en": '(injury OR injuries OR "team news" OR suspended OR doubt)'}
+NEWS_LOC = {"es": "hl=es&gl=ES&ceid=ES:es", "en": "hl=en-GB&gl=GB&ceid=GB:en"}
+NEWS_NOISE = re.compile(r"femenin|women|wsl|sub-?\d|\bu-?\d\d\b|filial|juvenil|federaci|academy|youth|cantera", re.I)
+
+
+def availability(key, L, teams, warn):
+    """Bajas, dudas y sancionados de cada equipo: {equipo: [[jugador, puesto, estado, detalle, clave, % de jugar]]}.
+    «Clave» = entre los 11 más valiosos de su equipo según el juego de fantasy."""
+    a = L.get("avail")
+    if not a:
+        return None
+    txt = read(ENV("AVAIL_" + key.upper()) or a["url"], required=False)
+    try:
+        data = json.loads(txt) if txt else None
+    except ValueError:
+        data = None
+    if not data:
+        warn.append(f"No se pudieron leer las bajas de {a['name']}; se muestran las últimas guardadas.")
+        return None
+    inv = {v: k for k, v in L["names"].items()}
+    inv.update(L.get("avail_names", {}))
+    team_of = lambda n: inv.get(n) or (n if n in teams else None)
+    ST, by, unknown = AV_ST[a["src"]], {}, set()
+    if a["src"] == "biwenger":
+        d = data.get("data") or {}
+        tn = {str(k): (v or {}).get("name") for k, v in (d.get("teams") or {}).items()}
+        rows = [(tn.get(str(p.get("teamID"))), p.get("name"), p.get("position"), p.get("status"), p.get("statusInfo"),
+                 p.get("fantasyPrice") or 0, None) for p in (d.get("players") or {}).values()]
+    else:
+        tn = {t["id"]: t["name"] for t in data.get("teams", [])}
+        rows = [(tn.get(e.get("team")), e.get("web_name"), e.get("element_type"), e.get("status"), e.get("news"),
+                 e.get("now_cost") or 0, e.get("chance_of_playing_next_round")) for e in data.get("elements", [])
+                if e.get("status") != "u"]
+    for r in rows:
+        t = team_of(r[0])
+        if t:
+            by.setdefault(t, []).append(r)
+        elif r[0]:
+            unknown.add(r[0])
+    out = {}
+    for t, ps in by.items():
+        ps.sort(key=lambda r: -r[5])
+        for rank, (_, name, pos, st, info, price, ch) in enumerate(ps):
+            s_ = ST.get(st)
+            if s_ and name:
+                out.setdefault(t, []).append([name, POS4.get(pos, ""), s_, (info or "").strip(), rank < 11, ch])
+    if unknown:
+        warn.append(f"Equipos de {a['name']} sin traducir: " + ", ".join(sorted(unknown)))
+    return out
+
+
+def headlines(key, L, team):
+    """Titulares de los últimos tres días sobre bajas y convocatorias del equipo (Google News): [[titular, medio, fecha, enlace]]."""
+    q = (L.get("news_q") or {}).get(team)
+    if not q:
+        return None
+    lang = L.get("news_lang", "es")
+    url = ("https://news.google.com/rss/search?q=" + urllib.parse.quote(f'"{q}" {NEWS_WORDS[lang]} when:3d') + "&" + NEWS_LOC[lang])
+    txt = read(ENV("NEWS_FILE_" + key.upper()) or url, required=False)
+    if not txt or "<!ENTITY" in txt or len(txt) > 3_000_000:  # sin entidades: nada de XML que se expanda
+        return None
+    try:
+        root = ET.fromstring(txt)
+    except ET.ParseError:
+        return None
+    out, seen = [], set()
+    for it in root.iter("item"):
+        title = (it.findtext("title") or "").strip()
+        src_el = it.find("source")
+        src = (src_el.text or "").strip() if src_el is not None and src_el.text else ""
+        if src and title.endswith(" - " + src):
+            title = title[: -len(src) - 3].strip()
+        link = (it.findtext("link") or "").strip()
+        if not title or not link.startswith("https://") or NEWS_NOISE.search(title) or title.lower() in seen:
+            continue
+        try:
+            dt = email.utils.parsedate_to_datetime(it.findtext("pubDate") or "")
+            when = madrid_time(dt.astimezone(timezone.utc)).strftime("%Y-%m-%dT%H:%M")
+        except (TypeError, ValueError):
+            when = ""
+        seen.add(title.lower())
+        out.append([title[:220], src[:60], when, link[:600]])
+    out.sort(key=lambda x: x[2], reverse=True)
+    return out[:6]
+
+
+def team_news(key, L, teams, pend, warn):
+    """Bajas y titulares de los equipos con partido en los próximos ocho días. Si una fuente falla, se usa lo último guardado."""
+    cache_p = p_out(f"novedades_{key}.json")
+    cache = jload(cache_p, {}) or {}
+    lim = (date.fromisoformat(TODAY) + timedelta(days=8)).isoformat()
+    soon = sorted({t for f in pend if TODAY <= f["date"] <= lim for t in (f["h"], f["a"])})
+    av = availability(key, L, teams, warn)
+    out = {"avail": av if av is not None else cache.get("avail", {}),
+           "avail_gen": TODAY if av is not None else cache.get("avail_gen"), "news": {}, "news_gen": {}}
+    fails = 0
+    for t in soon:
+        h = headlines(key, L, t)
+        if h is None:
+            fails += 1
+            h, g = (cache.get("news") or {}).get(t, []), (cache.get("news_gen") or {}).get(t)
+        else:
+            g = TODAY
+        out["news"][t], out["news_gen"][t] = h, g
+        time.sleep(1)
+    if soon and fails == len(soon):
+        warn.append("No se pudieron leer los titulares; se muestran los últimos guardados.")
+    write(cache_p, json.dumps(out, ensure_ascii=False, indent=1))
+    return out
+
+
 def pending_list(cal, played_keys, fx, over, ofmap, tsmap=None):
     """Partidos pendientes y de dónde sale su fecha, de más a menos prioridad: 3 = football-data (con cuotas),
     4 = fechas y horas anunciadas (TheSportsDB), 2 = corregida a mano, 1 = calendario abierto, 0 = calendario oficial."""
@@ -427,6 +546,11 @@ def build_league(key, L, fixtures_text):
         variants.append({"key": k, "name": name, "chosen": k == chosen, "d": rnd(res[k].get("d"), 4), "se": rnd(res[k].get("se"), 4),
                          **{q: rnd(s.get(q), 4) for q in ("n", "ll", "llm", "dll", "dse", "acc", "pd", "fd")}})
     wfs = model.walk_forward_stats(played, teams)
+    try:
+        news = team_news(key, L, teams, pend, warn)
+    except Exception as e:  # noqa: BLE001  (las novedades no deben tumbar la página)
+        warn.append(f"No se pudieron preparar las novedades: {e}")
+        news = None
     # apuestas del usuario (apuestas.json): se comprueban con los datos reales y con lo que daba el modelo
     mine = [b for b in jload(p_in("apuestas.json"), {}).get("apuestas", []) if b.get("liga", "laliga") == key]
     try:
@@ -452,7 +576,7 @@ def build_league(key, L, fixtures_text):
     payload = build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn,
                             trends_bt, trends_live(played, pend, pos, sms, reff), trends_flex,
                             {"chosen": chosen, "why": why, "blend": blend, "hist": log["learning"], "refx": refx,
-                             "ref_bt": ref_bt, "ref_on": ref_on, "reff": reff}, bets)
+                             "ref_bt": ref_bt, "ref_on": ref_on, "reff": reff}, bets, news)
     fragment = render(payload, L)
     write(p_out(L["out"]), full_document(fragment))
     if ART_DIR:
@@ -468,7 +592,7 @@ def build_league(key, L, fixtures_text):
 
 
 def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn,
-                  trends_bt, trends_now, trends_flex, learn, bets=()):
+                  trends_bt, trends_now, trends_flex, learn, bets=(), news=None):
     ti = {t: k for k, t in enumerate(teams)}
     M = []
     for m in played:
@@ -533,6 +657,10 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
                   "hist": [rdict(h) for h in learn["hist"][-120:]], "ref": REF},
         "pl": jload(p_in(L["players"]), {}).get("teams", {}) if L.get("players") else {},
         "bets": [{**b, "h": ti.get(b.get("h")), "a": ti.get(b.get("a"))} for b in bets],
+        "news": {"src": (L.get("avail") or {}).get("name"), "lang": L.get("news_lang", "es"), "avail_gen": news.get("avail_gen"),
+                 "out": {ti[t]: v for t, v in (news.get("avail") or {}).items() if t in ti},
+                 "head": {ti[t]: v for t, v in (news.get("news") or {}).items() if t in ti},
+                 "head_gen": {ti[t]: v for t, v in (news.get("news_gen") or {}).items() if t in ti}} if news else None,
     }
 
 

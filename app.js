@@ -475,6 +475,28 @@ function ahGoalsHtml(X, f) {
   return card('Hándicap asiático (goles)', tbl([['Línea', 'l'], 'Gana local', 'Nulo', 'Pierde local', 'Cuota justa local', 'Cuota justa visitante', 'Mercado (local / visitante)'], rows, 'num et') +
     note(`${mtxt} En las líneas de cuarto (,25 y ,75) la apuesta se reparte entre las dos líneas vecinas; "nulo" es la probabilidad de que se devuelva el dinero.`));
 }
+/* ---------------------------------------------------------------- novedades: bajas, dudas y titulares (build.py, team_news) */
+const NW = D.news || null;
+const NST = {lesionado: ['Lesionado', 'bad'], duda: ['Duda', 'warn'], sancionado: ['Sancionado', 'bad'], apercibido: ['Apercibido', ''], 'no disponible': ['No disponible', '']};
+const safeUrl = u => /^https:\/\//.test(u || '') ? u : '#';
+function newsCard(h, a) {
+  if (!NW) return '';
+  const side = t => {
+    const all = (NW.out || {})[t] || [], heads = (NW.head || {})[t];
+    const main = all.filter(p => p[2] !== 'apercibido').sort((x, y) => (y[4] ? 1 : 0) - (x[4] ? 1 : 0));
+    const warned = all.filter(p => p[2] === 'apercibido');
+    const li = main.slice(0, 10).map(([n, pos, st, info, key, ch]) => { const [l, c] = NST[st] || [st, ''];
+      return `<li><span class="chip ${c}">${l}</span> <b>${esc(n)}</b> <small>${esc(pos)}${key ? ' · de los más valiosos' : ''}${ok(ch) && st === 'duda' ? ` · ${ch} % de jugar` : ''}</small>${info ? `<br><small>${esc(info)}</small>` : ''}</li>`; });
+    const hl = (heads || []).slice(0, 5).map(([tt, src, when, url]) => `<li><a href="${esc(safeUrl(url))}" target="_blank" rel="noopener noreferrer">${esc(tt)}</a><br><small>${esc(src)}${when ? ' · ' + fdl(when.slice(0, 10)) + ' ' + esc(when.slice(11, 16)) : ''}</small></li>`);
+    return `<div class="nw"><h3>${nm(t)}</h3>` +
+      (li.length ? `<ul class="nl">${li.join('')}</ul>` + (main.length > 10 ? note(`Y ${main.length - 10} más.`) : '') : note(`Sin bajas ni dudas en ${esc(NW.src || 'la fuente')}.`)) +
+      (warned.length ? `<p class="note"><b>Apercibidos</b> (a una amarilla de la sanción): ${warned.map(p => esc(p[0])).join(', ')}.</p>` : '') +
+      `<h4>Titulares de los últimos días</h4>` + (hl.length ? `<ul class="nl">${hl.join('')}</ul>`
+        : note(heads ? 'Ningún titular sobre bajas o convocatorias en los últimos tres días.' : 'Los titulares se buscan para los partidos de los próximos ocho días.')) + '</div>';
+  };
+  return card('Novedades de los equipos', `<div class="nws">${side(h)}${side(a)}</div>` +
+    note(`Bajas, dudas y sanciones de ${esc(NW.src || '–')}${NW.avail_gen ? ` (actualizado el ${fdl(NW.avail_gen)})` : ''}; titulares de Google News${NW.lang === 'en' ? ', en inglés' : ''}. El modelo no tiene en cuenta las bajas y las casas sí: una baja importante explica a veces por qué las cuotas se separan del modelo. «De los más valiosos»: entre los 11 jugadores de más valor de su equipo en el juego de fantasy.`));
+}
 function renderPartido() {
   const f = FX.find(x => fxKey(x) === ST_.fx) || upcoming()[0] || FX[0];
   if (!f) { $('c-partido').innerHTML = card('', note('No quedan partidos pendientes.')); return; }
@@ -565,7 +587,7 @@ function renderPartido() {
     <div class="tile"><span>Marcador más probable</span><b>${pr.top[0][0]}-${pr.top[0][1]}</b><small>${pc(pr.top[0][2])} · luego ${pr.top.slice(1, 3).map(t => `${t[0]}-${t[1]} ${pc(t[2])}`).join(', ')}</small></div>
     <div class="tile"><span>Más de 2,5 goles</span><b>${pc(pr.ou[2])}</b>${mo != null ? `<small>mercado ${pc(mo)}</small>` : ''}</div>
     <div class="tile"><span>Ambos marcan</span><b>${pc(pr.bb)}</b></div></div>`;
-  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + h2hHtml(X, f) + ahGoalsHtml(X, f) + prudentHtml(X, h, a) + card('Conclusiones', concl, 'concl') +
+  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + newsCard(h, a) + h2hHtml(X, f) + ahGoalsHtml(X, f) + prudentHtml(X, h, a) + card('Conclusiones', concl, 'concl') +
     card('Estimaciones y umbrales', tbl(['', esc(NM[h]), esc(NM[a]), 'Total', 'Probabilidad de superar la línea (total)'], erows, 'num et') +
       note(`Cada celda da la media esperada y, en pequeño, su rango con ±${z} ${z === 1 ? 'error' : 'errores'}: lo que cabe esperar de media, no de un partido concreto (el rango de lo que puede pasar en el partido está en Predicciones, y con ese se cuentan los aciertos). Las probabilidades de la derecha sí son para este partido e incluyen la variación normal entre partidos. ` +
         (hasRf(f) ? `Las amarillas y las faltas incluyen el efecto del árbitro (${rfTxt(f)}). ` : '') +
