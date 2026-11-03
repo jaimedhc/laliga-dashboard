@@ -297,7 +297,9 @@ POS4 = {1: "POR", 2: "DEF", 3: "MED", 4: "DEL"}
 NEWS_WORDS = {"es": "(lesión OR lesiones OR baja OR bajas OR convocatoria OR duda OR sancionado)",
               "en": '(injury OR injuries OR "team news" OR suspended OR doubt)'}
 NEWS_LOC = {"es": "hl=es&gl=ES&ceid=ES:es", "en": "hl=en-GB&gl=GB&ceid=GB:en"}
-NEWS_NOISE = re.compile(r"femenin|women|wsl|sub-?\d|\bu-?\d\d\b|filial|juvenil|federaci|academy|youth|cantera", re.I)
+NEWS_NOISE = re.compile(r"femenin|women|wsl|sub-?\d|\bu-?\d\d\b|filial|juvenil|federaci|academy|youth|cantera|"
+                        r"bilbao athletic|sevilla atl[eé]tico|castilla|mestalla|\bsanse\b|promesas|celta fortuna|"
+                        r"atl[eè]tic\b|atl[eé]tico madrile|villarreal b\b|betis deportivo|real sociedad b\b|fabril|ilicitano", re.I)
 
 
 def availability(key, L, teams, warn):
