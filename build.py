@@ -297,14 +297,116 @@ POS4 = {1: "POR", 2: "DEF", 3: "MED", 4: "DEL"}
 NEWS_WORDS = {"es": "(lesión OR lesiones OR baja OR bajas OR convocatoria OR duda OR sancionado)",
               "en": '(injury OR injuries OR "team news" OR suspended OR doubt)'}
 NEWS_LOC = {"es": "hl=es&gl=ES&ceid=ES:es", "en": "hl=en-GB&gl=GB&ceid=GB:en"}
-NEWS_NOISE = re.compile(r"femenin|women|wsl|sub-?\d|\bu-?\d\d\b|filial|juvenil|federaci|academy|youth|cantera|"
+NEWS_NOISE = re.compile(r"femenin|jugadora|women|wsl|sub-?\d|\bu-?\d\d\b|filial|juvenil|federaci|academy|youth|cantera|"
                         r"bilbao athletic|sevilla atl[eé]tico|castilla|mestalla|\bsanse\b|promesas|celta fortuna|"
                         r"atl[eè]tic\b|atl[eé]tico madrile|villarreal b\b|betis deportivo|real sociedad b\b|fabril|ilicitano", re.I)
 
 
-def availability(key, L, teams, warn):
-    """Bajas, dudas y sancionados de cada equipo: {equipo: [[jugador, puesto, estado, detalle, clave, % de jugar]]}.
-    «Clave» = entre los 11 más valiosos de su equipo según el juego de fantasy."""
+# Tipos de evento de cada jugador en los partidos de Biwenger (comprobados con los marcadores, los cambios y los 11 titulares
+# de cada equipo en las 11 primeras jornadas): 1 gol, 2 gol de penalti, 3 asistencia, 4 sale sustituido, 5 entra desde el
+# banquillo, 9 gol en propia puerta (no cuenta como suyo), 14 se lesiona en el partido.
+BW_GOAL, BW_ASSIST, BW_OFF, BW_ON, BW_INJ = (1, 2), 3, 4, 5, 14
+
+
+def _int(x, d=0):
+    try:
+        return int(float(x))
+    except (TypeError, ValueError):
+        return d
+
+
+def bw_line(rep):
+    """Lo que hizo un jugador en un partido de Biwenger: [id, titular, minutos, goles, asistencias, se lesionó]."""
+    ev = [e for e in rep.get("events") or [] if isinstance(e, dict)]
+    ty = [e.get("type") for e in ev]
+    on = next((_int(e.get("metadata")) for e in ev if e.get("type") == BW_ON), None)
+    off = next((_int(e.get("metadata"), 90) for e in ev if e.get("type") == BW_OFF), None)
+    mins = min(90 if off is None else off, 90) - (0 if on is None else min(on, 90))
+    return [rep["player"]["id"], int(on is None), max(mins, 1), sum(ty.count(k) for k in BW_GOAL), ty.count(BW_ASSIST),
+            int(BW_INJ in ty)]
+
+
+def bw_games(key, L, rounds, warn):
+    """Partidos terminados de Biwenger con lo que hizo cada jugador: {id: {"d": fecha, "t": [[id del equipo, [líneas]], ...]}}.
+    Se guardan en jugadores_<liga>.json: una jornada ya no se vuelve a pedir cuando han pasado dos días desde su último partido."""
+    cache_p = p_out(f"jugadores_{key}.json")
+    cache = jload(cache_p, {}) or {}
+    G, R = cache.get("games") or {}, cache.get("rounds") or {}
+    asked = fails = 0
+    for r in rounds:
+        rid = str(r.get("id") or "") if isinstance(r, dict) else ""
+        c = R.get(rid) or {}
+        if not rid or r.get("status") == "pending" or (c.get("st") == "finished" and c.get("f", "") >= c.get("fz", "9")):
+            continue
+        asked += 1
+        txt = read(ENV("BW_ROUND_" + rid) or L["avail"]["rounds"].format(rid), required=False)
+        try:
+            rd = (json.loads(txt) or {}).get("data") if txt else None
+        except (ValueError, AttributeError):
+            rd = None
+        if not isinstance(rd, dict):
+            fails += 1
+            continue
+        last = 0
+        for g in rd.get("games") or []:
+            if not isinstance(g, dict) or g.get("status") != "finished" or not g.get("id"):
+                continue
+            G[str(g["id"])] = {"d": _int(g.get("date")), "t": [
+                [(g.get(s) or {}).get("id"), [bw_line(x) for x in (g.get(s) or {}).get("reports") or []
+                                               if isinstance(x, dict) and (x.get("player") or {}).get("id")]]
+                for s in ("home", "away")]}
+            last = max(last, _int(g.get("date")))
+        fz = (datetime.fromtimestamp(last, timezone.utc).date() + timedelta(days=2)).isoformat() if last else "9"
+        R[rid] = {"st": rd.get("status"), "f": TODAY, "fz": fz}
+        time.sleep(0.5)
+    if asked and fails == asked:
+        warn.append(f"No se pudieron leer los partidos de {L['avail']['name']}; los datos de los jugadores pueden no estar al día.")
+    if asked > fails:
+        write(cache_p, json.dumps({"games": G, "rounds": R}, ensure_ascii=False, separators=(",", ":")))
+    return G
+
+
+def bw_season(G, team_of_id):
+    """Temporada de cada jugador en su equipo: {(equipo, id): [titularidades, partidos, minutos, goles, asistencias]},
+    partidos de cada equipo y, de su último partido, quién jugó (1) y quién se lesionó en él (2)."""
+    P, games = {}, {}
+    for g in G.values():
+        for tid, lines in g.get("t") or []:
+            t = team_of_id(tid)
+            if not t:
+                continue
+            games.setdefault(t, []).append((g.get("d") or 0, lines))
+            for pid, st, mins, gl, asi, _ in lines:
+                r = P.setdefault((t, pid), [0, 0, 0, 0, 0])
+                for k, v in enumerate((st, 1, mins, gl, asi)):
+                    r[k] += v
+    last = {t: {ln[0]: 2 if ln[5] else 1 for ln in max(v, key=lambda x: x[0])[1]} for t, v in games.items()}
+    return P, {t: len(v) for t, v in games.items()}, last
+
+
+def fpl_recent(L, data):
+    """Minutos de cada jugador en las dos últimas jornadas del Fantasy, de la más reciente a la anterior."""
+    evs = sorted((e for e in data.get("events") or [] if isinstance(e, dict) and (e.get("finished") or e.get("is_current"))),
+                 key=lambda e: e.get("id") or 0)
+    out = []
+    for e in reversed(evs[-2:]):
+        txt = read(ENV(f"FPL_LIVE_{e['id']}") or L["avail"]["live"].format(e["id"]), required=False)
+        try:
+            el = (json.loads(txt) or {}).get("elements") if txt else None
+        except (ValueError, AttributeError):
+            el = None
+        if el:
+            out.append({x["id"]: _int((x.get("stats") or {}).get("minutes")) for x in el if isinstance(x, dict) and "id" in x})
+    return out
+
+
+def availability(key, L, teams, played, warn):
+    """Bajas, dudas y sancionados de cada equipo, con lo que ha jugado cada uno esta temporada. Devuelve (bajas, equipos):
+    bajas = {equipo: [[jugador, puesto, estado, detalle, clave, % de jugar, titularidades, minutos, goles, asistencias, último]]};
+      «clave»: entre los 11 más valiosos de su equipo en el juego de fantasy; «último»: 2 si se lesionó en el último partido de
+      su equipo, 1 si lo jugó, 0 si no lo jugó, None si no se sabe (sin datos de partidos, la fila acaba en «% de jugar»);
+    equipos = {equipo: {"n": partidos, "g": goles de sus jugadores, "mg": más goles de un jugador, "kg": cuántos los tienen,
+      "ma": más asistencias, "ka": cuántos las tienen}}."""
     a = L.get("avail")
     if not a:
         return None
@@ -319,33 +421,82 @@ def availability(key, L, teams, warn):
     inv = {v: k for k, v in L["names"].items()}
     inv.update(L.get("avail_names", {}))
     team_of = lambda n: inv.get(n) or (n if n in teams else None)
-    ST, by, unknown = AV_ST[a["src"]], {}, set()
+    ST, unknown, tm = AV_ST[a["src"]], set(), {}
+    # filas: (equipo, jugador, puesto, estado, detalle, precio, % de jugar, [titular., partidos, minutos, goles, asist.] o None, último)
+    rows = []
     if a["src"] == "biwenger":
         d = data.get("data") or {}
         tn = {str(k): (v or {}).get("name") for k, v in (d.get("teams") or {}).items()}
-        rows = [(tn.get(str(p.get("teamID"))), p.get("name"), p.get("position"), p.get("status"), p.get("statusInfo"),
-                 p.get("fantasyPrice") or 0, None) for p in (d.get("players") or {}).values()]
+        tid_of = lambda tid: team_of(tn.get(str(tid)))
+        G = {}
+        if a.get("rounds"):
+            try:
+                G = bw_games(key, L, (d.get("season") or {}).get("rounds") or [], warn)
+            except Exception as e:  # noqa: BLE001  (sin los partidos, las bajas se muestran igual)
+                warn.append(f"No se pudieron preparar los datos de los jugadores de {a['name']}: {e}")
+        SP, NG, LAST = bw_season(G, tid_of)
+        for t, n in NG.items():
+            tm[t] = {"n": n, "g": sum(v[3] for (tt, _), v in SP.items() if tt == t)}
+        for p in (d.get("players") or {}).values():
+            t = tid_of(p.get("teamID"))
+            if not t:
+                if tn.get(str(p.get("teamID"))):
+                    unknown.add(tn[str(p.get("teamID"))])
+                continue
+            have = t in NG
+            rows.append((t, p.get("name"), p.get("position"), p.get("status"), p.get("statusInfo"), p.get("fantasyPrice") or 0,
+                         None, (SP.get((t, p.get("id"))) or [0, 0, 0, 0, 0]) if have else None,
+                         (LAST.get(t) or {}).get(p.get("id"), 0) if have else None))
     else:
         tn = {t["id"]: t["name"] for t in data.get("teams", [])}
-        rows = [(tn.get(e.get("team")), e.get("web_name"), e.get("element_type"), e.get("status"), e.get("news"),
-                 e.get("now_cost") or 0, e.get("chance_of_playing_next_round")) for e in data.get("elements", [])
-                if e.get("status") != "u"]
+        els = [e for e in data.get("elements", []) if e.get("status") != "u"]  # «u»: ya no está en el club
+        recent = []
+        if a.get("live"):
+            try:
+                recent = fpl_recent(L, data)
+            except Exception as e:  # noqa: BLE001
+                warn.append(f"No se pudieron leer los minutos de la última jornada del {a['name']}: {e}")
+        ncsv = {}
+        for m in played:
+            for t in (m["h"], m["a"]):
+                ncsv[t] = ncsv.get(t, 0) + 1
+        by_t = {}
+        for e in els:
+            t = team_of(tn.get(e.get("team")))
+            if t:
+                by_t.setdefault(t, []).append(e)
+            elif tn.get(e.get("team")):
+                unknown.add(tn[e.get("team")])
+        for t, es in by_t.items():
+            # último partido del equipo: la jornada más reciente en la que alguno de sus jugadores tuvo minutos
+            lastmin = next((mm for mm in recent if any(mm.get(e["id"], 0) > 0 for e in es)), None)
+            tm[t] = {"n": max([ncsv.get(t, 0)] + [_int(e.get("starts")) for e in es]),
+                     "g": sum(_int(e.get("goals_scored")) for e in es)}
+            for e in es:
+                rows.append((t, e.get("web_name"), e.get("element_type"), e.get("status"), e.get("news"), e.get("now_cost") or 0,
+                             e.get("chance_of_playing_next_round"),
+                             [_int(e.get("starts")), None, _int(e.get("minutes")), _int(e.get("goals_scored")), _int(e.get("assists"))],
+                             None if lastmin is None else int(lastmin.get(e["id"], 0) > 0)))
+    by = {}
     for r in rows:
-        t = team_of(r[0])
-        if t:
-            by.setdefault(t, []).append(r)
-        elif r[0]:
-            unknown.add(r[0])
+        by.setdefault(r[0], []).append(r)
     out = {}
     for t, ps in by.items():
         ps.sort(key=lambda r: -r[5])
-        for rank, (_, name, pos, st, info, price, ch) in enumerate(ps):
+        withs = [r[7] for r in ps if r[7] is not None]
+        if t in tm and withs:
+            mg, ma = max(s[3] for s in withs), max(s[4] for s in withs)
+            tm[t].update(mg=mg, kg=sum(s[3] == mg for s in withs), ma=ma, ka=sum(s[4] == ma for s in withs))
+        for rank, (_, name, pos, st, info, price, ch, sp, last) in enumerate(ps):
             s_ = ST.get(st)
             if s_ and name:
-                out.setdefault(t, []).append([name, POS4.get(pos, ""), s_, (info or "").strip(), rank < 11, ch])
+                row = [name, POS4.get(pos, ""), s_, (info or "").strip(), rank < 11, ch]
+                if sp is not None and t in tm:
+                    row += [sp[0], sp[2], sp[3], sp[4], last]
+                out.setdefault(t, []).append(row)
     if unknown:
         warn.append(f"Equipos de {a['name']} sin traducir: " + ", ".join(sorted(unknown)))
-    return out
+    return out, tm
 
 
 def headlines(key, L, team):
@@ -383,14 +534,15 @@ def headlines(key, L, team):
     return out[:6]
 
 
-def team_news(key, L, teams, pend, warn):
-    """Bajas y titulares de los equipos con partido en los próximos ocho días. Si una fuente falla, se usa lo último guardado."""
+def team_news(key, L, teams, played, pend, warn):
+    """Bajas (con lo que ha jugado cada uno) y titulares de los equipos con partido en los próximos ocho días.
+    Si una fuente falla, se usa lo último guardado."""
     cache_p = p_out(f"novedades_{key}.json")
     cache = jload(cache_p, {}) or {}
     lim = (date.fromisoformat(TODAY) + timedelta(days=8)).isoformat()
     soon = sorted({t for f in pend if TODAY <= f["date"] <= lim for t in (f["h"], f["a"])})
-    av = availability(key, L, teams, warn)
-    out = {"avail": av if av is not None else cache.get("avail", {}),
+    av = availability(key, L, teams, played, warn)
+    out = {"avail": av[0] if av is not None else cache.get("avail", {}), "tm": av[1] if av is not None else cache.get("tm", {}),
            "avail_gen": TODAY if av is not None else cache.get("avail_gen"), "news": {}, "news_gen": {}}
     fails = 0
     for t in soon:
@@ -549,7 +701,7 @@ def build_league(key, L, fixtures_text):
                          **{q: rnd(s.get(q), 4) for q in ("n", "ll", "llm", "dll", "dse", "acc", "pd", "fd")}})
     wfs = model.walk_forward_stats(played, teams)
     try:
-        news = team_news(key, L, teams, pend, warn)
+        news = team_news(key, L, teams, played, pend, warn)
     except Exception as e:  # noqa: BLE001  (las novedades no deben tumbar la página)
         warn.append(f"No se pudieron preparar las novedades: {e}")
         news = None
@@ -661,6 +813,7 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
         "bets": [{**b, "h": ti.get(b.get("h")), "a": ti.get(b.get("a"))} for b in bets],
         "news": {"src": (L.get("avail") or {}).get("name"), "lang": L.get("news_lang", "es"), "avail_gen": news.get("avail_gen"),
                  "out": {ti[t]: v for t, v in (news.get("avail") or {}).items() if t in ti},
+                 "tm": {ti[t]: v for t, v in (news.get("tm") or {}).items() if t in ti},
                  "head": {ti[t]: v for t, v in (news.get("news") or {}).items() if t in ti},
                  "head_gen": {ti[t]: v for t, v in (news.get("news_gen") or {}).items() if t in ti}} if news else None,
     }

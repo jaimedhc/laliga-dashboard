@@ -179,6 +179,7 @@ table.tt td{vertical-align:middle}
 .nws .nw{min-width:0}
 .card .nws h3{margin:0 0 8px}
 .nws h4{font-size:13.5px;font-weight:600;margin:14px 0 6px;color:var(--mu)}
+.nwc{background:var(--bg);border-radius:8px;padding:10px 14px;margin:0 0 16px}
 ul.nl{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 ul.nl li{line-height:1.4}
 ul.nl a{color:var(--ink);text-decoration:underline;text-decoration-color:var(--ln);text-underline-offset:2px}

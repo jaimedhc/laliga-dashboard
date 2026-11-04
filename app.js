@@ -478,24 +478,127 @@ function ahGoalsHtml(X, f) {
 /* ---------------------------------------------------------------- novedades: bajas, dudas y titulares (build.py, team_news) */
 const NW = D.news || null;
 const NST = {lesionado: ['Lesionado', 'bad'], duda: ['Duda', 'warn'], sancionado: ['Sancionado', 'bad'], apercibido: ['Apercibido', ''], 'no disponible': ['No disponible', '']};
+const NOUT = new Set(['lesionado', 'sancionado', 'no disponible']);  // los que no juegan; las dudas van aparte
 const safeUrl = u => /^https:\/\//.test(u || '') ? u : '#';
-function newsCard(h, a) {
+/* artículos: «la Real Sociedad», «del Sevilla» */
+const FEM = new Set(['Real Sociedad']);
+const elT = i => (FEM.has(NM[i]) ? 'la ' : 'el ') + nm(i), delT = i => (FEM.has(NM[i]) ? 'de la ' : 'del ') + nm(i);
+const NUMW = ['ningún', 'un', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez'];
+const nw_ = k => NUMW[k] || String(k);
+const plw = (k, s, p) => `${k} ${k === 1 ? s : p}`;
+const yE = w => /^h?[ií](?![aeouáéóú])/i.test(w) ? ' e ' : ' y ';  // «Marcão e Isaac Romero»
+const lst = a => a.length < 2 ? (a[0] || '') : a.slice(0, -1).join(', ') + yE(a[a.length - 1].replace(/<[^>]+>/g, '')) + a[a.length - 1];
+const POSL = {POR: 'portero', DEF: 'defensa', MED: 'centrocampista', DEL: 'delantero'};
+const LINE = {DEF: ['defensas', 'en defensa'], MED: ['centrocampistas', 'en el centro del campo'], DEL: ['delanteros', 'en ataque']};
+/* Jugadores de las novedades de un equipo. Cada fila: [nombre, puesto, estado, detalle, entre los 11 más valiosos, % de jugar,
+   titularidades, minutos, goles, asistencias, último partido (2 se lesionó en él, 1 lo jugó, 0 no)]; sin datos de partidos acaba
+   en «% de jugar». Titular habitual: titular en al menos la mitad de los partidos de su equipo. */
+function nwTeam(t) {
+  const tm = (NW.tm || {})[t] || null;
+  const P = ((NW.out || {})[t] || []).map(r => {
+    const p = {n: r[0], pos: r[1], st: r[2], info: r[3], key: !!r[4], ch: r[5], s: r[6], mi: r[7], g: r[8], as: r[9], last: r[10]};
+    p.has = !!tm && ok(tm.n) && ok(p.s);
+    p.out = NOUT.has(p.st);
+    p.reg = p.has && tm.n >= 3 && p.s >= tm.n / 2;
+    /* máximo goleador: con 2 goles si es el único, con 3 si lo comparte; máximo asistente: 3 y 4 */
+    p.topg = p.has && p.g === tm.mg && tm.mg >= (tm.kg > 1 ? 3 : 2);
+    p.topa = p.has && p.as === tm.ma && tm.ma >= (tm.ka > 1 ? 4 : 3);
+    p.w = (p.reg ? 4 : 0) + (p.topg ? 2 : 0) + (p.topa ? 1 : 0);
+    return p;
+  });
+  P.sort((x, y) => (y.w - x.w) || ((y.s || 0) - (x.s || 0)) || ((y.g || 0) - (x.g || 0)) || ((y.key ? 1 : 0) - (x.key ? 1 : 0)));
+  return {P, tm};
+}
+function pStat(p, tm) {
+  if (!p.has) return p.key ? 'de los más valiosos' : '';
+  const b = [p.s ? `titular en ${p.s} de ${tm.n}` : p.mi ? `${p.mi} min, sin ser titular` : 'no ha jugado esta temporada'];
+  if (p.g) b.push(plw(p.g, 'gol', 'goles') + (p.topg ? (tm.kg > 1 ? ', de los que más llevan' : ', su máximo goleador') : ''));
+  if (p.as) b.push(plw(p.as, 'asistencia', 'asistencias') + (p.topa && !p.topg ? (tm.ka > 1 ? ', de los que más dan' : ', su máximo asistente') : ''));
+  if (p.last === 2) b.push('se lesionó en el último partido');
+  else if (p.last === 1 && p.st !== 'apercibido') b.push('jugó el último partido');
+  return b.join(' · ');
+}
+/* Conclusiones de un equipo: frases, cuántos titulares habituales faltan y si las bajas tocan su ataque o su defensa. */
+function nwConcl(t) {
+  const {P, tm} = nwTeam(t);
+  if (!tm || !ok(tm.n) || tm.n < 3 || !P.every(p => p.has || p.st === 'apercibido')) return null;
+  const N = p => `<b>${esc(p.n)}</b>`, Ns = p => N(p) + (p.st !== 'lesionado' ? ` (${p.st})` : '');
+  const out = P.filter(p => p.out), R = out.filter(p => p.reg), S = [], said = new Set();
+  const say = (p, txt) => { said.add(p); S.push(txt); };
+  out.filter(p => p.topg).forEach(p => say(p, tm.kg > 1 ? `Baja de ${Ns(p)}, uno de sus máximos goleadores (${plw(p.g, 'gol', 'goles')}).`
+    : `Baja de su máximo goleador, ${Ns(p)}: ${p.g} de los ${tm.g} goles del equipo.`));
+  R.filter(p => p.pos === 'POR').forEach(p => say(p, `Baja de su portero titular, ${Ns(p)}.`));
+  out.filter(p => p.topa && !p.topg).forEach(p => say(p, tm.ka > 1 ? `Baja de ${Ns(p)}, uno de sus máximos asistentes (${plw(p.as, 'asistencia', 'asistencias')}).`
+    : `Baja de su máximo asistente, ${Ns(p)} (${plw(p.as, 'asistencia', 'asistencias')}).`));
+  const by = {};
+  R.forEach(p => { by[p.pos] = (by[p.pos] || 0) + 1; });
+  const [lp, lk] = Object.entries(by).sort((x, y) => y[1] - x[1])[0] || ['', 0];
+  const when = p => p.last === 2 ? ', que se lesionó en el último partido' : p.last === 1 ? ', que jugó el último partido' : p.last === 0 ? ', que ya faltó en el último partido' : '';
+  const whenS = p => p.last === 2 ? ' Se lesionó en el último partido.' : p.last === 1 ? ' Jugó el último partido: es una baja nueva.' : p.last === 0 ? ' Ya faltó en el último partido.' : '';
+  if (R.length === 1) {
+    const p = R[0];
+    S.push(said.has(p) ? `Es su único titular habitual de baja.${whenS(p)}`
+      : `Le falta un titular habitual: ${N(p)} (${[POSL[p.pos], p.st !== 'lesionado' ? p.st : ''].filter(Boolean).join(', ')})${when(p)}.`);
+  } else if (R.length) {
+    const pre = said.size ? 'En total le faltan' : 'Le faltan';
+    S.push(lk === R.length && LINE[lp] ? `${pre} ${nw_(R.length)} ${LINE[lp][0]} titulares: ${lst(R.map(Ns))}.`
+      : `${pre} ${nw_(R.length)} titulares habituales${lk >= 2 && LINE[lp] ? `, ${nw_(lk)} de ellos ${LINE[lp][1]}` : ''}: ${lst(R.map(Ns))}.`);
+    const ni = R.filter(p => p.last === 2), nl = R.filter(p => p.last === 1), k = R.length === 2 ? 'Los dos' : 'Todos';
+    if (ni.length) S.push(`${lst(ni.map(N))} se ${ni.length > 1 ? 'lesionaron' : 'lesionó'} en el último partido.`);
+    if (nl.length) S.push(`${lst(nl.map(N))} ${nl.length > 1 ? 'jugaron el último partido: son bajas nuevas' : 'jugó el último partido: es una baja nueva'}.`);
+    if (R.every(p => p.last === 0)) S.push(`${k} faltaron ya en el último partido.`);
+  } else if (out.length) S.push(out.length === 1 ? 'Su única baja no es un titular habitual.' : `Ninguna de sus ${out.length} bajas es de un titular habitual.`);
+  else S.push('No tiene bajas.');
+  const go = out.reduce((s, p) => s + (p.g || 0), 0), wg = out.filter(p => p.g > 0).length;
+  if (wg >= 2 && tm.g > 0 && go >= 0.25 * tm.g) S.push(`Entre todos los que faltan suman ${go} de los ${tm.g} goles del equipo.`);
+  const DG = P.filter(p => p.st === 'duda' && p.topg), DR = P.filter(p => p.st === 'duda' && p.reg && !p.topg);
+  const chT = p => ok(p.ch) ? ` (${p.ch} % de jugar)` : '';
+  DG.forEach(p => S.push(tm.kg > 1 ? `Es duda ${N(p)}${chT(p)}, uno de sus máximos goleadores (${plw(p.g, 'gol', 'goles')}).`
+    : `Es duda su máximo goleador, ${N(p)}${chT(p)}: ${p.g} de los ${tm.g} goles del equipo.`));
+  if (DR.length) S.push(`${DG.length ? 'También ' : ''}${DR.length > 1 ? `${DG.length ? 's' : 'S'}on duda ${nw_(DR.length)} titulares habituales` : `${DG.length ? 'e' : 'E'}s duda un titular habitual`}: ${lst(DR.map(p => N(p) + chT(p)))}.`);
+  const att = out.some(p => p.topg) || R.filter(p => p.pos === 'MED' || p.pos === 'DEL').length >= 2 || (wg >= 2 && tm.g > 0 && go >= 0.3 * tm.g);
+  const def = R.some(p => p.pos === 'POR') || R.filter(p => p.pos === 'DEF').length >= 2;
+  return {S, R: R.length, att, def};
+}
+function nwSummary(h, a, far) {
+  const H = nwConcl(h), A = nwConcl(a);
+  if (!H || !A) return '';
+  const top = far > 8 ? [`El partido es dentro de ${far} días: estas son las bajas de hoy y pueden cambiar.`] : [];
+  if (H.R !== A.R) {
+    const [m, o, mR, oR] = H.R > A.R ? [h, a, H.R, A.R] : [a, h, A.R, H.R];
+    top.push(`${cap(elT(m))} tiene más bajas entre sus titulares habituales: ${mR}, por ${oR || 'ninguna'} ${delT(o)}.`);
+  } else top.push(H.R ? `Los dos tienen ${H.R === 1 ? 'una baja' : nw_(H.R) + ' bajas'} entre sus titulares habituales.` : 'Ninguno de los dos tiene bajas entre sus titulares habituales.');
+  /* ataque de cada equipo: lo bajan sus propias bajas y lo suben las de la defensa rival */
+  const parts = [[h, H, A], [a, A, H]].map(([t, me, op]) => {
+    const d = (op.def ? 1 : 0) - (me.att ? 1 : 0);
+    return d < 0 ? `sobrestimar el ataque ${delT(t)}` : d > 0 ? `subestimar el ataque ${delT(t)}` : '';
+  }).filter(Boolean);
+  if (parts.length) top.push(`El modelo no tiene en cuenta las bajas, así que puede ${lst(parts)}.`);
+  return `<div class="concl nwc"><ul class="cl">${top.map(x => `<li>${x}</li>`).join('')}` +
+    `<li><b>${nm(h)}</b>. ${H.S.join(' ')}</li><li><b>${nm(a)}</b>. ${A.S.join(' ')}</li></ul></div>`;
+}
+function newsCard(h, a, day) {
   if (!NW) return '';
   const side = t => {
-    const all = (NW.out || {})[t] || [], heads = (NW.head || {})[t];
-    const main = all.filter(p => p[2] !== 'apercibido').sort((x, y) => (y[4] ? 1 : 0) - (x[4] ? 1 : 0));
-    const warned = all.filter(p => p[2] === 'apercibido');
-    const li = main.slice(0, 10).map(([n, pos, st, info, key, ch]) => { const [l, c] = NST[st] || [st, ''];
-      return `<li><span class="chip ${c}">${l}</span> <b>${esc(n)}</b> <small>${esc(pos)}${key ? ' · de los más valiosos' : ''}${ok(ch) && st === 'duda' ? ` · ${ch} % de jugar` : ''}</small>${info ? `<br><small>${esc(info)}</small>` : ''}</li>`; });
+    const {P, tm} = nwTeam(t), heads = (NW.head || {})[t];
+    const main = P.filter(p => p.st !== 'apercibido'), warned = P.filter(p => p.st === 'apercibido');
+    const li = main.slice(0, 10).map(p => { const [l, c] = NST[p.st] || [p.st, ''], st = pStat(p, tm);
+      return `<li><span class="chip ${c}">${l}</span> <b>${esc(p.n)}</b> <small>${esc(p.pos)}${st ? ' · ' + st : ''}${ok(p.ch) && p.st === 'duda' ? ` · ${p.ch} % de jugar` : ''}</small>${p.info ? `<br><small>${esc(p.info)}</small>` : ''}</li>`; });
     const hl = (heads || []).slice(0, 5).map(([tt, src, when, url]) => `<li><a href="${esc(safeUrl(url))}" target="_blank" rel="noopener noreferrer">${esc(tt)}</a><br><small>${esc(src)}${when ? ' · ' + fdl(when.slice(0, 10)) + ' ' + esc(when.slice(11, 16)) : ''}</small></li>`);
+    const wr = warned.map(p => esc(p.n) + (p.reg ? ' <small>(titular habitual)</small>' : ''));
     return `<div class="nw"><h3>${nm(t)}</h3>` +
       (li.length ? `<ul class="nl">${li.join('')}</ul>` + (main.length > 10 ? note(`Y ${main.length - 10} más.`) : '') : note(`Sin bajas ni dudas en ${esc(NW.src || 'la fuente')}.`)) +
-      (warned.length ? `<p class="note"><b>Apercibidos</b> (a una amarilla de la sanción): ${warned.map(p => esc(p[0])).join(', ')}.</p>` : '') +
+      (wr.length ? `<p class="note"><b>Apercibidos</b> (a una amarilla de la sanción): ${wr.join(', ')}.</p>` : '') +
       `<h4>Titulares de los últimos días</h4>` + (hl.length ? `<ul class="nl">${hl.join('')}</ul>`
         : note(heads ? 'Ningún titular sobre bajas o convocatorias en los últimos tres días.' : 'Los titulares se buscan para los partidos de los próximos ocho días.')) + '</div>';
   };
-  return card('Novedades de los equipos', `<div class="nws">${side(h)}${side(a)}</div>` +
-    note(`Bajas, dudas y sanciones de ${esc(NW.src || '–')}${NW.avail_gen ? ` (actualizado el ${fdl(NW.avail_gen)})` : ''}; titulares de Google News${NW.lang === 'en' ? ', en inglés' : ''}. El modelo no tiene en cuenta las bajas y las casas sí: una baja importante explica a veces por qué las cuotas se separan del modelo. «De los más valiosos»: entre los 11 jugadores de más valor de su equipo en el juego de fantasy.`));
+  const far = day && D.meta.today ? Math.round((Date.parse(day) - Date.parse(D.meta.today)) / 864e5) : 0;
+  const sum = nwSummary(h, a, far), stats = !!(NW.tm && Object.keys(NW.tm).length);
+  return card('Novedades de los equipos', sum + `<div class="nws">${side(h)}${side(a)}</div>` +
+    note(`Bajas, dudas y sanciones de ${esc(NW.src || '–')}${NW.avail_gen ? ` (actualizado el ${fdl(NW.avail_gen)})` : ''}; titulares de Google News${NW.lang === 'en' ? ', en inglés' : ''}. ` +
+      (stats ? `Titularidades, goles y asistencias de esta temporada, ${NW.src === 'Biwenger' ? 'de las actas de cada jornada de Biwenger' : `del ${esc(NW.src)}`}. Titular habitual: titular en al menos la mitad de los partidos de su equipo. `
+        : '«De los más valiosos»: entre los 11 jugadores de más valor de su equipo en el juego de fantasy. ') +
+      'El modelo no tiene en cuenta las bajas y las casas sí: una baja importante explica a veces por qué las cuotas se separan del modelo.'));
 }
 function renderPartido() {
   const f = FX.find(x => fxKey(x) === ST_.fx) || upcoming()[0] || FX[0];
@@ -587,7 +690,7 @@ function renderPartido() {
     <div class="tile"><span>Marcador más probable</span><b>${pr.top[0][0]}-${pr.top[0][1]}</b><small>${pc(pr.top[0][2])} · luego ${pr.top.slice(1, 3).map(t => `${t[0]}-${t[1]} ${pc(t[2])}`).join(', ')}</small></div>
     <div class="tile"><span>Más de 2,5 goles</span><b>${pc(pr.ou[2])}</b>${mo != null ? `<small>mercado ${pc(mo)}</small>` : ''}</div>
     <div class="tile"><span>Ambos marcan</span><b>${pc(pr.bb)}</b></div></div>`;
-  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + newsCard(h, a) + h2hHtml(X, f) + ahGoalsHtml(X, f) + prudentHtml(X, h, a) + card('Conclusiones', concl, 'concl') +
+  $('c-partido').innerHTML = ctr + head + card('Resumen', sum) + newsCard(h, a, f.d) + h2hHtml(X, f) + ahGoalsHtml(X, f) + prudentHtml(X, h, a) + card('Conclusiones', concl, 'concl') +
     card('Estimaciones y umbrales', tbl(['', esc(NM[h]), esc(NM[a]), 'Total', 'Probabilidad de superar la línea (total)'], erows, 'num et') +
       note(`Cada celda da la media esperada y, en pequeño, su rango con ±${z} ${z === 1 ? 'error' : 'errores'}: lo que cabe esperar de media, no de un partido concreto (el rango de lo que puede pasar en el partido está en Predicciones, y con ese se cuentan los aciertos). Las probabilidades de la derecha sí son para este partido e incluyen la variación normal entre partidos. ` +
         (hasRf(f) ? `Las amarillas y las faltas incluyen el efecto del árbitro (${rfTxt(f)}). ` : '') +

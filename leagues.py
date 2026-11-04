@@ -23,9 +23,11 @@ LEAGUES = {
         "sources": "football-data.co.uk (resultados, estadísticas, xG y cuotas), calendario de la RFEF, fechas y horas "
                    "anunciadas de TheSportsDB, calendario abierto de openfootball, bajas de Biwenger y titulares de Google News",
         "tsdb_id": "4335",  # TheSportsDB: fechas y horas en cuanto se anuncian
-        # bajas y dudas (Biwenger; sus nombres de equipo coinciden con los nombres visibles) y titulares (Google News)
+        # bajas y dudas (Biwenger; sus nombres de equipo coinciden con los nombres visibles), lo que ha jugado cada jugador
+        # (las actas de cada jornada de Biwenger) y titulares (Google News)
         "avail": {"src": "biwenger", "name": "Biwenger",
-                  "url": "https://cf.biwenger.com/api/v2/competitions/la-liga/data?lang=es&score=5"},
+                  "url": "https://cf.biwenger.com/api/v2/competitions/la-liga/data?lang=es&score=5",
+                  "rounds": "https://cf.biwenger.com/api/v2/rounds/la-liga/{}?score=5&lang=es"},
         "news_lang": "es",
         "news_q": {"Alaves": "Alavés", "Ath Bilbao": "Athletic Club", "Ath Madrid": "Atlético de Madrid",
                    "Barcelona": "FC Barcelona", "Betis": "Real Betis", "Celta": "Celta de Vigo", "Elche": "Elche CF",
@@ -80,7 +82,8 @@ LEAGUES = {
         "sources": "football-data.co.uk (resultados, estadísticas, xG, árbitros y cuotas), fechas y horas anunciadas de "
                    "TheSportsDB, calendario abierto de openfootball, bajas del Fantasy Premier League y titulares de Google News",
         "tsdb_id": "4328",
-        "avail": {"src": "fpl", "name": "Fantasy Premier League", "url": "https://fantasy.premierleague.com/api/bootstrap-static/"},
+        "avail": {"src": "fpl", "name": "Fantasy Premier League", "url": "https://fantasy.premierleague.com/api/bootstrap-static/",
+                  "live": "https://fantasy.premierleague.com/api/event/{}/live/"},  # minutos de cada jugador en una jornada
         "avail_names": {"Coventry City": "Coventry", "Hull City": "Hull", "Ipswich Town": "Ipswich", "Man Utd": "Man United",
                         "Spurs": "Tottenham", "Leeds": "Leeds", "Newcastle": "Newcastle"},
         "news_lang": "en",

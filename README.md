@@ -26,12 +26,16 @@ cada jornada. Solo usa datos de esta temporada.
 | `calendario_of_laliga.json`, `calendario_premier.json` | Última copia buena del calendario abierto de openfootball (se reescriben solos). |
 | `estado.json` | Resultado de la última actualización de cada liga. |
 | `novedades_laliga.json`, `novedades_premier.json` | Últimas bajas, dudas y titulares guardados (se usan si una fuente falla). |
+| `jugadores_laliga.json` | Actas de cada jornada de LaLiga en Biwenger (titulares, minutos, goles y asistencias de cada jugador). Las jornadas terminadas no se vuelven a pedir. |
 
 ## Cómo se actualiza
 
 - Dos veces al día (mañana y tarde) y cada vez que subes alguno de los archivos de la tabla.
 - Las fechas y horas de las próximas jornadas se ponen solas en cuanto la liga las anuncia (TheSportsDB) y, unos días antes, se confirman con football-data.
 - De viernes a lunes hay tres actualizaciones más (12:17, 15:17 y 20:17) para recoger bajas y titulares de última hora: bajas de Biwenger (LaLiga) y del Fantasy Premier League, titulares de Google News.
+  Cada baja se cruza con lo que ha jugado ese jugador esta temporada (titularidades, minutos, goles y asistencias) y el análisis
+  de partido resume lo importante: si falta el máximo goleador, el portero titular o varios titulares habituales (titular en al menos
+  la mitad de los partidos), si la baja es nueva, y qué parte del partido puede estar estimando mal el modelo por ello.
 - A mano: pestaña **Actions > Actualizar dashboard > Run workflow**.
 - Si una liga falla, las demás se actualizan igual y la que falla conserva su página anterior; la ejecución
   sale en rojo en Actions para que se vea.
