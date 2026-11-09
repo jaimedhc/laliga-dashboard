@@ -69,6 +69,19 @@
   ],
   "Levante": [
    [
+    "De la Fuente",
+    "DEF",
+    "apercibido",
+    "",
+    true,
+    null,
+    8,
+    765,
+    2,
+    0,
+    1
+   ],
+   [
     "Manu Sánchez",
     "DEF",
     "duda",
@@ -140,8 +153,8 @@
    [
     "Cristian Romero",
     "DEF",
-    "lesionado",
-    "Molestias musculares. Retorno estimado: Mediados de Noviembre.",
+    "duda",
+    "Molestias musculares.",
     true,
     null,
     5,
@@ -149,6 +162,32 @@
     1,
     0,
     0
+   ],
+   [
+    "Baena",
+    "MED",
+    "apercibido",
+    "",
+    true,
+    null,
+    8,
+    766,
+    5,
+    3,
+    1
+   ],
+   [
+    "Pubill",
+    "DEF",
+    "apercibido",
+    "",
+    true,
+    null,
+    9,
+    763,
+    1,
+    0,
+    1
    ]
   ],
   "Santander": [
@@ -460,23 +499,10 @@
     1
    ],
    [
-    "Mayoral",
-    "DEL",
-    "lesionado",
-    "Gastroenteritis. Retorno estimado: Vuelta inminente.",
-    true,
-    null,
-    0,
-    27,
-    0,
-    0,
-    0
-   ],
-   [
     "Zaid Romero",
     "DEF",
-    "lesionado",
-    "Pinchazo en el cuádriceps de la pierna izquierda. Retorno estimado: Mediados de Noviembre.",
+    "duda",
+    "Pinchazo en el cuádriceps de la pierna izquierda.",
     true,
     null,
     7,
@@ -501,8 +527,8 @@
    [
     "Gudelj",
     "MED",
-    "apercibido",
-    "",
+    "sancionado",
+    "Acumulación de tarjetas amarillas.",
     false,
     null,
     9,
@@ -524,13 +550,13 @@
     697,
     1,
     1,
-    1
+    0
    ],
    [
     "Dani Olmo",
     "MED",
-    "lesionado",
-    "Rotura de grado I en el aductor izquierdo. Retorno estimado: Finales de Noviembre.",
+    "duda",
+    "Rotura de grado I en el aductor izquierdo.",
     true,
     null,
     3,
@@ -542,8 +568,8 @@
    [
     "Koundé",
     "DEF",
-    "lesionado",
-    "Esguince en el tobillo izquierdo. Retorno estimado: Finales de Noviembre.",
+    "duda",
+    "Esguince en el tobillo izquierdo.",
     false,
     null,
     3,
@@ -957,6 +983,19 @@
     0
    ],
    [
+    "Veiga",
+    "DEF",
+    "apercibido",
+    "",
+    false,
+    null,
+    11,
+    990,
+    0,
+    1,
+    1
+   ],
+   [
     "Akhomach",
     "DEL",
     "duda",
@@ -1061,6 +1100,19 @@
     0,
     0,
     0
+   ],
+   [
+    "Vertrouwd",
+    "DEF",
+    "duda",
+    "Molestias sin determinar.",
+    false,
+    null,
+    2,
+    191,
+    0,
+    0,
+    1
    ]
   ],
   "Real Madrid": [
@@ -1228,8 +1280,8 @@
    "ka": 1
   },
   "Ath Madrid": {
-   "n": 11,
-   "g": 22,
+   "n": 12,
+   "g": 23,
    "mg": 5,
    "kg": 1,
    "ma": 3,
@@ -1292,11 +1344,11 @@
    "ka": 1
   },
   "Barcelona": {
-   "n": 11,
-   "g": 44,
+   "n": 12,
+   "g": 46,
    "mg": 15,
    "kg": 1,
-   "ma": 7,
+   "ma": 8,
    "ka": 1
   },
   "Ath Bilbao": {
@@ -1308,399 +1360,7 @@
    "ka": 1
   }
  },
- "avail_gen": "2026-11-08",
- "news": {
-  "Ath Madrid": [
-   [
-    "Hansi Flick da la sorpresa en la alineación para el Atlético-Barça: un cambio en el once",
-    "Crónica Global",
-    "2026-11-08T19:49",
-    "https://news.google.com/rss/articles/CBMi4gFBVV95cUxPc0FoZG5SNVJGQ1Zxel9XRWh0MmpkNUlJdm1wZVA1c3ZsdnNUcFIyeVpZa0hLdF8yMGhEMzhFNmViXzlZZThHUDRsUFpvUE1iTFl2amhqemIwbE1KYld2VURwSm1Jd25JUTducjRyQURRUnItZ0Zud3lDeXRKTWpnNndTMEJNRmkzdEFNSUVSNEZTVXNLNU1qMnhXUWhPenhwYWN0aGpXRWMzWXRFc29KcDdyOGpzOHNGTGt5OUFXYmY0Q1AyXzhiN0U2MUtCSlkwMmNOT0hkMUtWeng0cExrck530gHnAUFVX3lxTFBISUw0NDFaY3pjbzREZllDSFBfd3NfQlJzUVhRTXJxYklTZlBibFhVSk1qY09nNDR6Qkg3a192ZVJfWVJVNF81bXZvT3RQSG9uNGZ6U3RHZ1hjMW9jWGo2UWNUTnctM1FtQUZYek55d3c4cjRqOUtFQlVQbE9pdzB5R3dZUmNYX0JWUTYyMGRxRmUwQml6Q0ZOa1A1X09aTHo1bndfU2hxaTVlT2IxSTZycVJJa0QxaF8tX01"
-   ],
-   [
-    "Cardoso, de vuelta a la lista del Atlético de Madrid, para medirse al Barça",
-    "Mundo Deportivo",
-    "2026-11-08T19:46",
-    "https://news.google.com/rss/articles/CBMiyAFBVV95cUxONjFWMjVEVElSd243ZXNyVlBRRE90SDgyalRmTU9LbHBOYUM0WW16VWhBTl9LcExuQnVvSVdBU20xZHZKY0I2eXJtVl9EZk10RXFCVXppMUgwQmFVcHQtcjdOZlZlaldWVUNXbFM4bFJwekpHeVBTaEpVbE1wWDg3amdlR1IzLUdhMWlQSHRFdml0UGkwbjJIQlM1bDhSMmowdkZiU1ZiRTV3MzIyb1REM3pKXzZOdjdlalZxaEFKeHNyZjZibG5ITdIB1gFBVV95cUxNcGRycHhlU05pUWt3Y0xsWUdFWVlOdk9sUGhuY3ZlX3Z0bm1oemI1Ql9SaWJyVnpFOHZXUlFUU3FHYVBOSHNyYXVqSW1OTEx2NGtta1Q4ZUNWUTNiZW0xb1BMZ3UzX3M3SEg0WWVaXzB3dE5LVjBZNXJvRkR0WEg5YWlFdTBoLUw0RmlabnVPMGdtNElaWnVVWWhtTjh0NjNPRGlUQmhVSlBBZGN0Y3hSejUtWkNyRkNkRndmbFhydEc1b3hMZndUd3hOMlBMcTBHMW9TN0Z"
-   ],
-   [
-    "¿Por qué Cuti Romero no juega para Atlético de Madrid contra Barcelona por LaLiga?",
-    "Bolavip Argentina",
-    "2026-11-08T18:50",
-    "https://news.google.com/rss/articles/CBMirwFBVV95cUxNLU11VFBEYTBEN1J6Z2FqbTBjcVdjS1NTSVllWjM1OUpjLXBYNTJCU2lZaDdPOGlIUHJ5bnFRMFd1T1JIRW5rRmdfRk9OTnJfRTBlY1J1emhZM2ZzS1NiRmFuU2dycEZVX0MxbFlzdEoybnRzU2RRRGJLZWJua3p6SzNtSWctZGxvQmVjTDRNdmdkNGhyZVBxVGRYNGdiSU4yVTA1MVpZanhGT1hueU9Z0gG0AUFVX3lxTFB3Wk5LYkU1aWxCNF9ZVjdoYkVjNG41QUFRQkZyNkY5dnROY09Vd2dGX1pNejhWVHRzZEVoNk1ibW1NMFZKc0ZmaG01YXpCUER1c0laSnFfUjBLalRYS2E0TGZDaDl1R1FPc3F4UnRrZmo1Um9yNGhTN1hwLWtubVg3NGVQWjFoU2pCRjRrSVFQeVBUZFZUWWtURFM5c19jLUR6NVlqQllkTVVJX2FQT2JqZXQxWg?oc=5"
-   ],
-   [
-    "¿Por qué no juega Cuti Romero en el Atlético de Madrid vs. Barcelona por LaLiga 2026-27?",
-    "Bolavip México",
-    "2026-11-08T18:45",
-    "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNMjM3ZHRQajZnOUZ1QVhLNFJnSlZfUVYzdlFxcFBxT0ctZnFUZVdNS3I5ZFQzNEV4WTVzWWJRdWRQMkhNRklWU1NDdGlOWjdnZ1JSdldDZV81MHg1VVVOUUsyWG1pNGk5LWRPeVNPLUp4a2J5cm55TTlYNU1IMUZ4N2Z1eTVhMUFLM2xFTlo2Q0EtVEhWZWQyWVBvSngzOGRZYmFHVE9od2R0N3pPZXJLMTIwd09JUGw2aV91VkoxSzczc0w4XzRGRtIBzgFBVV95cUxNOUJiYTFISEhpUXdvcllzM1p3ZDdkM1ZTSnYtTngycDFWOUJkSjZoMTZTdHl3cGdqSHQxVmxQWXFnZjktcXRoeHdfd1FiVnp2UVAxdUdEQ1hXOHk2Y1B3OHo1RmhDaEZ1bkYwRldhOG9xMWZhcVprbnNOTTZpdHUxTmV0M2dCQnJSNHZfN2lZdXVEZjF1bURSMnNVV2hvb1RsNXEwdjVHd3liUXBZdE13SG5OQmdxWTA0RHVJOGpZcm9rX050Qi0xdURKcThoZw?oc=5"
-   ],
-   [
-    "¿Por qué no juega Rodri en Atlético de Madrid vs Barcelona? Lesión y fecha de regreso",
-    "365Scores",
-    "2026-11-08T18:39",
-    "https://news.google.com/rss/articles/CBMigAFBVV95cUxQOVhaZTVULWlQeG1PSDFfdzZXWU1UOXBSTl9MbkYwd0Z4c3FLNDJCSEQ3aWc2WHRjcWJlSG5qYlVvUlo4ZUlTQVA2MlJ3WnN3bGp4T2NCWkRoeDZVRFRpVm42QlR1SEhKdEU5RldxSWNqUURobTlRZjFDQXFLdElCNQ?oc=5"
-   ],
-   [
-    "¿Por qué no juega Rodri en el Atlético de Madrid vs. Barcelona por LaLiga 2026-27?",
-    "Bolavip México",
-    "2026-11-08T17:55",
-    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTUVCc3FqRERlTkVmSk1CZTJGX1hLZ2xPTF9fY2dRenZfdVdQNU9jd0xvY3VtUFh3bEVCNXp4bG5Xa0RiaGpZRFNWb0VNN19PMHFranU1dTFJNm9fRVBhVUZGMVpzRWVTNnRsaDBWdGE0NWFLV2RZN0ZmcDZHNml3cGhTR0ItSzlzaFFsRFNHTjRjMmFPLUgzQkt3aXJsRkoxdTM2UDNSNVNFLU9GREdkbnp3cTFJLWp0cTh4YVNmNFUtd9IBxwFBVV95cUxPOTRyRGlYRVA0bExyenZVTGtsWnFEa3BnS2dIU2Fkd0V3cjFrUERwTDcyX0dCRnduWU5MVUE2SHAtdDRUa2E2Rlk2Z0lGT1JHUnFsU2hsa3NndXlLNC1VaS1Wa0I2V2l1SGhFcGdFdnVkTVZLWW00bXlQYjRZRk9uMm80UEYxXzBHOEFSTVJZYmd0eUhsLTBzTlp6eU1OanZmUnpVTUdGNlpfNktsUW5vQXhOdXF4ay1CdHJLYkY2Z29LOVExaDBB?oc=5"
-   ]
-  ],
-  "Barcelona": [
-   [
-    "Las alineaciones confirmadas de Atlético de Madrid vs. FC Barcelona: formaciones, cambios y bajas",
-    "Bolavip Perú",
-    "2026-11-08T19:13",
-    "https://news.google.com/rss/articles/CBMizAFBVV95cUxQaHI1WU9fNXFRNUtBaFo0TWtkWU1Lb0Vrd1RpeFEyY21Rd1NCOUxQMzBhR3pSR21KeGNEMTJNdTQ1Uk96Z2RNc3ltWlhac3UwSHpsRXFUTUxoeU96TWE5VXVKLWVUT1ZIRXZuVGFuS0M2UjRPX2ZicnRweWRfUTV5b2VZMUowUHlqbDRFa2F1V3BvTjJLWmtsc0l4YXltZUtnTVgyc2xBRno0cFp6YV9velE0SURCOXBHUjZoOHhFRU1pOENtUnUyMXdzUl_SAdIBQVVfeXFMT2Z4Z3FUMzEzUEZvaDE1YWgyVFFXWk1kNkFieGU1cDdSdVNMQmd6OG9IYVRaVW4wNmVPOW5Ma1Q2dTk2aVVZUnpOejE0NWx6S0lSaDYwMUcxSzRwV2NWZ1ZBRnJhZUhIRVB5eDNvWVdTTUNnUm9jUWNPbC1iVU81a3RBV0NVb1N2UkdXQ1NDT0dYbnpUWE9kUUt6SDJvQkdEWl9ac0ZmWk4tVmpCbENsa3poZC1zVFE4dUlYV2lMVW1LeS1wclBDS1pOQWlOeF9OSXh"
-   ],
-   [
-    "¿Por qué no juega Rodri en Atlético de Madrid vs Barcelona? Lesión y fecha de regreso",
-    "365Scores",
-    "2026-11-08T18:39",
-    "https://news.google.com/rss/articles/CBMigAFBVV95cUxQOVhaZTVULWlQeG1PSDFfdzZXWU1UOXBSTl9MbkYwd0Z4c3FLNDJCSEQ3aWc2WHRjcWJlSG5qYlVvUlo4ZUlTQVA2MlJ3WnN3bGp4T2NCWkRoeDZVRFRpVm42QlR1SEhKdEU5RldxSWNqUURobTlRZjFDQXFLdElCNQ?oc=5"
-   ],
-   [
-    "Rodri Hernández apunta a reaparecer ante el Manchester City tras su lesión con el Barcelona",
-    "diarioeloriental.com",
-    "2026-11-08T15:41",
-    "https://news.google.com/rss/articles/CBMivgFBVV95cUxPSUt5Y1FuTG9WMTlWdzFReDA1Zm5nVDVXVV9YYXF2OEpZay1nQnY2Zmk2aXBNcUhyVjNWMUlGY0x2dXJhdFU5S1M2MEtwdEVfODhnOGcxdk92U3pfLXR2Y0ppbFdDb0lRTVN3cEZUR0hLbzJscE5lNmd5SkJyX2s4TGp1emRlZFo3dWdzSTE2S1EtOXptMWVVVXFlWWd6MGhKNWRibjVYOHJkcnAwVTNFTGdBMWZnamV6bnZCeWln?oc=5"
-   ],
-   [
-    "Eric García y Andreas Christensen regresan a la convocatoria del Barcelona para el partido contra el Atlético",
-    "Uruguay Al Día",
-    "2026-11-08T13:24",
-    "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNUEw2ZmZOTnU2YjU3Q0p5T0pwMHhCRE5OR1p3WlhVZ0E0bUFqdFJGSy1haU0ycHJfQzBmdVY3VXh2Y01uX29FdjJTbDh3dTNTMFZxQVJVeFBEOTJhdjIydElKUlllUm9JZlU2VThKS3ZYdFpwMmR6eHZaVXFkMWtZMjduRjZFWTk4Q0xuY3hiUVdrSGc1RlEteEZYQ0trcGdCczRGMjd4eHVPXzJaMFN6b1JRZkxPM2cyYmZpYUNaSTRnSjVuREtpa2w2d1k0NkxNa3NMTQ?oc=5"
-   ],
-   [
-    "Ona Batlle, baja con el Arsenal antes de la Champions contra el Barça",
-    "SPORT",
-    "2026-11-08T13:19",
-    "https://news.google.com/rss/articles/CBMinwFBVV95cUxNWnUtbXVxcHF5UkFqRExNdVYwaUl3cDFDSWVtdy1qNl8xTDVXbTdYOGhLY0FMUVV6X3pVU1ZLajQwNEZ6dURCc0JoZDBxUl9mbWM3YjM3SnV2S1J3RDNRYWM4ZktzSVBOS3NsMWdYVUE2T1Fza0hmNGVhcmwwMEVnM1ZCaGVKQzFsdnhCd01JdGFfak9MaTlpbXoyejNsUjTSAZ8BQVVfeXFMTjZCdHFOM0VYbjNTcjJEakc3d2ljLUJOS2FsSGxRNjg1MHdKVFlybEx2dmlibmZiUDd3U243MjlPekFPMmV1dXVDYjFsUmJwNFZCcFFXUFJZVEwzeDNPNThWLUxuV2l6RWdDSU1MTzlpOTAyZEpDbHRpWDBBNVQxcGMxMXZLYmlaQ21DalM4dVVNdVFDZFFHWFNDNG9sTjdV?oc=5"
-   ],
-   [
-    "Hansi Flick recupera a Eric García y Christensen para visitar al Atlético de Madrid",
-    "VAVEL.com",
-    "2026-11-08T12:23",
-    "https://news.google.com/rss/articles/CBMivwFBVV95cUxQY3VWbGRTYktCQkpva3RsRmF1aFlqbmlWblBhcVM1cW94andDbXZCaTBMVWJYSU9kSUE1OHhFN19SY0lRTmdKbmRKMlZrQzVoSWdibHhYdDlCc0tEY2RkVFNkZzVLWDJmdjdGM3U1aXBqZlZpS3lCTk5fN213TDloYS1xZkxTbnJBZ2dncHh2R3lpWWF2dVlMd04yaWRfSlNzcXlnY1ozN1pvY1hwNTl4aF9lMWlqaGpjZ29nVllwTQ?oc=5"
-   ]
-  ],
-  "Betis": [
-   [
-    "El motivo por el que Lo Celso se quedó fuera de la convocatoria del Betis",
-    "Jornada Perfecta",
-    "2026-11-08T16:14",
-    "https://news.google.com/rss/articles/CBMif0FVX3lxTE0tbi1mVnpxMUJkaWg5Q2RDUlN1clBmNGYwV25mQ1I5TGdOOExOSndLQzAzcTVTcFo1cU14bnI5eTlvdXRPQXNodEFEc2kxRS1ZdXg5cDR2R0dQT3pZZXUxc3hOX1ZRRThfd3ZjaS13UWFMNlVMZXNpN2Joam9rQXc?oc=5"
-   ],
-   [
-    "Gonzalo Villar y Buba Sangaré, fuera de la convocatoria del Elche",
-    "Jornada Perfecta",
-    "2026-11-08T14:14",
-    "https://news.google.com/rss/articles/CBMiggFBVV95cUxPX3drelA4Yk5DaVNMaTR4dXg4bm9laVZ3ZDdjdTZiTDlmbDdULUxLQnVBNjVuRHR3cHBxSTZxZVZhTEh6RkF4ZE1PTk9CMTZYTldKYVA4QnlDNzlJX2x6U2tZVWhzM0hGcndKckM3UnlMWEplNkJpX1VBZkgxNWc2bDVR?oc=5"
-   ],
-   [
-    "Buba Sangare y Gonzalo Villar se caen de la convocatoria por problemas físicos",
-    "FútbolFantasy",
-    "2026-11-08T13:15",
-    "https://news.google.com/rss/articles/CBMiywFBVV95cUxNc3VXODJaWk44clNmN1dZVXFxeUhtOVRrRnlJSXpkWi03RTlkaXM2Zi1rOEs0RFRwVTBvYUtDNkt0RmVURTV1TGdWbXRZNWwxV09TZ2cxdjlSdG5DMWJnQkdZby1zUU1tdERFaks1WDRpVlFxNWo1ZEc5aUhRRWhCZUpDX3RGZ0d2TGQ3RVJOdklaVW50YzJBSG9GNW9HSGRrT1ZSTmdDSWRsSjhkLV9HcXBFaUFjbXNIQWFMZkZkQWNXS0NkM0RadW5Va9IB0AFBVV95cUxONGdhODdJNkp1NEo3d2IyRlp6R3l6a1RsNEc2ZVdQbjJsZER3ZnUyY1BmMUg0NmExc3d5Rk9qZ3JWSjNreXZYTkxpaTZRaWxTZVQ4Y2g5VUxhTGg2R2F6YVlzVWV3MTNFamZsa2k3Uk01TkE5aUZiMDFRWlc0RDZSZ2tGaVZKekEwV2dhSnhpYU15c1NsU1FBdS1pZmZDNC1aZ05KbllBQ0VZa1JCeHFBNTlOdU1INGhfY0JQQkNrUUdaNm13dS1BZVpVWjMwclJN?oc"
-   ],
-   [
-    "Alineaciones Elche - Betis: alineación confirmada de Elche y Betis en la jornada 12 de LaLiga",
-    "Estadio Deportivo",
-    "2026-11-08T13:09",
-    "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQTGhXb0RoUFlERW5YLWNkYnpBMTlOX0dmSWM5ZVBhX2VGelB4R3hOOGNZQVVCdksxN0ZnTVFmUURHc1FjVWh5ZG9oRWhmeHZyM1I0MjdsM3ZOVFJYb3BzZmFadEhqNzNfTEhPYmhlRHNvNDk4QU1jMFZLNVJOWmwzT2h1M1dwNEhVbElTdG5zQ0trM203ZHFsMVRlSWIyeWVwQ05URWU4LVpsN1ZQS2hnNnR5c0xtNHE2NU9XYTBaT1g5ZXRfVDVlenBoUmUzcWNybUNhMGlRQWpsVkJxbjlIek9iMA?oc=5"
-   ],
-   [
-    "Alineaciones de Elche vs Real Betis | LaLiga · 8 nov. 2026",
-    "YSscores",
-    "2026-11-08T13:01",
-    "https://news.google.com/rss/articles/CBMihgFBVV95cUxNTmJnZDVMNlNaQmhBSjVHaTRpM2pNUUExUEZCdlBvZDBpM1AzODBQYV9KNVozRGxISVA1VV9xLXE3aVNjUm05QzlieTcxVnpyeTh5X2xEX2EtakdUMzgyWUl3ZUdubmFjaTRSUkRKYVd2WFJwYXFscE96cmQ3aUY3cVY3cHNLQQ?oc=5"
-   ],
-   [
-    "Lío en el Real Betis: Se filtran los motivos por los que Lo Celso no entró en la convocatoria",
-    "Ficherio",
-    "2026-11-08T10:44",
-    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTXZqeHNMa0pkRU5YZG9YRUpHLVR4RVNJcUt5T3NlbXp0cjl2RktaYTZpQ0ZEdUtxZUkzRjQ3eVB3ellWWEFqWnJ1MHhIUUh3bFlRMkw5NHVPMkNYRDBobG4xREdEZXFvV19nT0dWQm5aVzl6ejRlX0RkSG5LRmx6X2d6YkV3c2k1aTh5ZnhBV0tSMjVodlVGZUJLTXIyYjV0alZfdjByNldEWVJ2SnVOWEZsU1BsdHBGMERrdXhuU3ZrQQ?oc=5"
-   ]
-  ],
-  "Celta": [
-   [
-    "Celta y Levante, en directo: igualdad y gol anulado en Balaídos",
-    "Diario Ahora",
-    "2026-11-08T20:20",
-    "https://news.google.com/rss/articles/CBMib0FVX3lxTE04OUNBZFhYaWxMRWdJY3lVUFhSNExTekhjX05WbGJKdDFNb0VHSDY3VkRlTUNSQWd3MUZYY1VyOExHenVJOUF1VFFOaHBYc2dmV1Z4UmNpQW9hMkJhcFNPZzlfNVVWWmtVTm5sRGJwYw?oc=5"
-   ],
-   [
-    "Celta de Vigo-Levante UD y Villarreal CF-Getafe CF, en directo: el partido de la jornada 12, en vivo",
-    "Cadena SER",
-    "2026-11-08T17:30",
-    "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPRVloZVVaS3RTekdQdm1aWl8zVVJCMHNUdFZOLVhPeWJUTmlXSWpkOXo1N0VXTEZKdjNhZHN6UlkzRkgzUHZDcUJmUElCUmg2bW02ZHNKd0Q5NkxuU24xeDVFSF91QWVUaHlaR0R2YnV4MFJQbmtQWGhPaUo3STZCcTB1ZW5ORG1jdGllODJ1Mmh3c05SMmdtVjdURVM1V0NId2NYRFVCWWEyZ0N5UGZBOXRBSkZ4M1JRZGxWWXZseGRqRDlBU1VLb0lmTHFpbWJHalUteHBIcFNyZS1wdlN1OVRHYmZvQdIB-gFBVV95cUxPOHVIY0tXUk5WeXFXSXN3N3Y2MlZJeDhvRTJla240Y25yMFdVM2MxQ21QX1dvN1o0TVpGNHZVcjgydTE4SzdURkdrYmtMVnhCUVR4N05BUFpzdHdPdC10M2RhQjMtSFRRWXNYeXItM25iemJLeEo2MTNYUkpYaXFFMDNEQml6R2d6blVoNDE0UUlrbV9pdXZMSm9QczFmWGhucGFnb1l4TUtXRmhmbGdLNlBQVC1MUUk"
-   ],
-   [
-    "Alineaciones de Celta Vigo vs Levante | LaLiga · 8 nov. 2026",
-    "YSscores",
-    "2026-11-08T17:25",
-    "https://news.google.com/rss/articles/CBMiekFVX3lxTE9KdnFBOEVUYUNDNXZzbEJPemhlNnB3cnZ0YnVsNnJnb3oyZzdzOHgwMDY5VW9NdHhOVE1LZEc3UGYtMDdmdGJ0ZXhsWlVFWHNGZXZvT1g2Y0F6ZW85X25Jb3RNejNVOUk4MktCcDYwQk5KeGZiYXdFMWJ3?oc=5"
-   ],
-   [
-    "Alineaciones de Celta de Vigo vs Levante: Estadísticas, horarios y dónde ver",
-    "Xpectro FM",
-    "2026-11-08T16:30",
-    "https://news.google.com/rss/articles/CBMingFBVV95cUxOTGVNS0EyWU1rcFRmQ0JJd2o2OGtMOGFMZjk1NkRpalBnMENnMUtNeDRyN1FMRDNVTnJVWVVJVzBGOVJHR0g3R0pnOTJkSTZWajdpZ0hwVlBNb2dHUVpkVkhvQjVKbHVZd0ZXSlhVczVvLVE0eEV4NGRya2loeE5FcG1nT3dfM1IwT3lZODZRczFPcEdrTHRPZkc1REY0dw?oc=5"
-   ],
-   [
-    "Celta Vs Levante (18:30) Movistar LaLiga",
-    "Celta de Vigo Moi Celeste",
-    "2026-11-08T16:00",
-    "https://news.google.com/rss/articles/CBMiggFBVV95cUxPeDFzNVMzYXBIa3VFR0h2Wi1LTFEwUDhBSUt4cFZOWWtDRS1KRDZ3RzZkY05vYUtpVDZhWFFBN0tLQ0gwQUJSZHVyU2ZXeEhIcHVtY25XTUdaR2tia1F2TjM4LWp6S2ZFWVRyME1ZdlN1OW5UQUxMbElNS2Z5Nm5CZUNB?oc=5"
-   ],
-   [
-    "RC Celta de Vigo - Levante UD | pronósticos + mejores cuotas | 08.11.2026",
-    "Futbol24",
-    "2026-11-08T11:39",
-    "https://news.google.com/rss/articles/CBMirAFBVV95cUxOS2lhQ0F2RUswZ3JCbnRmVHRtcDBPUjNjUFJHSXBSaWR1MDYzalBYTktmWVUzd0poX1hlZU8zMVUzMHpvMk1QWm0xcnVsY0tpT2Uta01YTVBvN3JpMGxtU0VHa25qR0VBeVBPT2FDY3Q4dDJhRWY3MHFCRGZHMUVpdldETi1Scndod1lUQmU1X3pINjM1cDFsRm1BY0NTMGkyUVhxY0wwU0JCZ3F0?oc=5"
-   ]
-  ],
-  "Elche": [
-   [
-    "Martín Anselmi defiende al Elche CF tras caer ante el Betis: «Merecimos más, pero nos faltó acierto»",
-    "Official Press",
-    "2026-11-08T18:17",
-    "https://news.google.com/rss/articles/CBMixAFBVV95cUxPOTItTVNlRWRMSDJJNE00MmVTaHZtR1VTeVRGUkhIRFJoLThXWGx0WHh3dnpHdDRTdzVFaDNHeVFHMVFMTkNNM2ROM05iVE1iSTB0c3FubnVmRWNrYXhORjRjdmNib3E2YTF2aV9wMFY3eGUySU01bTlBNkFBT3p2MW5zV3ZlSGNWRUdXelNjZmtLY3A1Z2dlcnlvZVYxcHh2MkxyR2Npcm9GRjZZVjQzYUNfMWp5eFA5R3hxNzJCQlM1SUxV0gHEAUFVX3lxTE85Mi1NU2VFZExIMkk0TTQyZVNodm1HVVN5VEZSSEhEUmgtOFdYbHRYeHd2ekd0NFN3NUVoM0d5UUcxUUxOQ00zZE4zTmJUTWJJMHRzcW5udWZFY2theE5GNGN2Y2JvcTZhMXZpX3AwVjd4ZTJJTTVtOUE2QUFPenYxbnNXdmVIY1ZFR1d6U2Nma0tjcDVnZ2VyeW9lVjFweHYyTHJHY2lyb0ZGNllWNDNhQ18xanl4UDlHeHE3MkJCUzVJTFU?oc=5"
-   ],
-   [
-    "Anselmi se aferra al juego del Elche CF pese a la derrota: \"Si seguimos así, vamos a cosechar muchos puntos\"",
-    "Alicante Plaza",
-    "2026-11-08T17:01",
-    "https://news.google.com/rss/articles/CBMi8gFBVV95cUxQY1ozSk9hMDV0cml2NEVienhDWDFaWWlRUXhtckRuQ01DYXp5MjBHR0NNN1BqQTlOZDlNRnJ4azE4cTBnM3d6RGZ5VkhjMFhpSERWY0VGamVmSkpUZWJhRVZJY2lFVHl6SmVXVElYeDFlYUU0VWJxdmI4OGJBRklqNk5kOTdWRVpBSmhKMnJMREI1cUVibjNlakUtNlZldjY2T08yYWJkX2w4VlN5R3JKZ3NCaVRheEV0ZkhLQVZpenFrMFRqYURFb3A1MnBkNnB3Q3NybWNNaFJDQjM0eUVFNE96a1c2U3p5cXJqSHI5Z0dYZw?oc=5"
-   ],
-   [
-    "El motivo por el que Lo Celso se quedó fuera de la convocatoria del Betis",
-    "Jornada Perfecta",
-    "2026-11-08T16:14",
-    "https://news.google.com/rss/articles/CBMif0FVX3lxTE0tbi1mVnpxMUJkaWg5Q2RDUlN1clBmNGYwV25mQ1I5TGdOOExOSndLQzAzcTVTcFo1cU14bnI5eTlvdXRPQXNodEFEc2kxRS1ZdXg5cDR2R0dQT3pZZXUxc3hOX1ZRRThfd3ZjaS13UWFMNlVMZXNpN2Joam9rQXc?oc=5"
-   ],
-   [
-    "Gonzalo Villar y Buba Sangaré, fuera de la convocatoria del Elche",
-    "Jornada Perfecta",
-    "2026-11-08T14:14",
-    "https://news.google.com/rss/articles/CBMiggFBVV95cUxPX3drelA4Yk5DaVNMaTR4dXg4bm9laVZ3ZDdjdTZiTDlmbDdULUxLQnVBNjVuRHR3cHBxSTZxZVZhTEh6RkF4ZE1PTk9CMTZYTldKYVA4QnlDNzlJX2x6U2tZVWhzM0hGcndKckM3UnlMWEplNkJpX1VBZkgxNWc2bDVR?oc=5"
-   ],
-   [
-    "Alineaciones Elche - Betis: alineación confirmada de Elche y Betis en la jornada 12 de LaLiga",
-    "Estadio Deportivo",
-    "2026-11-08T13:09",
-    "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQTGhXb0RoUFlERW5YLWNkYnpBMTlOX0dmSWM5ZVBhX2VGelB4R3hOOGNZQVVCdksxN0ZnTVFmUURHc1FjVWh5ZG9oRWhmeHZyM1I0MjdsM3ZOVFJYb3BzZmFadEhqNzNfTEhPYmhlRHNvNDk4QU1jMFZLNVJOWmwzT2h1M1dwNEhVbElTdG5zQ0trM203ZHFsMVRlSWIyeWVwQ05URWU4LVpsN1ZQS2hnNnR5c0xtNHE2NU9XYTBaT1g5ZXRfVDVlenBoUmUzcWNybUNhMGlRQWpsVkJxbjlIek9iMA?oc=5"
-   ],
-   [
-    "Alineaciones de Elche vs Real Betis | LaLiga · 8 nov. 2026",
-    "YSscores",
-    "2026-11-08T13:01",
-    "https://news.google.com/rss/articles/CBMihgFBVV95cUxNTmJnZDVMNlNaQmhBSjVHaTRpM2pNUUExUEZCdlBvZDBpM1AzODBQYV9KNVozRGxISVA1VV9xLXE3aVNjUm05QzlieTcxVnpyeTh5X2xEX2EtakdUMzgyWUl3ZUdubmFjaTRSUkRKYVd2WFJwYXFscE96cmQ3aUY3cVY3cHNLQQ?oc=5"
-   ]
-  ],
-  "Getafe": [
-   [
-    "Villareal vs Getafe: futbol español 2026",
-    "Diario del Cauca",
-    "2026-11-08T19:01",
-    "https://news.google.com/rss/articles/CBMigwFBVV95cUxObGFDdkxLM2FZQW1aVFVQUlZZaEtENnVKS0dqRGw5VHJid2wxRHNwLWhmLVdwVURkQ2NoNlRCTU1BSi1WazdIM19kSTk5STJxOVNjODR0Y2x0aTB4NnRwdGFTWC1LMEl0U2lmS0ZONnlDLWxwcWRySzlGa0VIZlM4YlBZRQ?oc=5"
-   ],
-   [
-    "Celta de Vigo-Levante UD y Villarreal CF-Getafe CF, en directo: el partido de la jornada 12, en vivo",
-    "Cadena SER",
-    "2026-11-08T17:30",
-    "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPRVloZVVaS3RTekdQdm1aWl8zVVJCMHNUdFZOLVhPeWJUTmlXSWpkOXo1N0VXTEZKdjNhZHN6UlkzRkgzUHZDcUJmUElCUmg2bW02ZHNKd0Q5NkxuU24xeDVFSF91QWVUaHlaR0R2YnV4MFJQbmtQWGhPaUo3STZCcTB1ZW5ORG1jdGllODJ1Mmh3c05SMmdtVjdURVM1V0NId2NYRFVCWWEyZ0N5UGZBOXRBSkZ4M1JRZGxWWXZseGRqRDlBU1VLb0lmTHFpbWJHalUteHBIcFNyZS1wdlN1OVRHYmZvQdIB-gFBVV95cUxPOHVIY0tXUk5WeXFXSXN3N3Y2MlZJeDhvRTJla240Y25yMFdVM2MxQ21QX1dvN1o0TVpGNHZVcjgydTE4SzdURkdrYmtMVnhCUVR4N05BUFpzdHdPdC10M2RhQjMtSFRRWXNYeXItM25iemJLeEo2MTNYUkpYaXFFMDNEQml6R2d6blVoNDE0UUlrbV9pdXZMSm9QczFmWGhucGFnb1l4TUtXRmhmbGdLNlBQVC1MUUk"
-   ],
-   [
-    "Alineaciones de Villarreal vs Getafe | LaLiga · 8 nov. 2026",
-    "YSscores",
-    "2026-11-08T17:25",
-    "https://news.google.com/rss/articles/CBMieEFVX3lxTE9QT1IzUHlFX2pIbjF5OW0wQ0dUR2xDV1lTZ3d0NDZxY0J1VE1neDFPa21DVDFzWXhqQ2owekdXM3N3QXVfd2lVai12d3pvZEU5SGJLWS1XblY4LWd3azZYSGI2LWxZd0FpT2pBUEhZTzdaRWJhOXFHOQ?oc=5"
-   ],
-   [
-    "Villarreal - Getafe hoy: hora y dónde ver en directo (TV y online)",
-    "Dxtadaptado",
-    "2026-11-08T17:16",
-    "https://news.google.com/rss/articles/CBMic0FVX3lxTE5DNkNacFRFX1R0WF9uZWJMblNkd2FPRFMyRDRYS1hER1FmU1o3V3kzdlA2ZFR4MTYtMkJUazVBdHplYlRJdkNpc1c2Nk5RZk5ueEVrbmJSOXFITjRrSnk5YmhPblIzRlhGMnh4OVV0Z3RoNm8?oc=5"
-   ],
-   [
-    "Villarreal CF - Getafe CF | pronósticos + mejores cuotas | 08.11.2026",
-    "Futbol24",
-    "2026-11-08T17:14",
-    "https://news.google.com/rss/articles/CBMipwFBVV95cUxOQUw1NWllcUVnOHN6b1pzeURJRy1mdkQ4Y1ViTGtUYXIwLV9JMmUwVVBWQWRsSnRtUjlaZVlGUzFaaUF1WDNLSkh0YTF3Z0VmZEtOcTd5U0hILUtVMkxCNHdBTGo3dDJlUmZFWGR5a3BjemxZaFhHUnh5S2N6T0M2SGRkR1RKbnZaSGQ2T0I1VXd3ZTNoakFqOTZyeUhFZFZjRXFRZHhSaw?oc=5"
-   ],
-   [
-    "Villarreal CF – Getafe CF: una oportunidad para levantarse en La Cerámica",
-    "NEKO Deportes",
-    "2026-11-08T16:26",
-    "https://news.google.com/rss/articles/CBMinAFBVV95cUxQdmFxc1d1Mllyb3otT1JTUGJJcnNFR0YzRmpwSThLaFhLQUFHSVd6WFpDZXotUmpjUjhJWDd3bEpYQlA2cnU0azFydmd5RjRhWWptTTE5eGN5dTB1ZFRJMG9vX0dzOTJHc3dkTHIwR19rWXpiWU10Q0JtUUVKblFwcmRXVzJBX05palRUbEo1YzdmbVNsUFdpZVFieEY?oc=5"
-   ]
-  ],
-  "Levante": [
-   [
-    "Otro empate tosco del Levante UD en Balaídos (0-0)",
-    "Mundo Levante UD",
-    "2026-11-08T20:27",
-    "https://news.google.com/rss/articles/CBMihwFBVV95cUxOaWVvWmN3Ylc1Q05KRk90LWJTdXNLMEVFc3F0V0JWMEMxc09CblN4T2FheXktQ3pXOVA2N0RkaGw3ZWRIYWVwdFpsU2ZNQWQzOXhzeWR0OFJYV3RzVF9MVTBoUl9HR0w5dnIwU2dEQnJ1elNNb2YtMG9JTERwbjhEcHhIQ3l4b0k?oc=5"
-   ],
-   [
-    "Levante UD viaja a Balaídos con Sotelo de regreso en el once",
-    "deportevalenciano.com",
-    "2026-11-08T19:07",
-    "https://news.google.com/rss/articles/CBMilAFBVV95cUxPdklOLXlwdmJfNGxoekhSaGYtMXJlOVZsc0hpUnZqRGxOR0hlam1rWFhmM3I3SmZuWWtYUlpGU01Ob29aMmRVM0FlNUdyeFNBcWowUGIzMW5zcUR6NFZSX2pvZzBCaVkzWW1RSzkzbHBVMVhDWDllSlpKNzVldjBaRWxqQzN1bmZ4UVZfRFpBRF9iS0pz?oc=5"
-   ],
-   [
-    "Celta de Vigo-Levante UD y Villarreal CF-Getafe CF, en directo: el partido de la jornada 12, en vivo",
-    "Cadena SER",
-    "2026-11-08T17:30",
-    "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPRVloZVVaS3RTekdQdm1aWl8zVVJCMHNUdFZOLVhPeWJUTmlXSWpkOXo1N0VXTEZKdjNhZHN6UlkzRkgzUHZDcUJmUElCUmg2bW02ZHNKd0Q5NkxuU24xeDVFSF91QWVUaHlaR0R2YnV4MFJQbmtQWGhPaUo3STZCcTB1ZW5ORG1jdGllODJ1Mmh3c05SMmdtVjdURVM1V0NId2NYRFVCWWEyZ0N5UGZBOXRBSkZ4M1JRZGxWWXZseGRqRDlBU1VLb0lmTHFpbWJHalUteHBIcFNyZS1wdlN1OVRHYmZvQdIB-gFBVV95cUxPOHVIY0tXUk5WeXFXSXN3N3Y2MlZJeDhvRTJla240Y25yMFdVM2MxQ21QX1dvN1o0TVpGNHZVcjgydTE4SzdURkdrYmtMVnhCUVR4N05BUFpzdHdPdC10M2RhQjMtSFRRWXNYeXItM25iemJLeEo2MTNYUkpYaXFFMDNEQml6R2d6blVoNDE0UUlrbV9pdXZMSm9QczFmWGhucGFnb1l4TUtXRmhmbGdLNlBQVC1MUUk"
-   ],
-   [
-    "Alineaciones de Celta Vigo vs Levante | LaLiga · 8 nov. 2026",
-    "YSscores",
-    "2026-11-08T17:25",
-    "https://news.google.com/rss/articles/CBMiekFVX3lxTE9KdnFBOEVUYUNDNXZzbEJPemhlNnB3cnZ0YnVsNnJnb3oyZzdzOHgwMDY5VW9NdHhOVE1LZEc3UGYtMDdmdGJ0ZXhsWlVFWHNGZXZvT1g2Y0F6ZW85X25Jb3RNejNVOUk4MktCcDYwQk5KeGZiYXdFMWJ3?oc=5"
-   ],
-   [
-    "Celta - Levante hoy: hora y dónde ver en directo (TV y online)",
-    "Dxtadaptado",
-    "2026-11-08T17:16",
-    "https://news.google.com/rss/articles/CBMibkFVX3lxTE9ueDV5MDBQQ0ZMSU5UU1k2Q0p1RDdsN05ZNnNzay1Mc0VzRHdTRHNfeU93TU8zY1ZQR3JSQmUxMk05clkzVkV2bXJINGp1MzBKTFJzc2ZNclIxZHZoRFBYaHpjemktOV9aMVRLWkZn?oc=5"
-   ],
-   [
-    "Alineaciones de Celta de Vigo vs Levante: Estadísticas, horarios y dónde ver",
-    "Xpectro FM",
-    "2026-11-08T16:30",
-    "https://news.google.com/rss/articles/CBMingFBVV95cUxOTGVNS0EyWU1rcFRmQ0JJd2o2OGtMOGFMZjk1NkRpalBnMENnMUtNeDRyN1FMRDNVTnJVWVVJVzBGOVJHR0g3R0pnOTJkSTZWajdpZ0hwVlBNb2dHUVpkVkhvQjVKbHVZd0ZXSlhVczVvLVE0eEV4NGRya2loeE5FcG1nT3dfM1IwT3lZODZRczFPcEdrTHRPZkc1REY0dw?oc=5"
-   ]
-  ],
-  "Sociedad": [
-   [
-    "Ander Barrenetxea se retira entre lágrimas del Real Sociedad-Rayo Vallecano y peligra su presencia con la selección española",
-    "Cadena SER",
-    "2026-11-08T19:25",
-    "https://news.google.com/rss/articles/CBMiigJBVV95cUxPWldXYTZ0dkFYWGxZUjRtUXMta1RPNi1JMW9DMGdyVXV0MjdfVkdEcGlVQTlzYThkaU5ZMk1YdkIxZXlXbF9LUWl5Rk9XTU40bGkxdUJsXzdnRndNWV9Fak91WGFySktSLTFTem9CbE4wb243TlJ6SWlJSG53NldsN3pMMkVzS0tpOU00ZUtfdHBiOUZ1TjVhb1hTUVk1VjhoWjAxTjVPRTNFVDhneF9tdy12dHNkLV9LZHgzWTFYbENvTzdka3BNZ05fbGdFOWZnejVURmZ4cGd4a3EyY09mOXQ2OEh1Z0NQU0E3djhVcnhKNi1tc1B5UW05V3RwNkh1eHhRWUVpZjljUdIBngJBVV95cUxQbWF2RmZWTlBTZTJiY2xIUDdwQmVRcUItb0VGX1kzTW5xaWFZNTNBdGlzQ3dJVzVRa1d2SFRSUTRKTGJJcFJIbm5pcmRQSWV5V3NkSndTU19nQkpVdFhvOWdNejdFTkdJR0VvSFI0UWpmdkpHN2I3UUVRQVZFbzlpYjR4X1Ywb2RmSW14ZDJqZ2dLeWl"
-   ],
-   [
-    "Convocatoria del Rayo para medirse a la Real Sociedad",
-    "Pasión por el Rayo",
-    "2026-11-08T19:20",
-    "https://news.google.com/rss/articles/CBMiigFBVV95cUxPWlJROFFwVTlLRF83YlJMc0dpQjhoang1TjdFekpnNDZ0SEVQT2lQMlU4VjlBdHQzRGtxQzk2cFhYUEJoTkFDMnY4b1RQY0VEdVJQSXk2NW1GU2thelp6VGpGa1lwXzlJSnptbGxTcVIxU1dTMjJYS3h2bUtBaW5qSUltdnBmWE9sc0E?oc=5"
-   ],
-   [
-    "\"Barrenetxea tiene una lesión pero no sabemos cómo de severa es\"",
-    "Mundo Deportivo",
-    "2026-11-08T18:56",
-    "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQSDNya3VxUEE0VHFuRzlhUUVZaTEzU2FPYjlXRGJoNGdCaXYyZVFTWkhpejFpRmVoR1BSbTF0elpzMjctMGtPeVZQbnlHcm5iUEIzSl9faVFsY1pmOE9vTjk4NFJOTV9GWndWN3cybE02bVpnQXY0SDdWcFZPOHg2WU1mRjZ1N2tCbllXWmJtOXk3bUdPUlliZmwxZ2dsT2RzdXl2N0xDMzHSAbYBQVVfeXFMUGRybUpvQUd3QmI3Qm83Zy1nMF96NjRzSm0zRkNzNnZHczhkT3lfS2tWR3AtUmpkUDV3UDVQTUhYRm9GQmEtamV1SkhfMEFmNVdhem0zZy1JZlFCa3IycWdkS2EtS2piMXNXY203LUROWkt6QmExUUhmZmhwVW92TVM2R0ZDR1FpR1ZFRGl0UHJpRzRiNzlMWTQ4eG5IMmxJNm5XREM2WlNGUGM3bm13b295ZW1YR1E?oc=5"
-   ],
-   [
-    "Barrenetxea se lesiona ante el Rayo y causa baja en la lista de De la Fuente",
-    "ElGOLdigital",
-    "2026-11-08T18:43",
-    "https://news.google.com/rss/articles/CBMijwFBVV95cUxORTVYdktzZWMzQjlsalo5WnpBWkp6Q0pQS2xNVGtockVFcTdDOWpsSGNGRUhKUEJndktYdzczdmczQi1ieG9TTHE4TDQ2VUp5MWRMYjFtUG5VZVFBaW9xcmpYU041M2tTbl9ibWMzWXNUN1pzTU0tYjFDLXlZSGRveG12RXl2XzJfLXNXMGM4WQ?oc=5"
-   ],
-   [
-    "Oyarzabal se queda fuera de la convocatoria por anginas",
-    "Jornada Perfecta",
-    "2026-11-08T16:33",
-    "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNUXlqcTVpeFMxRFRiVWNTTDUzV2R3Z0JDcEllbVhZcmpEa1gyZUVFSThYOXZfZVVPQ1ZFWXQyLXBaVndxZkd6WGttNmxwNzdVNy1HS2luZXlEbGU1N2p2Z2tlSmZTdTVjcWphazZqZkVEY2poZ0dfZU9tYXdXbFFTdjU1cnhna3I5Tjk4?oc=5"
-   ],
-   [
-    "Alineaciones confirmadas de Real Sociedad y Rayo Vallecano en LALIGA EA Sports: Oyarzabal, baja de última hora",
-    "El Desmarque",
-    "2026-11-08T15:10",
-    "https://news.google.com/rss/articles/CBMi4wFBVV95cUxOdEdfeWZQbDI3YWF5T2lsOTFlaVRncUo4dTZaY3pfU1U0T2FTcURGVFdlYi02aXlSbjQ5azdEZmVqMDRjTnpNckJnOG1La1lFb2pzSDA0WHJtcGt3bmZGOUxEek9wVkNCcGY2d01wbUd4MmxJX2puU1hESkdaNjF1aDJscDd5azRwYjFMaHBicnZhOWN2S3hsZEFNVGswemU4eHY0WHltaHlOZE82SWd4anlac2hPcV9GeG1sS2p6aGdUX0JQZEtPY3JVMTlyUG1fRDZZd2I5dnhxUUdxN0N4ZXNCcw?oc=5"
-   ]
-  ],
-  "Vallecano": [
-   [
-    "Vertrouwd, sustituido a los 10 minutos de entrar al terreno de juego",
-    "Jornada Perfecta",
-    "2026-11-08T20:31",
-    "https://news.google.com/rss/articles/CBMieEFVX3lxTFByV3lzWEx0ZG1rd1htNWduSDBLVlEyOVctSjNWS0hJRG9MaElhQjVab3ZMMUJ1d0hwcTBmX2dJQnRxMGVCMTkxal9QZ2RtSTQ1M0t0TklGdkU1ang2SmdaOFpTOThYRFkwdmdfNDhTMWNIMVVHNy1UUQ?oc=5"
-   ],
-   [
-    "Ander Barrenetxea se retira entre lágrimas del Real Sociedad-Rayo Vallecano y peligra su presencia con la selección española",
-    "Cadena SER",
-    "2026-11-08T19:25",
-    "https://news.google.com/rss/articles/CBMiigJBVV95cUxPWldXYTZ0dkFYWGxZUjRtUXMta1RPNi1JMW9DMGdyVXV0MjdfVkdEcGlVQTlzYThkaU5ZMk1YdkIxZXlXbF9LUWl5Rk9XTU40bGkxdUJsXzdnRndNWV9Fak91WGFySktSLTFTem9CbE4wb243TlJ6SWlJSG53NldsN3pMMkVzS0tpOU00ZUtfdHBiOUZ1TjVhb1hTUVk1VjhoWjAxTjVPRTNFVDhneF9tdy12dHNkLV9LZHgzWTFYbENvTzdka3BNZ05fbGdFOWZnejVURmZ4cGd4a3EyY09mOXQ2OEh1Z0NQU0E3djhVcnhKNi1tc1B5UW05V3RwNkh1eHhRWUVpZjljUdIBngJBVV95cUxQbWF2RmZWTlBTZTJiY2xIUDdwQmVRcUItb0VGX1kzTW5xaWFZNTNBdGlzQ3dJVzVRa1d2SFRSUTRKTGJJcFJIbm5pcmRQSWV5V3NkSndTU19nQkpVdFhvOWdNejdFTkdJR0VvSFI0UWpmdkpHN2I3UUVRQVZFbzlpYjR4X1Ywb2RmSW14ZDJqZ2dLeWl"
-   ],
-   [
-    "Convocatoria del Rayo para medirse a la Real Sociedad",
-    "Pasión por el Rayo",
-    "2026-11-08T19:20",
-    "https://news.google.com/rss/articles/CBMiigFBVV95cUxPWlJROFFwVTlLRF83YlJMc0dpQjhoang1TjdFekpnNDZ0SEVQT2lQMlU4VjlBdHQzRGtxQzk2cFhYUEJoTkFDMnY4b1RQY0VEdVJQSXk2NW1GU2thelp6VGpGa1lwXzlJSnptbGxTcVIxU1dTMjJYS3h2bUtBaW5qSUltdnBmWE9sc0E?oc=5"
-   ],
-   [
-    "Oyarzabal se queda fuera de la convocatoria por anginas",
-    "Jornada Perfecta",
-    "2026-11-08T16:33",
-    "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNUXlqcTVpeFMxRFRiVWNTTDUzV2R3Z0JDcEllbVhZcmpEa1gyZUVFSThYOXZfZVVPQ1ZFWXQyLXBaVndxZkd6WGttNmxwNzdVNy1HS2luZXlEbGU1N2p2Z2tlSmZTdTVjcWphazZqZkVEY2poZ0dfZU9tYXdXbFFTdjU1cnhna3I5Tjk4?oc=5"
-   ],
-   [
-    "Real Sociedad - Rayo Vallecano de LaLiga EA Sports: dónde ver por TV, horario y canal de este partido de Primera división de fútbol",
-    "Mundo Deportivo",
-    "2026-11-08T15:57",
-    "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOZDMtV3Rudk9WcjlkdVFRNkNHU3NPU0dqbTBfSEJQdnlpWmFRUXZMazZ6MVZDR3VmMHl1Q3lSZThqQV9WdERPT1Y3c3hhdzFnRm1xaldXbjAxRnFxYW1VbnlRN0FqamxfaGZ4RlNPWXhiYU1qTXd1MDNtNzFlX3pSN2ctSzR0SjhpaHVhaG9RMGMzak5NbG5wSEYtY0o0UmZ2Ym1HVldaSElKbk8xOTVSRmFPam53R3Nlb09MS2hyQTRzLVJ2enltNlBBX0dyeWEtSXVuZWlhczJlcVdnbDhJWHNYQTcxQTBtT0pR0gH4AUFVX3lxTE1kT1VHaGNzV0tGX05NdFk2X2RBc19fQlhqX2lvZUpsRlJwSHVxMXo4RnFZbFNGS2xWZzFXRGxRQU5nWGJjdG95VGcxZkxvbmFUN245aVQxZzV1aFh3WGZaWlptLXRQUW04cGkxNjJfeW5xMVBPdzNfcjA3cU5jR0dzMzVUWHZ4YkRVeElwc1hJQTNJSUhWMHQ5bUJHTjczQXRWSVZCcjBvZG9zWE5COHE2dTh"
-   ],
-   [
-    "Matarazzo explica la baja de Oyarzabal, las rotaciones y analiza al Rayo Vallecano",
-    "FútbolFantasy",
-    "2026-11-08T15:52",
-    "https://news.google.com/rss/articles/CBMizwFBVV95cUxQbjZyM2xsNHVjOVN3SFhraHZ4Vm0wdGJ3NU02QUZQaDRFdUNQRzhhRElLdmtRWUhERDlSX05hS0MwVFgyY256aGtvU093MDNqYmNqSnlqd0Y5aUNmNGlQckR1ci1aUkQ2U1VMUmowQ2tjY1otdmY4aVhKNFo1aDlSM0pyYVctY0Z3dzNMMmZ2ZEZoQVY5eG55UTh3UGcyZlhKemc4WVJOdzhmZ2hobVFtWXhCYXNKcXJ3d3lmRUh6LUoxQ1A4VTNMTGgtUkJUMVnSAdQBQVVfeXFMTmhfNkFLaXlqNUs3TVlQZzZOek9aUkVLYmM0TGp1SzU5eTdvNERkSGlfaFJ6cDRsdXp2QVNKdnk2bFFsM1VvV3hTQW9iZTRMWlhXZkhzZURKN0JZVVpIcm12eG0wWVJNTk9FZDQySWUwQTdISGZJWUZWbmN0M1VFcUpCMTBDaU85RjJyV0tHNzFCQUxqbXRHQkE0Zkw0ejFwdFdBbHNBTHphakpJNHVnMm5PM0ZKbEFaNzhlZjNKa2pjNVYtUHZsMGpqNjlWREV"
-   ]
-  ],
-  "Villarreal": [
-   [
-    "Company: \"Nos vamos con la sensación de haber perdido dos puntos, pero el empate es bastante justo\"",
-    "Alicante Plaza",
-    "2026-11-08T19:37",
-    "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNQWNENTBWX19HejFCRnBUU1lMd2h5R2ZlUmgwb1BkVWtNR2Z2T0dLb2Ntejkxel85d3pyUDVSQjUydVlXeUJiWXhWS0RKa0NjTkJabGRMQ1VvWGJIc0RENHRmTXRoOVZBMUFDT1ZYNWduVjFkSmJtakhwSm13Y3RGYlp1OGdPVzV1d1RBd1F5bEtyc3JjWFk5RWloeHYtQ3FiNXBDSEpkbWdKdmhhRTJEOW9yTlBYU282RFhmUTVxRDd0ckc4TTltS1lwNXdxcGhaWHYxc1BmU0szbTVFamlydWtWOFdyZw?oc=5"
-   ],
-   [
-    "Resumen Lliga Comunitat | El Alqueries CF salva el orgullo de una provincia en horas bajas",
-    "El Periódico Mediterráneo",
-    "2026-11-08T19:32",
-    "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQUmVCTU11c3lkVnhaZVZXTjNGZWNEYTVoSTJVeHZHUkktdDJaWTFIZFV6RFNxQkZlVDdVcTZxcUZaakNMamxQd0NYMU5iWUd0bEh5bFhPaVFhaExsV1ZXRFV3bnFzQzZQZm50NmM0M1QtLXUySnowcm9SUnpCTEtDYlJyYW9oVmVsT296ZmdNQVBFX2t1dnBrWXFacU5Ic1BOLTAzcVVLaGw3ZHh3VWdTaXh3ZmhsWl9RTTJGXzl0MHZGMy01NnExZGI2dFUtV242azI5QVFrWFHSAd4BQVVfeXFMTmlPNXY1aS13Ql95UHp2bTBvVFZFLXZ1WEc5NWlWcVlocWszNGRicmhIYjNvajNoMGo4b2NNVDluQmZDV3M4YzVEWWNGMkJ1YVlHTVhaNzRuLTBMY3R3WXFUdkRGcEVldHQyel9sdVM3cDQxQ3JiZXNJaTFHU2Z3OWxzYm5COThIR1Y2RmwyMDYyTlFUdGhYS1dheWgta2trNHcxNU84ZmM4M3NCdTgtRmlQTzNvRWxUUGhrTElUSTVQWGFkSXF"
-   ],
-   [
-    "Villareal vs Getafe: futbol español 2026",
-    "Diario del Cauca",
-    "2026-11-08T19:01",
-    "https://news.google.com/rss/articles/CBMigwFBVV95cUxObGFDdkxLM2FZQW1aVFVQUlZZaEtENnVKS0dqRGw5VHJid2wxRHNwLWhmLVdwVURkQ2NoNlRCTU1BSi1WazdIM19kSTk5STJxOVNjODR0Y2x0aTB4NnRwdGFTWC1LMEl0U2lmS0ZONnlDLWxwcWRySzlGa0VIZlM4YlBZRQ?oc=5"
-   ],
-   [
-    "Celta de Vigo-Levante UD y Villarreal CF-Getafe CF, en directo: el partido de la jornada 12, en vivo",
-    "Cadena SER",
-    "2026-11-08T17:30",
-    "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPRVloZVVaS3RTekdQdm1aWl8zVVJCMHNUdFZOLVhPeWJUTmlXSWpkOXo1N0VXTEZKdjNhZHN6UlkzRkgzUHZDcUJmUElCUmg2bW02ZHNKd0Q5NkxuU24xeDVFSF91QWVUaHlaR0R2YnV4MFJQbmtQWGhPaUo3STZCcTB1ZW5ORG1jdGllODJ1Mmh3c05SMmdtVjdURVM1V0NId2NYRFVCWWEyZ0N5UGZBOXRBSkZ4M1JRZGxWWXZseGRqRDlBU1VLb0lmTHFpbWJHalUteHBIcFNyZS1wdlN1OVRHYmZvQdIB-gFBVV95cUxPOHVIY0tXUk5WeXFXSXN3N3Y2MlZJeDhvRTJla240Y25yMFdVM2MxQ21QX1dvN1o0TVpGNHZVcjgydTE4SzdURkdrYmtMVnhCUVR4N05BUFpzdHdPdC10M2RhQjMtSFRRWXNYeXItM25iemJLeEo2MTNYUkpYaXFFMDNEQml6R2d6blVoNDE0UUlrbV9pdXZMSm9QczFmWGhucGFnb1l4TUtXRmhmbGdLNlBQVC1MUUk"
-   ],
-   [
-    "Alineaciones de Villarreal vs Getafe | LaLiga · 8 nov. 2026",
-    "YSscores",
-    "2026-11-08T17:25",
-    "https://news.google.com/rss/articles/CBMieEFVX3lxTE9QT1IzUHlFX2pIbjF5OW0wQ0dUR2xDV1lTZ3d0NDZxY0J1VE1neDFPa21DVDFzWXhqQ2owekdXM3N3QXVfd2lVai12d3pvZEU5SGJLWS1XblY4LWd3azZYSGI2LWxZd0FpT2pBUEhZTzdaRWJhOXFHOQ?oc=5"
-   ],
-   [
-    "Villarreal - Getafe hoy: hora y dónde ver en directo (TV y online)",
-    "Dxtadaptado",
-    "2026-11-08T17:16",
-    "https://news.google.com/rss/articles/CBMic0FVX3lxTE5DNkNacFRFX1R0WF9uZWJMblNkd2FPRFMyRDRYS1hER1FmU1o3V3kzdlA2ZFR4MTYtMkJUazVBdHplYlRJdkNpc1c2Nk5RZk5ueEVrbmJSOXFITjRrSnk5YmhPblIzRlhGMnh4OVV0Z3RoNm8?oc=5"
-   ]
-  ]
- },
- "news_gen": {
-  "Ath Madrid": "2026-11-08",
-  "Barcelona": "2026-11-08",
-  "Betis": "2026-11-08",
-  "Celta": "2026-11-08",
-  "Elche": "2026-11-08",
-  "Getafe": "2026-11-08",
-  "Levante": "2026-11-08",
-  "Sociedad": "2026-11-08",
-  "Vallecano": "2026-11-08",
-  "Villarreal": "2026-11-08"
- }
+ "avail_gen": "2026-11-09",
+ "news": {},
+ "news_gen": {}
 }
