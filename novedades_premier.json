@@ -527,6 +527,19 @@
   ],
   "Hull": [
    [
+    "Belloumi",
+    "MED",
+    "duda",
+    "Hamstring injury - 75% chance of playing",
+    true,
+    75,
+    8,
+    685,
+    3,
+    3,
+    0
+   ],
+   [
     "Morita",
     "MED",
     "lesionado",
@@ -832,6 +845,19 @@
     0,
     0,
     0
+   ],
+   [
+    "Maguire",
+    "DEF",
+    "duda",
+    "Back injury - 75% chance of playing",
+    false,
+    75,
+    10,
+    855,
+    0,
+    1,
+    1
    ],
    [
     "Shaw",
@@ -1213,7 +1239,7 @@
    "ka": 8
   }
  },
- "avail_gen": "2026-11-10",
+ "avail_gen": "2026-11-11",
  "news": {},
  "news_gen": {}
 }
