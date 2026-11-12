@@ -43,8 +43,8 @@
    [
     "Aitor Fernández",
     "POR",
-    "duda",
-    "Molestias en la región del tríceps sural de la pierna derecha.",
+    "lesionado",
+    "Lesión muscular en el gemelo interno de la pierna derecha. Retorno estimado: Mediados de Diciembre.",
     false,
     null,
     6,
@@ -281,6 +281,19 @@
     9,
     736,
     0,
+    0,
+    1
+   ],
+   [
+    "Sadiq",
+    "DEL",
+    "duda",
+    "Molestias en la rodilla.",
+    true,
+    null,
+    2,
+    246,
+    2,
     0,
     1
    ],
@@ -618,6 +631,19 @@
     2,
     2,
     0
+   ],
+   [
+    "Morante",
+    "DEL",
+    "duda",
+    "Molestias en la cadera.",
+    false,
+    null,
+    0,
+    13,
+    1,
+    0,
+    1
    ]
   ],
   "Celta": [
@@ -633,6 +659,19 @@
     0,
     0,
     0
+   ],
+   [
+    "Ilaix Moriba",
+    "MED",
+    "duda",
+    "Molestias en el tendón rotuliano.",
+    true,
+    null,
+    11,
+    897,
+    1,
+    0,
+    1
    ],
    [
     "Álvaro Núñez",
@@ -1374,6 +1413,86 @@
   }
  },
  "avail_gen": "2026-11-12",
- "news": {},
- "news_gen": {}
+ "news": {
+  "Ath Bilbao": [
+   [
+    "Nico Williams y Laporte son baja ante la República Checa; Unai Simón, único convocado",
+    "Athletic Club Info",
+    "2026-11-12T17:11",
+    "https://news.google.com/rss/articles/CBMivgFBVV95cUxNWHcwdG9wM21qaXVCbHd1UDBDLWlZV0t5N2VxS3U0SmdBYUtfT1BjN0NZeXJTZmZadVpmMkxZM2ZQTnQ3MVJtdmRIbkFfeXExc0dodFRLSlJUYkRvS3luQXpPMGJ3cFNLUGJDNmEwV21SYVkxcmpkcndEbVZvOU9yakFYRlM2YW15Z1lHRlk2N2JmWkdPekdIeVBEbmlCaUl1RlplUHJtSmo3WFBHeE8xUTV3MnRXdGJoTl9yTXR3?oc=5"
+   ],
+   [
+    "Vivian y Rincón son baja con Euskadi; Prados entra en la lista",
+    "Athletic Club Info",
+    "2026-11-12T17:11",
+    "https://news.google.com/rss/articles/CBMixgFBVV95cUxNZjlVWnJRWmxpU0ZPUzRvSVZnV1k2UWpJMWFneFNtbEN5bEdjX1IzSlJIMnBjQjBicmUwSFAtUGxfelkwLTVOUkVVV3pUWnFRMWxsSVZSREFRZVRTRDlVaGM2MGtFZ2s2d0p2WFZiSWhHbjV2b1ZrandqdVg2RXNzaDhOYklMbWdUY1NWZmtTY0RFal9keWVudlNmOXZOdmJWZkRia0ZNSTRSLU16cmgyMGJZdTNoUGZDck5pZF9GX21sUkx3c2c?oc=5"
+   ],
+   [
+    "Los rojiblancos Vivian y Hugo Rincón causan baja con la Euskal Selekzioa",
+    "Deia",
+    "2026-11-12T16:19",
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxOTHgxMHdieXVZQ1FZRUN2WTFRRV9IUzVOR1lUWXFTOUFXN0N0VlgtU3JVODVEM2dOb1NoQ2VOQWJDN1lJWUFYUm5Oc3hBRHVwMjNZMGNNY1UxWDNxVWpkR1FYX2J6X3VEZ0xxNVFTZnFNNVJveTRwTzNFXzlPTmRzTVJqZjc2MFc0QXFHTDluYWl1d3VsRmpj0gGcAUFVX3lxTE1GM3lCeFhMX0hQeDNsX0pzTVk0MGw2UW5iNWRydng1TTZLUGNkUUVVR2hmS3dSNERIMjY0NkpYNjdUakZSZXA3NExySXRuZ2c4VTV0ZDZxNWNSZkxqUWtUSnQ4cTQteTI3cmZUYmZhbUN5bVZzT3hHSVVmTDZvTnJBQWxrSU9fYk82bElWcmdCdE1EQjdDUFdtUmRIWQ?oc=5"
+   ],
+   [
+    "Edin Terzic prepara el partido ante el Espanyol con once ausentes y seis al margen",
+    "BilbaoHiria",
+    "2026-11-12T15:27",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxNVXVQQUFwZVlYLUNPYVR3b3dUbWdzMm1ZZzRtMUlFMDFrZGlJbDhaZnljRko4VU9lOVBHVW15Z1FzazRmdFByS0FfZmFLVVIxZGZWRUVpa19BT3JOYnZ0S3k4d01lM19rWThNRFY4bmc1NFNjTlY3dFBUYXFNU1RfMExMbDVqdXROVUYzZ2lrMA?oc=5"
+   ],
+   [
+    "Vivian y Hugo Rincón causan baja en Euskal Selekzioa por sobrecargas",
+    "Diario Ahora",
+    "2026-11-12T13:50",
+    "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPMFNqLW1MbWtlSzRKTF9PVThUSl93V18wcGxNOGNIVUFSQ2tBRDI4cThESV9MT2FLWnh5M0NLNFo1YUx1Z0Y0Zm4zeHZnSG45LTVCS1ExN3JpVVdhSi1ob3BTTm1ZMlk1UDQzU0VfZURIQkxZVU9zQ01ia21uLU51ZExjNXBKTWZPVWNZ?oc=5"
+   ],
+   [
+    "¿EVALUACIÓN DE TERZIĆ? ¿SANCET DE 9? ¿MANEX LOZANO TITULAR? | Q&A 3 - PRIMER TRAMO DE TEMPORADA",
+    "Athletic Club Info",
+    "2026-11-12T13:26",
+    "https://news.google.com/rss/articles/CBMi0AFBVV95cUxOSENnQkh6ZWFRbXZSdERsWDNYTU16REVNNFRJbnRWc0Ywbm1XbDJNSEx0NGFqeHI2MVVFYVRFSU5INFdEMlBadGY2bWFscWhseGhzdXFJdURBSnlBLVJzZkg4UzZHR3pzZUtqQk4waDNBOGt3RWFzQnJvZ0czZWc1MzVkcmZFQllkTDZOLUhTaWJ5MVJ6SDZUcmtITnloeUtqVGtScFdhai1nQnZ3dU93M2JEc2dpaGJpVE1aQk1VZXkwemRfZlIySGJEcDBBTFZ5?oc=5"
+   ]
+  ],
+  "Espanol": [
+   [
+    "Euskadi cita a Gorosabel por la baja de Rincón",
+    "FútbolFantasy",
+    "2026-11-12T15:38",
+    "https://news.google.com/rss/articles/CBMioAFBVV95cUxQRy1CWFBIMFZuSHBnb0VZNF9TUzgxOThia2RIWWFJelcwOWxlNXJ4Q3ZVRXQ3M2FJSEhDMGFzNnZXVVNuQnlZQ0JIb2pSeWtVUG1TVjZuZFNZYWg1WlVvUkdvdjY2UmJadEZzOTZraE9wQ081dm83R091U3RpSnNHTnhrOHZqRXBfSnl4WXMwUVpEa1Y4QXdaaGIya1U1dnB20gGmAUFVX3lxTE5hV3diWHpLZGtYa3R6ZDUxMWlCUmRBMGc2ZEJ2eHpXNm1DOG1NdlBtb0xNQnZLaWVIYWExU3JHdWtVcmhBSkEwRFA2dVZCc3cxWDAwYWd2a25ORkxfRHpqeG4wa1dqcDZoYURjcnQ4TktGN00yTWVLNVhTQm15ZGNwc19mS2xVdU5sU2JOblNjUDdRSjlXbXNWV2VCVkdpSlhTaHpfZ0E?oc=5"
+   ],
+   [
+    "Edin Terzic prepara el partido ante el Espanyol con once ausentes y seis al margen",
+    "BilbaoHiria",
+    "2026-11-12T15:27",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxNVXVQQUFwZVlYLUNPYVR3b3dUbWdzMm1ZZzRtMUlFMDFrZGlJbDhaZnljRko4VU9lOVBHVW15Z1FzazRmdFByS0FfZmFLVVIxZGZWRUVpa19BT3JOYnZ0S3k4d01lM19rWThNRFY4bmc1NFNjTlY3dFBUYXFNU1RfMExMbDVqdXROVUYzZ2lrMA?oc=5"
+   ],
+   [
+    "Marc Roca, convocado por De la Fuente, relata su calvario en el Espanyol por la lesión",
+    "IUSPORT",
+    "2026-11-12T15:00",
+    "https://news.google.com/rss/articles/CBMitgFBVV95cUxOSGd4YXkzN0VJTUUySC1CQjFJLUNlcHBsTmhxa0JsYldPbnQzYzlnR2lnWFI5UWh1T3Z4UkhGaWpzYkxNbDV1cVRzaDhvRzRzYWhmQ1QyM3ZmM2cyZlQxWl9YeWh3X0hPQUdlX0d0NDBwc3VNbHNjVjZPckltRGdGWUVGUzZWRFk1MGM0cndtMVFxc3lVT0RSMHd4eGd3elo0dHhjaGpVbHlhRGpmOTBCWXRZeld1dw?oc=5"
+   ],
+   [
+    "Vivian y Hugo Rincón, bajas con la Selección Vasca por sobrecargas",
+    "Jornada Perfecta",
+    "2026-11-12T13:04",
+    "https://news.google.com/rss/articles/CBMieEFVX3lxTE9CdGFrMXFLUlRyWUVQRi1zM1BXNG1EWkVyd3lPS2J6VkVxX3lyUDJuMmFLeWF3MTJXLWV6MjFLYWU3LUxrRzlZbTU2UHJoVVVIb3dubmt2RlFkZ2lSYUNrSEI2eUVkQ3l0d09iOFE5Y2VRYzFYcDZfaw?oc=5"
+   ],
+   [
+    "La selección vasca convoca a Gorosabel, que todavía no ha debutado oficialmente con el Espanyol; deja La Garrotxa para atender esta cita",
+    "La Grada",
+    "2026-11-12T10:59",
+    "https://news.google.com/rss/articles/CBMikAFBVV95cUxQc0JjblZwVFpEWS11cE5kejZld2ZuUTl2c0hpTlBSTEZGZ3Z6Z0w1dUJ6dGZ5YjltdUtrWGNYZnlmQzl4OUx2T3pzLXBnOVhZdUUxSnFwMHZHd0RBMXl6MzVhd3o1MlN4cnRpRXN5Nk1BYU50MlVncW5NNjdKbkdUb3h3N0tUbFpLZEozNFZibWs?oc=5"
+   ],
+   [
+    "Espanyol: Andoni Gorosabel cuenta para la Selección del País Vaco",
+    "El 1900",
+    "2026-11-12T10:46",
+    "https://news.google.com/rss/articles/CBMifkFVX3lxTFBfczBrZWIyYkRyV2hpLTdTNGhVVTNWeTF1c1NSa0QwWm9VeEpyMW9xbndhZFlPcXlzNHVUTkhndU9MM21lb1FZS0I5anVWaW1PZjc1dFJRTXZENW1MWkMyN0VCcng4VFZ0Z0dra2dQS3hQY1hKSE9yaWhkQ1JMQQ?oc=5"
+   ]
+  ]
+ },
+ "news_gen": {
+  "Ath Bilbao": "2026-11-12",
+  "Espanol": "2026-11-12"
+ }
 }
