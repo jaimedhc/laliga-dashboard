@@ -1210,17 +1210,17 @@
   ],
   "Sevilla": [
    [
-    "Peque",
+    "Alfon González",
     "DEL",
-    "duda",
-    "Lesión en los isquiotibiales de la pierna izquierda.",
+    "lesionado",
+    "Rotura del ligamento cruzado de la rodilla derecha. Retorno estimado: Mediados de Julio.",
     false,
     null,
-    3,
-    214,
-    1,
     0,
-    0
+    65,
+    0,
+    0,
+    1
    ],
    [
     "Marcão",
@@ -1416,10 +1416,28 @@
  "news": {
   "Alaves": [
    [
-    "Sigue en vivo y en directo el CDA Navalcarnero-Real Betis",
-    "Muchodeporte",
-    "2026-11-12T17:47",
-    "https://news.google.com/rss/articles/CBMinwFBVV95cUxOZjFwTmowLTlBb1F1WHVWNXQ4OEtjSFFPX0hibERNTE40WDNxS2lSdXdlU2xOV2t2UUh5WU9jVTFzV0E4TjBQS2ZMZ0ZaX1hGYUhkZTB0cks5ZjB4QWhOam5MQVdRODg0dzlJVkRmYzl5ZkpmNjlRMG1TcTRQWlZDSXhCRVNFc1ZSdThnQk5XekVheFF0RFF0ZFZJcEpwV3c?oc=5"
+    "Vicky López sufre una reagudización de su lesión muscular y estará de baja entre 6 y 8 semanas",
+    "Notimérica",
+    "2026-11-13T12:23",
+    "https://news.google.com/rss/articles/CBMiywFBVV95cUxQa3ExNGxoN25Jd2dkTDhPRkZFSmNJaVVNbHV3Y0wyZ1F4LUp6X09Ya3VtTHctOHJuOGxYMm9KRFhDSVJGN2o2WHRwaXNjMTdRRGE1ZEwwSnB0UW9qRXRvZzhoZ1lBdWZISEZLUXFHOVYzMlBUMU80Und4bmxXV1VsODItNWdKOEFvY2ZWX0RFM0c5Y3BtMG9kTGF4UDRfd1hFTXA4NnpQT3FWVEZpM3RkSURVNUY4TTVjd1IwZ1RNUU9MUnAzYmVDTVNkMA?oc=5"
+   ],
+   [
+    "Mazazo en las últimas noticias del Sevilla FC: Alfon dice adiós a la temporada",
+    "La Colina de Nervión",
+    "2026-11-13T10:14",
+    "https://news.google.com/rss/articles/CBMisgFBVV95cUxNUGVycDlubnpYYWZ3aFNRQXE1ZWNiaFJKVEw1VVdrbEU4ajN6X2xBLV96Q3VXWGFmMk5EMXAySVg2ZlJQR3pPWlZLUmd3Um90NTRLaEtSVkNpLUw3dmNELWZZUTA5RndKSnp1TGlOQ1I0b3IxamE1bkdwR3d3a1JRcVlYSi1ZcmJQV0lhNjNqT2oxZjZjWk1BRmR0QkVLcHNBRklkejl6OFAyMDh5YWRpY2V3?oc=5"
+   ],
+   [
+    "Alfon se pierde la temporada por lesión: qué tiene, tiempo de baja y posibles sustitutos",
+    "El Desmarque",
+    "2026-11-13T09:46",
+    "https://news.google.com/rss/articles/CBMi7gFBVV95cUxNaTdhekxiSGtXeTRWdjhRbjhTaHJwZDduY2MzMEhzOTZXVkc5TElMLTdTdGRVOGZBX04tMGo2MEV2VVdzblNtWnpNa3Uya0VHbWVhWTRuUWNwVWNob0J0VzhqS2xnVDNWbl9zWkxJYkJLWTdYcWg2dF9qN3FvblJjcHBBb3JObFc3Qml1bDdGbWFTTi1pcldVc3A1Zmt3MGJTbXBGVmdTbm83ZU1FSUx2YTV6bVk2YlQ4bHZpZmZKTUZXS21rZU1ybFVJdnhqeWp1UW8wMnZScy0yQmRKOWlYVEp4ek0yMnRBQlpma2d3?oc=5"
+   ],
+   [
+    "ALFON SUFRE UNA ROTURA DEL LIGAMENTO CRUZADO DE LA RODILLA DERECHA",
+    "Sevilla FC",
+    "2026-11-13T09:44",
+    "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPR2x5Sm84dGhvbWpZZC1zMWdCdWVfQldKWlVFVzhuYVFfZUhZOU05azgxSVJpSlBFdk9QZTVSc2dQa1RyNXYyZUdxbW9aWE5LeTg0YTNQbUhmWmQyd2NvMjgtRjRZU3RzcVhqVEdGQ0RtV0pjMG1FRUtrcFFBb2QxWkNldnktMWgwb2hV?oc=5"
    ],
    [
     "\"Taller inclusivo para explorar el patrimonio alavés a través del tacto\"",
@@ -1432,44 +1450,32 @@
     "Muchodeporte",
     "2026-11-12T13:24",
     "https://news.google.com/rss/articles/CBMilAFBVV95cUxQYVdnMUdSLVh2aU5uX1NCMHNuWkRSSTk1cEo5aEJJM09VanBvOHoxQUtXeDRwYVd5OFE4VllGd292UXNLMWxJR09fRXF0YWR1UU9pamVNblhyV3lsM3JDUUpDRkdrdXVzcFlYUG50WnNqUzJIa0c3eG41aFBXOG5SNnpVaE9XVW1JRmxDbWt4THlWZlJI?oc=5"
-   ],
-   [
-    "Una reválida inesperada para Lo Celso",
-    "Muchodeporte",
-    "2026-11-12T09:48",
-    "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWWczVXVNblo4MFYyTTBYOEhMa0JGM0NEdUZfQ1NqZ2hoUUowY1lyZS1WUnVsT1lzQXpKTDNVMUt5X2NIbUVhcWVXNFpzMm91eGplOU1COEZjUzNxdnlQTGt4OWtxaGZBNnZrd19OR29pMnpJSGo4XzBJbjhZRHhFYjd5RTk?oc=5"
-   ],
-   [
-    "Bright Ede completa dos sesiones con el grupo y estará listo ante el Alavés",
-    "La Opinión A Coruña",
-    "2026-11-12T09:21",
-    "https://news.google.com/rss/articles/CBMiowFBVV95cUxPLU1Fc0UwOUNEelZiS3ptaUZZNGxTUVZfZ1dSMlBacmxpRW9za0xBd1hiWVN2Z0tlUEE3SEVZN1Vmcm5UV19QYU1ISGhjX05hTWx0MTBDOE1TYnVadkc3dU1ONUloUVBycmJOVzB6TDZIMjN0bDRhbGhBZVhRdnRISWJCZDRIcUlLSkd1RG1TYXhwcUg1S1c1TUtTV2hFQjdRNC1N?oc=5"
-   ],
-   [
-    "García Plaza empieza a preparar el derbi entre lluvia, viento y numerosas bajas",
-    "Muchodeporte",
-    "2026-11-11T20:17",
-    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQLWZJQWIycklRSmRCUGpSUU5LcS1DRU9lN0FtWGxMd3hjRlZZd1NNT1FnOURsbGdVWTlCbHpqRjBYSzl4WnNBb3pZd25MVVIyRHlwQ3R5bXpPeHVyLXlad0VGeXAySmdIa2JHaG9FZ25OSmVTVmp4UWRXai11MUxZeFZrU1oyNFdXRVI4eWxsWG1uR3dpMTJLRDhxR2lwYmZLVEJGU0c4bmFyd29scENZYTBCQ2pKTllOY2Vn?oc=5"
    ]
   ],
   "Ath Bilbao": [
    [
+    "El navarro Oihan Sancet, tras su primera convocatoria con Euskadi: \"Es la selección de nuestro país\"",
+    "Navarra.com",
+    "2026-11-13T08:32",
+    "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPWWI4VVdPRDhWbE9PblVhNEs0S29Sclp6bFVFRkk3cUM5LWtFdk1OUEFKT2E2UTMzU3V3aXpxU3dkeUJfN3pqQWEzdDdOWXpjZFNBNUdPeGtSdkl3NFRhdnYyRTI5T0lJN0Joc0llWThPTDRxMkh3UGJjRXp6dThGMTA2NEJ3bjVEanlEMTVMVzhmbjdBcnZJMVF3Q204azI5Tkd0NFJjQnQwX3FlNVN1dDVydzRnNHZ4UlBCNERFcWpPcU9RUTQ1RHRWcld5eEJGaW1HVS1JdkZJQmpwazFxSdIB5gFBVV95cUxNNmdnNzdsM0I1UmQ3SzRFZjhiTV9ObEtKS3AtX05RYUVlTnYxcVBBNmU4bUlOVzd5QnUwUEdQdGR0WTF4dHlYRlVvaWMxRFduaF9ucXpobWJFb296QXBNSFFFTll5MzJVdlpCcE1QQm0zM09zcTY5b3ZhOUtTSGZtUUE2VzhfSEZiQWc1Xy0xZmM4QUtlV0hxaGIxbVZsclQ2WnZNdmpLZm1QU0NGYWFYTlo5UFB0ckQ0d25zdzd"
+   ],
+   [
     "Sancet habla de sus sueños con España y Euskadi",
-    "athleticclubinfo.com",
+    "Athletic Club Info",
     "2026-11-13T08:16",
     "https://news.google.com/rss/articles/CBMisgFBVV95cUxNeFYtc284MHVIcDdGSEFySUNUQmgtNHpPU2luN2NxWi1Gdl9KdEh2NGMwcGJidkZSSTgwc2stWExvLW9lcmJDNzB4MEQ5a3JmdmFILVVzN2ZMMjRKalVQUXVBSVFLWVZLdmFSWFVpanhqV1NZSURPYURfajlldmEzV2VieEdJX25QanRXQ25XRUVnYnU1ZTdiUTR4S2Q4alhfUDFRNHFQdE9la2tFVEtKY2R3?oc=5"
+   ],
+   [
+    "También hemos conocido que Dani Vivian y Hugo Rincón causan baja en la Euskal Selekzioa por sobrecarga",
+    "Athletic Club Info",
+    "2026-11-13T08:16",
+    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPV0ZCcVNDcHJ5WkRORWdNVWhwNGhSdFoyY0VpZEZqRzhnbm53eUw4ejBnbGZjb1BqYm55QzdTMHlsc2Y4Q0hSUms0ekJYUnRQekhKWjdSWWFsN3pxVXBUdGtGOWRtVWZkYzF4ZmxUbmJpZEYxc240MXlhR1FMa1hKT1B1QUQ1Vm1PcWZFeWNkSldKUENUYVNmd2pFSkV4emtmeEhXRWdkclRKRjhlTUs0a1RmS25iOVU0dmYwdjhsOF9tTnBfOHNHdmFZdURFQUNQaTJ0YmJCZVdwUWM?oc=5"
    ],
    [
     "Nico Williams y Laporte son baja ante la República Checa; Unai Simón, único convocado",
     "Athletic Club Info",
     "2026-11-13T07:16",
     "https://news.google.com/rss/articles/CBMivgFBVV95cUxNWHcwdG9wM21qaXVCbHd1UDBDLWlZV0t5N2VxS3U0SmdBYUtfT1BjN0NZeXJTZmZadVpmMkxZM2ZQTnQ3MVJtdmRIbkFfeXExc0dodFRLSlJUYkRvS3luQXpPMGJ3cFNLUGJDNmEwV21SYVkxcmpkcndEbVZvOU9yakFYRlM2YW15Z1lHRlk2N2JmWkdPekdIeVBEbmlCaUl1RlplUHJtSmo3WFBHeE8xUTV3MnRXdGJoTl9yTXR3?oc=5"
-   ],
-   [
-    "También hemos conocido que Dani Vivian y Hugo Rincón causan baja en la Euskal Selekzioa por sobrecarga",
-    "Athletic Club Info",
-    "2026-11-13T00:08",
-    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPV0ZCcVNDcHJ5WkRORWdNVWhwNGhSdFoyY0VpZEZqRzhnbm53eUw4ejBnbGZjb1BqYm55QzdTMHlsc2Y4Q0hSUms0ekJYUnRQekhKWjdSWWFsN3pxVXBUdGtGOWRtVWZkYzF4ZmxUbmJpZEYxc240MXlhR1FMa1hKT1B1QUQ1Vm1PcWZFeWNkSldKUENUYVNmd2pFSkV4emtmeEhXRWdkclRKRjhlTUs0a1RmS25iOVU0dmYwdjhsOF9tTnBfOHNHdmFZdURFQUNQaTJ0YmJCZVdwUWM?oc=5"
    ],
    [
     "Oihan Sancet expresa su gran deseo tras ser convocado con Euskadi: \"Ojalá podamos jugar el Mundial con la Selección de nuestro país\"",
@@ -1482,12 +1488,6 @@
     "SPORT",
     "2026-11-12T21:31",
     "https://news.google.com/rss/articles/CBMilgFBVV95cUxPU3hhVVNEb3ZVOFRCWUJqTktLYUtDSlZIZDM1d25kOVlvejhjT3FiVjdOSHNubTBCZUdjd05GOEE2dGxJdC1EYVRKY092dHNPdzE4NFNyeS1laEk4YlRYcGpjbGNWTl9hY3VUdlRIelhGQ2NtZWRCVlMtVVUxeXNJeDVnWUU3Wm9xa0xFVGMzMGg2QkJ1cVHSAZYBQVVfeXFMT1N4YVVTRG92VThUQllCak5LS2FLQ0pWSGQzNXduZDlZb3o4Y09xYlY3Tkhzbm0wQmVHY3dORjhBNnRsSXQtRGFUSmNPdnRzT3cxODRTcnktZWhJOGJUWHBqY2xjVk5fYWN1VHZUSHpYRkNjbWVkQlZTLVVVMXlzSXg1Z1lFN1pvcWtMRVRjMzBoNkJCdXFR?oc=5"
-   ],
-   [
-    "Djaló vuelve a ser titular con Guinea-Bisáu y juega 69 minutos",
-    "Athletic Club Info",
-    "2026-11-12T20:26",
-    "https://news.google.com/rss/articles/CBMirgFBVV95cUxOOTk2U3dsd3ZOTHNoenV6eGlLWVZZdXJKQXdiTHVEdGNzdm9ILXFhdG9PMkc2a2k2RmxxbXRBVWk4VHR6YlAzazQ1U0thQXBWMURVdjIya0R5Wmd4Q21Ed2FNb0UydURmd1loY011dlN5NHlQSzBXT041bUJPdFNRUmNnOGhiUTEtUVpOeXIzcXVSQ2dfeThQWlc3b0RrVktVUm1CYkt5dndGVHY0VkE?oc=5"
    ]
   ],
   "Betis": [
@@ -1530,6 +1530,24 @@
   ],
   "Celta": [
    [
+    "Ribes y Capde se caen de la lista",
+    "Cadena SER",
+    "2026-11-13T12:12",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxQT0JoNEVTV0FqU1lZT2MycVB3NnAyUmhlanNUaXVDaFpSRE9KV2pUM2lVaXFWZnBCeVVaUlBoVndSdjJIZkhuT1FEZWRfaXBkazYxcXYxR1JoQzdLVzVVR0V5SXRjYXo4Q3JLck1ON1p1eXpkUkVmOFQzTklxb20wSVlSREdDMnNpMjR2RGd5NNIBowFBVV95cUxPQ01IdTBJLUJBcjBobFR6ZWJId1pIMHlfUmp6TG0wOG4zRC1qRXBXS09IMGNNb3dFUFBmX05ZRzZYYlpoTzVJQ2pxYk1KVlM1YVlOazJhcVhhRXczYXhzc2JUUGczLTgwWTZsRm9LdnJNZnd3bTlPdmlETlNvRmVNeFB4MGo4WWVMaUNNMTdSRU0xRlFOVmxEX2w3WDVCQUd2Yzg4?oc=5"
+   ],
+   [
+    "Tchouaméni apunta a estar disponible para el duelo ante el Celta de Vigo pese a la lesión sufrida con la selección – informes",
+    "Tribuna.com",
+    "2026-11-13T10:21",
+    "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPM2VUeWhHSmpmU1BXNUtMVUpHaHNhUGxDRGJVallRem1fbmc1SG9nd1hLLVNBY3NocFVHM1NmcFNyb3lFN2phQ2NPM296Nkh0c2JTbXA4Q1hZV0Rld3lsVm11YXh4OXJCOG1Hendnb3ZJN3F5OHM0NnpPaElYRWhseTZVX2RCY1VhU1pLczZIME14emtTck4wc3B3bm15bUEyRXQtc01xaVlzTlljMW12cWJVeXhGZ2F0VEpyenRQTVdIMWNNVzcwQdIBzgFBVV95cUxNZi1qd2V0N3RMZlhBRnJ0NW9mTlRycXNjUXJaZndNcDN6S2hlUDBNa0hLVUVxcXNqaG5RZWEtMnNhNjhQUXc4SHhPZUJQSktBbEwxV1dCNkdMWTVFTnFub0JURU1sVF9aTGRKbmhDTGJ2dDV0YmI2ZjZaZUZWejhmcXF0aFJZc0RIZExMaXB4YmpJMWF6TG5maEl5OWtFRzVlS3oxcmY2TG1rcmd4aXVUelllODE0ei05cGtLbzhYMFNkdFBaaVRRc19JVlhXdw?oc=5"
+   ],
+   [
+    "Abdoulaye Faye, Celta: 45 minutos y la Copa en Salamanca",
+    "La Colina de Nervión",
+    "2026-11-13T09:00",
+    "https://news.google.com/rss/articles/CBMigAFBVV95cUxNMDhNRVBGUV9ER21rOEEwdE9GbFBzRGJWVV8zbml0cGUxS3puX0VCcjVwOGw0MkNYZ3RDdFJrOWV4NGhqZW5ySDRHRkdMdks2OFJFc0g3ejhWc1dLOXhWdmY0di1EUDFpNkZ1Ui1nd3l2UUcycnZ1NHJJX1B1ay1ZRg?oc=5"
+   ],
+   [
     "El Celta de Vigo presenta su convocatoria para la Copa: Iago Aspas regresa al Helmántico",
     "Tribuna de Salamanca.",
     "2026-11-12T22:22",
@@ -1546,24 +1564,6 @@
     "SALAMANCArtv AL DÍA",
     "2026-11-12T19:11",
     "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNYkswa0dfVXFjMm1GMjVzdXJqeU81SFFLZkVfaGNycnEydktKNVdzX3hSLUJIXzZtcjFPMEpVVDkzUXRiSjBRb1J3UmxGa05NRUVDMkNQaG5EZDAyR04xckVBRVBnb2tZajdCVWpjdHFzTUdVRDd6LXRwdndyZkY2Zi1fZlpHSHhRX0ZEZi0wY2JFcnMzZWt1X1Q5WlZhczlQMjQ3enVDSFlEVzM3a1I5dHlIbjlZQ3JvcXk0QXJpMmRGb3d6UWQ2SHZHOEpDMThhWUxwaGowVjlCM0JrbTR1ZEhVdU44QQ?oc=5"
-   ],
-   [
-    "El Salamanca CF UDS-Celta de Vigo de Copa del Rey: comida de directivas en el Gonzalo, Giráldez y Aspas con los celestes y el alcalde de la capital en el palco",
-    "Cadena SER",
-    "2026-11-12T15:18",
-    "https://news.google.com/rss/articles/CBMiwwJBVV95cUxPNmc1NmVqaE1EOFpSWDMxZFZBYW0waE1uSEw5R0pLN2NsS3ZKeXV3Xy1XUGZEY1M5UXprR2o1TEh5bGVjNmdURVR3NG02QnlCNmp3S3NEX0NiNmZsSml5dGU1bGdrbzh4WUZfQ0FPNloteTg5ZHNXX19RYk9XWVAzWndHOFFjX2pTdTNjRkcwakFJMVY4cVV4ZnVVVkpEM2NjbUdjR3VDbXFsM3FBN1lzaXFsZWF6UGpRZ0JDUTNNN2Z0YkFnZ3hWMFppeDAtZ1ZlbmJXR012VVRkVTY4eEgyMDkzaWw5ZFRaT181cnhVNWsxTGpBTThDOVhfa25JWW9MVWlEbURTQWw2VlBTa2FtM0FBR2ZnVEtTLUZBYWZLSFFLWTE0dVFMdnFCb3hBS29wZ1pRd0tlZFlzc2ZiNW9sZGxzTdIB1wJBVV95cUxNbHdSUHU2N1hTRHI0cG9EbVZncXZfZGJvbHBxSy03alVXYXZVT2ZDeFI0Ykd0VERFaE9VcU9HZkpHMVJCSnVxb3pvNUVJTHpJZk9XUVktZUZPeGF"
-   ],
-   [
-    "El Fortuna refuerza al Celta para la Copa",
-    "Cadena SER",
-    "2026-11-12T14:26",
-    "https://news.google.com/rss/articles/CBMirgFBVV95cUxPNHcxa0xuTDMydFpVeFJ6azVpbkxBMm9FeWlMTGItR2Z4NGNHb0QycW5iWjhLMG9wcVFmRko5OVZWSnNFNGxVajNnV3FMOTFGVlY5WmpRVWNtd0dXQkNLY3phTVh0dzZISl9QR2NyTFFpcU1zTXZfZEFRV194ZEJ1dnM0ZGM1d3JYX1Y5ODM2eFpLZzlkT2lGNnhVMmdGQlRqMjlfV2dQaTJkRTFTdHfSAa4BQVVfeXFMTzR3MWtMbkwzMnRaVXhSems1aW5MQTJvRXlpTExiLUdmeDRjR29EMnFuYlo4SzBvcHFRZkZKOTlWVkpzRTRsVWozZ1dxTDkxRlZWOVpqUVVjbXdHV0JDS2N6YU1YdHc2SEpfUEdjckxRaXFNc012X2RBUVdfeGRCdXZzNGRjNXdyWF9WOTgzNnhaS2c5ZE9pRjZ4VTJnRkJUajI5X1dnUGkyZEUxU3R3?oc=5"
-   ],
-   [
-    "Cinco lesionados, cuatro jugadores que descansan y ocho del Fortuna; la convocatoria del Celta en Copa",
-    "Metropolitano.gal",
-    "2026-11-12T14:12",
-    "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPNDZHOExEaVE1MUpkaS1NOW1tX2lfQ3M1RndKTUo2cGlVMHVVSVBIcG1rRmdXMHBCUUpRc0o1aTc1eEtHODNsZnNITDB5elcybThkUUtjUk14Y1lMNHlpQTJsbjdNdnUzREdtX0NNT29UVkpCVW91UjR3RVJWZW5STWxqV0JNcVU3UnUxdVIySkMzbnpsUjlmMmdZZl9fMWRpZzlNQkNXT1ZpTldTQ0w3YU5MQ3VpQ3NjVy1zeWFkbnItNWJXbFc3NUNFX29QZGprQ3JFdV9QYjdMd9IB3wFBVV95cUxOLXF6LXBadUZ6bWJGOFNqenFZR1o0Z21WdWVvbmMyUmhaWV91OGM3ZkhQZkctMzNXcG80LWlybFl1Zmx1NklhWXhBS2s5aUlzM1M1VGV3SzhOd0VYMG5WcGprMEpOMEs0cU5TMkhIWFBSWjMtanN6RS1ZcGV4cG0xVmFtVXJ5dTFkOHBMaV8zVTF6Zzlxd3NaZTVvWGdUanJRdXNNeG1uUnNmTWd0WXByWnJkckJZVThtWlNkc3J6QS1JNUl"
    ]
   ],
   "Espanol": [
@@ -1601,12 +1601,36 @@
     "Hoy en 'La Grada Ràdio' | Sarabia acelera su revolución en La Garrotxa, Roberto espera su oportunidad con España, la sorpresa de Gorosabel y el futuro de Omar: todo preparado para el Espanyol - Inter d'Escaldes",
     "La Grada",
     "2026-11-12T13:11",
-    "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOeTJfVGcyQ0p3cFcwODFaeHBTbDk1VWE4RVZwRWU3bHZLek9Sd0thdnNxeDNuMTlXWFVWbVdsQTZ3WWxoRC1SbDJ1LWdRWTA4WXVaRGNrVmJQYTVGSTR4aGNFX01EUTkzNEpzeEpGY0d2Q0dVMHQ4aEpJX0YzZmVBQ2tnYU9hZVp0cldQUElua1JTQk9YYmxRNWxUV0MtQkxGcHg3VG0zYU84SFk?oc=5"
+    "https://news.google.com/rss/articles/CBMitAJBVV95cUxPcThobEp2TFRsUlFkWXlZdUltX2FhbXFOOHF6OF9OX3lZcHNzRy1Lb0NGQkpyUG5hb2RzYXVOY094SkpkbTJMWG15UE5HRmM4VnpUNlpzSVZHN3ItM0s0MHF6VjRaZWpWdGpDVWRfdjE3bXROQndsMTJYbE9pdExmdVJEMW53bkZXWURkZmh3YlBqbzJyNlFBazJUNkNMeXRCaGdGMnRGVXh4eHhqYVEyR0dQaHRIVjdwMVo4RjNOZThKSDlRUU1qbUhnblN3azZ2djNhcmlkQ0FnS25CMmtmYVdPaUwzNkNlSDJyUXg4Z0Qyc1NCSlpQZmlSc290c3N3d2t4cG9qVmFLQXFPSEd0UXM4XzlrMUxqTS10N0k4YWctNlU0bWo0Z1N3U01RSENjdndSYg?oc=5"
    ]
   ],
   "La Coruna": [
    [
-    "Ainhoa Marín mira de tu a tu a las mejores",
+    "Fofana e Isaac Romero acaparan las inquietudes del Sevilla a una semana de recibir al Betis en El Gran Derbi",
+    "Estadio Deportivo",
+    "2026-11-13T12:48",
+    "https://news.google.com/rss/articles/CBMijAJBVV95cUxQRUJIQ3REc0JucUh0VlhuYlFVUDhOdDQ3S21DLUpfTnV4ajZIOFI5OGpJNmZUOVVjZU84bFllcFlVVFZwRjAxbWxCUldEOWV6czNyTHZDeXFRSlpwMEREQldPc2JLTHBnX1JzNjVud0Jfd3NLcnNPSDN3VjVieU82T0JqZVhKRi1YOVRvNFVuVm9TUU8yck4wVFJrOVZYQ05yTnQzRV81WkFSbjhMNEliNFNHQWJyUXZkR2ZTeWwteG1iN1c4YzBCSlRNelJPMnlwS1BlczJXUHJ2MVBLZkF3SEFJRzExR0xHX1lPS1hfZUtzZXdNNThwOFlQUEVLUDVRdVlMQmlrbXVXcFZs?oc=5"
+   ],
+   [
+    "Nsongo carga pilas para su reencuentro con Aubameyang",
+    "Diario AS",
+    "2026-11-13T10:32",
+    "https://news.google.com/rss/articles/CBMimgFBVV95cUxNZTZNbHhRWk0yM3BNNzZ6M0Zoc2s1MGJxS1RJS1dDWHMwaDlmRnhaY05meHZxTjFHZGNNcTh4cW13NGg5eTdFZVRRM1ZQNVFDd0xrdDRuVWV4LXdydHZ3eC1BQlJhTVBNS1F1VjBhSHEtc216X2hVRk9ENFp6cWR0U1FtX2lzN1JRQzJvU240WmlkcHA5UGJaREhR0gGuAUFVX3lxTE1CWWpMZGhKY1VGREJ5bHlPTU5Bd1hUZWg3cHJiNFAtWmx2RmpORE5ISjQzalJUaENjanBHeDR2emRjb3lySUtxYnpEc3VLUTFVUzdMU29mZ3pxalk4dE5MQUhYR1BBYVZJb21Ma05lNlVZOVJ1Znp6SUF4a09KTnI5S2oxUF9zZ25telVwUU5NRlZSUU90N1VBM2syZUt0R1FMLV95emxQTFNpVHlKUQ?oc=5"
+   ],
+   [
+    "Stephen Curry se rompe y engrosa la larga lista de estrellas que dejan huérfana a la NBA",
+    "Estadio Deportivo",
+    "2026-11-13T08:55",
+    "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQbVhzbGREUE1BV3RGYXNseF85VUVGSHVZQmUxeU5ncXBmWENPWHJvVXJmNG8xSFRwX2s0N2JRV2R5VV9lY0R0MFpiZXhyc3dJNnlGMjExVl9tbFlkTmc4NlZGUEJzU0YxMWZrTUF2RmRHS1dESmNpVzd6SUJQcTV5S0JRczlGam9WOW1kLXE0bEJ5UnZWSjZnUl9OT2NHLThfSnFQdngtVVp5LWhFZ21CSkpMbjA5a3VDLUxXSzREZU9QZ3ZSbzBQdURzWkZxVjluN0NwWkxOSjBRZnNwUExlbHlFVHViNGd2RFF3Nlh3?oc=5"
+   ],
+   [
+    "Monchi: \"Creo que Roberto no va a salir en enero y seguirá aquí, como mínimo, hasta el 30 de junio\"",
+    "MARCA",
+    "2026-11-13T08:26",
+    "https://news.google.com/rss/articles/CBMipwFBVV95cUxOc09rS0tUcWtzVkhpTGhkZWhsQmt5QUtlQ2MzVlBMSlJ5MHo1djVmSUFLU09KOXlRYW5tcGg0RTM3N2FjcU9CTml3RDBfcnk1Wl94QUtzbjdPSE1CQ2d5MGp0MDRtZTlQRVpsZkVETGF5WWprcHV3RGM1SEdNZElScmhQREF2cS05RWREQnBpT0tfRVRhOXdZeDJpWU9MR1JNZG1teXVCWdIBpwFBVV95cUxOc09rS0tUcWtzVkhpTGhkZWhsQmt5QUtlQ2MzVlBMSlJ5MHo1djVmSUFLU09KOXlRYW5tcGg0RTM3N2FjcU9CTml3RDBfcnk1Wl94QUtzbjdPSE1CQ2d5MGp0MDRtZTlQRVpsZkVETGF5WWprcHV3RGM1SEdNZElScmhQREF2cS05RWREQnBpT0tfRVRhOXdZeDJpWU9MR1JNZG1teXVCWQ?oc=5"
+   ],
+   [
+    "Ainhoa Marín mira de tú a tú a las mejores",
     "Artículo 14",
     "2026-11-13T04:35",
     "https://news.google.com/rss/articles/CBMilgFBVV95cUxQeXh5N3VZVG9MeUdkTFpjWWUtendmdGxsS19sRDBaTmR0Mzdod19XVFJLdG9XQVYtUFh3LW1OR3hFUWZ6M0xydWk1cVc0ODFBUUY4bFFFRTJNTmNQOFJTd09mbUREYXRtZVFYWDNiZkE3alpvRU9zRFBtOVRPdE9JeWFyUmJpQjJicTZlNDIzZUgwWFNVWlE?oc=5"
@@ -1616,33 +1640,21 @@
     "Mundo Deportivo",
     "2026-11-12T19:11",
     "https://news.google.com/rss/articles/CBMi1wFBVV95cUxNNkJtMVZpMWptRTRQUG5PeGpQSUw4YU1sZUZWU1BJTEV3N2txMDg3d0VGX25kRTdra2M0UHZTc1UzZC0zdkV2aUpNOC1kNUc3X0E1M3ZZV2x5ZzFKOXFmRm1PSmxrM1J6VUNhT1hkLUU0empmZ0hOaUFUWXRVblFnMDU4ZlB5WEI5dVlrVmk1NlNvdk9vN2VFdlgtcTBtb3BMQV9STXlSazRhbDJKNlRmMEk3cnBXSFh3R2xYanRHVUVBVlJ1Tk1ZeHZIWWY1dnZJVlNTQ1diQdIB5AFBVV95cUxOVm5kNmRvcnpWQkdkaXpqbEZiYUVjMUk4RVY4QV9rOEp3Y1FPQnZ5QzYyVmJUWTNyVDNUazFPMTlSMFU5ekVfNXZCMXRNdDJTRDNkQVJqMDBuc2EtLUY2ekh0SFZhWE53S3QwdFd4Y0pNeUFlMXhSdzlNX09wclozS2RLSE5aa3pYTmtNZklwNkJEX0JiT2ZlMEMwMXp2NUdRb3p1Qmh4cG1wRDVoLXdCVzlFcGp5dnJQMHlJX1RxaXc5Z0IwRjN"
-   ],
-   [
-    "Decisión radical del FC Barcelona con Gavi",
-    "Fichajes.com",
-    "2026-11-12T18:04",
-    "https://news.google.com/rss/articles/CBMikAFBVV95cUxPX0xrSVFDeEp5U3JmQUdUc2RZd1I2MHZJaU1aR3ZZSmc1VEo3anR4cldiRldCaE00WFIxNkx4TWZCQm55OVNYb1JEeDJ2bU9YWXgwSGJ6alM1aEdONVd1RkJ4WlVETlpidDZyRFlMNVpESzE1UjFmb2tzd1o2aXVMeHJNZEVEakZlZ3p2NFZOc1o?oc=5"
-   ],
-   [
-    "El Deportivo suspende los abonos de quienes revendieron su asiento ante el Barcelona",
-    "ElGOLdigital",
-    "2026-11-12T16:28",
-    "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOUGcxZXU4OHpoSVE0eEs1T3NFTGhiMWNHNkV1REZjNHVzcVgxejF4eFF1NzVHdXRrbEFoV0RZajh5ZmI4U2NSdWhEUk5NSEZ1REcyZGVkdWFKb1FYdGhjS01sb083MWtKVWFfTjZ1QjFTU3JQZFU5VnZkRGhadml3UjRhaU1kdm13NG9sLXQzMlJ3X19ZWGJDTEljMlE0R3NqZ055Y2s5blVxcFE?oc=5"
-   ],
-   [
-    "El guardameta de Osasuna Aitor Fernández, obligado a parar por una lesión en el gemelo",
-    "naiz:",
-    "2026-11-12T16:22",
-    "https://news.google.com/rss/articles/CBMixwFBVV95cUxOcmJ4SnNJUDR0cVRoOUhJYi1JdmdmVXlhMFU0VHotSjVwc0M2d2pfQXB5X1JYR0tHOGx0MDRqT0E4Nk5TWHZjeGpfbk9Qb0pSMWdmSmx0d0xIajNuRFR6NHRQQmZiYnNsTklEem4ySDFUaTJlOEx0T0N4SG5rLVRXVFpzUU9sYVI5NmxiSmIxbHU3RkZYd3Z1b285Q05FcWJGYlBZTmt5SFNzc0NwQW1Mc09URVBadlBjbUpVUFRJVGJwWGwzdHVJ0gHMAUFVX3lxTFA3b1A4VGlmM3IwV0thODNuU21jNWZQU0Q3SWxhNGw4NEhxR0FoWFFnZGhET2FLYWh1UkVXbTVoMkNyU1BzakhVMDQ1YXg1dXdxQnFoQ3ZGdktTVF80MG9NMVN2Z1JiSjhaYl8tTHhyTHpRX0JjS095SnVFb3ZPUzJoUlBSZmg4eHItRlJlQk5iTmpQQk1RdG82X2w4bExfR1lOSWlPTUFoS0ZQVVlLdDFUQlNSRFZCaHVsX2NmRHRBQmJsMFYyTzZidFFhcg?oc=5"
-   ],
-   [
-    "El RC Deportivo detiene la venta de abonos revendidos para el duelo ante el FC Barcelona",
-    "Uruguay Al Día",
-    "2026-11-12T16:05",
-    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQZ3VaZ1BVZ1hPSG1YNDlaUy1WZTNqeTQ2S0dFeWQ3bnVFb05zdmU4Qkc1Zjh0STIxemdXLUY4cGxYaFYyYlY0a3pTT0g2aW1aWENZeVJxUFBfMHdlVWFTUTBmVHY3QnFRenEzcTBmcFNkM2syQlc3ZFMzTlFJcnItOUJHaW1zOEs1QXNDX0diWU15c191TUNZSkoyYXZlUUIwR0VTRUV0ZVhiZkZUVlRyTkpCXzVJbjl6?oc=5"
    ]
   ],
   "Real Madrid": [
+   [
+    "Las reflexiones de Pedro Martínez sobre las posiciones de los jugadores y las bajas del Real Madrid",
+    "Gigantes del Basket",
+    "2026-11-13T11:14",
+    "https://news.google.com/rss/articles/CBMijgFBVV95cUxOc0RoYzJ6ZkxKQXh2N3dPMmYyOHQxeXRMUXlqa0J2WS0yc0ZZZFJkOWd3cVpDZk1xVk5MUlJJX3YxWWRoRnhHZ2h2OGpIS0ttSFV0TzRzd1lBbGN3Yk9JVkZRYm0tdGltMlNkNEZLd3VYd3A3SVdodnZ2VmVOaXp5NTVicjN6VFhQaTJ1TUdB?oc=5"
+   ],
+   [
+    "Tchouaméni apunta a estar disponible para el duelo ante el Celta de Vigo pese a la lesión sufrida con la selección – informes",
+    "Tribuna.com",
+    "2026-11-13T10:21",
+    "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPM2VUeWhHSmpmU1BXNUtMVUpHaHNhUGxDRGJVallRem1fbmc1SG9nd1hLLVNBY3NocFVHM1NmcFNyb3lFN2phQ2NPM296Nkh0c2JTbXA4Q1hZV0Rld3lsVm11YXh4OXJCOG1Hendnb3ZJN3F5OHM0NnpPaElYRWhseTZVX2RCY1VhU1pLczZIME14emtTck4wc3B3bm15bUEyRXQtc01xaVlzTlljMW12cWJVeXhGZ2F0VEpyenRQTVdIMWNNVzcwQdIBzgFBVV95cUxNZi1qd2V0N3RMZlhBRnJ0NW9mTlRycXNjUXJaZndNcDN6S2hlUDBNa0hLVUVxcXNqaG5RZWEtMnNhNjhQUXc4SHhPZUJQSktBbEwxV1dCNkdMWTVFTnFub0JURU1sVF9aTGRKbmhDTGJ2dDV0YmI2ZjZaZUZWejhmcXF0aFJZc0RIZExMaXB4YmpJMWF6TG5maEl5OWtFRzVlS3oxcmY2TG1rcmd4aXVUelllODE0ei05cGtLbzhYMFNkdFBaaVRRc19JVlhXdw?oc=5"
+   ],
    [
     "Kevin Punter es baja casi segura en el Barcelona para el partido contra el Madrid del 3 de diciembre en la Euroliga",
     "Defensa Central",
@@ -1666,59 +1678,65 @@
     "MARCA",
     "2026-11-13T00:06",
     "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQUEp0aHlZbG9yNDdOVTNZbUd5TFdsNTFPbDBRdVBsZUk3QU1uRUtPRnBkMmJQX2ZqWjc1VzNmSkphM2M2VFRMSFJfNFNoQnVDYjV5OHROWi1lYjhXbmFuVHRURXpEdG1FdFh3QmYzNEVpVUFVSXNHUWhqLVF1VThmbVR0eDRyNmkzMnFVSTJ0d2VHVEZqc1NZTXB4TFRxeXBzR3N4RHhnaGRCSU51S0NFd2x2SF91RERTd1I00gG7AUFVX3lxTE5PT05WMUVGSzVoWUVaRTM3aUxteHRmT1dpRXBpUDROX0dMYW1rZzhMeUtkTFRGbzV2VlRWbkZ2RmJFNUNYclpiOFlvUXNqdVg3aXFkWmdEcDRJbkRreXBtelhsR2VRdWlLUlQxSzViYkpJMlNFLTlBZEdwdG1xNzFCdWx3eTNkMFQ0YUM1dzZjOVF4LTdDUS1hUEhRQlNjeEVuVlFoWVQxVzdRU3lzZlkzTmo2LXp4WEhLclk?oc=5"
-   ],
-   [
-    "Pedro Martínez se reafirma tras otro festival anotador: «Si hablase mucho de las lesiones sería una falta d...",
-    "OkDiario",
-    "2026-11-12T23:36",
-    "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOMHc3R1ljRUxEaHl1X3ZHeWNoRXpFQmdxSktzTzNBWm1semdjYURJNlYxVS1Yc0cyR1FVTTNJd2Y0TXh3TGdhY0F1a0hJU3JuYmRBNWUzWGFnZjFHdEVkY2EzZmE3N2xzbXFWQzBEZUUyTWZmRjU2TUI2c0t1ajJxZ2lBX2g4anoyVnVHZnVPREQ1M0I3Nklpa0p0Zlk3UGdCWTRLRk9pcmd5OWVEdF9DVWhjSjRReEM3V1pORHZkS3dkNUxiM3FSYXIxcm9xNDZOWFVZMmd2LWJJY3lsMnVxd2x30gHnAUFVX3lxTFA5Z2xiLWxIS01naHEyQV8wVGFjT0libVdKTVAzV2ZpQ3drOXNlQ2hIWXhDZmZPdktJTVpkQ0FMWGhGbkkwSGxOd3lkdU9ONzRPSE5mZ1NnNER3N2ZOQjM3b1pxRFZaRlMwcjVVTl9xZnB0VXNrZjdWZ1Z4QlBXZGhnOFBmZms5cFR2bjd3cnpXWUxnTXRBc0tOOFRlQWVaM0k3cEZsc1k3RG1fWFpXTW15S1lsM05nelFtQVp"
-   ],
-   [
-    "El Real Madrid destrozó al Estrella Roja (105-84)",
-    "Encestando",
-    "2026-11-12T23:06",
-    "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBJRENLdzJxOEJldTlmbEh2b3FYNjJBc1JVdHE5X0l4SlZzLTN2a0g0QldIb3QxamN3VmxNQmh3YVA1Nm1wWHlwNw?oc=5"
    ]
   ],
   "Sevilla": [
    [
-    "Los nuevos plazos de Miguel Sierra: «Las sensaciones son muy buenas»",
+    "El margen salarial para fichar que libera la grave lesión de Alfon en el Sevilla FC",
     "Vamos Mi Sevilla",
-    "2026-11-13T07:26",
-    "https://news.google.com/rss/articles/CBMioAFBVV95cUxNQVo5dk9iSXdFQjdFbVRnT2xuMWdZdkwxRnZvblQzbUpyRUtMa0hFeWpJcnh0T3V2V25RclFlUndVdWRaakxWQnc4LTFrRV9oSnhoMFNYMkhva3J1Qi1iSm51cTB5ejRHeGVOVlVaVGpVVlpadk11MEJxcm1jTjNWdnlPSWdfZU5xTnpVZ1Y5aGlkVzBaZE1BT01MNWtIQU1n?oc=5"
+    "2026-11-13T12:59",
+    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPaTFNYmxydXRRdF9LSU5zX1pXejdKMU1OVmVuY3VZVlQ1M24yX1VkcnQtdkdKeFV2aG5IWmd4NDZyb1I2WHR2cFNVZGVpUGFha3ZDWGtRaXBpYjBPMDgzcS0xOGw3OVI1bVZTZ1FYMTBBRjRVS3ZHdVBSNXpIZ0JabEJqc2pvN2pabnNvbnd5M1loWmk1Szl4ZWFNVUhOaWFTaWQxSnRRcWxPQXBFUVVuRENfUDVWVXd5?oc=5"
    ],
    [
-    "Noticias del Sevilla FC: Marc Scuri y su racha goleadora",
+    "La grave lesión de Alfon abre algo de margen salarial para fichar",
+    "Muchodeporte",
+    "2026-11-13T12:37",
+    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNWTkwOWxQTEdjV0lIYmk4cXBXRndZWEN0STFmSFNIb0s1RkxZaFdlbDRlRnNSYTctWkNmMXd4RlYzYzRrOHdNbUgtdUV2c2dmYXRRS1ZCQ2UwcmIwWnZ0aDFzamJlVXZmZXpQRlpjYXpJeFJxVVpmQk1lc09JNjVhVnphS2pNck9tYnc1LTk5V0ZnTFFfR1N3b0lwSFVfTVhJNWNUSUp4Vklodw?oc=5"
+   ],
+   [
+    "Peque está de vuelta solo diez días después",
+    "El Desmarque",
+    "2026-11-13T12:17",
+    "https://news.google.com/rss/articles/CBMizwFBVV95cUxQeUo3LUhBRmJOSVdSOXhGemFvd1hFQzM4bTI2Sm1QVC1EeXFuLUY5OHJsLVg4SDNFWXpQOW1sVm5IMlk3SHpDTWdlcHdicFFRLXVqVnRyYW1VWVBHanByazEzVWVlZTFRNlJPTEhKUFJUekRyZHNoNTJQa2tnMVh2N1pDV3hKR2wySnpXMGtzU0lrUWg5ZXNwMnJyWkd3MU44U1VZVjhSSXJkN0J3LVBnQzBBcHJqblc5UUdzQnFNY2VFMzF1RnYzVjRJU01ad0E?oc=5"
+   ],
+   [
+    "El Sevilla FC confirma la grave lesión de Alfon",
     "dorsal16",
-    "2026-11-12T20:33",
-    "https://news.google.com/rss/articles/CBMiggFBVV95cUxPQmRsV0pfS2lNWFR3SUo4TVBjMUZ1MFprSVBaRnNYSTljWldEVE1XYTBhbjZLaTU0NTNKYTBUOWJKSWE1NjhNNWZ4QjZHU2paZndzVWlvVWdidlRVZWwxak1mTFVwQmQzdWhIcHdYNC1rRUIybHNmTDJxMTVfNHotTTN3?oc=5"
+    "2026-11-13T12:17",
+    "https://news.google.com/rss/articles/CBMibkFVX3lxTFBiM0ItVmtPREw2Q0VtdGloVmZ1RFJaT0JZdndUVDJkN1IyLVNJWGQ0bGJoRDJBOUlkSi1DV25zZTd4STk1SThrbDdUbU5PcjVNQlJ2NDZCWk1SVWEtR0xnbk9uTlZpRnVBOENKeFpR?oc=5"
    ],
    [
-    "Isaac Romero y Fofana trabajan al margen antes del derbi",
-    "dorsal16",
-    "2026-11-12T20:02",
-    "https://news.google.com/rss/articles/CBMifEFVX3lxTE94MERnejlTMXF1VGJNSGtYUTJkWkxUbXRaSkYxa09mSE55Q21VanVRaWJuOXgzLUIySnlrN25SVDJWZ1YxOUpOZEVRWm1mNFJ1OWptNy1nUlhtOGJJcTcyMTNSUlBlZ2lvcHdQU3ZqREpkcTJicWc0WXB4OE8?oc=5"
+    "Las lesiones de Alfon y Miguel Sierra señalan al nuevo descubrimiento del Sevilla: Luis García Plaza recluta al enrachado Marc Scuri",
+    "Estadio Deportivo",
+    "2026-11-13T11:32",
+    "https://news.google.com/rss/articles/CBMiqwJBVV95cUxNY1hkU2xOc2pzSFpyZTBzRDNqVFZrVlR4RlR6WVJDbVc4ODkzc2lCVUJqQ19zZnU1SmJacWtSSFdUdHViOWYzNXJoU0FOdTZlMXVxTEJZMFE4bmxDLWNUcnhOZHhJREtyZ1lFZFBTY2xnaFBJMGZLNFdqUHNFS1RhajFMMVlSSERsS2Q1VjdwX1gzT3p3T05vdXl3d0NYQ1JSSEQ1cWxnZGlPX2FKWFo3bG05bFR4a2RaSVR6T21yZXQwS2E2bFdmRmlpcnJyMHpscHRhbzV0WWx3VFJPV1JQd1FNdTllLUtNNVR0czh1MUtTblVqU29NS0t1bFBiMUs5N0xKYXJ5ZjZNeVpXNzFDZXdxQnFaZ3RpRUFDTjFNMVBTNFhPa0NYQ0ljTQ?oc=5"
    ],
    [
-    "El Sevilla FC afrontó su sesión matutina con numerosas ausencias",
-    "EL SEVILLISTA",
-    "2026-11-12T18:35",
-    "https://news.google.com/rss/articles/CBMifEFVX3lxTE96TjN5RFZBdmttVlRPT1JnMXZWRW1GNWl6TFYxa0JQRktpb1FGMjJoa25vV29zN2pqN25DRDFOTElUc0ZOcjNtOWRUYl9MaV96N2VqNGhIdHhnMk9FN1otQ05BQ05GUUhmcm1wNU5PWnRGcEt5UmxPUWN0eDg?oc=5"
-   ],
-   [
-    "¡Paradoja del mercado! El Lille pretende sacar mucho dinero con Nianzou",
-    "Vamos Mi Sevilla",
-    "2026-11-12T17:12",
-    "https://news.google.com/rss/articles/CBMipgFBVV95cUxNbVQyOUlFS09ManExcnFpbXpnN2xDWEZNc2RTWkxhMS1pZFdPR29OUzgtc0ZmbjUxa3pBLXNfYUhnOFhweTNHRkpMNDRMNnpseWxBZ0tHdHJpVC0wdjd2Y0FNMV9FMkdLSllTSl9uSnhKaThIbjN1SmxpdU1saS1kOWFVNG4xSTVZTzhzY2pjOVFwbFhfM3hCSGd2SzJtdl9pX2gxZ1V3?oc=5"
-   ],
-   [
-    "MARC SCURI, EN 'SOLO EL SEVILLA': \"ESTOY FELIZ CON LAS OPORTUNIDADES QUE ME ESTÁ DANDO EL MÍSTER\"",
-    "Sevilla FC",
-    "2026-11-12T17:07",
-    "https://news.google.com/rss/articles/CBMigwFBVV95cUxQZzN4Z19rZlFZNXRkN3RrbHVRU2g0UEJMZkpTMUdRVlI4VnI4QnVuZEEwWmhrRFdFQkthQ3Z3SU5jNEF4eUdjMWstVFJmR2NfSGY1c0RHTDctc0Y3NlR5Y3dzZnBrR3F5cWJ0VU10UkJOYkJ2Wjd6dERlYWxJd2Zmb2QwWQ?oc=5"
+    "El delantero del Sevilla FC, Alfon, sufre ruptura del ligamento cruzado anterior de la rodilla derecha",
+    "Uruguay Al Día",
+    "2026-11-13T11:24",
+    "https://news.google.com/rss/articles/CBMiyAFBVV95cUxOZ0doSUNPTF9GdDlKdkFvT0VPdGhaLUUtWjh1VHFFSHJLRmI1Xy02eF9VQXhRWGpDZjBiS1JHUzJWMTM4Q1UwY3F4Ny1rU3F4dWdpTUdJZFR5d1F3TlNvRW5fR3J0QWotdm9Xc1kzNHJDQnBielhVX2NzTXlGYldtaUkzNXVuMTNIVUpTVjFGZEVGNnh4dFA4NUgzbUtCbXJtak94TEV5d0NiWnFCYmkwRUtPTFNXTVZRYWpnZlIxXzRfWjRaZmlGaA?oc=5"
    ]
   ],
   "Valencia": [
+   [
+    "Gayà, sancionado con un partido y Braulio con dos",
+    "Noticias Ciudadanas",
+    "2026-11-13T12:18",
+    "https://news.google.com/rss/articles/CBMihwFBVV95cUxPQlQxRkpIcF84REdZWC1xQWc3amlYY0MxRS16R0NKUHMxOUd2SWJaMHFEdWJOcWl1V3V2NHRBdUFjZXJxbUlPbVR6TE1OSkx3WTBGUjNCMHlvTXdpWFhhblZEMUNuT3VxcGxPaE9MaFdIMGFZc3hqeENqTGNDRnRmNW56NG8zcDA?oc=5"
+   ],
+   [
+    "Malas noticias: Yomif Kejelcha será baja en el Maratón Valencia Trinidad Alfonso 2026",
+    "Levante-EMV",
+    "2026-11-13T11:01",
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQSUpvdUdEWjAtR1BPTWktYUpENjZfNElYTTJDV0pnWkRCQTlUSG9IUVI3OG5TVGdFYldnV29iVWJtQTU1NmgyVkJ3Z181RlNPdklFZHZSeElWbnV2ZXhyd3V6MXNVVnU5UTlNNC1IYmNfTmlUOHozejEyRmMxMmo4dVBBd2J4YVBFZE1ZTjBOLXdKbWpfM2tKb0QxVzJQY3VDbFJ4TkZpWTJzWG14YWpNbWdPczRpQ2o2ZW9V0gHAAUFVX3lxTFBJcnJEd25BODd0RFN1ZHJOakZsYy1JY2FNMElHTkRrVTVIb3RRY3lBMW0wSS03S25WZFVZUi1DRzFDdWYyWkQ0WjhoN2NrdGo0RjZtMmN3dWdiOHF5MlZIVXZQVjV0MVU4WlRLb3Y5NzEtU3pfNlJuMlFCTGtTS3U1TDlvVDI3R2gyQ1JScDUtb1pKMW1SN3NzTlpmU0RGLXJaZElKanFNX25TRGJLdjRHbkpXdHBzbk9XR2FlZzNQQg?oc=5"
+   ],
+   [
+    "Ricar Pérez, convocado por España para el Torneo de El Albir",
+    "deportevalenciano.com",
+    "2026-11-13T08:08",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxPZzlNekE1WUxELS1SM1JKYWRlZ1JBSmZmTk4zSFR5Wjh5NzdNQml1NElxMHI4dURaaTF5LTJFSHFqR2I0cUQwNVgtQmNCTVhLbEtZZ1R4SWZXQ3N2Z3ZUU1YyaF9OZnhoZmpRcUJoY3lvVEpqWXJGODBPLXVGbzBUYTYySlVYRmZqeVBwMnBkVQ?oc=5"
+   ],
    [
     "La lesión que frena al ex del Valencia Basket Sergio de Larrea justo después de su explosión en la NBA",
     "Superdeporte",
@@ -1726,34 +1744,16 @@
     "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNT2h6bzIwSkF5RFA5OW5EcDhaTGZpdm9KS3p5Q0xIR01yNEhReU5hYnpMZTdVMER1TnFkT0RvT3B4Uml5TVpVVm1jaG5MbUxfdkFNTUFvQlU4dllSWjJMbFh0aEVOekJ2SkY0U2VHbl82eXpWMERKYlJiYnFFdVpwUmRReXBNQ1NCR3ctZF84TUhuX3ZxYlMwUXhKYmVwSVZJeXA2VVN2aFNYbHNzMThCRURneTgyWllhZEdmMDFqRkFJMDR6bXZaSEFIaXVTdThM0gHWAUFVX3lxTE4zbEZfQkxQcDY3VHdBTmhtOEQzcE9aUHl6ZnFRX21MMzQ5aVVmaWxWTW8tLTJrYzBZX2EzSHdVUDJhT3JSdTlNYjF5U2ZrVF91NUYtN1J6ZlBvNmo0M2ppbGc3c2k3RGFaOUd3Y1ozbXRET2VRQ0s3di0wdEJVS1V2TGJ6b3EyZk9iQnF3WDFCSkNfU1VncjFaRjVZZUFEQkhQb3F6bzBEa3hYdHJmM3dCWU1kdkpMZE5ZVTZiTjF6ZmJiU2hmXzRmZ2VTMHB"
    ],
    [
+    "La lesión de Kylian Mbappé: ¿culpa de José Mourinho?",
+    "Sports Illustrated",
+    "2026-11-12T02:34",
+    "https://news.google.com/rss/articles/CBMif0FVX3lxTFBZU05ITG9NeWxUSDJqU01EQjZuMUMxZFpBSkttd2tsSndqNnVBQ3gwajVOSEJKZElmSTl3TlVsZFdiaWVrWGVuNXpabHFfUFNCQkVKcVJDYWlNYWlJUlg0U1ByajZEeUR6Z1dwbXAtUWo3TUc4NGllcUE1NEpubUU?oc=5"
+   ],
+   [
     "La Real Sociedad valora 3 opciones para cubrir la lesión de Barrenetxea",
     "Fichajes.net",
     "2026-11-11T17:00",
     "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQc3BDblpOVzFVdzdvMkhoU1VjMEJmUF9CbERLaXo4TjE1NXN5c3h6R2JwMUROMjNZRTFlR1BRbE9wclBRWFltdDNEZjB1S1JMSWRkR3JEa2FHUjQ0djkycHY3NlJkZF9HQzdNUEVoZHVxQW9HSnRUYm5NNjNFdkNQUFlHQi1hWHI1dVdmdDZGSTlFbktmOHlBRTdZT0N3QThzUi16ZkpNNVQ?oc=5"
-   ],
-   [
-    "El enigma Foulquier, de Copa en Copa y tiro porque me copa a golpe de brazalete",
-    "El Desmarque",
-    "2026-11-11T16:16",
-    "https://news.google.com/rss/articles/CBMivgFBVV95cUxQZHVMQzBzbExWNXB0OGNTZnFLd2pKVUZ0X3I3YzdieU9EQ0ZyM1VDV1dBcXFTdmxDYV9MUUlsR0otb2tYclEzNzBFVVVXdFBRWUxNeXc1NnhlMkM0TTZOaXBrY1NBektPbno0bkUtZHk1SXZhRWRvZTQ3YUpSNVZ5dVJvTXlEM1UtR0Jwckx0aWdBYXg1elpYekRPejNBSm45STdZRksxS25MNm55TTdaNHd5aXJfeThaZlVUX1Bn?oc=5"
-   ],
-   [
-    "Representación de la Academia VCF en la Selección Absoluta de Kenya",
-    "Valencia CF",
-    "2026-11-11T04:36",
-    "https://news.google.com/rss/articles/CBMimwFBVV95cUxQN2xpbDB3RGVVVHJRSHdBUWhzU2xzeWhLWkRSNS1vQThCdDJBcmZVdWxOdTh0eDVQNmlDb0NNWnBWNU11Y0d6V3VoQjZtZjZSZ0ZhbVd2WVdRaTBTMHU2a3hxZHBqb1gyYVNXVk1UaWplc1plZlhPSG9xc01jYVJuRkhZc3FVVlhUYjJ4XzZaYkhCNDNqaWtQT2c3aw?oc=5"
-   ],
-   [
-    "Foulquier: “Volver a disfrutar del fútbol es muy bonito”",
-    "Valencia CF",
-    "2026-11-10T23:47",
-    "https://news.google.com/rss/articles/CBMihwFBVV95cUxOakRneURKMGw5V2xRQnZUUmhLTjZrcGl5R1N5LWszWTMwa2wxVHhpTWo3am1ycUFVS2hjazdRZTlSaUJQNzBZNWFyRUVXcXFkbU9jY1N4VHd4M082X1NPRUl3X0JueTdPYTJhSENEUTlWcE13RVJWdFpaaF9VRk5rM0k0Y2ZnNmc?oc=5"
-   ],
-   [
-    "Aguirre prueba un lateral izquierdo para el Rayo - Valencia CF ante la sanción de Gayà y la lesión de Jesús Vázquez",
-    "Superdeporte",
-    "2026-11-10T22:25",
-    "https://news.google.com/rss/articles/CBMipgFBVV95cUxNZzRRY2dZWl9QaUZSRzl5NHFpbGhrRkpvRXdBd3FTelk4WmJtSktUcndfZWdCZEFZSEs5NmRsMW5vRDQ2eW1BQ1lzRGppb05oZkRZc0xqd2gyUGtlSnZEd2l5UjFhSmxxdDRKRlpVYkliRlhwejdVaEFsRURxMVF3LVpsYWJzcHJXSlR6LUJZQ3dURGtoUUpzRlNCVDFQSFFVR3g5ZnRB0gGrAUFVX3lxTE43ZGFJRHMzZkl1MHgtQmIybVNSWGp6cGhtNVUxVUdjUUhzMFh1WDdGb3JOMElrbTA3WEsyY0JReklwc0d1TVBHRzRiU0xJTS1PVU00TFYzVTFyX0ZJNnNwa052XzNWRTdPSlR0dGNmOC1RMnp4THU4TFpJcVVacXBseDEyWVM5M1Vfb2tDbC16U1E4Y2xFa1IwOVNYT3BDeUVacVQ3SGRTMzV0WQ?oc=5"
    ]
   ],
   "Vallecano": [
