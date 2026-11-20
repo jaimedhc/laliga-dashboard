@@ -366,7 +366,7 @@
     "Hato",
     "DEF",
     "lesionado",
-    "Unspecified injury - Unknown return date",
+    "Back injury - Unknown return date",
     false,
     0,
     6,
@@ -770,7 +770,7 @@
     "Guéhi",
     "DEF",
     "duda",
-    "Unspecified injury - 75% chance of playing",
+    "Hip injury - 75% chance of playing",
     true,
     75,
     9,
@@ -883,6 +883,32 @@
     855,
     0,
     1,
+    1
+   ],
+   [
+    "Darlow",
+    "POR",
+    "duda",
+    "Unspecified injury - 75% chance of playing",
+    false,
+    75,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    "Heaven",
+    "DEF",
+    "duda",
+    "Unspecified injury - 75% chance of playing",
+    false,
+    75,
+    2,
+    224,
+    0,
+    0,
     1
    ],
    [
@@ -1295,81 +1321,87 @@
  "news": {
   "Arsenal": [
    [
-    "Arteta delivers Arsenal injury update ahead of Newcastle clash",
-    "NUFC Blog",
-    "2026-11-20T16:25",
-    "https://news.google.com/rss/articles/CBMilgFBVV95cUxPRnlOOVo0MzU3TjJ6Yl81R20wbno1NmJzbTZyeVZScW83LW1qVkZSZ0ZIUC1MOUlncUNTRVl2ay1WOTlaRWZ2VGt6V2dTeUpPdFlNMlZ3TG0zLWhveFVQUVB0LW5qWkROTHhsMzdoSi1HVTJEeEw2MFVaVVZMb3VzUDhnWnhWaTVMXzZ4QTZyQmIxeDRYMHc?oc=5"
+    "Newcastle vs Arsenal: Team News and Predicted Lineups for November 21",
+    "Last Word On Sports",
+    "2026-11-20T20:00",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxNbHh4bXd4bDg2akRRdlVyTGlZUE1ZTmVMOGVxVTNqNG5CVGtaT2dHQlBjV2diT2ZVQUNnQ2JRTWJFUWYycXZpMGpoZHVNZlZUdkp2LVB0bGIwN2pfRDAtR2ExSGx0RGxEdDdPWHJNdFNGM3JsZ2FxTUR2VVRkdWZCOFhmamEyOFVTN1hveWhBNnpadw?oc=5"
    ],
    [
-    "Mikel Arteta imposes ban on Arsenal players after one indirectly leaked team news",
-    "talkSPORT",
-    "2026-11-20T16:21",
-    "https://news.google.com/rss/articles/CBMimgFBVV95cUxObDVjWUtsclRKZm04YnRJNHprajlLbl9RNWhZa2F2aUJ6UXhkUHZreDN2bDlTdFZiTmthMm8yT2pkZDVpVHcyaXVLNmZ3QnZDTTlfTmhZaG94eURIb3ZFbXlIbmpoN1MwSEtLc1Q5bVB6N0ZvTWszMklobGFHWXVQbmNQa1NjRUNpNm1yMmhRelZIeVVPNU4zTmZn?oc=5"
+    "Mikel Arteta shuts down Arsenal team news loophole exposed by Christos Tzolis",
+    "Sports Mole",
+    "2026-11-20T19:48",
+    "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNcEJMMEl1cHllcDlIT0NIeXlfOW9FbGs4OGZjU2NZdHRMWGtWOHVObFVIaWl3X0lDbVYwbFZ3RFI4Y2JMaG9COFNEal9lOTF4V2RXZzRfQkxMTUpJQm9EbVRreVpCNlpOSTRISU4xaDViNW0yZmZSZUxudktQbUpBQlNuUG9qSEZnNF9GV3hYYjhJVnI5NlNfNWZMN3hmZVp3dnBFZGx3ZWpieXBhWVdpeDJfRlJtckFzRWljSmFrdi1tZlQ0M3ZjMUFueWlhYml6OXFsSk10Q0w5ejREWnI2YVlvMC1NUQ?oc=5"
    ],
    [
-    "Arsenal confirm double injury blow as boss admits ‘we’ve done this to ourselves’",
-    "now.arsenal",
-    "2026-11-20T15:26",
-    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPOVY5SWUwc3lhT3NodFJmRmRSMTh5cFduR1JjUXdXLVhnUmJES2NRR2NUMTQ0UE5Zdngwd2hRcUxsSW8zdGVOWnlTX1VkR21BZUVFQnNiUWNEWmxSdEhoeEZsMlpxNFZmTEpnSGdQY1Nlbk9XQ01pVXFBb08tWC02OXJXalFzSUlPTjVUQjNlUVRJWXBaRVZ5RHFqQnNraFQ4WmVBOFBuVkhwYVZlMWpiX3kxcDd3SGM3?oc=5"
+    "Spurs loanee Mudryk in new injury blow after awkward 'Arsenal dream' remarks",
+    "The Sun",
+    "2026-11-20T18:41",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxOc2JPSUNlN01mSGRJYnltemVWWW9qQ01ydHhGVTY2Z0xxQzNCSXpfVXdQTkZzZmNDcTF3YUxmRHFMb1c1NEpZdWJWQ29IZklNcmlwQXVXQnBrQ0lOMmNOLXlJOExmSlBHNnZ0Uk1jSWttSUlOSnU2ODRjQVplU1hDcGFISjV1NHN1TC02cXRGUQ?oc=5"
    ],
    [
-    "Arsenal face double injury setback as Arteta confirms Saka, Zubimendi absences |",
-    "The Eagle Online",
-    "2026-11-20T15:09",
-    "https://news.google.com/rss/articles/CBMirAFBVV95cUxNRTFwYkV6S2lsQXdveHVwMjIxb0VyUnBwbF9lU0d3b1A1aFNmck5lOTR5dlpRMkNUU1I0RERKbXRBeXBmQjFEY1NudVNYUDAxUDNjUkQwVWNFWERtY0xld2ZHc2sxNXo4dTRtTV9PUmJ4cUE5R2I2V3pUMDM2R1JiMFB1ak42WVB5VXhfeEtRdVE0dzdjSHppZkkteWN1dHlQX0dPNV92YlFiUzh1?oc=5"
+    "Team News: Newcastle vs. Arsenal injury, suspension list, predicted XIs",
+    "Sports Mole",
+    "2026-11-20T18:30",
+    "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNOWpLaU03Rk5ZdVhYTy1WSXVub0R3dzJTLUJGbDRIa1ZjaGwzS253RGhxbEZQNnV1TTVSalcwM284MUUtcTBiM3I1WGwwNmRJQVJDZW16eVN6dEhaRWpZUVlDWUpmcGlBbE5xSmVwMUpiVGlEUlB4Tzd2dUYxd0xkVGtSYXpvRzRadkVfRmJVU08teGtJMUpzWVZmcmh2dzF0VjdNZWZyVEd4T3lsSU42WmlLYndxR3I1Z3B1NTVrUzc4UWtHQXNUa042UlBJVzNHOTRj?oc=5"
    ],
    [
-    "Arteta warns Arsenal players over FPL team news leak",
+    "Arsenal: Mikel Arteta warns players over FPL team news leak",
     "BBC",
-    "2026-11-20T15:08",
-    "https://news.google.com/rss/articles/CBMia0FVX3lxTFBGSnVRQV9xQ1BqanRXV2pXc2hsZFc0Y2t3ZjAyVGlsSnFLakdkay1sSm1DMktRaDZQWVFTMUpCczVNNTFCRGRqRG5sSm12UjZNRUFrQWx3d2o1dFZudUt5bHluTDdvU1ZRcXUw?oc=5"
+    "2026-11-20T18:17",
+    "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9KRUhQTHR5Qkl3ekJHdDRuUmVmQUw3T0FxZk9ndXZxbjVrU3U4ZUFQbDY5TWx4N0ZJYWZYdlZxNFkzeTYzd1dmSkItcXJnWWVoVUdaS1U5MXpCSy00RGtVbVpONzlMdw?oc=5"
    ],
    [
-    "Saka injury update and return date as Zubimendi is out",
-    "Arsenal Core",
-    "2026-11-20T14:55",
-    "https://news.google.com/rss/articles/CBMigAFBVV95cUxQRmFmSHRHYVlsSkZxLUxGdjZyZFVqdHV5T2VVRDBfczVLT0laRFBxTFU5bnhoZXhKZHNqamhVcGZ5YzNjTy1CZ0tEYnlZa0FRM1RTczdPNXZWdi1PWktPeWRlMldvZ1lVUDQ2VVJ3bXA5cU9ZSi12LV9FQzd6TFpndw?oc=5"
+    "Mykhailo Mudryk reveals real reason he joined Chelsea over Arsenal with explosive claim",
+    "Football London",
+    "2026-11-20T18:15",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxPbHpMNmFKWUgzZ0NENy1QNFFiQ2RJUFhWRkoxTUtMTVlqNE9nMHdpLWFQRy1ud1JNNE9Yb2VIdXpWd1lFOHFKbWxVZmFDek9renpUcFJiWGRka1BKV2cyM0UzaGEzWS1NanJ1Y1NHbnF6UmQ0bU50OWxsWVJaaEl5V01BWmUzdFk1Wk9FMDNlQ25Qd9IBlwFBVV95cUxOMzJ0NXhOdG5vdmE4YTJrQmY0Y1VxX3JERlBwRUFJRU93MTViQmROT2VWbG1UcjJhaVNZX3dSeG9RV3lCUDJHZ3FLYjhtNV9GUGlMQ0M4NEoySjVrMkdrY0RuVWdyMWtRb19Mc1ZDcUg1TmlOY2EwTS1KbjJ6TWVDTnhvLVcxUzdqMkpJbkV6SlRMU05FVDJV?oc=5"
    ]
   ],
   "Aston Villa": [
    [
-    "Team News: Aston Villa vs. Sunderland injury, suspension list, predicted XIs",
+    "Sutton's predictions: Aston Villa v Sunderland",
+    "Yahoo Sports",
+    "2026-11-20T19:27",
+    "https://news.google.com/rss/articles/CBMiigFBVV95cUxPUFhIM0h3MVFwX1o4T1JzTkZjRGRqLThJdll2ZjlJOXZuWllhTzNtanFFSXZsa05hLTdOc1dOV3JpRklmcXhkRXpoYVR3cGhGYUIzejB1LUZhaC1Va1Z0MjJWclR4eVE2TTJGMVotYm5EUElZS0E4NjRXeHd2LThLN1ZjSEY3SnpHc2c?oc=5"
+   ],
+   [
+    "Aston Villa handed major boost as £60m man returns to face Sunderland",
+    "Sunderland Echo",
+    "2026-11-20T19:00",
+    "https://news.google.com/rss/articles/CBMipgFBVV95cUxPTjdzbUFkdDBLTzF0QzgxRTJ5UjdjaDhkRXA2NjR5d0lHUVJHZVdxRGVCSHVYRmg5a09iODVZNElxczA0LUVhWmZvcmgxY2dUUlgwam5qOThaQW5xUHMxYXEtdnR3LWJpUXBOSnRIYWtBNmlJajBvVUtfbDNmRk1pNW4xVHh4dVc3cG9mRDFIdDFEekotUy1JU0k5RXhIT2ZxcVp4ZGZ3?oc=5"
+   ],
+   [
+    "Aston Villa transfer news: Sporting Lisbon star Pedro Goncalves makes surprise admission over Premier League club",
     "Sports Mole",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOc2FpM2NkTGNvdFU2ZnV3QzhBalNjUHZvZkVHRjFiOFN6ajFjbmVsSm9KX1hPLTkyUG9SVzRhU1BYYlVqOTRVbEZTTExpSnp1Q25oVmNaWVFqOHFadkpvX2paNFBfWWpSeGl5MXhpVmNLUEZ5MnBpTEtIQ0Q5bFp0R0ZicmxyenoxejZYUE4wbjZkTUFFQmljdzZSRTlodjB6b3MwdDNEX0dRUVg3dWNqMHBEZ2QtTmNWcHkxcGZIQkxJYTdQX3A0ejdrUjJSQVZjc2YxeE5fdlhxY0ZQdVJj?oc=5"
+    "2026-11-20T18:31",
+    "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPNENETnpNWjF3eDJ5Ym5rVjlabjJyZUdLaVpUZXRrRWhzaEhYTDN3OUFxRS1aOHhXWUVmNDVsRTc3TmpLdFVITklZYXVhdkpYdUJkMFNCcFlvdDRnWGRZUzIxWUsteVE5MmFDNjAwY3VLWS1kZWI2QVdhOTB1bk1DWW5Fem5uaDFuUFZNNzJ2RWkzdS1KNDVnN1ZxUVBsRFNxbmN3VGRfTmtMaEd3WWc5TktXdkhJX0hBdXZtZWNJRDBuTmFOV2pmbHlxUWxiX2E2RDVmT2hpYzhYVDM0VG1CdE9Daw?oc=5"
    ],
    [
-    "Aston Villa v Sunderland team news & predicted lineups: Manzambi fit to feature",
-    "news.bet365.com",
-    "2026-11-20T15:47",
-    "https://news.google.com/rss/articles/CBMitAFBVV95cUxOSU9rbUhkbzU0U29CZzBjUEZwUE8xbnBvZXBINFR6QkE0am84RjFmeS0wQmdWM2xxUUoxVkMzbTUxQm9TOEtQQmNsbmZudGxVaTNnaUM5Z2VoUDhhRTZMcWE0bXZ1TWd1WHNJMkdiUGZRYVFjOGI1Yl9uRFZ5UDFTYUVSSGlQcG9vVnVVVnE2QWZCOGhxVEtKSS02T1NxYUJpaU4xSHV5NE5GYjlRLWFmZVBzQ18?oc=5"
+    "Aston Villa-Sunderland: Sunderland arrive with five absences",
+    "Tu Futbolero",
+    "2026-11-20T18:29",
+    "https://news.google.com/rss/articles/CBMipAFBVV95cUxNNE1ybTJZbXNKM082dW1XcFozY3djWjA1TVR3UG5RUy1fODNaQ1ZSVjItd1lCOWE1WFdLOEJOQmgxZUdhTHhySndIQThnTmh1MUF2ZWRPOG1NMTNweEh0bWtydTlEOFhaUjZFY2xVUzRnN044UnE0ZDRfQUkwckphRkRULVN0WHVfNml2QXVEWDlNaHpsQlljVWQ1VWc2NHZubU52SQ?oc=5"
    ],
    [
-    "Unai Emery delivers positive update on long-term Aston Villa absentee",
-    "Express and Star",
-    "2026-11-20T15:42",
-    "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPY21sR3RRZjRtYlpsaUVfNmxvREhtZC1RdGhGTmtjT1VsUXdBd1ZQbWM4dnlxbFVGRDNRWElXYWNJT19IMWljTThiZXY0YTRrNmtyZTgxWko5Z3U0eGRTTFN1VGtpQTRWbVB0OG5qNHByQnhCRTN0VldpVngzU2FYNjNEeU10cF9aYWZxbHJVbFp4b25DcHpybHR6aU10QUY1TzNpb3JGRklVTGNMcm41MHYxdzJFQlBHelFNdWtydzNnWk9LUkdiVVZvOE5kR01u?oc=5"
+    "Aston Villa injury news: Unai Emery confirms regular sidelined for Sunderland fixture",
+    "Sports Mole",
+    "2026-11-20T17:12",
+    "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPeHRwSHZtRjV6eDA4bm0yc2RvRE5SRExnbGNTWEhLZEJQcDQ4a3BEamVFVFpsSFhiZWYtMTI5MWs1N29wQ0c2V1dkbXJnTDVpV0JKY0ludE1PMGp5VTlIdDRjMm9KaUlfdDZ0QkFhcVZVelpXMlkwcm5nUG94MkNZYXJHVF9LZnk0eWg3bjVuNFo5bGZ0bzFsVDRuaHJ3MmpEaUpKREFFU0ZoQUt3R1VLWERxdTJSa1Vqc3dHVURRcVprY2ZkZWlfU0ZoN2FrNnF0dnVpZENHbjVjWDd6THFzQjVkNC1aR3c?oc=5"
    ],
    [
-    "Amadou Onana injury update as Unai Emery confirms return date",
-    "Birmingham Live",
-    "2026-11-20T15:33",
-    "https://news.google.com/rss/articles/CBMipAFBVV95cUxOb1VXd1k4R05yczUxR2F0M01xdkJ5Ny10MUFvaWVFMW9ja2RFLVBxRVNBM0NsR2lSTUh6aGhrVC1CLWZCZ3VVek1oTkUwTUU4U2FIYzAwZUlFeDNBenlhNkx0NmlGRFY1MlMxY0xRTlo0MTRSMTMzdHFiMDJ2c0tDUmM5NlEwU2NEMkU4SjlPZHRhQWNZQzJZaVphWXEyNjJ6Y1dVYtIBqgFBVV95cUxPSi1VR0NPNUVQSVJNVlFoVFlDMmZZZVJaVFZLeXRxS1I4dVVSZERKRmViZEthZjZyNUZfZXBRcXNmZ0p5TDJUejRGWWNqd2d0cHloMzI1eThkSjRHdnIyOEdRLVFlOXdXTkRSSDNfdm1ra3NaRkJPRVFQRDJBMS1aaXlnN2xXYVZkOEdCV0xRNnp1RzRXeW93SlBPZXVYSzhLbnFJaUlZdnJWUQ?oc=5"
-   ],
-   [
-    "Johan Manzambi and Matty Cash injury updates as three Aston Villa players ruled out of Sunderland",
-    "Birmingham Live",
-    "2026-11-20T15:22",
-    "https://news.google.com/rss/articles/CBMipgFBVV95cUxOVEJqT0VVZDlIU3k3Z2JyTzViZ3NXc1doNVBPTjZNNVpkRS1Pem5pTDdhMHJvMXNuTE8zOXYwNFJ4OHdaclpnMTVKdlNFWGZ3ZkhOZ1hUU2FoX1BRa3JheEJyaTQyOUVOcW1wcU9wY3otOWplSDlPbUVVamVTQXZFZ3R5WndWT1lGSTh1aEJWdmtwT21mbHdNT1lxNGFoMkg5WWItVzFR?oc=5"
-   ],
-   [
-    "Aston Villa injury news: Aston Villa face a defensive depth test as injury problems threaten to disrupt Emery's plans",
-    "Read Aston Villa",
-    "2026-11-20T15:00",
-    "https://news.google.com/rss/articles/CBMijAFBVV95cUxNRDJMdzBUMEo1dmhnMU1VTEthWkdhVUtRODdmYkJaTGdoTGxpamxpUkkwV01ab3hBOU9QOE90UDd3a0dpNTJwbDFIUjltN05LZnpobjlUX1ZQZllnRTZvOE5VVHRmUWU0VGZJbi1zRFI3UWZNZDhBRVFtSkxLMkdia0t2YW5lNWRuSXRONQ?oc=5"
+    "Aston Villa's Johan Manzambi available for Sunderland clash",
+    "ESPN",
+    "2026-11-20T16:42",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxQRm9mTzFYZDkyRldDbzFCVzZNeHBYd1ViNE9KWTd5LUdtZnRRNlBVaFZWbkZZaHZ5YXNJMFJWdVpkZWYwOFNNaENpN0NyeXlOeFllT204cGI5Z1N6cjEyd0o5c0RuU3ZhQ1JKN1p2Xzd0YXRWcVZieDlxT3lfT3d2ZGdhUk42Vmk5U3BDT1J3eVJzOG8?oc=5"
    ]
   ],
   "Bournemouth": [
+   [
+    "Predicted line-ups for Premier League teams in Matchweek 11",
+    "Premier League",
+    "2026-11-20T16:14",
+    "https://news.google.com/rss/articles/CBMiqAFBVV95cUxObTFIQzd0YWdCcWhmTXFRUUJKc0VhSUpUd1k0a05JQ0ZBWDluTDdWUTBGWnJvLWRIWkVGa2xrcFpWdHR1RVdkVzAzMU5LQkVqNlBRWFBady1qOVBDa0liRXJ0V1ZZQ3FfQkhGMUZlM0doZFJLa3hLaDVIaS1WQXFUaWpfMnBKLTdoaUtDYUR5eHpfSEFDLUxoNXQ1alRBY0s2UEtMUEx5bk0?oc=5"
+   ],
    [
     "Team News: Bournemouth vs. Nottingham Forest injury, suspension list, predicted XIs",
     "Sports Mole",
@@ -1389,139 +1421,139 @@
     "https://news.google.com/rss/articles/CBMitwFBVV95cUxQOVUxaWhaLWFOV1ZhY1lSQk53dFZaTnZCeHFxdzM2VDB5MUR6aHJsdlJ2Z0x4LXJ3VmJ2SVd2eGhTQWc0M1NtZExrb3p6N0ZteHdjZXZuNmpzOGMzODZ2MHJ2TzFDZTZmMGlDUkRZc013dk5sOW1qaUxmc0k0N1JmclVQM0hqSGgwNlVYU3FSN1IzcVBtRnFuRzNvZlpCeHIycld2MVBjWEVoUGVPQUhmUGMyZ0U0aWc?oc=5"
    ],
    [
+    "AFC Bournemouth vs Nottingham Forest Betting Preview, Tips, Predictions & Odds",
+    "Compare.bet",
+    "2026-11-20T12:53",
+    "https://news.google.com/rss/articles/CBMibkFVX3lxTE01Z0pzcWpyaGxKNWFyWWpVN1l1dVEwZGgxbS1DYXZmaXNVSG9yRE1pTU9GY1ZsNG43TEZsTE5RakR0dnFqWWxOT1RpU1JzSTBPbnpSckZqcHphNDRkVzNsTUdwUXNRUVFPcl91R1Zn?oc=5"
+   ],
+   [
     "Ten players could miss Bournemouth vs Nottingham Forest after flight chaos",
     "Nottingham Post",
-    "2026-11-20T12:19",
+    "2026-11-20T12:21",
     "https://news.google.com/rss/articles/CBMirwFBVV95cUxQWDNQTVoxTzZZcGZ6NmRpaG5DWFBBWUt5Tm9jMXAxOTRnbHhaRnpNMXo0N2paWlZjZ0lmc3RDcjFUM3gwY0tWWG9HcG9ua0hzWnJydjBfb2lEVTh3RzdPNlA5SklVX1l6Tjg2OEEyeGFzNkdxTngtSWs3WnpDZVA1NmRaSnlHWWE5OTJrYk1RTVVPeW5nOVJfbkhzQmlUZVE4a3BjcElQTTRrMGJsekVv?oc=5"
-   ],
-   [
-    "Forest Weighs Sangare Return Amid Injury Crisis Before Bournemouth",
-    "Demokratis.co.id",
-    "2026-11-20T12:18",
-    "https://news.google.com/rss/articles/CBMid0FVX3lxTFB0S01iZGtCUjNfYTNldUpfdFlxeS1xNXdpTjdwcHE5Q005Q3lRbl9lMU9jemZwMFhFTFF4eWhrMTFHSzBoaUZnZzFXNEpnRkRaQ1EycGI1a1J6UVIwbS1CV1FTZDRmSkNLbjk2LWpJbXR4YmZXa2NR?oc=5"
-   ],
-   [
-    "Bournemouth v Nottingham Forest team news & predicted lineups",
-    "news.bet365.com",
-    "2026-11-20T09:58",
-    "https://news.google.com/rss/articles/CBMivgFBVV95cUxPSkpTUjNMRXd0T0dhUV9BdjBvc0dhQ1VZT252VUluQ2pfU2pJV3FMTm8wQW5vSTFvdU9mYmh3dlVVblU0c3JkVjNuUWI3TWs1Z0t6Z09PN2VlcXdKTEpSOGxzLUp6WlRLS042Z0tXVjgxRUgzZk1vV2U4VVppLVhZLTUyZWg2R01DQW9ON2FUM2hPVHlsamNJX2lLdzhZSUJacWRsbVNvTkpoVnpZNWNLS3RTdlRFVldDRXkxLTNR?oc=5"
    ]
   ],
   "Brentford": [
    [
-    "David Moyes press conference: Brentford vs Everton",
-    "BBC",
-    "2026-11-20T15:37",
-    "https://news.google.com/rss/articles/CBMi8gFBVV95cUxQMlVXNGpQNkU0T1loSFhTcU03MkMzajFWa3IxejZhX3RfUXZtb1VEZ29EcUcyUFhkUGhPMHZ0c3ozeF94NDh6V3JseDFYS09VVlVlY1RPOTJiZVBXVEh4RUNxT0Q4REFZalBKWTJqZkRXNmhRdDFjSFBuck1mdmxZb2U5WU14bm56V1g5ZXdJQUp3UUJzbjFGZXdiVEVacnh2ZjBJNU5hQzJsV3NQRmxMUURDYlNVbjFUQ1M1RGpWWDZlc0dSS0RiZlp5bkViYmNDdUJxYlFxTDVYWTBybUgxZnhrS21sQWlLVnlSQm5SSlctUQ?oc=5"
+    "Everton Boosted As 7 Brentford Players Out: How They Could Line Up",
+    "Yahoo Sports",
+    "2026-11-20T19:22",
+    "https://news.google.com/rss/articles/CBMijAFBVV95cUxNYU5xUl9fVC1fOUhHaHJqYnk3VkhsajNKRWNtalJueUYybzhoYVdWVXZmcnNEanlrOWZ0UWw5WXJrb2dEQUZLV0g1bFJ6VUxXcUlNN2JzSVpfLVdmLVl5Y3otT2R4TmR1Y21ZT1FXYlFTQlNzSTRVUlFHbWJYNnZndnNYbWswUkZNZEpkcA?oc=5"
    ],
    [
-    "Andrews: How Brentford will approach Thiago absence",
-    "Brentford FC",
-    "2026-11-20T15:34",
-    "https://news.google.com/rss/articles/CBMinwFBVV95cUxNSUtLZmI5Qkh3M1lwS3p5N2k1YXlsazlPRl9zN0ptYTdPdDI4Y3FfdnF2WFdGVE1HVlF4T3R6V3EtR1kxMzdZRmphMTEzVFBGTmlnTmxlV3pLWXJkQTJFOEE4dndFbWF0Mi1IdEkzMVBRMnM3Q0dNUnpMamxqUFlxZnNfWEFFa0ctTFFtUkswdXJjZUVlMnA4UHdtbmNiNUk?oc=5"
-   ],
-   [
-    "Hickey and Collins out for 'a number of weeks', says Brentford boss",
-    "West London Sport",
-    "2026-11-20T15:22",
-    "https://news.google.com/rss/articles/CBMihAFBVV95cUxNWW1Gb3VjN05ma0FmdS1vVjhyQTN5bGlQa0s0akU2ZDdFaU5XSVc0OHd2dFM1TVBhMmpidGQzbHA3N2kzTy1FSVNxVzNfdzkyU0JzNmFwT2VfZ0dPakphei0zUFp3RzZ3SUZDcEFaWHVvVTBrSGZJZ3Baa2dwUXRiNk9EUUQ?oc=5"
-   ],
-   [
-    "David Moyes confirms Jack Grealish status vs Brentford as teammate 'nearly ready'",
-    "Goodison News",
-    "2026-11-20T14:49",
-    "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUnBUN3JQMUFpRnA5MUczS21EYlEtUDg2dkpqUnotRGgyY1pPRHctU1I5RlpuRUE4UFllRVkzazRoOExoQzhzUGpDNk40ak5YcEJyVEF0WnVhNzgwSFN1V1g5UW04ZUJVclk2X2JBeUVPamJTazlNVDg4WlVLQ2M0ckxkakVZX2IxOUxjcjE4MDhHTGt3TXdCYnhucUltSFhKTDcyNUJRWG9PQ212V2RzbVpyaEhGcUl4dkQxSg?oc=5"
-   ],
-   [
-    "Brentford vs Everton Preview: Team News and Thiago Ban",
-    "Dave.Sport",
-    "2026-11-20T13:48",
-    "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5oeTJTOTFBTFk4VU9RWFR0bGE4dUl1SXFKRi1TUVBXM0hTRi1ldVJEQzA3bHFSemRMU1ViWU9CT2g5OTJOdGVJYjh6aE9GMXYtVl9VV05QSG5vSEc5UjI5SVZPaw?oc=5"
-   ],
-   [
-    "Arsenal transfer news: Gunners 'keen to sign' Brentford attacker in January",
+    "Everton team news: Latest Jack Grealish update from David Moyes before Brentford",
     "Sports Mole",
-    "2026-11-20T13:45",
-    "https://news.google.com/rss/articles/CBMixgFBVV95cUxPMXNWYi0wbUxpSElzMnNwUlFkRkxNN2JlY3ZqTURFTDkwSnFsUmFBTzl0VGVlMUh2Mk1qQWFnM3ZRWmZ4cVdjcFhIdWNTLS1fR2VoNVNpWDV2dENzRmxKZVNXTW5LNUdOOUNveU5peFR0MEhfejhyTTVrb25WT0RTMmJHS3Q3WERseWpLeUxFdTJ4eXc1ZTdvNGx3b0R5N3k5M2hVWmh2eTNBdDU2OVVENmxSaTFIcFJWcHNQSElOZlNTckVuQkE?oc=5"
+    "2026-11-20T18:58",
+    "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOY200OFpnSDU3NnhoSUJ1Tk9Xc0NBYWNadXE5eDl6YldNcUFxTmswTmdJaGVMeU1zMnVkNFZrR29makIzU1ROMTRaY0xDV085cEVyaHY3SE9iaWlEZlZfVzhDOEZ3TXlBR2U0MGs4NXZDQ01saTNlOXVsUVp1Z3ZMWURieUVmcFdsVWViWWVzTkJNdjR5MGtYcVhxT1UzS3Fwa2NaN29GS2k1Y2FfLUVpZHZMT0E3SUxrTE9ieUtGNHpZR3JnSV9seHNNWHFZMnBaYThnVHktTjhVRkpUN1JyXy1BbzdPRlk?oc=5"
+   ],
+   [
+    "Aaron Hickey injury latest after Scotland blow as Brentford boss provides update",
+    "The Scotsman",
+    "2026-11-20T18:41",
+    "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPbm5JcndfZmQtcDZOQWxqUFRkcFhPbTR5YXFMVzE3eUVQdVRYSUVIeFloRW9xOXVveUNjazRLR0p2UHQtejdQeEQ3RGN6VW5LaTRvRHMxYW1qWXptbEVxazZkYmpDcDdXNmFGZlVQWHZrdlVWd3ZYT3I1dTdIMVJYZVpXZzFSMDhidWE4SUlKNkJLN2JTVkRSTUNXbnc3SHJTaTgzRFlvSTVZNGtKMllZand4S3ZOLWFuM1VKYWNhNHlxaFdySDFJNXY2d1NKNzhQVGN2V21zWnZ5Zw?oc=5"
+   ],
+   [
+    "Everton at Brentford Team News: Jack Grealish, Nathan Collins, Aaron Hickey, Fabio Carvalho",
+    "The Sports Bank",
+    "2026-11-20T18:11",
+    "https://news.google.com/rss/articles/CBMie0FVX3lxTE85LXg1QzdnOVNLSl9QQlQ0S2xVLVVqRktSSGllNmsyLWU0UWJuVmpTcmxIMHh0TDJZTW9WbnlIUWx1Snlha2ctUUZyZ3hMbUd4YUstNXpobXpmRUh5MGRfY29JMHNWTXZmc3pfVHp4cU5GbmRiVVNFeUYtaw?oc=5"
+   ],
+   [
+    "Brentford Team News and Predicted XI vs Everton: Aaron Hickey and Nathan Collins Injury Blows",
+    "Yahoo Sports",
+    "2026-11-20T17:18",
+    "https://news.google.com/rss/articles/CBMihwFBVV95cUxQY196WEdfeVo0aGV6NGU1STJIZ1JQbnZyTVpPaUw2WTBCaTdxRnlVV2FiV0Z5WUdka1ZpQ2ZIbl9QRUFCYlEyTE43QmVfNy1CWVo0TWs5LWpoc2lLVlRXTDg3SzQzSExGck01ekYxRlFzc0xicVBTUzdDYXI0NEhlSWI3V0tTems?oc=5"
+   ],
+   [
+    "Andrews on team news, Thiago's suspension and 'iconic' Moyes",
+    "Yahoo Sports",
+    "2026-11-20T16:34",
+    "https://news.google.com/rss/articles/CBMijgFBVV95cUxOQ2ZBUUVmeUtrVjhpd1FNRXFiVWg2TnRnS3duS2dCQnRKTmVJaXYyU1NVOW5kRG5iOE1saFRnVHJicDdJT3ZjUG5pVFNKemhyX1VnVWE4ODNmRzJXNTB3aExrRXV5dU9qY0tjTzQ0OVdmSXVPSElsOW9QemJpbEFRTFhlWlBmckZyeG9odG1B?oc=5"
    ]
   ],
   "Brighton": [
    [
-    "Hull City injury latest as Tigers handed major boost for Brighton and Hove Albion showdown",
-    "Hull Live",
-    "2026-11-20T16:09",
-    "https://news.google.com/rss/articles/CBMiogFBVV95cUxQYVFUbllOdDJiTlI2VkttejJWRUs1b0szNTBONm5GemlsYU9jOTVadzl1SlgtOWJHbmVfRUprMjg4WnViQXl1TTFyX3g0OEE5QjlyVTNUcmp5ck1uOUZpckFRUldoM0t5VGc3WUdzMTdhT0lwZVZnbFVrR2JXQk9oVWFHLWRuRmpxcVJmWjlxTXZDUkpaWjN2VjhxRlZTck9vUHc?oc=5"
+    "Fuel truck crash, fire closes Highway 401 eastbound near Trenton",
+    "CBC",
+    "2026-11-20T19:28",
+    "https://news.google.com/rss/articles/CBMikAFBVV95cUxQQWlXMVR1RjlVbWFOQkdGbjJnTHg0dE5sbHVSQ0I1NTlNWmlMZ2FlV09pbnZvQnJ0eXdoNDNpekw0VEpVVEtyZ3h0Z1hkcUhYcUI4UU9TN0dwNDdyb2dQdW1IaDdEYWdMZkhpeVFCdnRuUnRSOVNGTV9OQ2FqRm9ZcC14MVZiX2t3ZkxnNWwxWUg?oc=5"
    ],
    [
-    "Hull vs Brighton prediction: Gross to play key role as team news confirmed",
-    "Football365",
-    "2026-11-20T16:01",
-    "https://news.google.com/rss/articles/CBMigwFBVV95cUxNWlpQWUJQUmIwVGdPaHdVM2VMeGhFZGVockVGcUkyWFd2Z0lBa00tVU5ET1AtQml1Qnh5VVpwY3l1S2J1UkwxMy12bzUtZ1VGWXJkVHp3OFgzSlZLeFhmcGR3Z1VhTDRhTFROM1loZjB6SnJmT2x5LWE2SlNhcmM2RGdZUQ?oc=5"
-   ],
-   [
-    "Hull City v Brighton team news and predicted lineups",
-    "news.bet365.com",
-    "2026-11-20T15:41",
-    "https://news.google.com/rss/articles/CBMirwFBVV95cUxPclZtUjItWUUzajZhMFRwRTNLVTI1THJVU2V0ZThHZGMyU2dxNnRQNEhjVGVFUlBGZElFNlFKUnB6OFIwbmt5anZuZXFkdEw2VXBBTjRkMGdEb1ZXcDRzblRZT2V3WlY2aWFtY3JUVldxSUtnLUNzb1NRYW1lVzdfUkQzdXZ1TUJyb0RrNFFCUHJ6MzhNeFVOVlhUdm1WeEZHQ3c0UDVQa3EzQmNFZmhz?oc=5"
-   ],
-   [
-    "Brighton Boss Provides Injury Update On Zadok",
-    "Complete Sports",
-    "2026-11-20T14:48",
-    "https://news.google.com/rss/articles/CBMigwFBVV95cUxOdTdWMU5ISDQwc2JTcTJhd2ZCTW5ybVhJT0U5OE5GMkhvTHlNcmhqRXFwUVZDSUdqNVVqT0FKRkZJVWNUNk5LYnpLa2lNVVNRTzVfX2Roa3JjNHFKUzgtX0h3U211TDU5clU0TnJ2Qm14V3A5bWtQTWx4MzNUTGYzcjE4RQ?oc=5"
-   ],
-   [
-    "Hull City vs. Brighton: Head-to-head record and past meetings before Premier League clash",
+    "Pascal Gross: Brighton career assessed after huge contract announcement for “valuable” club legend",
     "Sports Mole",
-    "2026-11-20T14:39",
-    "https://news.google.com/rss/articles/CBMizAFBVV95cUxOekpZcjJNWURPVGRLWmRMT1BLRkpWOGpXdUpPVVM3Z0ZuUUJ1U0tla3JaemxmaW9VcG8wWGFwVVRTVk0zd0xVUnd6cno1UGphYnEzUDc3UVNsQnIwX2M3Y2ExZXhOU3ZaWHJWR1dQQVRLVWp4akU4MHNFZUdxZUtUUzlzVVlKR09VLUlRUGVhT0NTWlZWWEdXR2FVcmcxWjZITmpMM09FSXhDN2FER3cxb1VYYmZya1U2YWtHblUxVEVMT21BbEV1RFN1b1k?oc=5"
+    "2026-11-20T19:15",
+    "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNbk40cGFvTnFwSk5yWWxEcndXTzNsR1cteTZQeV9IZ2FKREZCZFprV0c5aldacG5XaWZQZHFZQlZpWHFtdE1FZjlHYUpMWjRfakZKd0hzM1psOUlPTWQtOEtOUzU4TnVLT2JtRnpEaFZFcUxmVElNTlNZR2diSmRfYUhpSEVGRnVCYk9QV1JtZ2l1MElXZ2JiZDBVSmtWYk9oYndIazB0VER4TVRqM2NSNjVKR2VSTEtLYzRHV2plV3I3dWxrY01CVnZoUmFzOWIyVXktdmFaN3dINWh2SmhFZWh4N1N4RVZRb1pmM0Q0MU9Gc2JqSE5uMVJkZ29HZ2s?oc=5"
    ],
    [
-    "Mitoma, Minteh, Yohanna: Brighton injury latest for FPL Gameweek 11",
-    "www.fantasyfootballscout.co.uk",
-    "2026-11-20T14:15",
-    "https://news.google.com/rss/articles/CBMitAFBVV95cUxPWTJIeFBWVFV3cUpUcmd3bnhMdkQ0RDdXZkxrOEF1TmhFY3pXQ19YcURKa3hNeFZGWk1WRXBtT01YU2tZNHhQRDJEVGJjT3FlLTJ5bVpPczZzWFdTcl9CRTlQY1hCLV9KX2twWTRoSktiRjVwcmJOczRubm4xMHN4SGFfLTFPeWdmR2NPQ0QxdW1CZHBVVDh1eTJBV3lHcjNOR2s5WmVNU1F6T2M5U0NhOVg2SDM?oc=5"
+    "Brighton main line to close for a day later this month",
+    "Brighton and Hove News",
+    "2026-11-20T19:09",
+    "https://news.google.com/rss/articles/CBMipAFBVV95cUxPRUR5R0hhVUx5ZDNzRVpyNFZXT3Q5bzFKU2NDWlk0Vmo1NVpRdVZJSVhXRE5rU3M2OFNETVZGSTZhN0FSWkpzeVRmR2tGTDFqQ1BJbjh0QWg0eEVjSUdJTzRweS1ZcmRZSDVtTWJJT1V0SjE3eDNOcHZYMnUxbzQ4Z2JuSHlCM0NSZDFhNUNLOERHWm9ERUNxVnpod085N0lzMl84ag?oc=5"
+   ],
+   [
+    "Femi Azeez’s Brighton return: 3 ways he could improve team",
+    "Afrik-Foot",
+    "2026-11-20T19:07",
+    "https://news.google.com/rss/articles/CBMiYkFVX3lxTFBER1k2dzd3Z2x5ZTFfVy10Q2Vwbm9MWWI0bnI3SkZvWGxPVnNRek1WTUo5SUlCbnBlT2E3Ylo2NG9Sckc0dlp2ckpGVDJLR3U5Ykx2VkxDelMwczJ5UUE1TUJR?oc=5"
+   ],
+   [
+    "Brighton coach faults Nigeria for Zadok Yohanna’s injury setback",
+    "Premium Times Nigeria",
+    "2026-11-20T18:14",
+    "https://news.google.com/rss/articles/CBMivwFBVV95cUxQZG5oMklqYjBFTzl3NDJQWkVpYURoLWVmcU5iN3ZNMVY0ZlM2VDI2endiTDIzSDFHZkdXMTlMY1hneXhseWxVTDVpSG5aczNMbkU2TlVkem5HQld3WmI4Y1FCOXZPR2swWUxmNTVrVzNGOFg0TDAtWXV6SjAzZWVkclR3bTIyWXEwODQ2aUltVGdDRkxKYjc4a3NMT3hyejUtVTI4bkcxWHRxOXpsMTNGMzBPN1RKQ2FhbW1Bcnc0aw?oc=5"
+   ],
+   [
+    "Premier League team news: Every injured, suspended and doubtful player for GW11",
+    "Sports Mole",
+    "2026-11-20T18:10",
+    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNbFZLZ202SmdsaFFoZFZXUFJoSGJ2VU9wMXVZMXJmdV9TMUppWVRRcEVpUldJdWFNTVpMVzVFYXZuZ01BYWMwaFpwSlNxMWVuYmNtVTNMWlBHTUxEWlRMcVowb0JZcWxoVk5ZRk5TVDRidHB6d2l5Y3ZmbTljcExYWENGb2Y2MVZ0QmJncWU3V0NzNU9pRHNuTHVEZEt4SWFTOHg0S2FCT0ZLTzN2R0c2a1NKQWVlbmlUUHZLcTNHaWZmM0JvWWZfTGpNc2lVRlNQWXlnRTZwMlppb1E?oc=5"
    ]
   ],
   "Chelsea": [
    [
-    "Chelsea vs Leeds United: Team News and Predicted Lineups",
-    "Last Word On Sports",
-    "2026-11-20T16:24",
-    "https://news.google.com/rss/articles/CBMigAFBVV95cUxQVjVZS0l2V1ZScnNzeFBudXhna0EzVVJoVE5yZXl1dDBiOGhpTnM0ZVlqbS05dHYxb21XbVdUTHFqMi1Vek91ajY3Y05JYy1LVGFySXV4LTdMRFJGT1ZPMWNnSDJXaTVWYWhMak9yYzBmTVJBWEhCM3pZX1JmekI0Uw?oc=5"
+    "Leeds United receive double injury boost ahead of Chelsea clash",
+    "EPL Index",
+    "2026-11-20T19:50",
+    "https://news.google.com/rss/articles/CBMinAFBVV95cUxNSTN3dWh4bGZTYWVMMldxd1QxRlpVRU9GQUJDQUctbDM5MHRWOEFuZ3dwbnJXTTN4V1hmOW9hUTd1WG9HblVZYlZBc0VhczZxWVlsQ1UwOXpLamxIOVA1R3FsSzdXYkRjUjc1RDFfUkxUaXhtUGVMTDBtOGhLVElFZjhOQ1cxMTFKdGliUGdMaHBuaUUtUmRPNXBwdEQ?oc=5"
    ],
    [
-    "Joao Pedro, Lacroix, Martinez: Chelsea injury latest for FPL Gameweek 11",
-    "www.fantasyfootballscout.co.uk",
-    "2026-11-20T16:22",
-    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQa3VMc1BGQWpWSTE1c3lRZC1KSjh6bWpSRTZZalF1RDVCcTFJUE1lemwweXJHWWdBTXJEenlIWDhZdDVFR3lISHJFMFp2eFlwMTRBYklYczlVcWZYVkxIMTBmY2d2RVBaQjBhTHNvSmR2LVpPVGdIZkNTb0xwVTdaSHc1aHkwSm50VExOb2F3XzRMLXMtb1RoVk03ZDFTVDFvZjA3a1FXUXB3Y3I3c2kzOU83SWpkalNwNkNN?oc=5"
+    "Xabi Alonso Sends Clear Warning to Chelsea Squad Ahead of Leeds",
+    "chelseafconline.com",
+    "2026-11-20T18:55",
+    "https://news.google.com/rss/articles/CBMiogFBVV95cUxPUmN6TDloNDhwUk9RR0Q4c0RzNy1aSFc4YzM1R25OQVpuR2ZZQVZEVVZpZXRVcm5TdEhTZG8tMmx3MHVfRjRBcDZNWFFrY0MzckZjNG4tS3J1aDNCa1hLd2JEVTZtSnhnV0hFQjNvd0g1LXFweEVlR2VXTmNLY1VXaml5eWZIYUtyNjdGT2ZnV0NyM19XV2hKOENON0g5UW1QblE?oc=5"
    ],
    [
-    "Injury-hit Chelsea aim to halt slide against Leeds as Alonso confirms Pedro's absence",
-    "The Straits Times",
-    "2026-11-20T16:10",
-    "https://news.google.com/rss/articles/CBMixwFBVV95cUxOZ2Fpc1FoNHVUUG9jM2dzNU52dF9WU1pkZEUwRXhYN3ZSMmhCdi1KeDJpaDdoTnpFMzZuOWNmMk16ZUlJaWZ4QS1jZ0lxcFZKWVhXOTdpY2hFQ3NKQl9ITzNoMHAwV1I3dU43S1BEakRpQW9LaVdLa2FQcjF5NWlaTXlidFhGRk1BTzNVaGM3TDh2ZFI5WGxOTUtDTTctRXVXWTctOVFQSUkxVi1wQ1RweGstZV9uczRNVXlVQndiS2pIUHlHdEpJ?oc=5"
+    "Chelsea Team News vs Leeds: Caicedo and Acheampong Fit, Joao Pedro, Lacroix and Hato Ruled Out",
+    "chelseafconline.com",
+    "2026-11-20T18:50",
+    "https://news.google.com/rss/articles/CBMixwFBVV95cUxQLUt5WE00bnNfUDZnWU5mRDV4TFJucWRadU5tWENmMW9GZWFYdG1nYUR4MjdlUUdRazRLTVRhdDhkUW5mcXY3M3pOc2l5akFjNG9SZzN0TVhlSWZWZUhoMTduVmJkSmdIRk9QeUdnNjdSams0ZWEwQlpJNVJDenlUTnlxNWFRd2NpdEtNTVhzbWVyZUdPNUxwWHZZSkRBdjhLeVJwQlJtcUdnWkFTallQcmc0U3FpLXc3QzYtNDV3b2FvNFdSQkY0?oc=5"
    ],
    [
-    "FPL injury news: Joao Pedro, Gvardiol, Van Dijk, Thiago, Guehi, Manzambi updates for GW11",
-    "AOL.co.uk",
-    "2026-11-20T16:06",
-    "https://news.google.com/rss/articles/CBMifEFVX3lxTE5tWjRudUw0TUdjUFBWTkVqeXljUVRFdXZFUFd4ckEzXzhCU2VMLXg3T3pMRlFFcEpaMVVGWmZRbkRzWnVCWENXZzlXSy1PekJTeG9MSlhMcnpkenV1SGdvWWZaanNQMTk4X0ZRSklqSGp4S0J5emhhVmJZTjQ?oc=5"
-   ],
-   [
-    "Team News: Chelsea vs. Leeds injury, suspension list, predicted XIs",
+    "Chelsea vs. Leeds: Blues bidding to extend 27-year streak in key Premier League showdown",
     "Sports Mole",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMizgFBVV95cUxPWkFjVGU4WDA2cGdQcUhKYTdIdGxDMTZwRVktX2U4bWd4QXJPWWdDSHI2MkNld3BsU1ZKakRTT2h1NHgtZmNpdFVXdEhVZmM1ZnJwOVpuWDVud2dYdXNyNG93c2VFdkR2YXNVU1E3VGVuWTZ1NUtZLVRUbXRJSjRrNVNTcmNhcUNZakRnYkVyY1BwT0lhTnVNb2E3YmJ5OTVpOGlRTEJOMU5xb1NaUXVlWk1vbW1NVnlSZXhBdUIza0ZCYUF4aEY1bzRoQjhZdw?oc=5"
+    "2026-11-20T18:31",
+    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxORklfV1gyRF9yVm5OLXhILW9RVnpOYlptS09XeXYyUlhhblRzWlRvWC1DV04yVk1veldBV3FTVk1OSW9sY2NSU1ZzWWFwSFV3VFBDTUhINjd2Q0JmaFhMVmJzaVJmQm9GZ1BJSzUwTlNHNTMwR0hmWFRRNlJuc3ZneVlFeGs1WGJxbF9EbGp0V0ZoQmxvMFlNQnAycnBHZ0VmWW94RjluOEZNbmtGbGJVb2V0ejJ5N19s?oc=5"
    ],
    [
-    "Chelsea handed double injury boost as Alonso issues five-man update",
-    "London Evening Standard",
-    "2026-11-20T15:59",
-    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPV3ZMc2hYaTA4MG0tZEQyWC13VDFoM0lDclgySFVHRlNuZlhIenNOYkxSTDVHZ3VQZllTRmJmUlFxQ1hLUTlzeEJmdFpKdTZEaFBaQm1ZUm5JUm0yVWFaSmRROURrSmtrQm1JSXFUeTNtUGhzSTlFX3owVjFaRjJXR01QN1k4QjN5OTB3V2ZYbkc3N3M3SEdlZlJCT0hwMTByekJqZjIzXzMxZw?oc=5"
+    "Chelsea team news: Mike Penders, Emiliano Martinez update provided ahead of Xabi Alonso dilemma",
+    "Sports Mole",
+    "2026-11-20T18:30",
+    "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQQTRUZFdSRGhkLW1IWU1haUhWYzVmUS1lZTlCeC1ld3gwM2tMcVc1bWlSbkNjeEVkeTNKNnhMNDNVNThZNEdVOUJvUzZEaUFXQVdDUkwtdnBNZFJpZHR5MmZDNmxaU3Z2RWc4Mk02bFlNZHJtRFVJbWRyUEVCMk9OVDFfRGJXTGQtc3ZDcXNYSkItZEZhbzlZR3UtcU1NdVJHUkpYbGlBc1A2MUZHSjhrUTVUUlk0NGtVT2lLM2IzZUs4Vkg2d0ozaUIzaGxLblM0OFllRA?oc=5"
+   ],
+   [
+    "'They need to step up' - Xabi Alonso sends clear warning to Chelsea squad as Joao Pedro remains sidelined with thigh injury",
+    "LiveScore",
+    "2026-11-20T17:54",
+    "https://news.google.com/rss/articles/CBMikAJBVV95cUxNazc2VkphU0VhNGJoQWRqR3c4MldCNUdaNTh4YklWaWhxQ3p1UzZ4d1pMaXdla2ZMS2NzNEJnUDlkQjVFNlJLSm1OU3k3ejBxLWJMYjIxNVQ2eTNqUndfTWYzQ0V3OFlCOVlSajc5MTZWNG81eHFaaUdNRDRGTVBzT1ItOTlQeGpDNnNLV3lZdDdpek1MSjVEWEpYQ0dwWDJzY2FHR3puZVJKQ0N2aHQ0bFQ2THZ5VmxrN3JDVllONnY0eXRhTlEweFo1a3RYR3VPN1hrUk1kU3lyNnNCdXJxVXMwWjQwOGpxVXNjWWRXTzc4VWJwczBNVlBVbzB5WGYzSU4zTVlmdkZSU2hQSVBvTw?oc=5"
    ]
   ],
   "Coventry": [
+   [
+    "Premier League team news: Every injured, suspended and doubtful player for GW11",
+    "Sports Mole",
+    "2026-11-20T18:10",
+    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNbFZLZ202SmdsaFFoZFZXUFJoSGJ2VU9wMXVZMXJmdV9TMUppWVRRcEVpUldJdWFNTVpMVzVFYXZuZ01BYWMwaFpwSlNxMWVuYmNtVTNMWlBHTUxEWlRMcVowb0JZcWxoVk5ZRk5TVDRidHB6d2l5Y3ZmbTljcExYWENGb2Y2MVZ0QmJncWU3V0NzNU9pRHNuTHVEZEt4SWFTOHg0S2FCT0ZLTzN2R0c2a1NKQWVlbmlUUHZLcTNHaWZmM0JvWWZfTGpNc2lVRlNQWXlnRTZwMlppb1E?oc=5"
+   ],
    [
     "Team News: Coventry City vs. Crystal Palace injury, suspension list, predicted XIs",
     "Sports Mole",
@@ -1541,30 +1573,42 @@
     "https://news.google.com/rss/articles/CBMivAFBVV95cUxQYnFnRHZVeUhvdzY0UmxXM3dpekJGS0JCSG0xbXNTSjQzVl9hSEVxTHF2REcxMGFNVlhvcTZzU2J4ODhCY2lvekpMWEtIV2liRldGS3R1MEt0YkV0X0RJZm5DSlpiejJkMEc4UU80c2Q2aGFiU19VRDRLUWZPVHJERTE3bnMwVDhMMzFhWE1raV9GNE1hbzRDbFVUejNlUGY2c19mM3dsWTN3VnJzTmM2SDdNc2Zfa1JJM2pVYw?oc=5"
    ],
    [
-    "Frank Lampard faces big Tatsuhiro Sakamoto and Stephen Mfuni calls - Coventry City predicted XI",
-    "Coventry Telegraph",
-    "2026-11-20T13:37",
-    "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPZW1LTjJ0VU5EY0xwZ1dQTm5vQmtqdnl4dTBuNzJaeHlUckVkZ1IxeWlJTUp3MExXSTJkeTI1MnIwR0hTVGJFTU1zbzZUaWJJVUhfZnFvYnBfbkZyaFpnb2JPYS1LTmdlZk5lR3JCMHRQSWp2WnFtalBDTERBREpJeG1WZEhwLVRPbkxDTTZMN0k5X3RWODZJRlFrb09QMFZIX2xuQUdaX2k?oc=5"
+    "Coventry City vs Crystal Palace Betting Preview, Tips, Predictions & Odds",
+    "Compare.bet",
+    "2026-11-20T12:53",
+    "https://news.google.com/rss/articles/CBMibEFVX3lxTE1uak9fNXJhTWx2Qkpqb2NnR2NMVHhOem13SWlkZmNqR1pMcHlzRVlIa3VRanFzTlFSMTJ2eUJVTkE2elNyU0VwVzRiZTJXQm5tX2pUSUZaV1RyZGRKTXpYNmx1MFVwdkY3RVNzbQ?oc=5"
    ],
    [
     "Ten players could miss Coventry City vs Crystal Palace as Premier League returns",
     "Coventry Telegraph",
     "2026-11-20T12:44",
     "https://news.google.com/rss/articles/CBMirgFBVV95cUxPOUdnVDBaOHZZU2tIWkJESlByRWloSFQ5b1AxaTRCZ0dMMUMyVEZPc2Z5WGppWjJFR3dhZVYtd1dFTmE5Ri1SS2c5ckN0SG5tSmRFdnVSNmVNQWl6UWFZVHgyZG9JSjNlZDFLbnZvdVpSdFZpdmNLRWhnV191LWJrUnNVdF9YT3lOa1Q4TVZtZ0g3THNrd01xT1gtaDViUGtDQm81c1BRSWVNNXk3WkE?oc=5"
-   ],
-   [
-    "Crystal Palace predicted XI vs. Coventry: Sarr set to miss Frank’s first game",
-    "3 Added Minutes",
-    "2026-11-20T10:35",
-    "https://news.google.com/rss/articles/CBMivwFBVV95cUxOSzNNWEJEZW5vZFVWOThhYUdkTDAwUExiZkV0Mk04N2xLOTdzVF9ST0NXUWZvdnJUODNkTnRnWm14NUlzemRHdEFTeDZEVHZYQmNWaWFtYXJjc0dfSHVzMnVzRmZJRHJYNFg3LXlnWXllZldpcEVWQklyOGFsWERDNkczaGtmMHhMMUpDZk1ERHNxMldfZ1RiZEkybjhrSVRYOFo2MnpxNkNZS181TENqMmFucVVuVm1tVHl3Nml1QQ?oc=5"
    ]
   ],
   "Crystal Palace": [
+   [
+    "Sutton's predictions: Coventry v Crystal Palace",
+    "Yahoo Sports",
+    "2026-11-20T19:27",
+    "https://news.google.com/rss/articles/CBMikAFBVV95cUxNZnpzcmFLbVF4Zkh6Qjc4cjRKRWhqY0JuWm81UHVmSjR3a1JPbnYtZDF2b2x5aXpBSXVzcXg0bF83MFhsem1HS0s2dm02aEZmRERwN25EUWNNbmgtX0MtTUdOUXRsZEFwTkVqZ25MVjZlV1Zwcl85b25iTHlvWDBxUTNDZXJVYjlCbXlKQTFRQnQ?oc=5"
+   ],
+   [
+    "Premier League team news: Every injured, suspended and doubtful player for GW11",
+    "Sports Mole",
+    "2026-11-20T18:10",
+    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNbFZLZ202SmdsaFFoZFZXUFJoSGJ2VU9wMXVZMXJmdV9TMUppWVRRcEVpUldJdWFNTVpMVzVFYXZuZ01BYWMwaFpwSlNxMWVuYmNtVTNMWlBHTUxEWlRMcVowb0JZcWxoVk5ZRk5TVDRidHB6d2l5Y3ZmbTljcExYWENGb2Y2MVZ0QmJncWU3V0NzNU9pRHNuTHVEZEt4SWFTOHg0S2FCT0ZLTzN2R0c2a1NKQWVlbmlUUHZLcTNHaWZmM0JvWWZfTGpNc2lVRlNQWXlnRTZwMlppb1E?oc=5"
+   ],
    [
     "Team News: Coventry City vs. Crystal Palace injury, suspension list, predicted XIs",
     "Sports Mole",
     "2026-11-20T16:00",
     "https://news.google.com/rss/articles/CBMi4wFBVV95cUxONFRrd0s1VnBtSWxCOVNLRWpQRVRMU1ZkbW8zT2tfSTc4Zkc4VDhZaGlaWEMzU3I1b0dHcEdsRFdMdlkzaXRpbjR6T0kySmNSWXNtOURZRUdocURKdWl2X2R2Z3dSQTJzZmRwekVRX21rano5S01ZVHBnWHZSOHZoWVY2TWM4QWVkeVBhcERmMTZSa0RjNDNMZG5zcmxaNDF0T2VQTE9oWTdZdThQWmVNVHdhTEFkRHNKQWVfUnZtSGNxMm5WSUlIdkZVU0FMbVlIUW9IV0dXTWZ2aEU2NWFKckEyWQ?oc=5"
+   ],
+   [
+    "Coventry City vs Crystal Palace Preview: Prediction, Probable Lineups, Tactics, Team News & Key Stats",
+    "TheHardTackle.com",
+    "2026-11-20T13:49",
+    "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQV2Nqb3hmbDd4S2FYbnVody15ekhITU9uNDd6NkxMUjlmdHBXSnB5anpNU1hic0FPaXRkNF8zUUNvWlEwTXVvU2ZYZU90VTFVdV9zc0hSc01jd1lQSnA3bVAxS3R2TW9odVlzOUpXOEY0TkxKOFY3MWVLLXJMRm41RkRZYVZSaVltcjVxUmxJSW92VlZrUnVIbUMwTWVoNEwxUUUtczN1WUR1RUNfT0hEWW1xOE05NE1MTVd5VVd0VkVJLXRsSlFIaVBYZE9HVDhsS200ak1YbGtoZ9IB3wFBVV95cUxNTTFmQXFDLWl1OVNDWkRha004dndiMXJ1Y0l4UnNobWFCaUVKUWYzQkhLRXlWRW9XZE9yMnZ3R1FVdzdYZDdsTjB4aDRWVlJfY3pIcGU4dGZ5U1BpUkh5cHpfRkpQVUtUQk5sMllWT3Uya3o0SE4ybXN0MkNzR3pNdHFJUk1QMlpNLWtXMTFFWlR6aTlvNjVDZDNlbWl1M25malVTU2VKT1ZNNnljaVVzVWw5ZzIyY1ZzUzY2TFJPNGE2eDV"
    ],
    [
     "Coventry City v Crystal Palace team news & predicted lineups",
@@ -1573,118 +1617,100 @@
     "https://news.google.com/rss/articles/CBMivAFBVV95cUxQYnFnRHZVeUhvdzY0UmxXM3dpekJGS0JCSG0xbXNTSjQzVl9hSEVxTHF2REcxMGFNVlhvcTZzU2J4ODhCY2lvekpMWEtIV2liRldGS3R1MEt0YkV0X0RJZm5DSlpiejJkMEc4UU80c2Q2aGFiU19VRDRLUWZPVHJERTE3bnMwVDhMMzFhWE1raV9GNE1hbzRDbFVUejNlUGY2c19mM3dsWTN3VnJzTmM2SDdNc2Zfa1JJM2pVYw?oc=5"
    ],
    [
-    "Ten players could miss Coventry City vs Crystal Palace as Premier League returns",
-    "Coventry Telegraph",
-    "2026-11-20T12:44",
-    "https://news.google.com/rss/articles/CBMirgFBVV95cUxPOUdnVDBaOHZZU2tIWkJESlByRWloSFQ5b1AxaTRCZ0dMMUMyVEZPc2Z5WGppWjJFR3dhZVYtd1dFTmE5Ri1SS2c5ckN0SG5tSmRFdnVSNmVNQWl6UWFZVHgyZG9JSjNlZDFLbnZvdVpSdFZpdmNLRWhnV191LWJrUnNVdF9YT3lOa1Q4TVZtZ0g3THNrd01xT1gtaDViUGtDQm81c1BRSWVNNXk3WkE?oc=5"
-   ],
-   [
-    "Crystal Palace predicted XI vs. Coventry: Sarr set to miss Frank’s first game",
-    "3 Added Minutes",
-    "2026-11-20T10:35",
-    "https://news.google.com/rss/articles/CBMivwFBVV95cUxOSzNNWEJEZW5vZFVWOThhYUdkTDAwUExiZkV0Mk04N2xLOTdzVF9ST0NXUWZvdnJUODNkTnRnWm14NUlzemRHdEFTeDZEVHZYQmNWaWFtYXJjc0dfSHVzMnVzRmZJRHJYNFg3LXlnWXllZldpcEVWQklyOGFsWERDNkczaGtmMHhMMUpDZk1ERHNxMldfZ1RiZEkybjhrSVRYOFo2MnpxNkNZS181TENqMmFucVVuVm1tVHl3Nml1QQ?oc=5"
-   ],
-   [
-    "FPL injury news: Joao Pedro, Gvardiol, Van Dijk, Thiago, Guehi, Manzambi updates for GW11",
-    "Daily Express",
-    "2026-11-20T10:04",
-    "https://news.google.com/rss/articles/CBMilgFBVV95cUxPVDNpSi03UHRIZTAyUmNRZHJtOFRJS0szZTNha1NWc2VLM2FfOS1MNnV5VWNydDc1WTBlZXdaNWVyM3dkR1dSWjdod0VwSTFzU1VBT3Jhb2xnbWNaYjR0UlI4Q2pEOVpScUVDWEdPb1g3WHM4YzduU01hem5CSG9fOHFmYVp0STh1eXVZdGZwQWdQTjR3MlHSAZsBQVVfeXFMT19BRUhnODM3X3lYeTB0NldrR1p0WlJvcjM1TzdPUzJmbC1zZWFqcnJaZjN4b1VwQThvNDY2QUdjMDBGQjloTFhXQm9TRHRCM1lvTUd3UnFGSXZvczFFNFI1QW5oeHJ4dUNCNlhTR0RoVnpRNkdrcWU0UlI5ZkY5b0xCUlZEWUdrUkRicGxlb2dIYWZYMy11WW81bU0?oc=5"
-   ],
-   [
-    "Coventry vs Crystal Palace: Preview, h2h as Awoniyi leads the line",
-    "Soccernet.ng",
-    "2026-11-20T10:00",
-    "https://news.google.com/rss/articles/CBMiigFBVV95cUxPUmtMZ3dwb2E4ODZuc1VGU0twWG9fYVVGZGlEaVZRWW8zTWp1Vkp2bkhSUkltVllBUXpLNlRwWGFLQU5IbWJxYm13MWJTdFVDck5rVlRlTFlvWnIzUjRnN2lkVTBRVDREN1ZHbWFHam5qbEE1akZWVWwyelZOamw1WFBGS0hkY1Z2dHc?oc=5"
+    "Coventry City vs Crystal Palace Betting Preview, Tips, Predictions & Odds",
+    "Compare.bet",
+    "2026-11-20T12:53",
+    "https://news.google.com/rss/articles/CBMibEFVX3lxTE1uak9fNXJhTWx2Qkpqb2NnR2NMVHhOem13SWlkZmNqR1pMcHlzRVlIa3VRanFzTlFSMTJ2eUJVTkE2elNyU0VwVzRiZTJXQm5tX2pUSUZaV1RyZGRKTXpYNmx1MFVwdkY3RVNzbQ?oc=5"
    ]
   ],
   "Everton": [
    [
-    "David Moyes confirms Jack Grealish status vs Brentford as teammate 'nearly ready'",
-    "Goodison News",
-    "2026-11-20T14:49",
-    "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUnBUN3JQMUFpRnA5MUczS21EYlEtUDg2dkpqUnotRGgyY1pPRHctU1I5RlpuRUE4UFllRVkzazRoOExoQzhzUGpDNk40ak5YcEJyVEF0WnVhNzgwSFN1V1g5UW04ZUJVclk2X2JBeUVPamJTazlNVDg4WlVLQ2M0ckxkakVZX2IxOUxjcjE4MDhHTGt3TXdCYnhucUltSFhKTDcyNUJRWG9PQ212V2RzbVpyaEhGcUl4dkQxSg?oc=5"
+    "Everton Boosted As 7 Brentford Players Out: How They Could Line Up",
+    "Yahoo Sports",
+    "2026-11-20T19:22",
+    "https://news.google.com/rss/articles/CBMijAFBVV95cUxNYU5xUl9fVC1fOUhHaHJqYnk3VkhsajNKRWNtalJueUYybzhoYVdWVXZmcnNEanlrOWZ0UWw5WXJrb2dEQUZLV0g1bFJ6VUxXcUlNN2JzSVpfLVdmLVl5Y3otT2R4TmR1Y21ZT1FXYlFTQlNzSTRVUlFHbWJYNnZndnNYbWswUkZNZEpkcA?oc=5"
    ],
    [
-    "Brentford vs Everton Preview: Team News and Thiago Ban",
-    "Dave.Sport",
-    "2026-11-20T13:48",
-    "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5oeTJTOTFBTFk4VU9RWFR0bGE4dUl1SXFKRi1TUVBXM0hTRi1ldVJEQzA3bHFSemRMU1ViWU9CT2g5OTJOdGVJYjh6aE9GMXYtVl9VV05QSG5vSEc5UjI5SVZPaw?oc=5"
+    "Everton team news: Latest Jack Grealish update from David Moyes before Brentford",
+    "Sports Mole",
+    "2026-11-20T18:58",
+    "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOY200OFpnSDU3NnhoSUJ1Tk9Xc0NBYWNadXE5eDl6YldNcUFxTmswTmdJaGVMeU1zMnVkNFZrR29makIzU1ROMTRaY0xDV085cEVyaHY3SE9iaWlEZlZfVzhDOEZ3TXlBR2U0MGs4NXZDQ01saTNlOXVsUVp1Z3ZMWURieUVmcFdsVWViWWVzTkJNdjR5MGtYcVhxT1UzS3Fwa2NaN29GS2k1Y2FfLUVpZHZMT0E3SUxrTE9ieUtGNHpZR3JnSV9seHNNWHFZMnBaYThnVHktTjhVRkpUN1JyXy1BbzdPRlk?oc=5"
    ],
    [
-    "Prediction: Brentford vs Everton",
-    "Soccer News",
-    "2026-11-20T11:19",
-    "https://news.google.com/rss/articles/CBMidEFVX3lxTE0tbkVDaHI2cVNOOTNvMVFZdFNJaHF1ZGxoOWZLeWRlYXBlYWxUdmRSRlZlM2h4VTd3bGp6ZmpvazhkZUI5Y3VMUzlObENZQnNNbzh2WnBEbjBXbm41Q01DbjJnVGs1emtWVlRkQ19mLWFSMlBX?oc=5"
+    "Everton at Brentford Team News: Jack Grealish, Nathan Collins, Aaron Hickey, Fabio Carvalho",
+    "The Sports Bank",
+    "2026-11-20T18:11",
+    "https://news.google.com/rss/articles/CBMie0FVX3lxTE85LXg1QzdnOVNLSl9QQlQ0S2xVLVVqRktSSGllNmsyLWU0UWJuVmpTcmxIMHh0TDJZTW9WbnlIUWx1Snlha2ctUUZyZ3hMbUd4YUstNXpobXpmRUh5MGRfY29JMHNWTXZmc3pfVHp4cU5GbmRiVVNFeUYtaw?oc=5"
    ],
    [
-    "Brentford vs Everton Prediction, Lineups & Team News",
-    "RotoWire",
-    "2026-11-20T08:03",
-    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQdGhYbTV0a3ZuTWlXa1RlbXg5NXBrVFUwQTU1MG9NX0hwVUozQU1GNDlNeVBGOWlxUlFTb0dablNxZ2MwQjB6akZHVHFZRHdmUHY1a3VMRlYtbkVPVlQtQjNnRmRWTVVpOHlBNFMxZDVqSTJxcm5QeUVJWWwzb1N1ZUZZcTIxVXp3OHZTUGR2RUNBNVhaQ3laYjEzZjZ0QkxkS3dPdTFDYnR3UQ?oc=5"
+    "Brentford Team News and Predicted XI vs Everton: Aaron Hickey and Nathan Collins Injury Blows",
+    "Yahoo Sports",
+    "2026-11-20T17:18",
+    "https://news.google.com/rss/articles/CBMihwFBVV95cUxQY196WEdfeVo0aGV6NGU1STJIZ1JQbnZyTVpPaUw2WTBCaTdxRnlVV2FiV0Z5WUdka1ZpQ2ZIbl9QRUFCYlEyTE43QmVfNy1CWVo0TWs5LWpoc2lLVlRXTDg3SzQzSExGck01ekYxRlFzc0xicVBTUzdDYXI0NEhlSWI3V0tTems?oc=5"
    ],
    [
-    "Nine players could miss Brentford vs Everton as Jack Grealish update expected today",
-    "Liverpool Echo",
-    "2026-11-20T07:10",
-    "https://news.google.com/rss/articles/CBMirAFBVV95cUxQYWlTNFFoV0tRNWJMb0FESU9XRDJyRHJfekU1Z1RqZEUtdEVDcFJFRjBmNlRhR3JNOUFHdzZ2OFhraHItYnU0eFBzSTQ0M2kzRElxUko3X3VTSGdzMVZUUXZSVUdQTGZPdW1tX2U4SVpISHM5YjQ2MVpzYmxyeW9BbDFVMGZmMXJvV244bFBmZWs5N1gtRUZBNGpReU94emFsdmZFRXdFLWVDZWpf0gGyAUFVX3lxTFBILXhjc3YtYkE2NVlUd1VBWXFEMG5uYXhPaDhnNnBLME9ac09IcGJrQ2tvY2x1VTlPN3hHdTNsWm40VzhEUko4dHU0TFBPWWVpdXNiZ1pRWWlKVnloQWZvTTNTMzA4VHJCSkNJd1dMekpJM1BTNU8tNTFELXFsNzViRDBXSGtKQWo5OWxXUkRUVlJaWjdVc2VGdDdYWk14bTQzZDctbUdMVE1KVEdsa0F3V0E?oc=5"
+    "Injury update: Hickey and Collins 'out for a number of weeks'",
+    "Brentford FC",
+    "2026-11-20T15:14",
+    "https://news.google.com/rss/articles/CBMiugFBVV95cUxNMGNZQ1ZiRzBaTWRNUzU1VGVLd1VrUUowVWxMQy1fX0Ytb0RaUVFfMmZwOUNPOEhDYW1VazhSaXR2VUx1OFhiRHA3emM3bld2VGVkZUNoemMwUGd4RnZqaFB4M0p0Z3VCLXI5aGc0WjU0eHVpT3lXNzVrdHFIOFFVU0pZdzI2enlGNzdycFdBaUVMR05KclNNTnVBYVg2WVRLODBTN1Y2aUZlaHJoa1J4Mm43NXdDSUloaEE?oc=5"
    ],
    [
     "Moyes Reveals Everton Team News For Brentford",
     "Everton FC",
-    "2026-11-20T03:28",
+    "2026-11-20T15:01",
     "https://news.google.com/rss/articles/CBMimgFBVV95cUxPRXl5czB3bVZJRXVYS09uczZ6UThiYldIR0J6R3oxWmVyaTRNQ2FBRVM4U1hfeVcxdjc5ZEJKS2hibzg5S25rMG9TWEJBWEtKTTVQQXZ6TVNOVEJpMXBiOU5SRzVDSDMzR2tGb1BnZm9rZFdPWnR5UmtLcUJiNUVsUjRYcURvblA4azB4T1V0ekIzME4xUjNyTnFR?oc=5"
    ]
   ],
   "Fulham": [
    [
-    "Man City duo doubts for Fulham clash – but Guehi expected to play",
-    "Yahoo Sports",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMigAFBVV95cUxPNnpPSjQ4akp1RmxzVHp6NnJMNmkxampoZlpHUktHbk9HUUs1NUNST2NQczUwakR1aHpGYmg2dld0NzQ1UTdaY2lNUEptUEo5OWR2TDdQdzRxRVZEZUVacGs0UzU3TFVvaEMzaEN0ckZDMlcwNWNtUnlOTHNPZ3BpUg?oc=5"
-   ],
-   [
-    "City-Fulham preview: City have won their last five meetings",
-    "Tu Futbolero",
-    "2026-11-20T15:59",
-    "https://news.google.com/rss/articles/CBMiowFBVV95cUxPU18xSG5QakhtUGNyZjdlVzZBNTV0WW8zUDFHbEhvdWpiTEI1SEhpb0I3QmZlYjE0RlVGMjRiREZhdHJXVjNKUjRQQWkwMWxpb014ZlNCa0dOX3h5UDVvZi1VYlpLUk9qZ2JCRHN0c2thNXBnX1NEV25HbnJkZjZ3V19TSUVzOVl6aTNfV2ZnT2g4QW43UktkTW1PYll0Mk11TEtV?oc=5"
-   ],
-   [
-    "Manchester City v Fulham team news & predicted lineups",
-    "news.bet365.com",
-    "2026-11-20T15:34",
-    "https://news.google.com/rss/articles/CBMitAFBVV95cUxOQ211bVhNUFFoMU02QW5QZXM3dTlRUGlvTDRlQkpqQmRfQWIySF94UkxNOFBaUG95Z3lhVzhrY1hERXN2MzVoQ05nVlJpM0wyV3BtSVVESkFlejlDaFRRUXJRVFdOY1RDU2VRMDhmSVdHM016SlcxeXRoNWxOekNENmhjRGl4dy1lczZSbE1BZENfTGVsUlBES1V2cVZFU1JlSlFoR2Z2QlJfR29lVnpzcXIySVU?oc=5"
-   ],
-   [
-    "Man City injury news: Two “doubts” confirmed by Enzo Maresca, Marc Guehi update before Fulham",
+    "Man City's Enzo Fernandez dilemma: How Enzo Maresca can fix glaring midfield imbalance ahead of Fulham clash",
     "Sports Mole",
-    "2026-11-20T15:21",
-    "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNTloxM3ZtV3VKdkowaUZOQmhfOVZFN0hBcU1oaENlWUdKT1AtU2E0bWtnWE9JRkx2eTN5VmtoMlVFRUU0cVdGaGs4N2FpMWwzRUdhSGhIbm5TVkFsaThnb2djbE9fUXMtd2laTDNCV2loZk5PeUpuQmhvand0aVZNSkFXTHBPbms4MDZWTkpiaEZPS01hYkNsNlZHZnRLRUxzT2FUTWdWZzZFcDZ5Wmo3OEQxOW9qYmtKN2dyZnFzODliRmd2NFlpV0JIWjFqdWlRbFNwMFEtQ3k2R2NLWGU5dTBnZzBCeXNJ?oc=5"
+    "2026-11-20T18:09",
+    "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPaFcyVFRZVVR6TG9fWnlwTGdhSV9DX2l2WUhIMDdaeE16QXBDbGFWNEFNYWV1RGVkS3BZb0E1OHdGX0JZN2tXeEhDbUpYRkxDc1dhS3BDbzB4QXc0TEpzdnpNOEgySkIybGR0cTNtNk1ycDlKQnlPbmlvel9WSEFoQnotdmZuYjg2Z1VzOGxJZ1dWSU5yeUsxLURXZ2RydDNMa1hQdGlURUh1cGRidFFZMHo2TFUxMjJaZzdGWjZGRHkxN3NwbGpCZWR5NW16cnp4ZEVxcFI3RHE?oc=5"
    ],
    [
-    "Manchester City vs Fulham predictions: 7-2 Bet Builder tip, team news and odds",
-    "Racing Post",
-    "2026-11-20T14:45",
-    "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNT0EtQzJSQnhmVnlZRnNvMXF0SFF4eGw4cFBqOUR5emdZSGh4Uk1VRHFNS19hUDR4YWFIU3E3aVNIeE9QTUVYc3dVdFdmX3U4N2ZVRnlXQmljTHR0MjhrYWZJMnhKeEctck1SX0NhcENRZ21Ta1VQZW50WkxBR0NnakFMVVZqRW9maTY0RExERVVRcnVZa2dXMzcyTUpJRnJlSkxhN0pPNzJfREdURXVuTXlZUWxCZDBFTWp0U0xzbzE3ME5hdmM0QlV6bFFQSERlb0VIclVRSkVuUTVxOVo0cUVrdEdjT1J4?oc=5"
+    "Man City XI vs Fulham: Confirmed team news, predicted lineup and injury latest for Premier League",
+    "London Evening Standard",
+    "2026-11-20T17:31",
+    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNZ3BaYS1McEVTT2dtZlJhUDB0YVBzMUdpYWRYTC1kbkVlQm1pS2w1ZDRLNHlOTDhaQXVQTGJhX01Bd0NoeHR2OWNJeFFLYThEdndfdkYzalc4ZFFfNnZ4dzBTQmtCMkxXUWxOeEdQRGV5UjNxT0hpeHAxa2tQWnlQZnNrUGNfd1BOMXFPd2tCSDlGemVLYnVnNWdleFZCZmFGTkcydnFBV0d2TFFmUFZvNW1uc0ZMNkZuSTF1M1RrS1BHVVppbVYzU3pGRGRsQ2d6SHNrN3psVUM5RDg?oc=5"
    ],
    [
-    "Manchester City vs Fulham preview: H2h, team news, & predictions as Bassey eyes 22-year record",
-    "Afrik-Foot",
-    "2026-11-20T14:29",
-    "https://news.google.com/rss/articles/CBMigAFBVV95cUxNU3F4WXk1ck1iLVdGQ2ZJSDlVVFFSR2Fyd0hyT1RqY3M2VmF4Q1lZRE9INXJvN1dOU0hWbzVIelU2TDNyNElKa0c3OF9TQUEzUC1HanZkZGhQN2U0UUo4U2p4RVNTcnR4bG5kbG5BLUpZSk9RbXRWQ3hoWTVzZFlJWg?oc=5"
+    "Gallery: Ready for Fulham!",
+    "Yahoo Sports",
+    "2026-11-20T17:30",
+    "https://news.google.com/rss/articles/CBMieEFVX3lxTE5Qa3MteGRtMkUxUlVqT3JlbDRZZDBiTkRzYzR6UU41M1BUVy1lekl3X2Y1NGxqejJQTTR5UVlMQnRnSFA1c04ydmdEZ24zNzZoVHdSdm5MOTBLSmZUek9Qa2lFNDB1OFJuSHZ3X0FUNHBRZ21OSFNhNQ?oc=5"
+   ],
+   [
+    "Manchester City vs Fulham: Predicted Lineups, Team News, Injuries",
+    "Six Sports",
+    "2026-11-20T17:30",
+    "https://news.google.com/rss/articles/CBMijAFBVV95cUxORUQxWEhnVzZrTXB5ODF3X2xTU1pSS3MySy12YVgwWjdPNUdwSUhKVGhsV05fbVpaRkdERTJRenZrdnlUVzhic01POTNXQi00QmJBdjFZNU1KcHRXRWhzV3RSemdnbUxRZnZiNWI5dHRnZlRwMHY3QmVTWWFkLXZ6b2dYWDB1anFORU90Zw?oc=5"
+   ],
+   [
+    "FPL Team News GW11: Guéhi Available, Saliba Back, City Pair Doubts (20 November)",
+    "The False 9",
+    "2026-11-20T16:50",
+    "https://news.google.com/rss/articles/CBMimAFBVV95cUxQVjAzTThaaERCWlNHOGNtZnloYXdrUlJXVVNJelViOWprME9yVFVpLVBsVUpLRzQzc2N2Nm1PakpZaUY1TmFFMTZ5QklXQWsxYjRCM3RlcWdyWG94OGdoNUJwTEJGdUZYeHlQSDktejZRenFTSjlqZ3F2TXBhN3hDSmZ3d3NlV045bFNVRTNSTURmUzVtUksxMg?oc=5"
+   ],
+   [
+    "Fulham goalkeeper ruled out for rest of the season",
+    "Yahoo Sports",
+    "2026-11-20T16:22",
+    "https://news.google.com/rss/articles/CBMijAFBVV95cUxPSlE3OWtfUGZnWG9FVEYtMl85dzBkeW5BWW9aZUZ2b09Qc2tLTnVtYmpCTlJEbWFoRGxxbTVKV3RPa3hoUDhzUkxoV3hmbmxtRWExLXdjOVNRUmlqUEtkNmdLYkdQbE1ueDJWcGYtM2xDbDJLZXZDc1VtbHhKUHpxVjFCVkNXQ1lqYnZjUg?oc=5"
    ]
   ],
   "Hull": [
+   [
+    "Sergej Jakirovic issues Hull City injury update ahead of Brighton",
+    "SussexWorld",
+    "2026-11-20T16:43",
+    "https://news.google.com/rss/articles/CBMijAJBVV95cUxOTFFmY0VjOW03QzMwSFJlc1o0dGx0STl0ajkzNHNoSEE2RWJFX2cweDNtODZPWnNyYUR2MHBzZzJ1OWptWG1ib2c3SkdpX0c1TkRUWHoyOFpvekJEZG83YWV0VDNaOXZaRlNubk5sVVZxSXpxbENmMzJKQzdTc2lkSVotYWJMOUZpWDhTTTVoMG5LcGtjSVV5R3ZQSlB6NVZLZlBGVnJIbC1sNlVYblowbjJEVWhEeF9LRHdGeUVKQzA5bmRNSU9IWndwdzlfT29jSWVYcnlERWFaLXVwSHhxWkpBaGt5MHgzNFRpdEx3UW1KZ2hscktlZXVJRFpYRUNpVm9xbEEwYmJ1Y18z?oc=5"
+   ],
    [
     "Hull City injury latest as Tigers handed major boost for Brighton and Hove Albion showdown",
     "Hull Live",
     "2026-11-20T16:09",
     "https://news.google.com/rss/articles/CBMiogFBVV95cUxQYVFUbllOdDJiTlI2VkttejJWRUs1b0szNTBONm5GemlsYU9jOTVadzl1SlgtOWJHbmVfRUprMjg4WnViQXl1TTFyX3g0OEE5QjlyVTNUcmp5ck1uOUZpckFRUldoM0t5VGc3WUdzMTdhT0lwZVZnbFVrR2JXQk9oVWFHLWRuRmpxcVJmWjlxTXZDUkpaWjN2VjhxRlZTck9vUHc?oc=5"
-   ],
-   [
-    "Hull vs Brighton prediction: Gross to play key role as team news confirmed",
-    "Football365",
-    "2026-11-20T16:01",
-    "https://news.google.com/rss/articles/CBMigwFBVV95cUxNWlpQWUJQUmIwVGdPaHdVM2VMeGhFZGVockVGcUkyWFd2Z0lBa00tVU5ET1AtQml1Qnh5VVpwY3l1S2J1UkwxMy12bzUtZ1VGWXJkVHp3OFgzSlZLeFhmcGR3Z1VhTDRhTFROM1loZjB6SnJmT2x5LWE2SlNhcmM2RGdZUQ?oc=5"
    ],
    [
     "Hull City v Brighton team news and predicted lineups",
@@ -1713,6 +1739,18 @@
   ],
   "Ipswich": [
    [
+    "Tottenham vs Ipswich Town Premier League preview, predictions, and team news",
+    "Spurs Web",
+    "2026-11-20T19:30",
+    "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdEVzN2p0SF93aHNncTFHblk1WEZBOC1KUEEyNEE5X01jWWtMaHJERmRtNXkzb3FIZjQ0VTRBS0k3VnN1enBIcHRjUEZaYmhTb1Y2aGhuY045UzlNLXBWenAzNHhKeDIwT0J2eXdjR2xRdTJ0TlJwMU90Z2luUk0xdlY2SEsxSzNsWS0yQjBQVURBdmE1cXpKU3RLcmtzcG44aHQ1THJfZXlFdk1mejFxS3Vn?oc=5"
+   ],
+   [
+    "Spurs vs Ipswich Town | How to watch, team news, kit colours, key information",
+    "Tottenham Hotspur",
+    "2026-11-20T17:06",
+    "https://news.google.com/rss/articles/CBMiugFBVV95cUxOVWNmSW5KTnBxY3VVd3F2amN3ZnEtU0VxRkd0MlFqNWRNdUtrNGVjYVdQOGU0aWlkX3ZmQ3JGTkM2bTZDQTNURkdiS2ZjQ0xZSE1SYk80ZWFuX1lTV1R5TVZwa1paR18wTmE2QWpGWk9TQWZyRWxrT0xHRUN0cnZXamxhSmg2X2l5NEMyVDFmY2RpcGVVbGhsNEpSTnh2VU9odjJ0dDYxQThaMnlWUHdHeEVHS25YN0Joa2c?oc=5"
+   ],
+   [
     "Team News: Tottenham Hotspur vs. Ipswich Town injury, suspension list, predicted XIs",
     "Sports Mole",
     "2026-11-20T16:00",
@@ -1735,211 +1773,223 @@
     "Tottenham Hotspur",
     "2026-11-20T15:31",
     "https://news.google.com/rss/articles/CBMivwFBVV95cUxONzlIU05BV3dJNWhMa2c3TmlVWm5GLWJySEdtbEJvT1NENFctSU5WNnQtbmVpa3dzTUVPWVZyRHVJVGpSUFNPZlRSTGhYTWR1Q3NmWDFtekVyTXhaZnVsYjhxM1FzVG9RcXp5cmc2Z0tPaGlfOXlrRHllbWhNNFZSV0FuandIS1dib1RBWFcyLVRqQmVrall3dC14UVpYdHhMaEhJNHJhbm1NYkk3dEcxYmh2NmszaVhidG5lNjhsMA?oc=5"
-   ],
-   [
-    "Tottenham training video reveals double injury boost as Roberto De Zerbi defends Mykhaylo Mudryk",
-    "Sports Mole",
-    "2026-11-20T15:27",
-    "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOQWhOQUphWU5fNmhQeFN5YXJPM210ZW9GODhFWUE1SDNHNjV3OWhqZU15TXowUThzakRSZFZMRG51T0QtTDN5cWVGalViUkItOEtPOFE5UGFWOGJfaU10X183SmE2YmwwNi11bkhhMGQwTjBXWXRnLThMVkJXallheV9YV09jU0FMWTRURGs4dzc3VjJWcHB3cjJaMUFWc2Z0Vm5xdWIxdC1qbGhnem9DeGtGdHcyUDhqYWRQQV9INU8tbHJ4UDQ2SE1waURXVkxCdjln?oc=5"
-   ],
-   [
-    "Tottenham vs Ipswich Town Lineups and Team News: Tel Out, Maddison Back",
-    "The False 9",
-    "2026-11-20T15:08",
-    "https://news.google.com/rss/articles/CBMimgFBVV95cUxPVHhfQnNFR01Wbm1jb1lFb3RJQm9XTUVqeE42NTZ0OXczSGVLU0ZHeVJBMXhZcU1QZUJUZDZ3X0J1bExXUDJiVTBhTHViNnRmVFBCbmtnVFdPdTdWRElodFpldlhZOTJoQjVESTE0UXhHakZYdDdRQTB3cFlSLWVxQzl3N0xsUm55SGRjcndpY2ZUV2Z3SG80c2xB?oc=5"
    ]
   ],
   "Leeds": [
    [
-    "Chelsea vs Leeds United Prediction and Pick Preview",
-    "ATS.io",
-    "2026-11-19T23:52",
-    "https://news.google.com/rss/articles/CBMia0FVX3lxTFB4Rkw3R1BSeVRNcEluZkFiSjJVTVMtcVB1SmxqQzJzXzhoNEhQUVJzY3VMZkxvNFhqZWRJZ2JTUzZoNjUtQk8xcXRxREhBdVlRSldlYXJQTXRSdEtPMEZ1NnF2RHhoeTN2Qmlv?oc=5"
+    "Leeds United receive double injury boost ahead of Chelsea clash",
+    "EPL Index",
+    "2026-11-20T19:50",
+    "https://news.google.com/rss/articles/CBMinAFBVV95cUxNSTN3dWh4bGZTYWVMMldxd1QxRlpVRU9GQUJDQUctbDM5MHRWOEFuZ3dwbnJXTTN4V1hmOW9hUTd1WG9HblVZYlZBc0VhczZxWVlsQ1UwOXpLamxIOVA1R3FsSzdXYkRjUjc1RDFfUkxUaXhtUGVMTDBtOGhLVElFZjhOQ1cxMTFKdGliUGdMaHBuaUUtUmRPNXBwdEQ?oc=5"
    ],
    [
-    "Nine players could miss Chelsea's match against Leeds United with João Pedro a concern",
-    "Yahoo Sports",
-    "2026-11-19T22:12",
-    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNVDVHaU1tbTVxUTlFbUNlQjFhaE5NMUl4THZXS0Y1Nk1XeHQ3UmVDcm0zeVZQX1NaZ0RZRG5RaHViUUxxeDVxNlZLX2doVElJZGFBc3JsM0o1YW9FV1pUYldTcVJVQjJvem4tZjRLeDNIYnRvUGd6TVcyOHppYnNacGp4QnRjSWNU?oc=5"
+    "U21s Team News: Mills, Cresswell & Lienou all start vs Charlton Athletic",
+    "Leeds United | Official Website",
+    "2026-11-20T19:00",
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxPclQ2WVdDRHJsY0dIdnFINkhSeFRpUFhyMFBTbW5LVGhma1N0Ulo4bHdfY3BpTzdCNjh3emcxLXVxc2xGajE2VFlldmJ5cG1rUUo0TG5xeE5iUnhpazRSdW1nTGdkTXNZV1pHZWpZZGszcGR1REpaaUJyRjIzNVB3UTZIc0U5ZUpNbUFJY3IzMS13cGVfOXRma3ZVdzhkRnRFYmNidmRoRTZCSU9l?oc=5"
    ],
    [
-    "Leeds confirm huge injury boost for Chelsea clash as two stars return",
-    "Yahoo Sports",
-    "2026-11-19T22:02",
-    "https://news.google.com/rss/articles/CBMihwFBVV95cUxNVUNJemFmQ1g3NThsYmlmTU9CdkFHM2xZOFpPdVNJaC14R2d3ZzdsSmN0X3NsYVhDbWhkWG9EdGZSTUZPeFVVSG02eWl3UFpCSGxsMDFWY1hveDVtTlhkSktDLW9TbXI1V3gwQy1nZFQ3WVVYeFo4eTFzYzNveGcwVTVNeW1jdlE?oc=5"
+    "Chelsea Team News vs Leeds: Caicedo and Acheampong Fit, Joao Pedro, Lacroix and Hato Ruled Out",
+    "chelseafconline.com",
+    "2026-11-20T18:50",
+    "https://news.google.com/rss/articles/CBMixwFBVV95cUxQLUt5WE00bnNfUDZnWU5mRDV4TFJucWRadU5tWENmMW9GZWFYdG1nYUR4MjdlUUdRazRLTVRhdDhkUW5mcXY3M3pOc2l5akFjNG9SZzN0TVhlSWZWZUhoMTduVmJkSmdIRk9QeUdnNjdSams0ZWEwQlpJNVJDenlUTnlxNWFRd2NpdEtNTVhzbWVyZUdPNUxwWHZZSkRBdjhLeVJwQlJtcUdnWkFTallQcmc0U3FpLXc3QzYtNDV3b2FvNFdSQkY0?oc=5"
    ],
    [
-    "Is Chelsea vs Leeds United on TV? Kick-off time, live stream, team news, referee and VAR",
-    "www.leedsunited.news",
-    "2026-11-19T21:46",
-    "https://news.google.com/rss/articles/CBMiekFVX3lxTE5BZkRtT19NRjFjQnNNcXlYYWJnVTZHelNfcGhKWnltSWxpVFFOWlEyQVNKYkk2eEJFaFV1Zlg2ZFNTcVZtVElfQ1doc1NVX0x6dk9RMURhVW5pLWYxem8yMUhBbkVFX1JNdzZkSzRXYUN3dnpPc2E3eF9B?oc=5"
+    "Chelsea vs. Leeds: Blues bidding to extend 27-year streak in key Premier League showdown",
+    "Sports Mole",
+    "2026-11-20T18:31",
+    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxORklfV1gyRF9yVm5OLXhILW9RVnpOYlptS09XeXYyUlhhblRzWlRvWC1DV04yVk1veldBV3FTVk1OSW9sY2NSU1ZzWWFwSFV3VFBDTUhINjd2Q0JmaFhMVmJzaVJmQm9GZ1BJSzUwTlNHNTMwR0hmWFRRNlJuc3ZneVlFeGs1WGJxbF9EbGp0V0ZoQmxvMFlNQnAycnBHZ0VmWW94RjluOEZNbmtGbGJVb2V0ejJ5N19s?oc=5"
    ],
    [
-    "Chelsea Intensify Thursday's Training With More Returning Internationals But Key Injury Absences Remain Concern",
-    "Yahoo Sports",
-    "2026-11-19T21:36",
-    "https://news.google.com/rss/articles/CBMilAFBVV95cUxObXJXUGpVNUd3Y2RtQXcwWUEtVUtBRkJaRWZaQlNpaFVFelRiN3lPbzQ1b2lCV3M4MzB1SlVWTFJ0NmItcmdqMDIwVVc4ME55UmNjZ0dQbm9RNXNUZnVsWG5kWXVVX2x4TFpjZGpmZi02aG5LdWY5VE5HNGE1aUhMbm5jOV8wRVhzZVhVX19SbW9aRG5h?oc=5"
+    "Joao Pedro and Moises Caicedo injury latest as Xabi Alonso gives seven-player Chelsea update",
+    "Football London",
+    "2026-11-20T17:46",
+    "https://news.google.com/rss/articles/CBMijgFBVV95cUxQOWlkNXJzX3I3MUFjbmJyNVFqdjB5V29va0tmMVFMc1dyMmJMdTdVdURkTjRrLVJnRUtyYXVGd0F2eUtrZ0VfQmlHM0dIbEtiRFl0U3dmOWpyM09fTm1OTUpKdjBMbURBVVNjd3BwOVRYdm5rRFJHTFFLMmNVNThDMTJDVm1xWkZ6XzlCOGZ30gGTAUFVX3lxTE11LUlXaTRPZjRLNUFGUDcwU2JxRUtKVHVKdzRDV09lNEFYTXF4eENqdVhfYnVtMjFSN3c5OGlsc2FnWWdzZzJPSnQyRjlYcFMzS2NoS1BFU0VEVWsxQTlmMXZreTVCZDJKbXNZOFlldmNhWm1vLXFRUFhZSGFwNUdjSHNMeXFDUklaZDJmS3RZSkdkTQ?oc=5"
    ],
    [
-    "‘I Was Also A Bit Concerned’ – Daniel Farke Makes Admission On Leeds United Star’s International Duty",
-    "Inside Futbol",
-    "2026-11-19T21:12",
-    "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQRW9XUzJSRnRiUjhwNjJKODZIcUZ6dFZHTVBYOF84OEtGc2d4aVNvelJKb25maWJkQkFoVTY0U2pDaXE0QnlvMkk0em9lWHFWSEw1M3ZPTmp0THRvWjNlR0tkLTRXTEdRNTJDQmEzZWJfOG56NG16cVBiVEZva2gzTW5uN2dtOFJ6QzFRbHZKdW1NMlJkSFlqRV80MFRyMVNjZnRaX192NzhLSG1YR3NtdmJNT3Fsa2hyLTk4QnBDQzFNaDl4NjJMdE4tUTF3RzhXM3FiUThR?oc=5"
+    "Leeds United transfer news, rumours and gossip: Live updates and latest on deals, signings, loans and contracts",
+    "Sky Sports",
+    "2026-11-20T17:35",
+    "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOUlB5ck9MdGNZeWdtYUs3eHFqMWhWMXFQTk5nRk5fYjlEcDBJMWdOS2lmWFNxcVB1Skt1bVZyZUxpa1hqODBDYmdrYVMwWHU4dHpSWlpoWW5kcFJsTUoxWnFELTc2NUxPRlptOVcxN0VBRVBUSnpiUEhSdjlMVmxnNzRxX1hSSm5ZS1Q3dTdleVhnZTFZZ0c5LWZja1N6d3BSRmpsRFJGb0N0Uk1CVExwQkJMMUttS2s5SncwNktkU2w3cEZaSHF0VHIzbGoxUHZudDBNa0tNWFRjSklUdjFqRm5STnA0ZmRoMi0xZWxLeWpsSEU?oc=5"
    ]
   ],
   "Liverpool": [
    [
-    "Szoboszlai + van Dijk: Liverpool injury latest for FPL Gameweek 11",
-    "www.fantasyfootballscout.co.uk",
-    "2026-11-20T16:22",
-    "https://news.google.com/rss/articles/CBMiswFBVV95cUxNMmdrQy05T1UzS3RYaEdaMk1mT3k3aGJVZjV2RHUwNDBXeTVaQml0TWhMUDVsWXdMLU1GMmZiMlJKeHBuX1k2QlJSOWJ4ZmlWSy1sZW9GNFJzMkFKUkJHZUswWUp6TEp0QXFtQzg3M2JNZGdpY3JiMmhsMjFpQ25kdS1zZmEyUjEtcGRiQUxrN2pDN3hDb0c5V2NyZ0N1S2RTd2h1SzhyLXpqYTJaa1FRX0N0QQ?oc=5"
+    "Ryan Gravenberch Injury Update: ‘A Matter of Pain’ Before Man Utd (20 November)",
+    "The False 9",
+    "2026-11-20T19:46",
+    "https://news.google.com/rss/articles/CBMiogFBVV95cUxOUmZSdzdKOFZaR0NvSFhQSzZSSHhYeUhLYVJPb2l3S1RGaEdXeGdfNWxfTTZKNjBtcVBaaVA5WHJaMWFkVlp3NkFUQmFGZXZHT1NMTlE2MlhRc1ZJTDJqS01OSmwzMzZOYV9wNDIxV2NSNmxQTXNFb3p6WDJqdnBrc1otSWZvY3hweHJxX3hvNHZyUzgzMm5sS040dFl3QzRWN2c?oc=5"
    ],
    [
-    "Man Utd predicted XI vs Liverpool: Nine out or doubts for Pochettino’s first match",
-    "3 Added Minutes",
-    "2026-11-20T16:22",
-    "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOblM0LXYtdnFoSXI5R3M4aWY1TEx3Wndfc0RuUFdsTWJMREJEUThxQmlEcS1JVWUxZHBlUDJ3NmZNR0dnSWxiZ3ZsZWgwUHMybkhrcUNnUW1XV0FUSmxLUk5vZ3BJN0JlQy1aTXFaRXNObGxaWDhYMVJSMEQxdHR2MmZncnYtTWp0X1V1cXpGcFVaVkd1SGIwc29FM3BWeTVMU3N0WFlfZlhpZ1pGUl92UnJXYm5odGpmbDJxYVlTRHk5ZUxFMVdIN3ZCYVFZZjB2OEczOA?oc=5"
+    "Man Utd XI vs Liverpool: Confirmed team news and predicted lineup",
+    "London Evening Standard",
+    "2026-11-20T19:36",
+    "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQemFjbURSZGNhQXNqc29xbDdxLTBjYjB6QTJIWlU2OGhsMVRsSzNyN2Rad3dIdlQ2bFNHWDNvclUwVDRLZTdWOGJrWF93cHdPV2d4Mk5xbm9hS1p2c2JkUWhGaUdudTh4c2pqWmtHLUpQT1dYS0tCdXd6aHc4TFNhdlV6bV9WbW9fci1xQzR1TnhFc0xyVGlFRHNuanJKdVdySXpHLVFKNkJYNDJfZUlyXzhiZkxVR2FwMnNPTUhlaG1LUldYZW9jMzB0bUoyRDVZUmdjOEJyaHpON2RsSE1nTjJ3?oc=5"
    ],
    [
-    "Iraola on team news, drones and a 'small advantage' for Man Utd",
-    "Yahoo Sports",
-    "2026-11-20T16:03",
-    "https://news.google.com/rss/articles/CBMihAFBVV95cUxQd0hsTXlOWlhWaVNJaWxZWm9kNzBEOG1LSXZjbVFiOHEyb3I5ZlpmU25NbV80WUFlZTM3YVpQYk9NQW5XWEM1T0F0emVmSWc1cHc5NTNyYnhyRE9PNVRrRUlaZVVxQklJLVhGSkx0bFo0NW40Ti05Unl0bjZNMy05MXBwNHo?oc=5"
+    "Liverpool vs Man Utd predictions: 7-1 Bet Builder tip, team news and odds",
+    "Racing Post",
+    "2026-11-20T19:00",
+    "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOQ2tSeEtHamlVTllERDFJRGJRRnI0RUFZYTNrTlZSenF1Nm5oWXMtUVBkYUEyaGRKLTVZVWh5S251UkdZUjBnMHZKamtrWVYyRnN1ZnZqdUhucVVaajQzVEp0cExVZTdhdldhU3VudmxBYkJQeDI2Rm1JOWJUNXcyMG1uTzdxcF8wSTNQUTJ3RjluSEM5OHlUQTlwb0VNXzVMUjhfcmFSak1ESkxseGU5ZEItcFAtWGpjVG5zUWpmWGREdzk0WTYySFAwdzFZZTVJRl9PSDBkdk9jcF9rVnNZWGpB?oc=5"
    ],
    [
-    "Liverpool star pulled out of game with freak injury following GTA release",
-    "FourFourTwo",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMijgJBVV95cUxQcWh2TW84ZXJaanVneFNPZHhXc0ZMTFllU1AzbDZoWmVLUjFIVzBHc09vRDFCSV9oaVB4N2VWU2U4V05tTnpHZVR6dGx5UUU5QW04dGctSHpDQUszN240cEk4VmNidUV4ckc0bHM2bjFuQk95OXo3RDNWV2txYzA5QS1fTTZ2RHJJU0NpRzV4WWZXdW1vN0hUVThUWWhJbEdDRENWamEtZldpZnpkb0FuTXNsSXhkOG9LczFyVUJzYVdhb25IblpyX2FTakh3Yk9mSjhSMDJGNmxRbGJCcFA0SzM5NE8ydWVYdVFxRldTQXFuZmM0akRmb0ozZ24zY3Nva05lVkwxZFFQM1JHdnc?oc=5"
+    "Confirmed: Liverpool receive triple injury boost ahead of Man United clash",
+    "Anfield Index",
+    "2026-11-20T18:53",
+    "https://news.google.com/rss/articles/CBMirwFBVV95cUxNTVh5X0prSmJzX2xHYXZTVXF0b1E5a2lzaDdlYnBwME5IdVJ3VGFwMnR1R2lLSUNKSmlBd0hxTWdTTHRIMndKamMtR1dHZlNvelFXZ1VfcFdYQV92QmRndmNTNHhoUWJISVUza0xhTjlyTUg4YXNhYWx6ZUZ1R3N4LTVONUhOcjRkZjNmcmpkQ0l5ZGYxU3dnNm1faUpDWmUtcVJ3dldveGJmRHRsZHF3?oc=5"
    ],
    [
-    "Dorgu, Sesko, Rashford - Man United injury latest and return dates ahead of Liverpool showdown",
-    "Manchester Evening News",
-    "2026-11-20T15:55",
-    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxORmp2Wi10b3NGUnFMQkhZc1VDd2VpQW9HbVBCTElwekU3bkljWmhNLUFwRzRCV1ZTM1otU256OGV4MzdJazIwR0ZWVlJuTDhnUWtXTEx1Ykdkdk5Ya3F5VFlVV1hGSXliQTRLOUtGOUxYZm9SY3ZFcldTdEQ2MmFQc2NBU1BjUTZjRTRLWFIzVXhwSThEeDAzV3VXZzJqUElzM2dVZ19FNjY1c25VYmF0QTQ3U1JHN1oz0gG-AUFVX3lxTE9BMFFBNEFmOTBXT1U3V1lUeEh5LXlZbXZkSlJFcnNjTTJzOEpuTzRoY3pYTzZuVWxjYm9ObkZzY1NfX2tXeHRGYzNxdTJTanVaamJYOTlXSTE1NHlaRVdxVzNWUTgyd0E0VHNSZ3Z2NHRSUzVPRm1KcW1HVWRDVmYtSDN5NmhvMmlUa0ExMUhTTkNobEFZcUtEek1IdlRETFY4MFNjdG5kQTZ1VDN3eXJIYnVFR0hjRDNpTmJPV3c?oc=5"
+    "Mauricio Pochettino provides Manchester United team news ahead of Liverpool tie",
+    "DaveOCKOP",
+    "2026-11-20T18:49",
+    "https://news.google.com/rss/articles/CBMiugFBVV95cUxPVm1SUm5LQ2lSbW1KUFZhaDdCbm1OSmd3V3ZEQV8zbHdUWnNqbC1XZDF6RW1jSURiMXpDRFlMbzJ2TFM4T3BNQVJuTnlGdzNRdlhXeFVTcUdtREtvbHktYTNydXNYQXZoTDdEVG5GRS0yTXpLdEJUMGo0QW1IbU4waTBZV01JR3o4SGVxc19zRjNHeDYyUGZMajZHbFRzN3pUU00zbWRFNjNlMVl4VHlPTDVjZkFKQy1OZHc?oc=5"
    ],
    [
-    "Andoni Iraola issues Dominik Szoboszlai update as Trey Nyoni 'dilemma' dismissed",
+    "Every word Andoni Iraola said ahead of Liverpool v Man Utd with drone issue and injury update",
     "Liverpool.com",
-    "2026-11-20T15:47",
-    "https://news.google.com/rss/articles/CBMimAFBVV95cUxNOFkzSmh3UEFHclh5aHd0cHh3NTAwY0YzOXgyTkQzd3Jxb0x4aTZJOVpjSXNwMVQyelhYd01PYktnUGJRanlJamNLU0U3bEMyVHZ4U1dlV3BUaktCQmplbko3cWs2cnNpREE3cF9lQ29uVXljcU5zSWZ2ZjNqU0ZsSUdySkZ3SmQzYWlnY0FUc2NwamtUem9BWtIBngFBVV95cUxOeVUtem42SHU4a0Z5RkVKLVlyQ0VkMkdLZ3RYWldGaWxzT0VGUmFwMV9xTXVQNFZqWkVfN21sRnJCSVVtQVpvd2RDTGtMb0NEYXZfNm9hcGViRlFtRzRDOVdpMHJKMW9XaFYtd3lRcW9FS1k3bE41YnB3NHdOalBuRlhvaXhlU1lUck1yYno5VTBTM2xoaFM1Z2J6M3NXZw?oc=5"
+    "2026-11-20T18:27",
+    "https://news.google.com/rss/articles/CBMinAFBVV95cUxOUWtNWmtjZVEtUElaRmJLV2k5SEo5ajhScmRoUzF5UW9pOFZUb3VoVXVvakszTXN1anNKOEhYQUNyOTk4RTY3SUY2bEVjbzU1R0tremNGYlRmZ1lmaHdTaUc3WHVVeS14bDlIc0c1Rm9DcGJFemxkcG5QOVJTS3NnOFZ5djZTdGhUaGlmQzZYQzZpZDZGdFVUYV92QlTSAaIBQVVfeXFMUDA1ZzFYeWh2TE5tc2dBRnJLN1VwRldjdlREOWZqcE5rZV9WdHlzek9YaXhNMUFYRFRfUTlfSHJBUlVNbmhLR1BBRmNPVmZzNTdoMk1MT2Z6RTVJSTBMZ3JiSG1yT3FIUlhaZnB3V1FCb2ZxYUhXcEtPUGlQT19LelVGaXZjRmdHSkdsdlhReFJ6OTMxWk1SMV9nNWVTSTg3aG93?oc=5"
    ]
   ],
   "Man City": [
    [
-    "Man City Team News vs Fulham: Semenyo, Guehi, Khusanov",
-    "The Sports Bank",
-    "2026-11-19T23:36",
-    "https://news.google.com/rss/articles/CBMihAFBVV95cUxPeXg2dHFVS0lVaHcwTHhyeWN4SDVBcVI3bDFZYnRXYnpQbE1MbUtxUmI5ZGx6VG5LMGp3Y0xBSS1OWl9qbmE4dVg5ckpxSU1SaHMtY2dQeVJURnVpLVc3LXR3dm02azlhUzA1VzN0b2UxNHBmQ3RZN2tiZklvUFJ2cUZIbEU?oc=5"
-   ],
-   [
-    "Manchester City vs Fulham: TV channel, kick-off time (Sat Nov 21)",
-    "ESPN",
-    "2026-11-19T19:15",
-    "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNYm9jeGhJWlhydTdnOFpHenJ1ZV9oM0t3bUlSQ2VCMmFZT0pSc2JPczVCRGpsTV93cnpraEtpV2FSOVBaUFRfMTFHRE1WOGYzRE81d0xqRXRtYTBpZS1FS0FNaVlCdnZCSGtPendDNFpqSHU4UzFySi1ZSEZIZGtzMHJFSFNqRjNNNWp1cFQ5aXIwUVl3WUdndUdsS0NpQW83eGhpX0M3MmFXbzJKeVJXT0lGMEdseVFMV2FVX1Jzckp1Z1lDQUYtM2ZQT3FzRTd4ZlZrSkJsdGxYQXhpcE5fLUhLWjBnZFRS?oc=5"
-   ],
-   [
-    "Manchester City vs Fulham prediction: expert analysis, possible lineups, 21 November 2026",
-    "RatingBet",
-    "2026-11-19T19:08",
-    "https://news.google.com/rss/articles/CBMivgFBVV95cUxNMzBqdXRpX3VodlR6SE5RaGM0dVRhdGR6a1NaQXo3UFFXVGxwcEgyTHZGNlJLWEpxZ2ozRzZUY3hMei0zNDNZeWJ1Sk9DbDNYZXJTcDhuMXo3VVdDNXoxbzhLWW95Y25FMENvOGZHSkN0VmJoRHhweG9Ua0ppelRxSWNTbGNRREVuXzMxYk45UGFjZmotc0xiYWFlbzhUanU3d3dEckdRRW5UVkZBTzN0R2dQLXVBZFlPVUZNTUd3?oc=5"
-   ],
-   [
-    "Manchester City vs Fulham Preview, prediction, injury news & lineups | Premier League 2026-27",
-    "Khel Now",
-    "2026-11-19T18:30",
-    "https://news.google.com/rss/articles/CBMijAFBVV95cUxPb3VZSUR2WEhaR3d0VDNmN3N3eUg2RjlTTUh0YnF5Ql9HWmhBU0V3bURQeWh3cGRlaFJGbjBVRm5XSkJiMHl1MDBWRXdLaE5RU0cwVkI5eXpfbzBBN3o1UFdPX043dWhIWS1YaWhjZTFxenljRkliME9WdmtuemdvVnBxX1ZGamtwTnBsNg?oc=5"
-   ],
-   [
-    "Manchester City vs Fulham predictions: 7-2 Bet Builder tip, team news and odds",
-    "Racing Post",
-    "2026-11-19T18:26",
-    "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQSW10ZFkxOHh1ZEc5bTNpZ0JaM0RFMnBHYWNOUHRGaFZmdWVQcWZ6SnVYaXEtOWhSRy1aYTRScU1XSkF2TnlCZm1lRU9wVDVfMHNTa3A4cEdMMzh2UHgzN29rbWpJV0V3YXNneTRjUTYzV29yY0xYbmtnZW5yRFZpRW9NRlowUjFPRjA0VGNoS3NqWUU0ZFZGUzV5Yk5xcmdjX183R2NIbkVqSEhxN2k2N1FkWk1sNnZSQy1RN1BWdXE5VXNacFg1M3dtamFwVW15XzJKbjBjVTJibVh3S01RcXdHZDhqZmhN?oc=5"
+    "Premier League team news: Every injured, suspended and doubtful player for GW11",
+    "Sports Mole",
+    "2026-11-20T18:10",
+    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNbFZLZ202SmdsaFFoZFZXUFJoSGJ2VU9wMXVZMXJmdV9TMUppWVRRcEVpUldJdWFNTVpMVzVFYXZuZ01BYWMwaFpwSlNxMWVuYmNtVTNMWlBHTUxEWlRMcVowb0JZcWxoVk5ZRk5TVDRidHB6d2l5Y3ZmbTljcExYWENGb2Y2MVZ0QmJncWU3V0NzNU9pRHNuTHVEZEt4SWFTOHg0S2FCT0ZLTzN2R0c2a1NKQWVlbmlUUHZLcTNHaWZmM0JvWWZfTGpNc2lVRlNQWXlnRTZwMlppb1E?oc=5"
    ],
    [
     "Man City XI vs Fulham: Confirmed team news, predicted lineup and injury latest for Premier League",
     "London Evening Standard",
-    "2026-11-19T18:03",
+    "2026-11-20T17:31",
     "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNZ3BaYS1McEVTT2dtZlJhUDB0YVBzMUdpYWRYTC1kbkVlQm1pS2w1ZDRLNHlOTDhaQXVQTGJhX01Bd0NoeHR2OWNJeFFLYThEdndfdkYzalc4ZFFfNnZ4dzBTQmtCMkxXUWxOeEdQRGV5UjNxT0hpeHAxa2tQWnlQZnNrUGNfd1BOMXFPd2tCSDlGemVLYnVnNWdleFZCZmFGTkcydnFBV0d2TFFmUFZvNW1uc0ZMNkZuSTF1M1RrS1BHVVppbVYzU3pGRGRsQ2d6SHNrN3psVUM5RDg?oc=5"
+   ],
+   [
+    "Manchester City vs Fulham: Predicted Lineups, Team News, Injuries",
+    "Six Sports",
+    "2026-11-20T17:30",
+    "https://news.google.com/rss/articles/CBMijAFBVV95cUxORUQxWEhnVzZrTXB5ODF3X2xTU1pSS3MySy12YVgwWjdPNUdwSUhKVGhsV05fbVpaRkdERTJRenZrdnlUVzhic01POTNXQi00QmJBdjFZNU1KcHRXRWhzV3RSemdnbUxRZnZiNWI5dHRnZlRwMHY3QmVTWWFkLXZ6b2dYWDB1anFORU90Zw?oc=5"
+   ],
+   [
+    "FPL Team News GW11: Guéhi Available, Saliba Back, City Pair Doubts (20 November)",
+    "The False 9",
+    "2026-11-20T16:50",
+    "https://news.google.com/rss/articles/CBMimAFBVV95cUxQVjAzTThaaERCWlNHOGNtZnloYXdrUlJXVVNJelViOWprME9yVFVpLVBsVUpLRzQzc2N2Nm1PakpZaUY1TmFFMTZ5QklXQWsxYjRCM3RlcWdyWG94OGdoNUJwTEJGdUZYeHlQSDktejZRenFTSjlqZ3F2TXBhN3hDSmZ3d3NlV045bFNVRTNSTURmUzVtUksxMg?oc=5"
+   ],
+   [
+    "Enzo Maresca backs Gianluigi Donnarumma despite dip in form for Manchester City",
+    "The Independent",
+    "2026-11-20T16:37",
+    "https://news.google.com/rss/articles/CBMiowFBVV95cUxNcUNTRlJJM1NSMzlKSjlVaFRVTXJiR1pKeHhvRGpYU0F2UnJHalVSeFZhZ3BqX1lPcjY4OFN5ZVhkMHgxUTE1LVVrTkNqTk5fTG44VEQ3OGVzbm1rZ0hDaEVUSTBvV1hmVm00ck02NGFuREJVR2ZNOW04VmhnVnRWSEg5UmVLbnF1RXJmbmdpOGlUemlOeFY1cFRGazVXalE1d0Fn?oc=5"
+   ],
+   [
+    "Liverpool v Manchester United team news & predicted lineups",
+    "news.bet365.com",
+    "2026-11-20T15:36",
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPSU5YblBVUS1NRnhjdFZTTlRuRjRjRWRLUjIxWFZDWHFNT1ZtZEwyc1VKUDh0V2NIZjlBVHRPUE5vSnhBdzk5ZElGV2VIenZBYjgzeXBwajNnYVBEVW5QcWx0bmI3R242MXNJblBleGxzWXN1dWhTSE9LaXNLX0xqcmd4ODZHa3VKdVFtR1NzVXpQRDdOcDhKMkRqTmxHbUx6d2ZabUc1WlpoX0VvUFRxNUJEM3ZZZ3hmTDBR?oc=5"
    ]
   ],
   "Man United": [
    [
+    "Leeds United receive double injury boost ahead of Chelsea clash",
+    "EPL Index",
+    "2026-11-20T19:50",
+    "https://news.google.com/rss/articles/CBMinAFBVV95cUxNSTN3dWh4bGZTYWVMMldxd1QxRlpVRU9GQUJDQUctbDM5MHRWOEFuZ3dwbnJXTTN4V1hmOW9hUTd1WG9HblVZYlZBc0VhczZxWVlsQ1UwOXpLamxIOVA1R3FsSzdXYkRjUjc1RDFfUkxUaXhtUGVMTDBtOGhLVElFZjhOQ1cxMTFKdGliUGdMaHBuaUUtUmRPNXBwdEQ?oc=5"
+   ],
+   [
+    "Ryan Gravenberch Injury Update: ‘A Matter of Pain’ Before Man Utd (20 November)",
+    "The False 9",
+    "2026-11-20T19:46",
+    "https://news.google.com/rss/articles/CBMiogFBVV95cUxOUmZSdzdKOFZaR0NvSFhQSzZSSHhYeUhLYVJPb2l3S1RGaEdXeGdfNWxfTTZKNjBtcVBaaVA5WHJaMWFkVlp3NkFUQmFGZXZHT1NMTlE2MlhRc1ZJTDJqS01OSmwzMzZOYV9wNDIxV2NSNmxQTXNFb3p6WDJqdnBrc1otSWZvY3hweHJxX3hvNHZyUzgzMm5sS040dFl3QzRWN2c?oc=5"
+   ],
+   [
     "Man Utd XI vs Liverpool: Confirmed team news and predicted lineup",
     "London Evening Standard",
-    "2026-11-19T23:40",
+    "2026-11-20T19:36",
     "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQemFjbURSZGNhQXNqc29xbDdxLTBjYjB6QTJIWlU2OGhsMVRsSzNyN2Rad3dIdlQ2bFNHWDNvclUwVDRLZTdWOGJrWF93cHdPV2d4Mk5xbm9hS1p2c2JkUWhGaUdudTh4c2pqWmtHLUpQT1dYS0tCdXd6aHc4TFNhdlV6bV9WbW9fci1xQzR1TnhFc0xyVGlFRHNuanJKdVdySXpHLVFKNkJYNDJfZUlyXzhiZkxVR2FwMnNPTUhlaG1LUldYZW9jMzB0bUoyRDVZUmdjOEJyaHpON2RsSE1nTjJ3?oc=5"
    ],
    [
-    "Liverpool receive triple injury boost ahead of Manchester United visit",
-    "Yahoo",
-    "2026-11-19T23:10",
-    "https://news.google.com/rss/articles/CBMijAFBVV95cUxOSG1ILXpMN195UVJQS2JaMV9QdUJfbWZOZmo1OF9UMWF2OEFpZkx4WU51Zklwa2ZBc3h5WTZoT0lHYmg2UHBpLVlLYy1zX29OcWxDZXBid3hBMTlDV2NtUUFZM2E2T0dWbFg3Si1CX0JGVzFpRkdyWFNyZlBCZnZBQUFZTmZXS2xXWEh3MQ?oc=5"
+    "Mauricio Pochettino provides Manchester United team news ahead of Liverpool tie",
+    "DaveOCKOP",
+    "2026-11-20T18:49",
+    "https://news.google.com/rss/articles/CBMiugFBVV95cUxPVm1SUm5LQ2lSbW1KUFZhaDdCbm1OSmd3V3ZEQV8zbHdUWnNqbC1XZDF6RW1jSURiMXpDRFlMbzJ2TFM4T3BNQVJuTnlGdzNRdlhXeFVTcUdtREtvbHktYTNydXNYQXZoTDdEVG5GRS0yTXpLdEJUMGo0QW1IbU4waTBZV01JR3o4SGVxc19zRjNHeDYyUGZMajZHbFRzN3pUU00zbWRFNjNlMVl4VHlPTDVjZkFKQy1OZHc?oc=5"
    ],
    [
-    "Injured Man United duo spotted in Mauricio Pochettino's first training session in huge boost",
-    "Manchester Evening News",
-    "2026-11-19T22:16",
-    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPeWM4ZGNYV2FNSUJJdXhaNUV1ZUlZT3hCQ0pCU2pzaGo5QzE1eWFPQVc1Vm1LQXdTejhrZjFTeUFwdkZ4QVg4UFEtcWlObW9MMjlWRHRDdm9NTlNyUHJSV1FEMnY3c2pDcHJ1bjNockdSS0w3MWVxUEwyRmxKbGtWeFpLUk4xS0ItX0l5MkpLX3BMeTJ6T0xaM1lZRjN5UnJyUmFCNkpUM0NjYUx4clpJTFp3LUM0NWhDVTA00gG7AUFVX3lxTE95YzhkY1hXYU1JQkl1eFo1RXVlSVlPeEJDSkJTanNoajlDMTV5YU9BVzVWbUtBd1N6OGtmMVN5QXB2RnhBWDhQUS1xaU5tb0wyOVZEdEN2b01OU3JQclJXUUQydjdzakNwcnVuM2hyR1JLTDcxZXFQTDJGbEpsa1Z4WktSTjFLQi1fSXkySktfcEx5MnpPTFozWVlGM3lScnJSYUI2SlQzQ2NhTHhyWklMWnctQzQ1aENVMDQ?oc=5"
+    "Mauricio Pochettino Makes Major Manchester United Rebuild Pledge",
+    "Heavy.com",
+    "2026-11-20T18:43",
+    "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPUnc0aUh0eUxNVnRKdVNIQW13ZEJ5aVVtVWN3andtc3dnelJPbTcyOXBTaGstV0lRWEg4UmU2YlVCMzRYQnJJZDA2OE1qVDNiSVZwVnVIcV9WV0hSS1c1SFd5MmFUSEVYRnJxdkdRNE1VbWZhcV8yck5MNHAtaVI1aTl1RGRteUs5cEt0d25lNlJNTTVWTk1JNWpxenNiUzZ0Z0kyeklIZzk?oc=5"
    ],
    [
-    "Liverpool injury latest: Virgil van Dijk, Dominik Szoboszlai and more",
-    "Anfield Index",
-    "2026-11-19T21:52",
-    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPdlYxcUVNcWpaM2RzUGpoM1V4Mnl4TnN4RzZndTk0LUdCeFk3UGNnczZrbUFLOUZ4YzgzWjl4ZW81WElZMjhZbkd6WURCTXNLdGVIeGVWbmVtazFJdGw4U2xTOExrX2RQMXctXy1NNzFub251SEU3Ri02RWNJNEZfUDNIRFFmR2hBZHh3X1h6MmJnOWQ1VlVPak92dTE4Nmw4clNsQXFaQnV2Zw?oc=5"
-   ],
-   [
-    "Liverpool vs Man Utd: How to watch, TV channel, live stream, NOW TV, team news and score prediction",
-    "Sky Sports",
-    "2026-11-19T21:35",
-    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOUGVxU29YM3ZNZ1dfOXJXZG11aXNGRVFKaEE5di16VndUMU9EQ25rSUItU001Rk5jQnlQQy0yV1dpcWlYTWEyTmMtZlBKbUpXaEtFSmp5alE3c2laeDBOTHdYS2JJanluR18xb29UdURhOVRHd3dHQWJfV3F1UW5zcklkbk1hLVNYSHhtRjQwVFlQcEpNcXN3dlJYYXpGeWFMd0pSSUR5emZzUjlmS0dVWUVfbzdPWHRZUWZlUWVVdjZUeUVaUFVvbFlXLWdKcFhNb1FHd05HSi0tYzA?oc=5"
-   ],
-   [
-    "Mauricio Pochettino Handed Double Injury Boost In First Man Utd Training Session",
-    "Yahoo Sports",
-    "2026-11-19T20:40",
-    "https://news.google.com/rss/articles/CBMikwFBVV95cUxON0NpOHg4TWhva2UwWW9rcU5LQ29MdUpFY3pVSzlURU1nSjZZX3pPRC1aa3NIZEs1cFozVjZmSFNZUDdmX0RZZWFPVWQ4aTYyTDQ5anZIVGgxOE9JT1Y3RG05ckVJczZZbmJjb05fRDJOZktTb2ZZZHZmRXpsSHZ4d3BscWR0MFVhTW5EUVlNZlRiT0E?oc=5"
+    "Premier League team news: Every injured, suspended and doubtful player for GW11",
+    "Sports Mole",
+    "2026-11-20T18:10",
+    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNbFZLZ202SmdsaFFoZFZXUFJoSGJ2VU9wMXVZMXJmdV9TMUppWVRRcEVpUldJdWFNTVpMVzVFYXZuZ01BYWMwaFpwSlNxMWVuYmNtVTNMWlBHTUxEWlRMcVowb0JZcWxoVk5ZRk5TVDRidHB6d2l5Y3ZmbTljcExYWENGb2Y2MVZ0QmJncWU3V0NzNU9pRHNuTHVEZEt4SWFTOHg0S2FCT0ZLTzN2R0c2a1NKQWVlbmlUUHZLcTNHaWZmM0JvWWZfTGpNc2lVRlNQWXlnRTZwMlppb1E?oc=5"
    ]
   ],
   "Newcastle": [
    [
-    "Arteta delivers Arsenal injury update ahead of Newcastle clash",
-    "NUFC Blog",
-    "2026-11-20T16:25",
-    "https://news.google.com/rss/articles/CBMilgFBVV95cUxPRnlOOVo0MzU3TjJ6Yl81R20wbno1NmJzbTZyeVZScW83LW1qVkZSZ0ZIUC1MOUlncUNTRVl2ay1WOTlaRWZ2VGt6V2dTeUpPdFlNMlZ3TG0zLWhveFVQUVB0LW5qWkROTHhsMzdoSi1HVTJEeEw2MFVaVVZMb3VzUDhnWnhWaTVMXzZ4QTZyQmIxeDRYMHc?oc=5"
+    "Newcastle United vs Arsenal: Preview, Prediction, Where To Watch",
+    "Six Sports",
+    "2026-11-20T19:30",
+    "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNMVVtU3NxaEtfN3A2ZjhSdlpOUGpLcmxpUXVyeGp0QnJYaHBRUzRVUi1UTFNLSWgxcWFMcnE1MUFKUS00U0c1eVBFb3laUEtKU0R5dVE4eGEyWnAwNVZ1Y3liSEJWc2ZFMGdMdFloeVZROEVMV0NNSk90cGR3bjhfT000Ukg0dFJvdnhv?oc=5"
    ],
    [
-    "Newcastle United vs Arsenal: Match Preview, Latest Team News and Score Prediction",
-    "EPL Index",
-    "2026-11-20T14:50",
-    "https://news.google.com/rss/articles/CBMisgFBVV95cUxQcU40SzZ1TDh5a0VLMFpkUE5PaDZJV3FyaUl2V3RWdlplM2RUQXVLYm9rRkktQUtSZXp1bE1tNThSeEJDNHJ1dEs2YUpQa3E3cWxrRlpVdFZ2cDltZG53NUhZbGZpRlh6OC1zNHNUSHdjZlVpT0NBV1dKNUl1OUxhdkJhWlJ0bWhCMGwwTlozNlRRQ1NvYjNydm9zMFpSVVY3ZmVuLXhTbjNvMTVkc0tMdzhn?oc=5"
+    "Team News: Newcastle vs. Arsenal injury, suspension list, predicted XIs",
+    "Sports Mole",
+    "2026-11-20T18:30",
+    "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNOWpLaU03Rk5ZdVhYTy1WSXVub0R3dzJTLUJGbDRIa1ZjaGwzS253RGhxbEZQNnV1TTVSalcwM284MUUtcTBiM3I1WGwwNmRJQVJDZW16eVN6dEhaRWpZUVlDWUpmcGlBbE5xSmVwMUpiVGlEUlB4Tzd2dUYxd0xkVGtSYXpvRzRadkVfRmJVU08teGtJMUpzWVZmcmh2dzF0VjdNZWZyVEd4T3lsSU42WmlLYndxR3I1Z3B1NTVrUzc4UWtHQXNUa042UlBJVzNHOTRj?oc=5"
    ],
    [
-    "Matthias Jaissle faces Premier League ban as Newcastle United boss makes candid claim",
-    "Chronicle Live",
-    "2026-11-20T14:04",
-    "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQSkx3NDdSbjNmVjZidGdwOV9jbWhoQ0ZPd0VXbGRlalREWER0d1hhSUhyQjBjNUVnNXp4QnIyT0hWV3F1NV8xTmlrcEwzZENDX3g1VXN6ajVIQ3llcjBSOFM1U3RRTXBBRmVWVFVWWmhjU0E3TFZlSXp5OEFaYUh4NmdLbG5Uc3N0ejZ2alNmZmR0anhpamdvY19jZVViUmRXZUdDUUo3X0tvRnPSAbABQVVfeXFMT0Ntbkt1VG1Hdjc4R2d0WUJKc2NrXy1aR1E1X2hxWUhDSHJ3YXZkel9qcVVWSkl3NTIzNDdYYkNXZnUyOWttb3Q5SlpmS0JldFZudkpFZld2MEEwNElIX0ZRX3kyRU5oUHVmM3Y3a2N5aXd1SzY2N0xpU0JablRvejZSdkZvWDRSNkMybkdOVGZPZ0JXMEZJbVNYSzNpeGM1c0hLSHgtTm5DbUxCOFdkZXI?oc=5"
+    "Premier League team news: Every injured, suspended and doubtful player for GW11",
+    "Sports Mole",
+    "2026-11-20T18:10",
+    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNbFZLZ202SmdsaFFoZFZXUFJoSGJ2VU9wMXVZMXJmdV9TMUppWVRRcEVpUldJdWFNTVpMVzVFYXZuZ01BYWMwaFpwSlNxMWVuYmNtVTNMWlBHTUxEWlRMcVowb0JZcWxoVk5ZRk5TVDRidHB6d2l5Y3ZmbTljcExYWENGb2Y2MVZ0QmJncWU3V0NzNU9pRHNuTHVEZEt4SWFTOHg0S2FCT0ZLTzN2R0c2a1NKQWVlbmlUUHZLcTNHaWZmM0JvWWZfTGpNc2lVRlNQWXlnRTZwMlppb1E?oc=5"
    ],
    [
-    "Newcastle star reveals he feared his career was over after horrific injury complications",
-    "Lente Desportiva",
-    "2026-11-20T13:30",
-    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOb3JfM0U1LWpVLWk5NWxrbEFHV1l1OFp2U3lFMkZqcS1pOGVKVXRxS2RCTGdPWDJ2UWZKQ0RhU1VUYjU5VXI2QTVjZnV1djFZMnRCVllxQVhSZmdHenJqZHBlZlcyVWUxaWZva3lORDBUYWUtR1pSWnZvOW5JV0J6d2VWOFJIYmRoX0JsZzQtYW1scmtZb2Jwc3V1c3ZDUFJ3LWxJQzJ3TjZQcDFvZDB2dURxaGIyMFRz?oc=5"
+    "Arsenal at Newcastle United Premier League match preview: Heating Up",
+    "The Short Fuse",
+    "2026-11-20T18:00",
+    "https://news.google.com/rss/articles/CBMihAJBVV95cUxQRmxybVJTckg0WDJ2YkZpbkw1NmdGeGhNLVRKd2xYdktyNTR4SWNrLXpIbEVhb1VKY1NMejlFdHNHMEN6N1VuSEgtQVNYV2xkUFVoMVBHYkxtTHNYbk5MckFRM3FnQjB6eUtrZ19YdmJOWXRCNjUyTno1Nno5QlNfalJQZWg4VThPbjMycHJiSWF6RnNOOWVNNGMxcFBfZXJXT01SZFplQzJmd2EtcWl6Qzl0ZXJ5SUZWRVFLZ0ZtYV9YNzJVckJYZzYzY1FnTjVOaDdibll1RGxEZ2xIVXZNRXc5MmVmSWU2Vk1PZFJMajBQUDcwZG5QUVVJaWdwbk5vU3NKWg?oc=5"
    ],
    [
-    "Arsenal three week injury blow confirmed 24 hours before Newcastle United trip - key man ready to be unleashed",
-    "Shields Gazette",
-    "2026-11-20T13:01",
-    "https://news.google.com/rss/articles/CBMivAFBVV95cUxOOXpIcUdMU2ZWUko3WVFEVWd1SlQtSzJjcml5VDVzdkhzOEVPUkFMdktqbnNxcGljQk1LUVF2T0p5czB4VnRVTDZhZHg3cGdrUzZPTElPcklmcFlteHFnS3BYNUFqYzAzQmtjWDJyY3g4OVB3UV8xWWNib3Jvb0lNd2w3a0VyQ2dnYmxDbmREUE11cjdxZW83ZmdfSWd4SVFqTFBXdHlCV1ducEN4YlRmV2ZqaGhTTXRMMDUtbw?oc=5"
+    "Arsenal injury news: Saka still weeks away, will Saliba play vs Newcastle?",
+    "Yahoo Sports",
+    "2026-11-20T16:58",
+    "https://news.google.com/rss/articles/CBMihgFBVV95cUxPay14MUc1RDRSaGo5dlFsWjRjc1JmS04xN0ZGaUQyRVZ2RWpWbTFsM0h3cGdUQ2xCTzNsSm56ODV6RUFIQ0ZQRHBsd0NHckszVHNQRzJEenZIOEVjVEZFT0hZNC04dm5UQ2drZENtZk5zbDB4SGFZWnhWQkViWGNSamxiZnd1QQ?oc=5"
    ],
    [
-    "Every Arsenal fixture Bukayo Saka could miss after Arteta injury update",
-    "LiveScore",
-    "2026-11-20T12:16",
-    "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNTXV1ZHlDR0RKYjA4Nm85Q2J3Mk9BRE1sd2RIU1JodENDb1lrWWFwd3kzaE11aWlpVG00VlBqUnRNcEV6UG9xcHg3MjVBeGF4UmFtc1ZxY1JnZ1NUMmNZVC1KMDVfd3dBbXgyNy13U2FKaXpUMHRUc3JwSDlUQXRtRDY0ZDRMZGlqWVU3Um15YWZvOFhCcDZVdE5RSi1jcXRJaEljN1hfX28zV2oyR2dfV1Zibjdua3E2b2dTVVJYUXpHek9XYnI1VUVyTk1NT3I2a2l0aUx3VXFsWlMy?oc=5"
+    "Arsenal XI vs Newcastle: Predicted lineup, confirmed team news and William Saliba injury latest",
+    "Arsenal Insider",
+    "2026-11-20T16:43",
+    "https://news.google.com/rss/articles/CBMitwFBVV95cUxQazdIWUlJNHdzZ3Fvb05wMHlVSDZKcmZpeWZBUU1TSjYxUmJmSDl1UU5lUHh3eXJHX0ZvWjF2YXk1cEFER1dNcG5jbUY4bFVVVGZxVDZqLUp4cXhvZXNNQ1BjaUJSdzFMSld0ZkZrV1ZYSWRjeTFJXzd6Q0lGSDJzLW02RHJNTFdqZlRrN0xwMXlsYWlELXpIOG15LWNkYkVtMFU3RTBYM3FMT2Y1Z3dTZkd3eU1acVE?oc=5"
    ]
   ],
   "Nott'm Forest": [
+   [
+    "Sutton's predictions: Bournemouth v Nottingham Forest",
+    "Yahoo Sports",
+    "2026-11-20T19:27",
+    "https://news.google.com/rss/articles/CBMimAFBVV95cUxNN0ZLS0l1cWhvSFNaY2VSU3dLajdkOGdvMU1iN21NY3NsM29DX29JRzdEdmQ1dVpnaWNCb2d2U1V4OG9OWnVVak5qQVZQN29TRVdDTEx4aWZJY1A4WVFXRkJZMUh0elQxd05oMnFsSkVOWVdKTGRwMWR5ejExejJmZHYwaFRKMjBSRUFhakxqOFhrdzNSZFFycg?oc=5"
+   ],
+   [
+    "Bournemouth v Nottingham Forest Prediction: Evanilson 6/5 to continue scoring run",
+    "news.bet365.com",
+    "2026-11-20T18:06",
+    "https://news.google.com/rss/articles/CBMitwFBVV95cUxPaVkwUDNsb2YwQVRRRVRvX2liSjRycktsd3dVUmhnV08zTkd6a29GNFdhYXNEc0R0OTd1XzQ4eno5V012Rl9BNV9aM2xXUi1KeUJBVk9IWW1NelZOLVhpckRKck85ODJUYnNjUU4zYTdrMDJKcnNieGlTdEo3TWpPV2N0Zk1kdTliUzFSSGJzeHljYnY1TllUSGZDcnNieEFvdEpQQlhZQUxoZlRVZ3o4RDJOMkdEcm8?oc=5"
+   ],
+   [
+    "Igor Jesus faces Nottingham Forest challenge as Evanilson shines",
+    "Football Whispers",
+    "2026-11-20T17:32",
+    "https://news.google.com/rss/articles/CBMiwAFBVV95cUxORF8zU1k3TElWMEdCNTRNVWM0QXpuZ0hadjdubHF5Slh5dUxHdUVhaFR0OHEzQUlvZkRObDlYXzdYZEhTUFNqclhLcHhtZUdHQmtpQ2NNTkl3NkhRdl9UeENlOGU2QWdmVWF4SnlKVjl2TzVwbEt1MThUQ0FOdWxHMll3aHBjdDBDTG1Gak1MUWdBSGpDbVNybEo5c3paT1JmT3hzdTN5cGdoR1EydHZNMktCd3ZhYW03NXVQTUtyMnQ?oc=5"
+   ],
+   [
+    "Bournemouth vs Nottingham Forest Prediction & Betting Tips | 21/11/2026",
+    "FootballPredictions.com",
+    "2026-11-20T17:25",
+    "https://news.google.com/rss/articles/CBMizAFBVV95cUxNdDRJOWFVSTQzaGh4RF9wMnZTVkRhU0pnODAtakF1LThZZWlRTFB3SzhnTk0wZFdaQ2swQml5azBYZ21ERzBWLVYzZUhSNlUxOWFQb0RDekZ5enh2N1hmX1pBQk9CSXlGMXlqVHlycmdVZW5heTdZa2VjRy14aFJxZVVLbjM0QXVPbWcxakE3MUhOUFVuQThQYzJIR1c5T29DcmtfMDJVQnRTdGRKZy1LYWtZMzliYzVXMmNhSFk2eW13cWFlMUpVLURLejg?oc=5"
+   ],
    [
     "Team News: Bournemouth vs. Nottingham Forest injury, suspension list, predicted XIs",
     "Sports Mole",
@@ -1951,106 +2001,82 @@
     "BOYLE Sports",
     "2026-11-20T15:50",
     "https://news.google.com/rss/articles/CBMiswFBVV95cUxQRnMydXdkalJSTURCc201VmRmT2lFSHBvMHp4bE1NTkE2ak9HNnlyaGhKbnpPbmF1dXdzTkxPSDF3YUZuaEM4TWtaRjZBX3d1SkpqYnFiZndSTE1QLUp2cW9HUmdTX0lQNVI2d3NoSzFvTHZaZVlXQ2I4dVlZOUNJSFk0VE5wd0h4T1FnRlFnMDJud3dvZlc2a3oxTE9lS3pLNDZWSkE4ZUVNVmVZYVNONGYwcw?oc=5"
-   ],
-   [
-    "Marco Rose provides Alex Scott injury update ahead of Forest clash",
-    "playmakerstats.com",
-    "2026-11-20T15:49",
-    "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQdWc3RE1iZzE1SlJrOUUwdXRGWjk1N2V5SC1OanVWR1F3anFGQWM4UW45QTh4Y0FXZVZkSG0yeTNFTEhIQ3pCQV8wNTNCenllMHphYmZXOVQ3bmM5U0pqSTItc0ZHbFVDLWZzQk1ScVVnNkZiUXlSMEJQX1pYTVQ3Qm1QRmNpSlJuVGNpODNGU29iWXlGVDhfelJlSU1SN1VFd1Fwcm5QVGNPcFhIRGRoMEEtalc5cUI5X0tJOVBRQUs?oc=5"
-   ],
-   [
-    "Ten players could miss Bournemouth vs Nottingham Forest after flight chaos",
-    "Nottingham Post",
-    "2026-11-20T12:19",
-    "https://news.google.com/rss/articles/CBMirwFBVV95cUxQWDNQTVoxTzZZcGZ6NmRpaG5DWFBBWUt5Tm9jMXAxOTRnbHhaRnpNMXo0N2paWlZjZ0lmc3RDcjFUM3gwY0tWWG9HcG9ua0hzWnJydjBfb2lEVTh3RzdPNlA5SklVX1l6Tjg2OEEyeGFzNkdxTngtSWs3WnpDZVA1NmRaSnlHWWE5OTJrYk1RTVVPeW5nOVJfbkhzQmlUZVE4a3BjcElQTTRrMGJsekVv?oc=5"
-   ],
-   [
-    "Nottingham Forest transfer news: Roma view star as 'alternative' to Chelsea attacker",
-    "Sports Mole",
-    "2026-11-20T12:19",
-    "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNZHMyaGtSdThtSUFFZVFtYUt0NnhralBwNGdmTUhwdUdhLVZsdF9BdHB1aUc2OFVIYU1EN3JzbVAxZVYxNUVnclhwbTlzSC1XVjRrZnNSd3B1RmF5YWJqbmEwX3hWSjk0MWozVTlFMmpqbXpYbUw4cVk1MXBodzV2Ry13SHd5ZVdwUy1IY1JOdl9CYlRWdkVEWmZuWXUzTzFpUXVhZFJiRHhiTktlUWt3VlBDXzN4NFVvNmliYnJoYWtMLWZtUEE2MnkwVGhqSERGd1V3MEZuMjRLTUE?oc=5"
-   ],
-   [
-    "Bournemouth v Nottingham Forest team news & predicted lineups",
-    "news.bet365.com",
-    "2026-11-20T09:58",
-    "https://news.google.com/rss/articles/CBMivgFBVV95cUxPSkpTUjNMRXd0T0dhUV9BdjBvc0dhQ1VZT252VUluQ2pfU2pJV3FMTm8wQW5vSTFvdU9mYmh3dlVVblU0c3JkVjNuUWI3TWs1Z0t6Z09PN2VlcXdKTEpSOGxzLUp6WlRLS042Z0tXVjgxRUgzZk1vV2U4VVppLVhZLTUyZWg2R01DQW9ON2FUM2hPVHlsamNJX2lLdzhZSUJacWRsbVNvTkpoVnpZNWNLS3RTdlRFVldDRXkxLTNR?oc=5"
    ]
   ],
   "Sunderland": [
    [
-    "Team News: Aston Villa vs. Sunderland injury, suspension list, predicted XIs",
+    "Sutton's predictions: Aston Villa v Sunderland",
+    "Yahoo Sports",
+    "2026-11-20T19:27",
+    "https://news.google.com/rss/articles/CBMiigFBVV95cUxPUFhIM0h3MVFwX1o4T1JzTkZjRGRqLThJdll2ZjlJOXZuWllhTzNtanFFSXZsa05hLTdOc1dOV3JpRklmcXhkRXpoYVR3cGhGYUIzejB1LUZhaC1Va1Z0MjJWclR4eVE2TTJGMVotYm5EUElZS0E4NjRXeHd2LThLN1ZjSEY3SnpHc2c?oc=5"
+   ],
+   [
+    "Aston Villa handed major boost as £60m man returns to face Sunderland",
+    "Sunderland Echo",
+    "2026-11-20T19:00",
+    "https://news.google.com/rss/articles/CBMipgFBVV95cUxPTjdzbUFkdDBLTzF0QzgxRTJ5UjdjaDhkRXA2NjR5d0lHUVJHZVdxRGVCSHVYRmg5a09iODVZNElxczA0LUVhWmZvcmgxY2dUUlgwam5qOThaQW5xUHMxYXEtdnR3LWJpUXBOSnRIYWtBNmlJajBvVUtfbDNmRk1pNW4xVHh4dVc3cG9mRDFIdDFEekotUy1JU0k5RXhIT2ZxcVp4ZGZ3?oc=5"
+   ],
+   [
+    "Aston Villa transfer news: Sporting Lisbon star Pedro Goncalves makes surprise admission over Premier League club",
     "Sports Mole",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOc2FpM2NkTGNvdFU2ZnV3QzhBalNjUHZvZkVHRjFiOFN6ajFjbmVsSm9KX1hPLTkyUG9SVzRhU1BYYlVqOTRVbEZTTExpSnp1Q25oVmNaWVFqOHFadkpvX2paNFBfWWpSeGl5MXhpVmNLUEZ5MnBpTEtIQ0Q5bFp0R0ZicmxyenoxejZYUE4wbjZkTUFFQmljdzZSRTlodjB6b3MwdDNEX0dRUVg3dWNqMHBEZ2QtTmNWcHkxcGZIQkxJYTdQX3A0ejdrUjJSQVZjc2YxeE5fdlhxY0ZQdVJj?oc=5"
+    "2026-11-20T18:31",
+    "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPNENETnpNWjF3eDJ5Ym5rVjlabjJyZUdLaVpUZXRrRWhzaEhYTDN3OUFxRS1aOHhXWUVmNDVsRTc3TmpLdFVITklZYXVhdkpYdUJkMFNCcFlvdDRnWGRZUzIxWUsteVE5MmFDNjAwY3VLWS1kZWI2QVdhOTB1bk1DWW5Fem5uaDFuUFZNNzJ2RWkzdS1KNDVnN1ZxUVBsRFNxbmN3VGRfTmtMaEd3WWc5TktXdkhJX0hBdXZtZWNJRDBuTmFOV2pmbHlxUWxiX2E2RDVmT2hpYzhYVDM0VG1CdE9Daw?oc=5"
    ],
    [
-    "Team News: Chelsea vs. Leeds injury, suspension list, predicted XIs",
-    "Sports Mole",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMizgFBVV95cUxPWkFjVGU4WDA2cGdQcUhKYTdIdGxDMTZwRVktX2U4bWd4QXJPWWdDSHI2MkNld3BsU1ZKakRTT2h1NHgtZmNpdFVXdEhVZmM1ZnJwOVpuWDVud2dYdXNyNG93c2VFdkR2YXNVU1E3VGVuWTZ1NUtZLVRUbXRJSjRrNVNTcmNhcUNZakRnYkVyY1BwT0lhTnVNb2E3YmJ5OTVpOGlRTEJOMU5xb1NaUXVlWk1vbW1NVnlSZXhBdUIza0ZCYUF4aEY1bzRoQjhZdw?oc=5"
+    "Aston Villa-Sunderland: Sunderland arrive with five absences",
+    "Tu Futbolero",
+    "2026-11-20T18:29",
+    "https://news.google.com/rss/articles/CBMipAFBVV95cUxNNE1ybTJZbXNKM082dW1XcFozY3djWjA1TVR3UG5RUy1fODNaQ1ZSVjItd1lCOWE1WFdLOEJOQmgxZUdhTHhySndIQThnTmh1MUF2ZWRPOG1NMTNweEh0bWtydTlEOFhaUjZFY2xVUzRnN044UnE0ZDRfQUkwckphRkRULVN0WHVfNml2QXVEWDlNaHpsQlljVWQ1VWc2NHZubU52SQ?oc=5"
    ],
    [
-    "Team News: Tottenham Hotspur vs. Ipswich Town injury, suspension list, predicted XIs",
-    "Sports Mole",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQY1pla2lGYXpRUi1aSWVDRXpsejVDaW16dFJVczRxU25JOEZzQ0JYWnE3MkR0TWFfZWNiM1dJcFVuRXMzRTBTUmo1ZDBLOWwwTUJWV3RISERaeENZQnBhaGQ5UzdhVzc1ZGlOaFhhbmNVWDJrUE5JdFUxT01sZGRibVBCQjZmcmdjOHFjel91U3IyZy1rWExuNURsSmRSVlRlWFFFMDByX1ZUcHNkZ3dhZWVVelhvSHFwYjhad1ZNWEZqNGlVZ1RvTWNyajhmN0VM?oc=5"
-   ],
-   [
-    "Aston Villa v Sunderland team news & predicted lineups: Manzambi fit to feature",
-    "news.bet365.com",
-    "2026-11-20T15:47",
-    "https://news.google.com/rss/articles/CBMitAFBVV95cUxOSU9rbUhkbzU0U29CZzBjUEZwUE8xbnBvZXBINFR6QkE0am84RjFmeS0wQmdWM2xxUUoxVkMzbTUxQm9TOEtQQmNsbmZudGxVaTNnaUM5Z2VoUDhhRTZMcWE0bXZ1TWd1WHNJMkdiUGZRYVFjOGI1Yl9uRFZ5UDFTYUVSSGlQcG9vVnVVVnE2QWZCOGhxVEtKSS02T1NxYUJpaU4xSHV5NE5GYjlRLWFmZVBzQ18?oc=5"
-   ],
-   [
-    "Chelsea vs Leeds United: Premier League Preview, Team News, Prediction & How To Watch",
+    "Sunderland Predicted Starting XI For Aston Villa Clash After Injury News",
     "roundtable.io",
-    "2026-11-20T15:16",
-    "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQYVp1MlFWRkVtTmRzY0hEci1KUnJpcGw0ZnRCcEJmZmpRVFQ4TkJzNUVRWnNrYVVsOU1lSWYtQ290ODVMaVVuS3ZWNlVISTVNbk5QQTJLYTdpU0psYVZQLVlKTlJkbjNyTTlVcFRGemgtVkh0anIzbjVNTS1YdlBtWkpVUzJzOUhWemlBWHZBRlVSYktmbGZ1SU04SnFyM2RSWThxWllMVjdQeFFfb0xoSmpuNWVZZmYycmZIakRDcWg3ZUE4eUd0Nlp1clJyLWNaWF93dUJNeHVpTTRCX3ctVnBNQQ?oc=5"
+    "2026-11-20T18:09",
+    "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPWnhuODVkSVFHSnlvbUdmckdkcFJ5ai1vUVRRd1BlWGNHazBCT1lUSVBhaW9VWVlTYWtRSk9neUJfeG03QnBlRW43THk4Q1ZtM0F2a190N2o4WTh3ZHhNQ0dxRlozWDR1NmZZOVJvUFV4YjZIcjNrbmJQVGpCeDZ2LTRkNWJjZkhwbDZ5TG1OZDRTLWtITXp0cjA4Q01EVzFlR1pEakNIem5ObzVYN1RibEM4Zy1PRGFna2l5RUt3R09Ea1IxcVlocUlQUElnSkxKN19JVlln?oc=5"
    ],
    [
-    "Brobbey, Xhaka, Ballard: Sunderland injury latest for FPL Gameweek 11",
-    "www.fantasyfootballscout.co.uk",
-    "2026-11-20T14:15",
-    "https://news.google.com/rss/articles/CBMitwFBVV95cUxOT1dwd1Z4TEdYTG9QWUNQVVFjYVZ2aGRuUnJCVFFVQTZWT003RDRTR1FxcHZEXy05TlFvNHNIbFl5eUFkUjFFSUEzUTU1Xzg1cTNtakJCaHBsWEFQVGl6STZEWEh6ZUlqeHEyOWl1UVZxMkZCdE5wQWRJRWMyenVnYjU1ZnU3RWtGREVfR3ltdFE5dHd5Y2FLX0J5UmNpamk5SW9VQjhaV0NDTVZyalJWOVdfWFBNQmc?oc=5"
+    "Aston Villa injury news: Unai Emery confirms regular sidelined for Sunderland fixture",
+    "Sports Mole",
+    "2026-11-20T17:12",
+    "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPeHRwSHZtRjV6eDA4bm0yc2RvRE5SRExnbGNTWEhLZEJQcDQ4a3BEamVFVFpsSFhiZWYtMTI5MWs1N29wQ0c2V1dkbXJnTDVpV0JKY0ludE1PMGp5VTlIdDRjMm9KaUlfdDZ0QkFhcVZVelpXMlkwcm5nUG94MkNZYXJHVF9LZnk0eWg3bjVuNFo5bGZ0bzFsVDRuaHJ3MmpEaUpKREFFU0ZoQUt3R1VLWERxdTJSa1Vqc3dHVURRcVprY2ZkZWlfU0ZoN2FrNnF0dnVpZENHbjVjWDd6THFzQjVkNC1aR3c?oc=5"
    ]
   ],
   "Tottenham": [
    [
-    "Tottenham’s Mathys Tel out for two to three weeks with ankle injury – Roberto De Zerbi",
-    "The New York Times",
-    "2026-11-20T16:15",
-    "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQb05TUTF3SFdhLUNlNldOUzhSeVdCdTlRMHZhYUJCUDZGWHR2Ml9WS3ZDWW1SX183X1BtSXBNWXdlMDFaWnhBaHNRNHNhbFpjY2VhZE9BZ2ZwMDRwLWlkS01BNktxcEMyTDUxQVB1WjRVWjVRTzRPcUROZURnd0xxVzNNR3k0eWdlak9R?oc=5"
+    "De Zerbi reveals TRIPLE Tottenham injury boost and when Mudryk can be unleashed",
+    "TEAMtalk",
+    "2026-11-20T19:52",
+    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOSUZHQUlLVHFRM3g3UzBLUmxFdzlLSE1HU01kaHF4TGt1a241Y1ZYYjBmOGF4bVg3VHlpM0xSVVp1UXdUOHRXSG92TTdjS0U3M0NQQ3d0NV9WMU85MTlkY09MSGt4N205Y1FlMGhNU0J5OHlGd2RNdERRME1Gc19qSFNVSW45WVc1Nnp2R1ZQZjV3XzgyTmRGUkNhMXlJeURhU2JIQWZyaHprbklOT0stWlBwcVNNTzV1aTNrZnQzZEJKZw?oc=5"
    ],
    [
-    "Every word Roberto De Zerbi said on six-player Tottenham injury update, Mudryk comments and GTA",
-    "AOL.co.uk",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMigAFBVV95cUxQTmRsWmxTcms0XzRic0dUdGZVZzRkSEdnamlRQ3lYNXlfSG9CT21lTHYwakM4UnpxN2N5c2F2NjUwRDB5QXA2ZHBmanEtU2lWTnFneXF0S0pNN0Q1b0taNHVoRlVFM3hCcllCTXBKeENITW41QnVKZHE3RzJBeGNQNw?oc=5"
+    "Tottenham vs Ipswich Town Premier League preview, predictions, and team news",
+    "Spurs Web",
+    "2026-11-20T19:30",
+    "https://news.google.com/rss/articles/CBMisgFBVV95cUxPdEVzN2p0SF93aHNncTFHblk1WEZBOC1KUEEyNEE5X01jWWtMaHJERmRtNXkzb3FIZjQ0VTRBS0k3VnN1enBIcHRjUEZaYmhTb1Y2aGhuY045UzlNLXBWenAzNHhKeDIwT0J2eXdjR2xRdTJ0TlJwMU90Z2luUk0xdlY2SEsxSzNsWS0yQjBQVURBdmE1cXpKU3RLcmtzcG44aHQ1THJfZXlFdk1mejFxS3Vn?oc=5"
    ],
    [
-    "Team News: Tottenham Hotspur vs. Ipswich Town injury, suspension list, predicted XIs",
-    "Sports Mole",
-    "2026-11-20T16:00",
-    "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQY1pla2lGYXpRUi1aSWVDRXpsejVDaW16dFJVczRxU25JOEZzQ0JYWnE3MkR0TWFfZWNiM1dJcFVuRXMzRTBTUmo1ZDBLOWwwTUJWV3RISERaeENZQnBhaGQ5UzdhVzc1ZGlOaFhhbmNVWDJrUE5JdFUxT01sZGRibVBCQjZmcmdjOHFjel91U3IyZy1rWExuNURsSmRSVlRlWFFFMDByX1ZUcHNkZ3dhZWVVelhvSHFwYjhad1ZNWEZqNGlVZ1RvTWNyajhmN0VM?oc=5"
+    "£67m Player Who Tottenham Tried to Sign to Replace James Maddison is Now Set Join Real Madrid",
+    "Yahoo Sports",
+    "2026-11-20T19:00",
+    "https://news.google.com/rss/articles/CBMihwFBVV95cUxPVjZobUZhby1xY3VxWVd2QmZ0Q1VLMlJ5MXhTXzFKTVhVX0NpMGU3YXhoVDlmdGQyZmZpRlJOam9GRXZITGlheFo5c1JSYzNaZ2JVckVhZUxGQzlRWDlyaFVLUkxUQVV1MFZUYXlUUGhoZzRkYjZHVG5lbERHNzIzYXZhRGpmejg?oc=5"
    ],
    [
-    "Tottenham v Ipswich team news & predicted lineups",
-    "news.bet365.com",
-    "2026-11-20T15:53",
-    "https://news.google.com/rss/articles/CBMirgFBVV95cUxOeXJWYlhsenl3ZlZKdGFHOFo2R3A3U08tR2dvekJHSXZPSkZwbGttNl8xM0lsT29MZHdCekRwX1AtOXUydGhrc3R6TzFwX211aTJaTkwwOC1zNnktU1RVV2xDX2FMY2Q5QXNUZlRhVU91a2lQQUV1YW5rUWU2cnlaOUFhd1M5YkhCRkxiU2h4N1owNWppY0l3eWR6MnQ5LUw4NU1LWEZTXzgteDVnQlE?oc=5"
+    "Spurs loanee Mudryk in new injury blow after awkward 'Arsenal dream' remarks",
+    "The Sun",
+    "2026-11-20T18:41",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxOc2JPSUNlN01mSGRJYnltemVWWW9qQ01ydHhGVTY2Z0xxQzNCSXpfVXdQTkZzZmNDcTF3YUxmRHFMb1c1NEpZdWJWQ29IZklNcmlwQXVXQnBrQ0lOMmNOLXlJOExmSlBHNnZ0Uk1jSWttSUlOSnU2ODRjQVplU1hDcGFISjV1NHN1TC02cXRGUQ?oc=5"
    ],
    [
-    "'Potential of a few changes' - O'Neil on Palacios/Lukic fitness and plans for Spurs",
-    "East Anglian Daily Times",
-    "2026-11-20T15:45",
-    "https://news.google.com/rss/articles/CBMijAFBVV95cUxQQWlkeHI3TGU5eHAzQkJJWDNzX0EwRlllNXIta2xXZFJsRVBwMkRvR3pxTllkelBsTW9YZV95cEx2eTJLM3QtQVFtNkc3NXJxa09xUXN6UUt5M1BaZ3BlRjlzdVpWeFFMVDBEZzFWOURYOUY1YTdBSVdWS3hxN0kxRC1sUXZCRjkyVl9Hbg?oc=5"
+    "Premier League Injuries & Suspensions",
+    "Sportsgambler",
+    "2026-11-20T17:00",
+    "https://news.google.com/rss/articles/CBMie0FVX3lxTE1uaGFvWDU2dWs4LVVpSXBXcTJjNFRlTFpfbjB4b240Tml5cmZqQ3loeUM1S1FXcjZaVy1hLWxMRjF6aDdMX3NOUjRUUXRmYTFtalhnTFExRXJDNVNSTElRSzAzdVBjbUVGYmZVT2t6ZkFfaHd0WXU5czd2Zw?oc=5"
    ],
    [
-    "Roberto De Zerbi tells Destiny Udogie what he must do to earn Tottenham starts",
-    "AOL.co.uk",
-    "2026-11-20T15:44",
-    "https://news.google.com/rss/articles/CBMihwFBVV95cUxOck5pOWhMd1dJQV9EcXk3QXd2WUNNU255MUNpLTlGUWJyc19XZWpxb3lySG9IMVRNNjljQ3FVU2RuSFdreGpaRFM3RE5Xd3RPWF9LUW9heVloQWJyUVhfbFZvNDM4OHJrdGtpYWFOOV85a2NHRG9WLWRIZWR5RFJTaTlzREhxemM?oc=5"
+    "De Zerbi issues Savio injury update as Tel timeline confirmed",
+    "London Evening Standard",
+    "2026-11-20T16:48",
+    "https://news.google.com/rss/articles/CBMinwFBVV95cUxPWllOM3ZTQjZzN2wxV0EyRXdDRnpMekVUY0hYOTl3YmItRDJ3N2NQSkd4bkVPR2RWQUMyWnBDdUprblViSFUtanJyZFZPeFQxT0RUdXZHdXA1WXN3bjN6NDV0TlJCM3FMNk9uc294cmw3NFhZT0pmMlFsZGhfUllpQUsxUDJiZml0WEFoNWxkMG9TRWlRWDlRc2xuLTMwRWM?oc=5"
    ]
   ]
  },
@@ -2067,10 +2093,10 @@
   "Fulham": "2026-11-20",
   "Hull": "2026-11-20",
   "Ipswich": "2026-11-20",
-  "Leeds": "2026-11-19",
+  "Leeds": "2026-11-20",
   "Liverpool": "2026-11-20",
-  "Man City": "2026-11-19",
-  "Man United": "2026-11-19",
+  "Man City": "2026-11-20",
+  "Man United": "2026-11-20",
   "Newcastle": "2026-11-20",
   "Nott'm Forest": "2026-11-20",
   "Sunderland": "2026-11-20",
