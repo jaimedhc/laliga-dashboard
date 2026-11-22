@@ -208,7 +208,7 @@
     "Andrés Martín",
     "DEL",
     "lesionado",
-    "Rotura de fibras en los isquiotibiales del muslo izquierdo. Retorno estimado: Principios de Diciembre.",
+    "Rotura de fibras en los isquiotibiales del muslo izquierdo. Retorno estimado: Finales de Noviembre.",
     true,
     null,
     4,
@@ -538,6 +538,19 @@
     0
    ],
    [
+    "Boselli",
+    "DEF",
+    "lesionado",
+    "Lesión en la pierna izquierda. Retorno estimado: Vuelta indefinida.",
+    false,
+    null,
+    3,
+    335,
+    0,
+    0,
+    1
+   ],
+   [
     "Gudelj",
     "MED",
     "sancionado",
@@ -607,6 +620,19 @@
   ],
   "Betis": [
    [
+    "Morante",
+    "DEL",
+    "duda",
+    "Molestias en la cadera.",
+    false,
+    null,
+    0,
+    13,
+    1,
+    0,
+    0
+   ],
+   [
     "Ceballos",
     "MED",
     "duda",
@@ -624,8 +650,8 @@
    [
     "Borja Iglesias",
     "DEL",
-    "lesionado",
-    "Rotura miotendinosa en el sóleo izquierdo. Retorno estimado: Finales de Noviembre.",
+    "duda",
+    "Rotura miotendinosa en el sóleo izquierdo.",
     true,
     null,
     0,
@@ -637,8 +663,8 @@
    [
     "Starfelt",
     "DEF",
-    "lesionado",
-    "Rotura fibrilar con afectación en el tendón del muslo derecho. Retorno estimado: Finales de Noviembre.",
+    "duda",
+    "Rotura fibrilar con afectación en el tendón del muslo derecho.",
     false,
     null,
     2,
@@ -650,8 +676,8 @@
    [
     "Miguel Román",
     "MED",
-    "lesionado",
-    "Cuerpo libre articular en su rodilla derecha. Retorno estimado: Finales de Noviembre.",
+    "duda",
+    "Cuerpo libre articular en su rodilla derecha.",
     false,
     null,
     6,
@@ -663,8 +689,8 @@
    [
     "Lago",
     "DEF",
-    "apercibido",
-    "",
+    "sancionado",
+    "Acumulación de tarjetas amarillas..",
     false,
     null,
     11,
@@ -879,8 +905,8 @@
    [
     "Sannadi",
     "DEL",
-    "lesionado",
-    "Lesión moderada-severa en la musculatura isquiotibial izquierda. Retorno estimado: Mediados de Diciembre.",
+    "duda",
+    "Lesión moderada-severa en la musculatura isquiotibial izquierda.",
     false,
     null,
     3,
@@ -1054,8 +1080,8 @@
    [
     "Mendy",
     "DEF",
-    "lesionado",
-    "Desgarro del tendón del recto femoral con separación ósea. Retorno estimado: Vuelta indefinida.",
+    "duda",
+    "Desgarro del tendón del recto femoral con separación ósea.",
     false,
     null,
     0,
@@ -1308,20 +1334,14 @@
    "ka": 1
   }
  },
- "avail_gen": "2026-11-21",
+ "avail_gen": "2026-11-22",
  "news": {
   "Alaves": [
-   [
-    "Denis Suárez baja al barro",
-    "El Correo",
-    "2026-11-22T00:03",
-    "https://news.google.com/rss/articles/CBMihAFBVV95cUxNbG5GTlJscVRFNXBUdS1LOFozby1ycFR4S1lNWUREVDRZcENkUWJFb2lQYlktVjNld0F5RkUzMTdqWmUydnJRWlM4WGdoa2dOOGR1VDk2Z21CMVpWNTZLa2RTa3VweGlwbmtzVjZlT1h1bDh1bEZlUm5DdENsVElxbnJyWlPSAYoBQVVfeXFMTTBUNkNNdTNrUjFLcTY3Ym1sQ04zbVV0TkRUMWtaYU54OFAtZTZOTUZaT2xCWEFYcms5YjQ1bFBtZnhuc0NPdmZGYV9hbzNIazI2UWhHYlNBNG9Bei1ENXQwYmw3eXl4YXA1WE1IRVpuRkhWVnBMZmtPY0F4UzZseUdqREVCOHJ6bDZ3?oc=5"
-   ],
    [
     "Hugo Novoa vuelve a recaer",
     "Diario de Noticias de Álava",
     "2026-11-21T18:52",
-    "https://news.google.com/rss/articles/CBMiugFBVV95cUxNOWREVVdsVlJqVnFBVEViYjk1clhSWU53cnNOTDlHeTZDZEN1MGN3SmpOLTJxenEzSURFNGNaSlc3cXI3Yi15Z3FwbHBlNzktV2w2dk5aUmttRnlOQWh3eWJBTWJZVGVPLWRRTjZ0SHlsVDBZc0steEItZ2hmWENITDYwWVFzTUJsMkkxb2ZwVjI1dU1UbXg3UFNhX0tRLTFBakFiQXFKd0lJWTl3dEVJdlNDQ0Eyd1FIWHfSAb8BQVVfeXFMT2Vyam50X3MyQVRCS1k2ZHNiUFpDel92ZGV3ZWw3RWdGTE9Kd1JxbzhiU2tjMjZMOW1LVEE5YktTYzdpbDk2OEg2Qk1jRTdKNFVzb2Z3QUctS1E3SVk3V3NuRTU3T0RPcWE0czFPaWVoQ19Ldi1LUjI5RHQ4ekFGTDBiOWZWdHVuS0FKQlJxN3lIWDNDSTM3bVg5S255cnJGM0RvenBNdjRHYzZWYVpsWUdiZXNkY0FKelA1cEctUVU?oc=5"
+    "https://news.google.com/rss/articles/CBMivwFBVV95cUxPZXJqbnRfczJBVEJLWTZkc2JQWkN6X3ZkZXdlbDdFZ0ZMT0p3UnFvOGJTa2MyNkw5bUtUQTliS1NjN2lsOTY4SDZCTWNFN0o0VXNvZndBRy1LUTdJWTdXc25FNTdPRE9xYTRzMU9pZWhDX0t2LUtSMjlEdDh6QUZMMGI5ZlZ0dW5LQUpCUnE3eUhYM0NJMzdtWDlLbnlyckYzRG96cE12NEdjNlZhWmxZR2Jlc2RjQUp6UDVwRy1RVdIBvwFBVV95cUxPZXJqbnRfczJBVEJLWTZkc2JQWkN6X3ZkZXdlbDdFZ0ZMT0p3UnFvOGJTa2MyNkw5bUtUQTliS1NjN2lsOTY4SDZCTWNFN0o0VXNvZndBRy1LUTdJWTdXc25FNTdPRE9xYTRzMU9pZWhDX0t2LUtSMjlEdDh6QUZMMGI5ZlZ0dW5LQUpCUnE3eUhYM0NJMzdtWDlLbnlyckYzRG96cE12NEdjNlZhWmxZR2Jlc2RjQUp6UDVwRy1RVQ?oc=5"
    ],
    [
     "Alavés y Deportivo empatan al descanso en Mendizorroza",
@@ -1336,19 +1356,37 @@
     "https://news.google.com/rss/articles/CBMiowFBVV95cUxQOXhHbVhhQVk1S2FvSUdhNzJXbG5KSDFLTTQ4Q0Vpd1BKYTNoWkhtdlBxT2owdHJENkJSX2p2TTJZZmpsMDU2VTVGNXVXSk9TQWNiaUZxNG5landmVUJXb3RRSS1abEdnbS1uYU5WZzFvUG5KWWtNTURNaW5aYWVDUlhmVldhZ0pjRFJtR0tJM0hVSVNyYnotRGticTVWbkxGNENF?oc=5"
    ],
    [
-    "Alavés vs Deportivo de A Coruña 21/11/2026 | Fútbol",
-    "Flashscore.pe",
-    "2026-11-21T14:13",
-    "https://news.google.com/rss/articles/CBMikgFBVV95cUxQWEFqYmktZlpZT1hLQ1FTcmlpVVpCUk9fc3p0WlVweVBNMC1XZlZ1ZGxsU0JsWjluZ0xzTzRyeEh1RERvZlZtdWY5NUpveUs0bG5DRkx6V1ZqUHFHWGlaSUdPN3dCM25mWDA2ZVBrMHhBRHJmRXJ5Qzl0R2Z0Y3VKWXpNWG5pVnVidW5UTnV5SXpIUQ?oc=5"
-   ],
-   [
     "En directo: Alavés - Deportivo",
     "La Voz de Galicia",
     "2026-11-21T12:44",
     "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNNTc4T0dfRkM0SEM3aUhCVXVEWERIU2drcmV0Z1U5N0JrcnloTmgxak4tQlhPQlhHRW5IeEhIOE5DX3VwN0dMbDE1anJsMTRYdTkyeGotSTZCR2oxZ2pIQjNSS3E4WTlUSlFOY0I3WHE2aktleWtibDNLMmZ6TGEwVFJydHJnQV8yZHE2RHhPQ084M1Q1c3VPUmc4Sm9IVEh2V0xaV2dJREVXUVhUVGJkcVgzREVVeUVaSGQyZFV6VFRLZ2dJdFRUZ3hydE5wbWlFQkFMZXY2cEdEd9IB2gFBVV95cUxNNTc4T0dfRkM0SEM3aUhCVXVEWERIU2drcmV0Z1U5N0JrcnloTmgxak4tQlhPQlhHRW5IeEhIOE5DX3VwN0dMbDE1anJsMTRYdTkyeGotSTZCR2oxZ2pIQjNSS3E4WTlUSlFOY0I3WHE2aktleWtibDNLMmZ6TGEwVFJydHJnQV8yZHE2RHhPQ084M1Q1c3VPUmc4Sm9IVEh2V0xaV2dJREVXUVhUVGJkcVgzREVVeUVaSGQyZFV6VFRLZ2d"
+   ],
+   [
+    "Alineaciones de Alavés y Deportivo La Coruña por la LaLiga: formaciones probables",
+    "Bolavip",
+    "2026-11-21T09:01",
+    "https://news.google.com/rss/articles/CBMisAFBVV95cUxNdmk2NTVpcjFybXFSTWdxSEY3WlFzY0p1WFZtQnFvMmZkV1QzVl9OMXh0cWtOcllReWRNOEJSSU1DVVBxNFBnOUZNSTk4dE9lSlBPY0JFanFGQWJ3TVgyQlJlNTViTHQzMnhQMW5BUks1MVJzMndud3F1cEdXTm9abkJYSWFRSEZPRjdQLWdXbWV6TTEtakJnblJNWDZsTk55U0dMY0RXNWV2bEFmRTVJYtIBsAFBVV95cUxNdmk2NTVpcjFybXFSTWdxSEY3WlFzY0p1WFZtQnFvMmZkV1QzVl9OMXh0cWtOcllReWRNOEJSSU1DVVBxNFBnOUZNSTk4dE9lSlBPY0JFanFGQWJ3TVgyQlJlNTViTHQzMnhQMW5BUks1MVJzMndud3F1cEdXTm9abkJYSWFRSEZPRjdQLWdXbWV6TTEtakJnblJNWDZsTk55U0dMY0RXNWV2bEFmRTVJYg?oc=5"
+   ],
+   [
+    "Alineaciones de Alavés y Deportivo La Coruña por la LaLiga: formaciones confirmadas",
+    "Bolavip Perú",
+    "2026-11-21T09:01",
+    "https://news.google.com/rss/articles/CBMiugFBVV95cUxORFRGVTNWMS1BZFRMNWxXdGFndERuUDRhLTFlYldwVFJNVTA2NldUbmlsMHFNUkxHSlQ4dzZEQ0k4Mi0xU25ZT2VMd3pOVmFyVXBZYlByeTg1MmRDQTdBUGhuUFducUkwUjlXN1ptaDd2cjYtRUNHVlVKYjJJZ1E0dFpXbE96UjlQby0xWXFpa0Ywdy1NUWpQY1FubTZJNTNVb0JwYnhkSlluelhsdU5PZ00xdjMtZ2drb3fSAb8BQVVfeXFMTVdqY2Q0SnFrcmlSSy0zR3ZaZ0IwaVZ0UXZpNWs4dm5KTENDLVBHeXlhRGlTNWh6TFFkV0kxbG95cHJEbHlTWjV5QVQyNU9McGlWMW9jaUhhSGg1OGZ2VVNQWUNYLXNVZF9QUmdwOFNJN2tOU2cwTmtmVUtVRFk3VEg3Y0JJS21EX0Z1MzZhSUNOeUYzOWpwRTRGSG5oLXZfalRNM3laY0E4M2VUeGF6YTRLWHlnaXd0eVNkcnMzcU0?oc=5"
    ]
   ],
   "Ath Bilbao": [
+   [
+    "Convocatoria de Pere Romeu ante el Athletic Club con cuatro bajas",
+    "Mundo Deportivo",
+    "2026-11-22T13:33",
+    "https://news.google.com/rss/articles/CBMiswFBVV95cUxOTkxHY3VLNHd1UllvVjBzZ3hSbUxfU0JOSmZyVndURjA2aUxMYVZBUE1ESjcwZGRZdzBKaXBxOTluX2dwMXVkMGpYMVRydTZvNVljS3NjS2c3QkRwMXhQQlFVdGptWnBtbkRISDVfNFFfZHloT1hxRUtqdko1a0VQSnRLZXR5LUZQaXBjT01yR1RDcTRwd1pObHRkZElnTXJsYWdyYWU3NUhRUno5cHlMakdvONIBwAFBVV95cUxNYzU2UzVRMmJ2RGY0Y3lkbHRTRW9jSW1tbW5icVF1THQyY2p0RjVDWnd5OEZ3dVBHWGcwNWgtM3Bxenlsc1FReS1pa2x0STdJM0ZDakx6MDVDQTdvWG1RYTg2OEdtSDNTRGMxZmh2LWlLVGxoY05ZOU5ZTlZIQmtfUTVzMWRUWGxsQTZQVjV6Mk1DQ3hOMUh1bHlSYWZsczR4dEhFQlRnWGFzcGhnczUyME1IVWtSS29NQW9yRHlMYTk?oc=5"
+   ],
+   [
+    "DEIA pide a Terzic replantear sus planes tras el Athletic-Espanyol",
+    "Athletic Club Info",
+    "2026-11-22T11:11",
+    "https://news.google.com/rss/articles/CBMivwFBVV95cUxPZ1d3WUV2RzVjeTV2N01ZQm43VHFSNUhiZTFfa2Vid2RXOXBhcWpYMExSb0xRQnBFX0dvY0t3eWpBcTV3ODNiRi14Q2VrWmptektxUnU5RjF1cndwYjBqLTdWekFXc1FxY3kxN2FLcjVXdFBEVlhuN3cwYzFDVG41b2Z2WVBYZVFLdG9OTXBCYk9zYmFZSFRjOVhzeGhHMVlZTHZMODA2S1ZIN0ZoMXF0U3lXREtNcTV3Ml9GUmpMdw?oc=5"
+   ],
    [
     "El Athletic pierde ante el Espanyol y deja escapar diez puntos en San Mamés",
     "Athletic Club Info",
@@ -1372,97 +1410,103 @@
     "Mundo Deportivo",
     "2026-11-21T01:57",
     "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPQzFnTkZKQmY4WS0yWFMwUFRYSktUcUJuc2d5MjFXUU11dXRWb2xiRHh1eE5rM3ZSTnlVbWZkSDRKYUE1aEdxdkplSEMxamx4T2NYaE8yTW95b2d0NFFRQ1JVSkQ5QTNnY0I0WjhDUTR3cHgyS3I1MFRDRmhfckdqeHRwWlNsWVhfSHlxLW9EVGxPel9QWWE5d0JHSldwLV80dTBuOUFtOFBzdGZwU3lNNFM0ckNFTVVNYVhKYmVWcV9Xa194ckxrQ21wdEhFTkx0NzFlZG5Xek9Vdw?oc=5"
-   ],
-   [
-    "Beñat Prados vuelve al once del Athletic en Liga 447 días después",
-    "Athletic Club Info",
-    "2026-11-21T00:31",
-    "https://news.google.com/rss/articles/CBMipgFBVV95cUxQcFNIRHZUTGhxOElFRHQyb2Y1Sm1PY1BSRlJQVUxscnJIS3EyY0V0SW9kUVdrU0p6QVByLTBlRlJIdmZJNlFQazAxRzFXQ254S0NoaXhrWUF3eHB6allpZVdqSEE4MkJyV3JVaTIzWmZCVWNyOXJvSWJQczFHbm9OLWFOOTFqNVFyanJ4TV80Yk16ZngtUXctNU5qVDNsWEo3MTlVa3lR?oc=5"
-   ],
-   [
-    "Athletic - Espanyol: Sancet apunta al once y Vivian será baja",
-    "Athletic Club Info",
-    "2026-11-20T20:10",
-    "https://news.google.com/rss/articles/CBMirwFBVV95cUxPb284cE8wWXdOdjlJQURsNHIxb0VUakYwbkN1VVdWekFzUU9WVTdVU2RrRHpZTE44NmlacXNIZGN2OGx0SEZ4a3Ffc3lsRVBIRmxMVjBoenRLRmtQcmZhR2xfMHNFUDBqWTNNU255WFU2Y0ltWmFPRzZodVdiVC00bmg2SW5XM01tQnFQaGY3Ri1EZ0l0cjlBdFRRRnM4Nzk3ZDhPZDljeTk1VkdZQ3Rv?oc=5"
    ]
   ],
   "Ath Madrid": [
    [
-    "Getafe-Atlético, previa: el Getafe llega con tres bajas",
-    "Tu Futbolero",
-    "2026-11-21T23:11",
-    "https://news.google.com/rss/articles/CBMinwFBVV95cUxQQTdPdEFRQUR3cWZKT0x0QjhsWG5ma1pYR19yYjJ5dFJaaFNtbTBvcnFfaTB6YTNOVDg2d1dvdWprVkx2VWpMUkZZYmk3b3lRM3NIU0oxdy1aTkxyTkdoSE93NXFFdV92SUc5MndMeWNNemNwaTJ1cV9WMm5KUDdFVUw5ZkdQN0QtQlBhRUFFYzBLaHhGX3hCUVpaWFFzeU0?oc=5"
+    "Dani Ceballos, baja para el Bratislava - Betis de Champions",
+    "El Desmarque",
+    "2026-11-22T14:22",
+    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTXBMSGZvcW5ISi1hWk03WWp3VFZNQ3R5MG4yV1B4S2JqX251QW95eFNleTUtQ0tBVmlpdWNROWRQTmVlZF9iQ2NMdXVmZ1RYeTU0QXozM2pSbmw1MXZaYlItR3Bic29oQ3o1MndrVGhCcFNrb295dE5MWVBqdkhVdjQwTFU1bFk4djJyUUh4VkQxZTcyd2dWeF9UYnNBbW1ZTXkwN2VFbEtneUFLMGZDVHZNUHE0cnd6Nms3Wnp4UjdFUQ?oc=5"
    ],
    [
-    "Respira Atlético de Madrid: el gigante de Europa que se baja de la pelea por Julián Álvarez",
-    "Doble Amarilla",
-    "2026-11-21T21:00",
-    "https://news.google.com/rss/articles/CBMi9gFBVV95cUxNRTZtaGhiekhjYVNxZDg2TnRBdEZzaENJeW5FSGU1enpuYUNpYmRsM0kyR05IblZMT3JVS2lsYWc4OTEwOUJaX0VYQTVhZUtTNVp1M3p2Q05qc1pnT3FlZk1jMWRwY1lVTTFkVDdYTjNBOXdnVGRpWDVnbGQ1Zl9BeHNQOFU2WTV5RzFmbF8za0FYQ0txU3RDVEpCLVYzeVpiTVhGLUF4V2c3VUNEZkRXbndIM3JBUVl6ckZLNi1VZWh0cVprSEd2cFpWYzVWdnpVZ053dVhqeS1MUmpkdUM5X1pSNUJkX21RUG5vTG9RcDJoUjRGZUHSAYQCQVVfeXFMT2UwdGN5U2JKTlZYVkJyTktQSUViaUVWMHNNcm5aRnM5T2dBYWFKMEhqWWRrU0dpVTFyU0tCMjFkNzM1enIwci1hZkkxOWttNWJvZXVXbk1vOWJtZkdwLTNUdGNtZG5yU1RNMV9sXzdqeENhWmhXUGVkckdiTTEwMWJGdnBBd3VjNmV5b1FkU2o3XzNBMUdxVGhUYlduemVpeVloTVBORHd"
+    "🚨 Tres novedades y tres bajas en la lista de Simeone para Getafe",
+    "OneFootball",
+    "2026-11-22T13:56",
+    "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOdUFhZTlUb0VZZU9kUEdvWWJaUWhFZGhaaTZRWklBLWJaX1pZaXptdldPN2swclpPVmxYUU1yckVHNUMtdGdLRmFnUnJybjM1YnhIR3NMUGVwdldIRHFLUGF1VjRSdDR4V0FnRERFeHdjRFE4TGdVWEdhZTFIY2RpRWktVzNrTmFkYW9fb0NBSy1aRmhnZ1NmbmZfN1F4QnBUN21WTTBYNTBvUUk?oc=5"
    ],
    [
-    "Harry Kane, lesión de larga duración",
-    "Fichajes.net",
-    "2026-11-21T19:45",
-    "https://news.google.com/rss/articles/CBMihwFBVV95cUxQS3FVSFI3a0RNRmRpMjFqU0RxYkJXemJNUXA1dklUaFNZbjNGY2UybTJwMldXWXhoVENnZFFoZW1rckNmVE9SNm42dDJQeF9ydmFKWmRtczhiQ0duOGlHTzBEVm4xT1VYZGQ0UTZlNEg5bmdTTW9fYUtjR3c4RHhVMTZ5UzFNdUk?oc=5"
+    "Boselli, baja de última hora ante el Atlético de Madrid",
+    "MARCA",
+    "2026-11-22T13:43",
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxQT1REU0I2MHFxS3N1eGkxcTl5STlmUk54NFlTaDV3QXpXTzFWS05MdjdQMFV2YzhJTUl4N1V6RjBvc0lQYk1aY3RlblNaT1RvZW1MSlpEU1Y0ZmV3b05rVFJ5VmV6T19URUQ2am9WYmNEZ1hSaWlxcmxiT2FnZTh5RGlnVHlGTXpsUDM0UUtsUDhQZWp5VHVn0gGXAUFVX3lxTE5wUW1wNUFHUGRvVVUtSThEMjdPZlZNZEhMTjRycWZFS3lKcnpBR1cyTDdMNENiTGRYb051QkFPNUM5LUFiMlluLXBjT2ZidGUtYzhlMndaRHFkV0toVkRCejBMdVZTeDJqUkFwb2RQUTRfMXhfVEZ2dF9ybmVYdVAtTWNzOER4eThVWGs1dzgwV2JFb1R4SEE?oc=5"
    ],
    [
-    "La baja de Harry Kane en el Bayern complica un objetivo del Atlético de Madrid",
-    "Esto es Atleti",
-    "2026-11-21T19:00",
-    "https://news.google.com/rss/articles/CBMisgFBVV95cUxPSEFaUGZCME10Y1dtdDgwUVU1cEtOWDI4dWNuNUtVeW9JbVUtTF9PZV9JSF92TTg2RjZTWkh6amhZQm1UVm9WUnIxTEplWVgxaTBsdFVhanZvc05LMl9wMENsVU1aMk1iMFpkNmJzZS1TUENHb2FnQmZPNHVfTDIzOFdZcHBwbUdzUFBMVEt2aTRQbXBCczlBdzB2ODJJX3llZ2hPU19MUW1OaUN5aEtUVjdB0gG3AUFVX3lxTE1wQlZWbnRqUHNoMWhUS3prTkZINXJtUnlpNzhaNW1ydnNzR2tid0drdVNCazZyNlhGVUNHaDZORnpucGVuWHZ0U2V6RWdidlZCUFNreDRWWkpvY3I4R29LbGU3MVdoR3pIM0NpOWZIcGhINk9TaEhzeUhxUFJxeG51czBUM094ZVlZcmgxNEpFdlhlWjd0eXNheHc2eV90Vjc2bHJuenRaNldmZGtFdm5zR253bURicw?oc=5"
+    "Boselli, lesionado en la pierna izquierda",
+    "Diario AS",
+    "2026-11-22T13:20",
+    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNZ2tsMGtBT3BvMV9aTlVhR3ltdkQ3UWRySEdJWjlPWG9QUVQ5SGV5aW0zdDdrQTV5T1dveVZQODU4ZGdrbUxLY2I0RkNmbzFsLTNFX1NrV1RxUURnWE15VF9VcHQ3THRhUG5iMHN1NGl4NVBCYXhQbXJJVTZQUUFQWUI4d01INURE0gGcAUFVX3lxTE9GN0Z2RHoxeGJtOTBpYThYQVV4bzBfYjEwX0sxYTQ2YmNpUjBBYkl2VFQwWjBZSDFnS09Xb1N3UlpkWk5FOVZmS2RUbUhJYW05RXNLaHZ0SDVDZWE4Z2RKS2hpdWhSRENUMnpKaG5yZmlBeDJldmg3N2ozTy1wdThlV1V4UGJMV1R2clNOanRFb0JtRU00SG9ROXJxbA?oc=5"
    ],
    [
-    "Arnau Ortiz y el mensaje de Simeone tras la lesión de Lookman",
-    "Betsuites",
-    "2026-11-21T18:43",
-    "https://news.google.com/rss/articles/CBMigAFBVV95cUxQaDFoaFRfM2hROGZ1cVZRQ240YkdaX1c2ejEwR1FXOTR5YnlYN0VfZFBvdXk4QmdVbkVLZUxQOGxMbHkycDloYmlmdEtaUndCOE9YTklMQzA4UmN5YW1oU0loTmxiZ1E0eG1kYzloR0lybnhrZWdmVldCMy1SUWtSNA?oc=5"
+    "Boselli, baja ante el Atlético por una lesión en la pierna izquierda",
+    "Infobae",
+    "2026-11-22T13:16",
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPYlNNNE5XMnFaLVd6YnltWS1ZTWxGVVB1RW15eTNXSWNiYjZiSUcyb0NJTDVsVklIbUFfWjViUjBud0Y3bXJMVkhLRHNQaWZuMFlKaTlJZWlqQ29iUzNkamc2NTl3bVJzZkkwbkVIenEtMVFqakJWOGJhUlRLeDcxTlRHa0QzWHNhUmQ4NERmQkJQU2Fid3JCU3k0REp0S3VMRW1zMGl5ZGZqNEhGbml1WGVYaXBHbXF5d0tj0gHWAUFVX3lxTFBWZnJULTdJMkxWZ2JOci1FRkduV1RmNk1TS2pPTFlsMkJqV0p4cWt4a19mLWk2QXdlR1dPVUJfMkNmNWJKZ2FnNWVkRnp1dnpMSUJpU2lHRWdia3N4Y0JPRjdFN3BQNmR5UldSYUplUW00dzJBNnpYVU11U0E4NWkzVFNpOWVuMURPWVhUTF9Xa2Rib191OV9KSVMxTUtzMzRnMWZVZ251QjY4b1BIUjItZlE2Z1hPNXZZRmVtb2FtRjc5N3k0MktWQ3NpYURQdThsUS16RkE?oc=5"
    ],
    [
-    "Getafe vs Atlético de Madrid: pronóstico, consejos y cuotas | LaLiga",
-    "Eurosport",
-    "2026-11-21T16:03",
-    "https://news.google.com/rss/articles/CBMivAFBVV95cUxPbjlmeXRBVWtWcVhBcHFwdUVxamtaOGlORmhSeWJtMTQtblNCSVZoZlBlN1gwek5iOS1WcU5iaTFxdXZSYk4zeUFuZGZVT21aejBFWVEtTjNwSmZzMzJ1akJjLXlGdlBYbVllSGtNWUhXSUM3TW9aSDJOeGM4bWI5bktfbUtXbzJPdU5HOWZ1cHhXdEg3XzdybHoxRnpXWktKb1NkUzhhNnlNVU1HT1c4LU1QbndEbU5ab0c5Mg?oc=5"
+    "Boselli, baja en la convocatoria del Getafe CF por lesión",
+    "Jornada Perfecta",
+    "2026-11-22T12:36",
+    "https://news.google.com/rss/articles/CBMib0FVX3lxTFBUWWZyUGhqeTFtaWJQTkctTVQybXhCQlFtLXp6ZV9meDR4QnVuR1k3emFBcHYxUFZOZnA3Ym10X2RPNDBCaXdTeGx4dVk2WUVva0F5YWxqb1FuS2JEVnNWQlhHSmM1S2F1UzZybGs3VQ?oc=5"
    ]
   ],
   "Barcelona": [
    [
-    "FC Barcelona - Villarreal: alineaciones probables de la jornada 13 de LaLiga EA Sports",
+    "Convocatoria de Pere Romeu ante el Athletic Club con cuatro bajas",
+    "Mundo Deportivo",
+    "2026-11-22T13:33",
+    "https://news.google.com/rss/articles/CBMiswFBVV95cUxOTkxHY3VLNHd1UllvVjBzZ3hSbUxfU0JOSmZyVndURjA2aUxMYVZBUE1ESjcwZGRZdzBKaXBxOTluX2dwMXVkMGpYMVRydTZvNVljS3NjS2c3QkRwMXhQQlFVdGptWnBtbkRISDVfNFFfZHloT1hxRUtqdko1a0VQSnRLZXR5LUZQaXBjT01yR1RDcTRwd1pObHRkZElnTXJsYWdyYWU3NUhRUno5cHlMakdvONIBwAFBVV95cUxNYzU2UzVRMmJ2RGY0Y3lkbHRTRW9jSW1tbW5icVF1THQyY2p0RjVDWnd5OEZ3dVBHWGcwNWgtM3Bxenlsc1FReS1pa2x0STdJM0ZDakx6MDVDQTdvWG1RYTg2OEdtSDNTRGMxZmh2LWlLVGxoY05ZOU5ZTlZIQmtfUTVzMWRUWGxsQTZQVjV6Mk1DQ3hOMUh1bHlSYWZsczR4dEhFQlRnWGFzcGhnczUyME1IVWtSS29NQW9yRHlMYTk?oc=5"
+   ],
+   [
+    "Alineación confirmada del Barcelona hoy contra el Villarreal en LaLiga",
     "SPORT",
-    "2026-11-21T20:03",
+    "2026-11-22T12:56",
+    "https://news.google.com/rss/articles/CBMimwFBVV95cUxOa2JrVHJBaWpzeWlscGw2OG9sT0NjN1A3d3ZOcHFlRE1OS3hsU0llc25VRWRncnV0S2pqMUlXSGNfUFYydm5PMHlyNnJUUWpkTTFwR0lXUW15LTJnb1Z0bzJYRmw3TTc2TlRDekRYNFBEWkdEQ0ttbzZfUGQ4MDdQNURqTGJ2X2IzSGFEX0NPaG9iSEVNNm5oUVdQUdIBmwFBVV95cUxPSWY5cmNpVTZEUWNNUVJhcmlnR0RGa0xpcVhQcjNaU3VQLWFRQm1Xbm81VzJfTUNxOEI0RWZRRGs0Qno5N0Zrd01Vd1lqZFhmMGxLTk94aUtRS2xwWkxKWXM3blcway1JcTVxdV82cWk4MFRiUGtsSUxGYWlaYkE1dDUyV3haVzhOX2lkUFNkTUJQdDBDdUFWSkY5UQ?oc=5"
+   ],
+   [
+    "Alineaciones del Barcelona - Villarreal de la jornada 13 de LaLiga EA Sports",
+    "SPORT",
+    "2026-11-22T11:00",
     "https://news.google.com/rss/articles/CBMimwFBVV95cUxPRWJzNlVtZnZWQVRGcUFrdWt6T2l6bVRfRXRSLTVRbFIwR0VfUmJCcGRsM0FtSVZHZHAxUVpzNy1GQ0wtRmd6aXIwR2M5MHpnVTR2Q1Y5V0Vxc19mOFhSbU5MbjJtVDhEa2NJSVhBR2I5RTh4eXBoaXFkQWo5WkN4OGZPc1JOd0ZmRFBtckNFTDF6VjR2QlExc3ZUb9IBmwFBVV95cUxPaDUtSE05aXFPWU8yTzQyYXBvT2pkX0NiVF9VUGlWYmVIMHVhMTFEalVielQ3bTk3RFNNcW5NNXBRTDVzSFVLQ1M0Y1ZEU3U1ZFJUT2twQlFqNmdsUU1uX1Q1aUJDZFg3S0JPSDRuSW9ocnotVUU0NlJsaTluS1pQOFhLVmNBSjNXTzh6bkdROWNhSXl0MEJpSTZDQQ?oc=5"
+   ],
+   [
+    "El Villarreal visita al Barcelona con cuatro bajas importantes",
+    "Noticias Ciudadanas",
+    "2026-11-22T10:16",
+    "https://news.google.com/rss/articles/CBMimgFBVV95cUxPSDk1MmtVRk1iNjhNdm9mdFcwRDVJSnZyemtkV0NmMlZaU0RTQXkxS3Y0RjRpRWd2VVlsVGpjNklTNHNRQzNNTFh1WC1UZFNBRWhYcFZjalppSVVwTTY2VTVybC1UZmFvVWVKZV9uVkJJS2d1a04zcDRDZFhqbmJQc0lYWXROMzVmaXdRN243VWRkd2JXNEdpU1JR?oc=5"
+   ],
+   [
+    "Alineación posible del Barcelona ante el Villarreal hoy en LaLiga EA Sports",
+    "Diario AS",
+    "2026-11-21T19:37",
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPSXM0c1ZQbzJuMjRlYl9nMEdOSkFIanZlSmJjcHE1OEhHOGN5djVMM3l4YmtnNGtNcHI1VVJVWGFxM1Qta2tGZ01oTFc2ZG8xek5haVRVd1h2OWNQWG5FSE5KMlNYc3VuZmJlRm1SS2RTUU1JcUI3OEJaa0FMVGtmTk13YzdBZFZnMDQ1VGlzYUtKbW9sQXpPeHQ2WHZ1eW1hNjZPYW5wYjFsZmhsTVpUakQ0WlF0aldKNml30gHPAUFVX3lxTFBxV0htUWs0M3U3SUh1dnBEVGRCNTBJQ2RoRWFTdzVpc01jYUxEVWFiRjR5dW1tS0lISTcwU0dURUNmQlJiVF85V3NKRk9GMklaaF95ZnZYZDI5SGhoVWdUTnZDTFRURkdpelFiTkxhbHNsdUE4emZQTHA4U1ltczR4cThRd2pVSWVqS18zZ2s2cDg0T3AtalpKYVloeEJubEo1MGRYdHpNclROQmVuLVluZnpBSXFvZU0zOFc3SGxLbzdNUzFfT1hfTl9POUVBcw?oc=5"
    ],
    [
     "Una lesión inesperada deja a Hamza Abdelkarim fuer… | Yalla Shoot",
     "YSscores",
     "2026-11-21T18:19",
     "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNYVJMTk1CcVhZSXBZZ0gtX05lREw1alFMZWoyMDNmM0E3Tmx0VHpXNjUyZk5QV29sV3VZeDJhNEd2NGZic0cwNUZ3MXZ4Ym1SWFJ3bDZEUDhPWGE1b1ZWTXMzR3pZenNIbFhuYS16Vl9FRnVHM3NiUzg5aTkwQUVEY0JpX2ZORUNtYzZ1cEdvOUVPZ1BBZ3ZMWVMtRzgyMDd5VUFZdkJ0SF8tSGc1Y1A1bHE3aURVVGd1aXVXSnNCeEY3SncyYnR6QUVrcnFWdGVLd1JqdlBWVE1CVFI0bEk2RHFSTVROMVZkSkwtMWhBdw?oc=5"
-   ],
-   [
-    "Flick confirma bajas en defensa para enfrentar al Villarreal",
-    "Emisoras Unidas",
-    "2026-11-21T15:01",
-    "https://news.google.com/rss/articles/CBMirAFBVV95cUxQcEItdk9HMGJpUVhwMnQ2dWc2VTZpWHZoZ2pYUHFTeXN0SUtWU0M4aDdKS1VPek1vLW80YUVKSDRocEpQVWVUSnJXWlV4LVZ5aXZHUEZWLXFKQkU3c3RwalhfZmJ0dlNWMzFGRU1hUzdUb1ZzS0Z4UTVsZkhYRVVlSDFiaUY5WXhMeE9HQ1VaTGF3OGZyVk9QX2Vsb0JaOTgtMVlsZ1NkUGlkbjAy0gG0AUFVX3lxTE5ua1hxQWdNT1BJR1dVNFBhVjhBSUtkelVZNnkxM1VUV2JyQ21BdmN0czQ1VWFaU3lzakVNdU1WUXRxLXZ6ZC05eUZaUE5GWkVpTXlIVTNVaU9aSlF2emJUS3BVbHhuYThteEphcWdQd3BkV3I5WjJKMzJ1ZkVZS283M3psNGFVWG1QeE1ndDMxbVNqNFNGMzJuQzhKRGlqbS1Ic0xrUnp3alZWUV9neDFWQ25GNA?oc=5"
-   ],
-   [
-    "Hansi Flick confirma la baja de Christensen y el plan del Barcelona en el mercado de enero: \"Es una situación que conocemos\"",
-    "Estadio Deportivo",
-    "2026-11-21T14:38",
-    "https://news.google.com/rss/articles/CBMinAJBVV95cUxOS01JSm1IRGF6REdLaFdvc01kbS03OHQ4ZmwtRTVlVE9WOGR3WnVIbzdOWFd0emZMaEhnZURGRklmcG90c0tGVFRxaGlsTkRQTzBJRnJQNmd5OUh2X2lVWS00S0NrUkRrWTdYcHFjLWhpS1dVUXMyN2VaUkNRbXBydG41cWRQeWw0SkRGRU1zSHRORDBBeldJWVROeTFFWVdlcXhCeW1JdmlSUWlfU1FsNVZZanBUdzlpajdxbnF2TlBHMF84bHVrR2xDQThRWmYtaDV4ZUxsbVRQTjJ6MXNtZkxMY3lhNVhrQjA2MXUyeWEySWRDaTk1b3VkWUozcklSdkxDenR5MkFEWDNjV0FNQ3VSbDNsbHBCLWF1dA?oc=5"
-   ],
-   [
-    "Flick, sobre la lesión de Christensen y la titularidad de Cubarsí",
-    "Jornada Perfecta",
-    "2026-11-21T14:28",
-    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSUp1OUc5M0lrT3MzbkR2b0ZYNmJrRVdXZnhLelRLcHJvWmtLQmI5S2dtWGdJLVpFV0tfcjByTlcyYnNaamhFdVlFWGJPUDNYdkRzVGZ1Sk81REw4cmdGWVBGcEtrQ3RsNEl0NU8zaGRwS1pqdk5iSUFlTzk4LVBtYjVHSk1HZkhS?oc=5"
-   ],
-   [
-    "Hansi Flick confirma la baja de Cubarsí ante el Villarreal y aclara la situación de Raphinha",
-    "Mundo Deportivo",
-    "2026-11-21T14:19",
-    "https://news.google.com/rss/articles/CBMi7AFBVV95cUxQQkcxU2V6UUZDWGRScmk1NlpSNk9CTHY0TWxaUnhVSFZ3RVYzYkZHWVJhY2ZIY21Vc0xLMDFWZElFeDRZUGlnRDIwYjlXYjhPY0F4THQ4dVVIQ3RqN1M1ejR2SzdueUpyU1lmY2VKa1BNVUtwcG9LNFZxRXBVVlFSX3VfVEoyNjBJZWxrN2Z6QVNSZ2JYUGtVNzR6WTFMQy1pcXBfZzg0QWhZQXBjR0pBVmtIeWJsU09idWlkdVkyQmxhcVQwWUo5ZjVqTURaWlVsQWFLc1lRbDh2WTRFMFBqZ2I4TDY2UVJTU1I2NtIB7AFBVV95cUxQQkcxU2V6UUZDWGRScmk1NlpSNk9CTHY0TWxaUnhVSFZ3RVYzYkZHWVJhY2ZIY21Vc0xLMDFWZElFeDRZUGlnRDIwYjlXYjhPY0F4THQ4dVVIQ3RqN1M1ejR2SzdueUpyU1lmY2VKa1BNVUtwcG9LNFZxRXBVVlFSX3VfVEoyNjBJZWxrN2Z6QVNSZ2JYUGtVNzR6WTFMQy1pcXBfZzg0QWhZQXBjR0pBVmt"
    ]
   ],
   "Betis": [
+   [
+    "Dani Ceballos, baja para el Bratislava - Betis de Champions",
+    "El Desmarque",
+    "2026-11-22T14:22",
+    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTXBMSGZvcW5ISi1hWk03WWp3VFZNQ3R5MG4yV1B4S2JqX251QW95eFNleTUtQ0tBVmlpdWNROWRQTmVlZF9iQ2NMdXVmZ1RYeTU0QXozM2pSbmw1MXZaYlItR3Bic29oQ3o1MndrVGhCcFNrb295dE5MWVBqdkhVdjQwTFU1bFk4djJyUUh4VkQxZTcyd2dWeF9UYnNBbW1ZTXkwN2VFbEtneUFLMGZDVHZNUHE0cnd6Nms3Wnp4UjdFUQ?oc=5"
+   ],
+   [
+    "Grandes noticias para el Real Betis de cara a uno de los próximos partidos de Champions League",
+    "Ficherio",
+    "2026-11-22T09:50",
+    "https://news.google.com/rss/articles/CBMixAFBVV95cUxOVTdDSzlncGpRRldQUnZuMWlsQjJqRndTN2VxeTVpRHZIcXRYc0xxMWY0X2hKbnNuM3d2WjFuR1IwbF9PWWJKMlZTalNJd0VWQUo3QksyTHVIVVQ3YU9mRFN6MlVrM1RuSk5RaC1yTFZHUzl4ZW5NNTlzUEkyRTA5ZjdlWFN0UW5CS3VwWTQ1UEZDMllCclZKUGZFSmpnaEN0bDh4U2NrOURsNnBFVXMwdGxvNXh5bzNRYzRrbHlsTTZubWNy?oc=5"
+   ],
+   [
+    "Sigue en vivo y en directo el Sevilla FC-Real Betis de LaLiga EA Sports",
+    "Muchodeporte",
+    "2026-11-21T14:00",
+    "https://news.google.com/rss/articles/CBMisgFBVV95cUxOYzEzR0pnVXZqaWNheUV3dE1ncWlHWDBHdlZaUlQtMmgyVEN1MlprUno5NV83S3Rtd3NOVEFVUWlJTnF2ODRuYUpiNDdncW9jY3FGWGw3TzREVmFUMjA1eGRGNHNaY09hdnR3VHcwVWhZQUpGR0FLOTNXRUswSEU5R05ISlgtN2JyVGtzMXhFcUtFWVQ0VFJEZllxdEg4UnVBVjdSVVNFenJlOHJZb3ZrcE53?oc=5"
+   ],
    [
     "Nhận định Sevilla vs Real Betis: Bài toán lực lượng của chủ nhà",
     "شبكة تواصل الإخبارية",
@@ -1480,32 +1524,20 @@
     "Tu Futbolero",
     "2026-11-20T20:54",
     "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOUlpOQjBtMFZSek80endPaGY5OFJuTDlVbHNURXZsTDBsZmxob0FSUUt2T2w5Zkhnd1phRWZ3TjhoZmZSWWo0MmRpNGxJbGxacVl4Qktxby12cVhyWVFmTjVlcVBZRXpFZklxcVdRUnE0NkQyc3FNd3dlUkVBZDFJSXgxTkZKVUhidDZfR3NSTUdSdENRZ0tLVTFGVGFUdGptWmZjYUNILVU?oc=5"
-   ],
-   [
-    "Convocatoria del Sevilla FC para el derbi ante el Betis",
-    "OrgulloBiri Sevilla FC",
-    "2026-11-20T20:44",
-    "https://news.google.com/rss/articles/CBMihwFBVV95cUxQcElYeGhxQk10bi1CaXgxTEtoYVBFc3ZneHdRUjBPMUlwTGdCS1pmcEcyQTl4Mk4xZVR5cXNfVkRUYWpxeWpWWEZpdElfVWtXaVI1bHZkOHJnREl5S1NWeWZrWThja0c0YjlzbVFMM3RkUHdqcUk0TUg1N0t4TlR1UlpXX1IwNTg?oc=5"
-   ],
-   [
-    "Ana González, baja para el partido contra el Málaga",
-    "Real Betis Balompié - Web Oficial",
-    "2026-11-20T17:43",
-    "https://news.google.com/rss/articles/CBMiogFBVV95cUxNV2Y0c3JjM2JQcnk3U3BLajQ3RkhfZW1GczczRmdfR0FNcVVfMkE4T1kwY3EtbEhIQnloTW8tVHAzckM2WkNDR1U1cjBGY21JNVZ1Z01UQ19IMmdqTzFwck9VdDJWT1dIaDVVV29lMW41TXExb3U3eTFLN3oxc2hlSlFSVjE4Qi1yQll1cnVwTE9aUGVPbThJN3RnTnRwZUI4WkE?oc=5"
-   ],
-   [
-    "Convocatoria del Betis ante el Sevilla FC con una baja destacada",
-    "OrgulloBiri Sevilla FC",
-    "2026-11-20T17:03",
-    "https://news.google.com/rss/articles/CBMikwFBVV95cUxON29XQ0VyUjBjZDBqajJrSDFYVzBaY0l5LUpGb2VDV3lBTm1sRlVJVUJtRVdlSXJwTzZoTFJFWkZON0xIbTBXclhqOGJfeXRPa2JPdWRCMGxBbkQ3Wlk3WU5JR2xUcXdJZWZwdi0zVHhtTlRON3ZWbEN4QklheUJvRWZuN1VHQVV5dmFFQXVVaVA2V1k?oc=5"
    ]
   ],
   "Celta": [
    [
-    "Cruz Azul busca refuerzos en el Real Madrid vs Celta de Vigo",
-    "Futbol Total",
-    "2026-11-21T23:58",
-    "https://news.google.com/rss/articles/CBMitgFBVV95cUxPdjhmdlVjV2tfb09Fb2VSR2U3YmVnV3k5b1E4ZFdLOE5KZlE1dXVCdXpfMmV6TlEyQklRZzk0dEV1UE5sSmxoV2JYU0NSam9qNDd4NkRoc1FNZlJad1dBZUJuT0hibXFTQ2Fma01sOHFOa3dtYTdvckh6UVFva1JUenZDNXhVUUFxWmpTdnhRMGdOaFlnRjhndmpoOVhYNXNITVh1cV9kbkVBRmpzQXBBMlI0dGdxdw?oc=5"
+    "Antañón y Capdevila entran en una convocatoria de 22 jugadores",
+    "Celta de Vigo Moi Celeste",
+    "2026-11-22T14:15",
+    "https://news.google.com/rss/articles/CBMifEFVX3lxTE9WRXhuS0M5TnlDdGplQjZBeFp6dGZaZDZqemt6OWJvZ19UV21fbDRORG5wM3RLZVJiN0NwbEdaTjBRRWxKVGhpUGZfdy1Eaks4TUJFaXZpWDNoa2pEclczYTc4cFJLUTJsbXlyTENnemJ3ekxuNV9aWjZTcVU?oc=5"
+   ],
+   [
+    "El Ing. Víctor Velázquez asiste al Real Madrid vs Celta de Vigo; este fue el motivo",
+    "Récord",
+    "2026-11-22T01:55",
+    "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPb3JfOFM0NjhTNm03UFRreUJtZ2RLS1BsV3hHTlZmZ0NEdEh4cnRDUXllS3NBcGE4b1dnWFRwc0I3ZW5peEhEV2gtcU9qMjNXVGd3SngtdGJRZW5vUzktMFdnS2dxWlNra3lZUzd6VXRrM3NfSncyejB4WHZIaVBCUW4tMll1SFZ5cmN6NFdwWXIwQzRzeVVsTEJEUmtnY0hHenVDdGpOeUpxQjFmSlVJTldncVBmZ21OU2RSb0RtZWRZLUtTNENkYlVKMHZaWFhNOWc?oc=5"
    ],
    [
     "Real Madrid remonta para imponerse 2-1 al Celta de Vigo ante Nadal",
@@ -1517,7 +1549,7 @@
     "Un gran Celta muere en la orilla del Bernabéu",
     "Cadena SER",
     "2026-11-21T23:50",
-    "https://news.google.com/rss/articles/CBMinwFBVV95cUxQN0lNdVZvVjNzc2RYT2pJdFZrM0tXUzhqb1d4U0dRU1lOU2xrVVVMWWVjMTl2aUdzREozZzUyZ09Md0c1M3N0aVItZkJFWDZza1NpZmRnNUQxejBzczJqUVFYX002ZDZHblk3a19rbXFtdTkzMmlIWlV1aHhBVnNyUG84OWtZM3dMT1puSHY2VndheUNEbS1HSXZvNWhDajTSAbMBQVVfeXFMT1pBVXJ3T1pfaXR3NHdJRDJreWpwNC1XckdMdHZyR0d0UlpVaHM3LUtic0VtT3BLdmYyTXBucVhSVDBoUHpjcDdsbnJhMEJDSWdwMGNvdzNEX0txajZKS3c2Rm9FVTZCMHA3aW42QlVNRzVITU1hY1ZKTlgzUjVKY1NmbndYdzZ4a3YwbkNFOUhXdmd2eVlxMC0wRE04RjBxdE5XTk9uVnc2UGQtWnhQeWNyRXM?oc=5"
+    "https://news.google.com/rss/articles/CBMiswFBVV95cUxPWkFVcndPWl9pdHc0d0lEMmt5anA0LVdyR0x0dnJHR3RSWlVoczctS2JzRW1PcEt2ZjJNcG5xWFJUMGhQemNwN2xucmEwQkNJZ3AwY293M0RfS3FqNkpLdzZGb0VVNkIwcDdpbjZCVU1HNUhNTWFjVkpOWDNSNUpjU2Zud1h3NnhrdjBuQ0U5SFd2Z3Z5WXEwLTBETThGMHF0TldOT25WdzZQZC1aeFB5Y3JFc9IBswFBVV95cUxPWkFVcndPWl9pdHc0d0lEMmt5anA0LVdyR0x0dnJHR3RSWlVoczctS2JzRW1PcEt2ZjJNcG5xWFJUMGhQemNwN2xucmEwQkNJZ3AwY293M0RfS3FqNkpLdzZGb0VVNkIwcDdpbjZCVU1HNUhNTWFjVkpOWDNSNUpjU2Zud1h3NnhrdjBuQ0U5SFd2Z3Z5WXEwLTBETThGMHF0TldOT25WdzZQZC1aeFB5Y3JFcw?oc=5"
    ],
    [
     "¿Qué canal transmite Real Madrid vs. Celta de Vigo por LaLiga 2026 en EE.UU., México y España?",
@@ -1526,19 +1558,19 @@
     "https://news.google.com/rss/articles/CBMi-wFBVV95cUxPWmFWTVBvZVF3NVF3a1U0cEdxendPOG93Q3pyM1ZxeGZEYXg0eWUtNDVVVy1RaFMxb01DSnRINVJIbHJxcU9GM2VzREhXY2VYcTVvdEgwR215ZTRqeFZKelllWVc4T0tUNk11ZjBWRTBlNEEtWVl3dEpJTi1XbmYzQ1FIdV9wOHEtMFZTNnpCY3BqUnNZQ3VlOWl4M29VWGNUZWxhV2pmdVJNMEJxeWVxM0Y4alV4QkFTTC1OMzVsUWVEQnRybHowbVdKU25DeHB4QnR6LTJjVk5NVFZjYjdPSnVpSEhURGVMRVphT0FicDZxOTdhZG41V1c0aw?oc=5"
    ],
    [
-    "VIDEO: así fue el gol de Carlos Espí para que Real Madrid remonte su juego ante Celta de Vigo",
-    "DSports",
-    "2026-11-21T23:00",
-    "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOb3FDOHBkODVKdjZZTGExZGFVeXlKWmxIZXd6dGRtX0ZTc3dURmdyV2VZX0R5OEdhWnRpSGhhWHRVTGw3TVAzNS0xWHhsamZpNGRJX0t1MmZzX2Q1a0pFeFFlbUZEZmE3TjNqUEQyWXZJTkRBdXV1bzRicDcyYmhjTFZoOVNmSjZDX1BBOGFSV2h4THI1SXdlZTRTRmJ4SEtzS2JxSlEtT21QTlJ5OWhncVpKa0tOWkJRWFFKQl9Bb2ktTDJCdmhrN1NreDhqNDZCYjlITXQ4NGZTNTM3elFPTHl30gHnAUFVX3lxTFBPTWVfcWZwZDBvdEJodEJrYW9LQVFWN1pvT3lvRU9OYk5mZnRXQlNJVUF0ZW5VNEp5ZWhTMnVRYkZ1SDIwSm5FR2tRSHRDSUV4TmpkVTVqNjNqbVVQU3hVYTlMR3RPUVJGZFk4d1BDLTBtdmJOWjNoakFQM3l6U0dGaWEwd2ozcUhYWWFzc09VZHdxbkx5a2VKd2lZY1FGZlh3am9XUFlUVGRaS2RPU21lYmJtX2trZHhuZ2M"
-   ],
-   [
-    "SKY Sports EN VIVO GRATIS — dónde ver partido Real Madrid vs. Celta por Fútbol TV y SKY Plus Online",
-    "El Comercio Perú",
-    "2026-11-21T22:14",
-    "https://news.google.com/rss/articles/CBMi7AFBVV95cUxNbW00YXRRcFVJcmUwVVdYWTFLc01xUnd4bm1jem5pYXlsaW5QNWpVVm9UQTFuT1BUd19fZXdGVTE5V1lxd2pSWndOdktDTmNQbWM5Tm9iTDY0UFpsVTBwRU5aSTlLU1JpLTFSbWtaSk9TUVlhd0RBMXcwLWc1TFdEWEp1WXRxSXg0LWtvZldBbHVWRmNqQ0g5aG9kWGgzT1poWTJrZmJhak5pVk82OWhVV2dCUzdjbHIzS3JrbURxOUJxMVh2YTdpUTFfZHVWTHhicEF3WEczREZmd2NNbkcyeG56QjU5MkpmcVFVYg?oc=5"
+    "Real Madrid vs celta de Vigo: futbol español",
+    "Diario del Sur",
+    "2026-11-21T20:13",
+    "https://news.google.com/rss/articles/CBMihgFBVV95cUxQZ2szVXg2WnRQeXNUYzBRcUZ5YlU4T01UVm01ZHdwcTRTY1Bpc1F0X3hWVU9ZVmFZeERvdXg1YnFxRU83MHJFdnhqVE5UTW5wRWd5aHdzZVVZSEVfMVNTc2VqNXFpbHFkQzdPTE53cksyN1hmZFJ0NUxqQ3dlVHdreDNRYTU5Zw?oc=5"
    ]
   ],
   "Elche": [
+   [
+    "Metrovalencia refuerza este lunes su servicio con motivo del encuentro de Liga entre Levante UD y Elche CF",
+    "Valencia Plaza",
+    "2026-11-22T14:04",
+    "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPWXJ4MUxUSlBHSG1BbWViaWRHb05qVFNzUTFSbkttaUtIY2JOWHR0bXl0V2JIQVhBZlQtaHRyX3JIajB1Ym9hX24tWFh6Tk1oaUZ0UDVXZnpRNUdpaUZMV3lFWUlMZTNKN1NnWFY2QVJoRUxOM2cyLW5Ib3ppYTBRWk9idU1GeUhSeEJ3OWpJZGRDOFJpU2VFdUdmYzFwLXl1S3R5RkY1dFktazJoalpGTmZCWU1xaUVDWFRyVWpPdlhxOW4yRzRkejEzNzlGTm1jUS1EWXpPNUd3UHVFOHlIeHc3MXZ5bXJTaU15Ym14U2VQdmpndzdyR2pB?oc=5"
+   ],
    [
     "Luis Enrique busca con urgencia un sustituto para Doué",
     "Fichajes.net",
@@ -1558,69 +1590,95 @@
     "https://news.google.com/rss/articles/CBMinwFBVV95cUxQdTFyby14VDNJeEl3T1djY3BhWFl2VlNXUkhRVFpVZ0ZGeEgwckFjRnQ1c0RQQjNHVTZRdTlBVzJjbF9IUWl0M01PVzY0WE9zSWZEVVBLS05QelhjSGxxNmR0OFZnYmU2aXNHTllQbXRLRGhCLVJuc0J1UUFlYXRXNGI1SHNmQjhkNnBxcElwSmJNSXFqdjBBN0J0d2lTN03SAaQBQVVfeXFMTzh1dFVsbjltV3RuY3hBamdOZFJLam50OGR1Z0FyMFFvN0FHakczMUdaNG1reVFJbE5hY2RHdFZ3SWpOdVdTY1VGZGJWX3praF9QMHFHVTIxVmtmeVhiZVVrOG93eVk4X3JxenMtN2N4eDZtVGJleVplUWVtemplSDBBcFZPdXZkZU5qSEhqOEtXdXNCQ3N5bWVfMERUNllkUTNfMVo?oc=5"
    ],
    [
+    "La previa de Martín Anselmi ante el Rayo Vallecano",
+    "Elche CF",
+    "2026-11-21T05:37",
+    "https://news.google.com/rss/articles/CBMiigFBVV95cUxQMWZoLVl5LTM5NjVXaGJVYnFEYVZGajVlNFRiWmVxUE01bnUyelowVzhmYVo0MlJUaTR6UUYtaGxlbllFR19wN0FQM1hDR19iYzZFZ3oyMm5OOEJ6dzF2V1JZVXlwaU4xejNSOTNrXzdub0VEZm9YYXljcUFGV3hvcG83U2hRTWZBLUE?oc=5"
+   ],
+   [
     "Convocatoria para el Gran Derbi",
     "EL SEVILLISTA",
     "2026-11-20T21:58",
     "https://news.google.com/rss/articles/CBMifEFVX3lxTE9ZcldWR2ljc1VmMkM2LWtySkhRcmh5UmhyUHREenFMbVZsTzkzcThvZlBjSDFGNFRKelV2RHNSdmh0ZHV2ZXNRVDBCcl9ZZVpvSWdROVFEXzIyRjRtQVF2X2tGMDRYcXYtTC1DZHZTTEJQMzBWQWhNSVI2Uy0?oc=5"
+   ]
+  ],
+  "Espanol": [
+   [
+    "Una lesión inesperada deja a Hamza Abdelkarim fuer… | Yalla Shoot",
+    "YSscores",
+    "2026-11-21T18:19",
+    "https://news.google.com/rss/articles/CBMizgFBVV95cUxNRmN0RVBVdTdFV01rcW5oU0xvV2hqVTQ2WFd3X2RsOTJ2VFBiN1A0OWdTSXVIeXBrZ3NhN2V6Q29rYVVXWHE4Y0hXZklLYU8yODJXaU9tUHd3YVRkZlUxb1pyYWdEdGNxOFJkNU1xcXh4WGMtekdlOXg1U0IyTUVaX25vWG9qbXBQcTFPWk9aRGJsTElKQWp5SmdCV0ZwVGNJbXF2QW42N3dIemRvU3dQVy1RNndiVWE3Uzk3MVkxM3lRdHNITkNzM0NmcUMtQQ?oc=5"
    ],
    [
-    "CD Teruel - Hércules CF, en imágenes",
-    "Información",
-    "2026-11-20T20:23",
-    "https://news.google.com/rss/articles/CBMinwFBVV95cUxOZl9lSmxjTktBX25vekZFNXpJTEdtSGJUQ2R4S1JGazlJT19CbklCWTlpcGdTZlhXUUE2b1NVX3VQV01GNldBRUpoUU11NTk1b29HbWs5dmUwMm5qQ1Y0a0ljZE8tVkFWbGpFeEtodU1NYkNFQThqdzlOWGZ1S2w4ZDlXUTNXQWxOMjB5el9XMmxvVGdzRlFVWnJfQXg4NFk?oc=5"
+    "DEIA destaca a Prados y critica al Athletic ante el Espanyol",
+    "Athletic Club Info",
+    "2026-11-21T08:06",
+    "https://news.google.com/rss/articles/CBMivwFBVV95cUxNOUt1SjVXZmx0aHN0ZTNpZUY0TV9taVhueGhWMnBTZHBaLWZlbEU1VXl2RHpZT09jSUVGYlgxSk81RHpueFg1bEZxelpwNVVUajRNWnNEMHJVTzNURjhpSUZaVjBTM0tmSzVCS1VWSFJpUzMzTzJGYkxrak11N0FCNDJWZHFBV1phS2xRQ05jOXhtT1psTmpVQ014QUh6TDRTS2wtY3ZudUtES2tsR08xTDNXN20wWGM4ckRybV9BSQ?oc=5"
    ],
    [
-    "David Affengruber, convocado por la selección de Austria",
-    "Elche CF",
-    "2026-11-20T18:58",
-    "https://news.google.com/rss/articles/CBMikAFBVV95cUxNQTBxNnY4czc4cGVPVUkwUHY0aGtwdmlXNGRLc3BpdGw4N1hTekZpNFNXaHhRTmRaaTZoMFJjQnZZcDJGUjh6SkdlbXlGRk1PU0NraDFHcU9HNUNvOXdNNXhSZ0RVelV6UkJqd3RBTkJscVhVYWVIV3NiRzV4TDJJZURQWWxOeGpUTFBaM050b0w?oc=5"
+    "Athletic Club vs Espanyol: pronóstico, cuotas y alineaciones posibles | LaLiga",
+    "Mundo Deportivo",
+    "2026-11-21T01:57",
+    "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPQzFnTkZKQmY4WS0yWFMwUFRYSktUcUJuc2d5MjFXUU11dXRWb2xiRHh1eE5rM3ZSTnlVbWZkSDRKYUE1aEdxdkplSEMxamx4T2NYaE8yTW95b2d0NFFRQ1JVSkQ5QTNnY0I0WjhDUTR3cHgyS3I1MFRDRmhfckdqeHRwWlNsWVhfSHlxLW9EVGxPel9QWWE5d0JHSldwLV80dTBuOUFtOFBzdGZwU3lNNFM0ckNFTVVNYVhKYmVWcV9Xa194ckxrQ21wdEhFTkx0NzFlZG5Xek9Vdw?oc=5"
+   ],
+   [
+    "Un batacazo que baja mucho los ánimos",
+    "El Correo",
+    "2026-11-21T00:09",
+    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNNDRjSDRzcHhlUzRyajVaSV9nV3J1QkNsTHdpeEMzODFlQUJrOFFGQTFSSTdzcGU1XzVqZHlYUF9jVGJPZHVEd081T2ItSTg1c1JGUlduTTJNUEZlY2lGdVA5ajB4VFpaNlVDOTNEOHRrNUJGWEY2MDNLWHd1Yl83bGVEWnBydWNoZmF0RHJsTnhDZ19menZRNTIzeDRtZ1JELWowYkdpbWttZ9IBrwFBVV95cUxNOU5nSTlJdXdIMzVDWkhXU3cyZ1lsMVlJV2ttTEZTTmJUOFRZa3lkN3NVUWtSbk9JTFVxVF9keGpQdlhvVUVtcmhrMkhsc1ZzLW1EclVrT0RBbU5ZVVdUQWpCTFh2Z3RUem1KdjJwMjU4bnp0NXFtMERGN0F4VXFLQnZYeXRGRFJpY0Q1ZFd3MFhBd0dTLTVDbEVhdXhpMDVoaGNhVVJNMWRoRExNM3Vz?oc=5"
+   ],
+   [
+    "Athletic - Espanyol: Sancet apunta al once y Vivian será baja",
+    "Athletic Club Info",
+    "2026-11-20T20:10",
+    "https://news.google.com/rss/articles/CBMirwFBVV95cUxPb284cE8wWXdOdjlJQURsNHIxb0VUakYwbkN1VVdWekFzUU9WVTdVU2RrRHpZTE44NmlacXNIZGN2OGx0SEZ4a3Ffc3lsRVBIRmxMVjBoenRLRmtQcmZhR2xfMHNFUDBqWTNNU255WFU2Y0ltWmFPRzZodVdiVC00bmg2SW5XM01tQnFQaGY3Ri1EZ0l0cjlBdFRRRnM4Nzk3ZDhPZDljeTk1VkdZQ3Rv?oc=5"
+   ],
+   [
+    "Alineaciones de A.Bilbao vs Espanyol | LaLiga · 20 nov. 2026",
+    "YSscores",
+    "2026-11-20T20:03",
+    "https://news.google.com/rss/articles/CBMijAFBVV95cUxNdksxNkY0MXNsckNDN29TWGRLYlNFam1ha3g1WndIdTJVR3N6SGFqak5ZYjdKTDJZUEw4eDgtZ2dVSnM4OGc4M0FPQWZQQzhUeWJSVGhnT2doSzVFMFFRRV9fcVBkYzJ4MTZXSndPYWJTUENsa3o1TmJnUnhZZF9RUVdrNVBleGtQeWFFTA?oc=5"
    ]
   ],
   "Getafe": [
    [
-    "Resúmenes LaLiga EA Sports: Getafe CF - Atlético de Madrid: lunes 23 de noviembre a las 12:00 en Replay",
-    "Mundo Deportivo",
-    "2026-11-22T00:13",
-    "https://news.google.com/rss/articles/CBMirwFBVV95cUxPQ3k2LTRLNElOQjZ4QVFMWlU0UW83TmZTUVFoM1RONDBBNkZKV0FHMXJ5Ulk4QkdXb0tzU3hwN3hXZXZvMFdZNFJLdERyNEtPbGlHZGFESHA3UW9NSW5ZTFRSUi01SE9kQlg3SkQ3UkRDYTRvNU9Nb2REdVlpTW1Rd09jY05ENTdtQjhJazhjNV82dlVIaWo3a2hSZ0tSSjhETHI3OF9UREpQZFphRUNz?oc=5"
+    "Dani Ceballos, baja para el Bratislava - Betis de Champions",
+    "El Desmarque",
+    "2026-11-22T14:22",
+    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTXBMSGZvcW5ISi1hWk03WWp3VFZNQ3R5MG4yV1B4S2JqX251QW95eFNleTUtQ0tBVmlpdWNROWRQTmVlZF9iQ2NMdXVmZ1RYeTU0QXozM2pSbmw1MXZaYlItR3Bic29oQ3o1MndrVGhCcFNrb295dE5MWVBqdkhVdjQwTFU1bFk4djJyUUh4VkQxZTcyd2dWeF9UYnNBbW1ZTXkwN2VFbEtneUFLMGZDVHZNUHE0cnd6Nms3Wnp4UjdFUQ?oc=5"
    ],
    [
-    "Luis Enrique busca con urgencia un sustituto para Doué",
-    "Fichajes.net",
-    "2026-11-21T22:45",
-    "https://news.google.com/rss/articles/CBMilAFBVV95cUxOVzdLaTBOR2lNa2NscjVZYnVWMlk3Z3hSY1ZvNE85QTl2Y0FiNlVJUklNT1VDR2ZqS2RLcWVPZGsxUlJsZW9DT1JVRnpnQ2htd2NUTlpGZVY5LTBBZk56czM3VlhRS2hGSDBSR2N2VC1NUkxhTngyMy0tMnhodWVqUVY0dmtUeS1EYmtFUzYySW9FVjEt?oc=5"
+    "Getafe CF – Atlético: Bordalás alerta del déficit de puntos antes de un derbi de máxima exigencia",
+    "NEKO Deportes",
+    "2026-11-22T14:00",
+    "https://news.google.com/rss/articles/CBMivAFBVV95cUxQVFNNVzhKR3NTV3hEbGRxOC00R0ZGOHo1dTZURV9ZUEFGMTJEb3hwM244SUFmenlxWUo2enkySy1VaUMtZWE5cWFkVEhxRWhpSWdsbEE0ZENKRUsyX1RERERaNTdjQ0hHbC1QT3cwTC1JZS1DYXVYT3RuTy1Nd0o5SUczWWZSaWVpc09xUG50X3ZBN0NRUVd0NGFIQ2VzU1JKUV80QU9EM3VOd3ZZU19qSy1IdkxLQjBaOVdhTg?oc=5"
    ],
    [
-    "Harry Kane, lesión de larga duración",
-    "Fichajes.net",
-    "2026-11-21T19:45",
-    "https://news.google.com/rss/articles/CBMihwFBVV95cUxQS3FVSFI3a0RNRmRpMjFqU0RxYkJXemJNUXA1dklUaFNZbjNGY2UybTJwMldXWXhoVENnZFFoZW1rckNmVE9SNm42dDJQeF9ydmFKWmRtczhiQ0duOGlHTzBEVm4xT1VYZGQ0UTZlNEg5bmdTTW9fYUtjR3c4RHhVMTZ5UzFNdUk?oc=5"
+    "Boselli, baja de última hora ante el Atlético de Madrid",
+    "MARCA",
+    "2026-11-22T13:43",
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxQT1REU0I2MHFxS3N1eGkxcTl5STlmUk54NFlTaDV3QXpXTzFWS05MdjdQMFV2YzhJTUl4N1V6RjBvc0lQYk1aY3RlblNaT1RvZW1MSlpEU1Y0ZmV3b05rVFJ5VmV6T19URUQ2am9WYmNEZ1hSaWlxcmxiT2FnZTh5RGlnVHlGTXpsUDM0UUtsUDhQZWp5VHVn0gGXAUFVX3lxTE5wUW1wNUFHUGRvVVUtSThEMjdPZlZNZEhMTjRycWZFS3lKcnpBR1cyTDdMNENiTGRYb051QkFPNUM5LUFiMlluLXBjT2ZidGUtYzhlMndaRHFkV0toVkRCejBMdVZTeDJqUkFwb2RQUTRfMXhfVEZ2dF9ybmVYdVAtTWNzOER4eThVWGs1dzgwV2JFb1R4SEE?oc=5"
    ],
    [
-    "Previa del Getafe CF - Atlético de Madrid",
-    "Teleprensa",
-    "2026-11-21T18:57",
-    "https://news.google.com/rss/articles/CBMimwFBVV95cUxPaC1wa25SV193Z1ZMbTY1SEdpSVBpcl9zZzVZU1JETEpjMldEeGlaM1BSYk5pNzNTbUFZTmJTTV9Nd1Y1Ti00UmZ4WFpOVXEyeDdWS1hQSElWb3pEbHJELVZHRjlDTktCb3R2TjRRci1yUXZ1SkhLOThKOFoydDVGUVR1S0I0c2pWQWRtb3drS0NoNVdYc0J1c3luUdIBoAFBVV95cUxQQmt3ZzZUbDFJd19TemhjN1VqYzhxWkY4MEZvS05oUDQtSERVMU9NMnBQZ2lhdEhoUUlZQ0VnTmVSb1Jna0hVR0NUal9Md2QtVl9BQXRkYUl2cUpya2swM0NKM2dLbEZZR0VzSnhLbEE4VTZPZ05uUzhaOXpXTFJvRjJsS1cxdk82ZDdHdTNOamh0MUV3ZTNQQTNoT2ZkS0tz?oc=5"
-   ],
-   [
-    "Máxima precaución en el Atlético: Gil Manzano dirigirá el duelo ante el Getafe",
-    "Esto es Atleti",
-    "2026-11-21T15:15",
-    "https://news.google.com/rss/articles/CBMirwFBVV95cUxPRW83NkNQTmlsZDI4bVJON1NnYTd6eWQ3U29OaEpmYjV2dXBTRmptUGpNUVlSMGRudUd5SGVJTEs5Z3JUOGx1UXE0V1hsRUxDa3NiWjVobnluMmpBVnpxREJCSk9pOFBnc3BXTWY2eDhnZWNxU2JJVUFiMXhwMGVwcUluQmMzUlQzaGVjdlRUT1JNcGxub2lJR2tZai1lbFdseEZ5R3pIbExOb0hScE9J0gG0AUFVX3lxTE45d0pQd3VFYjJLU3hQZWJtelFzN2UtWUFVOVBYN19pYVcwWVpHeGszV0UtcllMMXBadjNFXzV6Xzh4c2VVcXRDeGlVRGVEWFlSUmdNUzZPUEp0amFWOUJHdF9heFJ0NE13OTRJWHR5U09YdEVHaDRpeWw1NUR1cDNaTC1JYkVsOWdCazFzWWFMNGZXUW1DdHVXbHZPWVdUczhMMm5SUFdFUUs5Z1NjS2hLUVI3bQ?oc=5"
-   ],
-   [
-    "Simeone, sobre las lesiones del Cuti Romero y Pubill",
+    "Boselli, baja en la convocatoria del Getafe CF por lesión",
     "Jornada Perfecta",
-    "2026-11-21T14:14",
-    "https://news.google.com/rss/articles/CBMihAFBVV95cUxQSEZGbTlPSXljeFRpbTdkbXVuUnlnWWZ4Q0FrZzNuYnE3VzN1bGM5ekh5NTB2VThzQUJjaVp4Z1dZNXZTWFFCb0NqTXVKOGZ6ZUQ2djFWWHBJbmFIaGZnNk03ZjlQOU05NVotQTJ1UTlsSjY0cEZiWE9HQnZMWTNVamNOclY?oc=5"
+    "2026-11-22T12:36",
+    "https://news.google.com/rss/articles/CBMib0FVX3lxTFBUWWZyUGhqeTFtaWJQTkctTVQybXhCQlFtLXp6ZV9meDR4QnVuR1k3emFBcHYxUFZOZnA3Ym10X2RPNDBCaXdTeGx4dVk2WUVva0F5YWxqb1FuS2JEVnNWQlhHSmM1S2F1UzZybGs3VQ?oc=5"
+   ],
+   [
+    "Getafe CF - Atlético Madrid | pronósticos + mejores cuotas | 22.11.2026",
+    "Futbol24",
+    "2026-11-22T11:39",
+    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQVlRVTEhvTHFVaDU4N1FrNGxUOU00YUliclBIbEt3eEhuM0N0Qk5iaFlZclpaOGJjSDRfZXBHR2hMUWw1SWJBTGE1dEtqTnhNTUM0enBZRzJGd3ZvdWs3SXd4MjlCUS1TWXJ0OWFFdXd1dE5aMmJYOFpGNUp0UE1NSVhJbnJHRUhMRFNrcFRxb3NkWnQzdVdYWVA3MWl6aHg4Q1VlbzhydExxQQ?oc=5"
+   ],
+   [
+    "Previa del partido entre Getafe y Atlético de Madrid en La Liga",
+    "Uruguay Al Día",
+    "2026-11-22T05:57",
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxQV0tOOEkyYVEzYXljR0MzQkVjVl9rNWRiay1QcmY3dlJEMVNqVGFodVhkRjZ4ODYyODBmSzR2REFTS0pKQUFka2dwY2lRRl9IVUZpb0F6T0NGYjNGUjBzQW1HQTdmVTRiaHk2Y1p6VTVadzdEajFqd2xIV2FLd1cwRzA2OG15QVNlMHJKRTN4bklyUDVLbjFn?oc=5"
    ]
   ],
   "La Coruna": [
-   [
-    "\"Será bonito\": Casadó sueña con hacerle daño de verdad a su club de origen, el Barcelona",
-    "Tribuna.com",
-    "2026-11-21T20:34",
-    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQd2x1eHV5UDZkcUdmSV84MVoxSDVfT09rNVJCV2lyejBnWDBiVEJrVDRHVlY2N2pKRXhRd1NxMHlHWkswcXVha2JVb2Q2UnZnd1Rhb2ZSbzlnQnZOVkd0QThGOW02LUhUV0MyRHhQV1J5QkExR1U5cDdRVXRvZG1fOUVYUWVaaEJoS043cFNwUV9QYTB1a0pWaHFBeWxVa1hYWklteXlsTDFjQktIWF9BSS0xcDJtTG85UGh1bkM3MldBQdIBxwFBVV95cUxNbWpLMFBEalZfUWVOMTZDbjI2SWloOFJzVGNxSTNEaWFxLWplWEFWc3NoZzRRVjhDNFlveWNwUWtOcnBQLTdrS2lRVkhuNk51X2JQMktmcENvY1BuTnFJM2lKYW9UczdmU01ORlRLNmtKcEVGRTMzWmRoQWx6dWUzUDNWYlRDcGZ2Mm0zMzR6bE53SXhiNHdzYWc4aTZEdGFscTRmNVFzUFNuUC1yU3JTWF9zM3R2amM5N0NvelpJU3NrSjk4allz?oc=5"
-   ],
    [
     "Hugo Novoa vuelve a recaer",
     "Diario de Noticias de Álava",
@@ -1650,20 +1708,38 @@
     "FútbolFantasy",
     "2026-11-21T15:38",
     "https://news.google.com/rss/articles/CBMitgFBVV95cUxQeE1WV2JUeFRTX0VEdmY5M2xJUlhrQWdTbGFpUHpsamo5cnBESVFHcjBLVGE3MEhkRWxEbjhWZFp4MjBWNUFXQ1BCemhHb0lpUm9kQW9UYlR2OGczX3N6eVBUMVk3LWJEUTRTb0dNUTNQMlhvcE9LUUtaMGJDZVhTeXlySDZhNmFzR05BOFNxSTJxNUM3TUM2bHhMM3VsN1NYSDZYNGdKd1YwSDlzc2N1VkF5cjktUdIBuwFBVV95cUxNc0x2d1BNRXZtc1RSLWVCWUR4Zm1fU2ktV3h3UjBQR3ROZjVRaHMtSDg2UzJPMWpWTHlNOWxiN2p5RWFLZGxMY0J2X0twazZxRUdYcWctU1RWdXBZbzdua1o5OWszS3A4R1VERGhaRTVrM0ltVnV3WUNwZl9rc2FVNEdVeWh5Tkc0ZWdpcGtlMVBhdHJaem1nZF92TTZxUXFXajA0aGlGQ0hBUnk5aFR0Qk5VWllsNXBRdzNB?oc=5"
+   ],
+   [
+    "Liga F: El Deportivo Abanca se da un golpe de realidad en Badalona",
+    "VAVEL.com",
+    "2026-11-21T14:33",
+    "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOeWpFX2RyT2NLSHdLT0lCT001bzRBcDRmeHBQQ3I4WF9UWE1tSElBNnRrVDhpV1dwaENpamlmdnZUSGN1SFdfMTQ0bU9MYlh0WWVZVmJTaXIxa19GblotejY3WmVYSG9oeWxFYjJWTG92cU1mLUdLY0xJRW9FQUpaeUcyby16bFE3VXREdG80OUV1N20tdlZKNXAySEVmS1I2VjExeUNVbmVoMWotM1pjcGtuMDlQWURmTDBaS3hOemdvbHkwNlZyd3Zldkh3bmpTeUZzT25aRWpGOVlm?oc=5"
    ]
   ],
   "Levante": [
    [
-    "Luis Enrique busca con urgencia un sustituto para Doué",
-    "Fichajes.net",
-    "2026-11-21T22:45",
-    "https://news.google.com/rss/articles/CBMilAFBVV95cUxOVzdLaTBOR2lNa2NscjVZYnVWMlk3Z3hSY1ZvNE85QTl2Y0FiNlVJUklNT1VDR2ZqS2RLcWVPZGsxUlJsZW9DT1JVRnpnQ2htd2NUTlpGZVY5LTBBZk56czM3VlhRS2hGSDBSR2N2VC1NUkxhTngyMy0tMnhodWVqUVY0dmtUeS1EYmtFUzYySW9FVjEt?oc=5"
+    "Metrovalencia refuerza este lunes su servicio con motivo del encuentro de Liga entre Levante UD y Elche CF",
+    "Valencia Plaza",
+    "2026-11-22T14:04",
+    "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPWXJ4MUxUSlBHSG1BbWViaWRHb05qVFNzUTFSbkttaUtIY2JOWHR0bXl0V2JIQVhBZlQtaHRyX3JIajB1Ym9hX24tWFh6Tk1oaUZ0UDVXZnpRNUdpaUZMV3lFWUlMZTNKN1NnWFY2QVJoRUxOM2cyLW5Ib3ppYTBRWk9idU1GeUhSeEJ3OWpJZGRDOFJpU2VFdUdmYzFwLXl1S3R5RkY1dFktazJoalpGTmZCWU1xaUVDWFRyVWpPdlhxOW4yRzRkejEzNzlGTm1jUS1EWXpPNUd3UHVFOHlIeHc3MXZ5bXJTaU15Ym14U2VQdmpndzdyR2pB?oc=5"
    ],
    [
-    "Girona: noticias, resultados, calendario y fichajes | VAVEL",
-    "VAVEL.com",
-    "2026-11-21T22:40",
-    "https://news.google.com/rss/articles/CBMiUkFVX3lxTE41SGQzSm82d2Y2SWpTc1dCdk9BYXdtM0hZaUtscmFkbUVRbnRfVTFFVmhkMVZQTmE4eTlkRlpueF9pNHp3RGVvWnJrYlpwNHF1Rnc?oc=5"
+    "RUEDA DE PRENSA | Luís Castro: “Es un equipo que fuera solo ha perdido un partido; no puedes relajarte”",
+    "Levante UD | Web Oficial",
+    "2026-11-22T13:33",
+    "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPd0hydVEzZ0VGN2dkU0VQN1NlSjcxbDNyeVY2VTJJT2tjcWU1OWZDU2hEM0VQaXpaVE1lMlpsY0s1Q0dFak9RLXRYZHZTV2ZuT013NXVjZUNEOS1kR2ItMjNDREt0YW5KNm5yZEhiMERxNzBocGE1QWNFbHplMTZnakNmVHBxQUNyNGl5UEpZaUZiQWpGWUNNd1JuV1RUSExCR2YzbnJvQmcxNjJLZG1ON1ZUbDNVaS1zNUdjYVZ3bmRJVUxkVmtPMktDYU9jeHVN?oc=5"
+   ],
+   [
+    "Bardeli marca el gol más lejano de LaLiga en debut con el Levante",
+    "deportevalenciano.com",
+    "2026-11-22T11:05",
+    "https://news.google.com/rss/articles/CBMimgFBVV95cUxNZ3ZFeWlrUUNQM0RjTU9PY0RDSWFZX0oySkFja21SVjFRbkFRZ3QwUXBlQlZ1MGVuNjFtR1lyRy1INDhqNlg3bHVjVGJHb1VDWExncjN6ang4X1VHd3lQNlRLS2k4a0JmVmNiRWlOQWVvNVNWbDE4eWNoeWJJRVQwanVGSk9jN2hJanVFRUtvM2NYNlYxVHE2RmpB?oc=5"
+   ],
+   [
+    "Braulio baja las expectativas del mercado de invierno del Valencia CF: \"No vamos a hacer una macro revolución\"",
+    "Levante-EMV",
+    "2026-11-22T10:01",
+    "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRDVDWHBrWUcyMGhyWVg4RDR1MVFOUVJMTFFJYVE5UW9fb3VCQmpLMHl4ZU1ISjNmSXYwbDJyMS0zczVtSFl0X2tJb0g2M2R4bF9aUVFkNVE3S2d2dk1vVmdUT05YWTJfT3BNMG1tajFIa19Ic3QwRVBvZkdWQUhSSkhnMzdsT05pU1RyVm8xcDVueW9fTGVCV2RtcndXc19PUzB2OHJXTHfSAa4BQVVfeXFMTjBYcl82eHBDUFdmN1U3ejd0a2RlYTJuMUxaRHhuWXU4QWs1Nm9Mb3h5a183UUZPZjJGaEd4MUptbE9EQk00MWtxMkJvNlVVeHpEc0JYYlpzcWttUHhJTXkxNFVpSDNZN2FmY3p0UllCeHQ3RHVjcW5qZTBhVlN0WU9rb2lvc0NwVUNKc1ZicXRlR3BISTkzcWdFQ21LTG5VSXRJX0hMZEJsd3owR0F3?oc=5"
    ],
    [
     "Harry Kane, lesión de larga duración",
@@ -1676,114 +1752,26 @@
     "Levante-EMV",
     "2026-11-21T19:00",
     "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNR3R1c2lsRFNfWGhxa004ZkhoY3ZtYlFfSWVsWlA1XzFoRUlva25aZnF5b3U2QW9ZWng3UDdqVDA1aXlRMWFEcV9sNzU3Tl8xRkdKOV8teFdVUWZuTVp6Nkt0SzBLTnp3d0VMazUxMnVfRHBOcWI3dDNncUktUmxoMGFZRExUS0JKaHNuQThPTHFyR1JFZ2ptcThSTkF6UHVmaFFIYzZDWUlHYkRvRlhjNmloVnYwcGRr0gG-AUFVX3lxTE54R2NOODc2Yi01RDVjV2daZ1h4TmRvTUFvaWhDZjdwdGljQlp1ckdhb2xaSFg1ckJ0bGlhODdBRF9wS2pPUkMwNTZ6WU5ranczUnh6QXNXTTRPLWlUUjZ1cVJuNjFJVS1VdnJkTkJ2c0ZiNlZiM3BQZU5MNjNPTDFxd0pqV3BxMGJsbU5NekFzS3l1SVJDMEprOWpVaGVwVkcyY0hTb3I1OV9vME5KYkt2dVpVdndXdE9IdWdzYlE?oc=5"
-   ],
-   [
-    "Copete pone fin a su pesadilla en el Valencia CF: gol y vuelta perfecta nueve meses después",
-    "Superdeporte",
-    "2026-11-21T17:16",
-    "https://news.google.com/rss/articles/CBMipgFBVV95cUxPUnJuQ0FyOUN4Q1B6SDlBNG9fNnFvVVNkVGk2NkFQcWJWWnhLbHB4Ml9rS0J3NXRqQ041dDFva3FiQWMtbjVOclAxN0xXZXNQVnBVU1VkME1sQ3NUNDVLS0lWY2FGSF9NbXZGZS1KUFFCaVZJUFBlTzlzamRBcjMzRXZLdXFtNW5JdFd2R0JuWTNOY0hhMHIwVm9fcF9qTFYtYXcyaVFn0gGmAUFVX3lxTE9Scm5DQXI5Q3hDUHpIOUE0b182cW9VU2RUaTY2QVBxYlZaeEtscHgyX2tLQnc1dGpDTjV0MW9rcWJBYy1uNU5yUDE3TFdlc1BWcFVTVWQwTWxDc1Q0NUtLSVZjYUZIX01tdkZlLUpQUUJpVklQUGVPOXNqZEFyMzNFdkt1cW01bkl0V3ZHQm5ZM05jSGEwcjBWb19wX2pMVi1hdzJpUWc?oc=5"
-   ],
-   [
-    "Levante UD - Elche CF | Pronóstico y cuotas 23.11.2026",
-    "Diario AS",
-    "2026-11-21T10:20",
-    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQM0trRUdwUy0xRTBjUFVTZEU1dVhEVThKa0JRUEdGcnNEdWFmX2xLRndhRFVrMnlPOWZ2R1UtV3VNZE5qNlFGV0k4VzNmQXJKT3VpX0dpSkU2WUFOR0VxazlaM2xJd21sY3NkZlN3T2ZYZVozUVJjaTdVRHo5Uk0tdWZzQVRNVk5i?oc=5"
    ]
   ],
   "Malaga": [
+   [
+    "Osasuna - Malaga CF: Alineaciones probables",
+    "La Opinión de Málaga",
+    "2026-11-22T10:49",
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSHJ2X0xUNkxDWjROX244Y2huNkxqNGhnVjc1TV9jVXpfQ2hrS3Q0ZTk2VFh5dXpPN24zeE1YTWM5dzBuZWVkdHZ4ajBuckxSMjQyV25qM2x6XzdjU1ZDejVMNGFXMUVndTV4T3d4S2JaeVVMcHk1LU5HZ0VMYjNod3hiOFlVME02cWZxSmVGTXhSaUQ0RElSZE1vZHhCYWtCWl9BSFktVVVVWXJ20gGyAUFVX3lxTE1hbWFHWEgxM2Zjd3lPa0RfeURjaWozTkFwa01UV0RfblcwdFBydlYyRkxYTlZhald0bW1xR1dkTEZfbnlWTlJvb2F4UUtjMzQxbC05VXNDeE84akJ5YWVnZVJXZFpybkZkMmVIeDZsbXhvVHFxWWVIcDhIaTJnOWVXQmNaMjhBLVVXNlFLVlpKUVdqOERaYUJ6UDNBZS1PUjQ4eUEzZl9PaFJjLTByNzlVQ1E?oc=5"
+   ],
+   [
+    "CA Osasuna-Málaga CF: La obligación de la marmota (18:30)",
+    "Málaga Hoy",
+    "2026-11-22T06:13",
+    "https://news.google.com/rss/articles/CBMijAFBVV95cUxQalpFN3NydUNiNVJXUzBsS1NJb0otaU5xcFhqWm84WTNqWldrMFBoSjJJQ0JUVzYzQ0V3dGtTeVI4SEliWEpXMlZKc1FKUUN2Ny1EeHZ0S1U3ZVZEa3c4Q3lfZTFpanBMN0wxT2F0SWpndnM3MXpUb3Zra3h5cGFGazBQTFV5Y1U0M0Rmdg?oc=5"
+   ],
    [
     "Este es el posible once del Málaga CF ante el CA Osasuna",
     "Radio Marca Málaga",
     "2026-11-21T21:16",
     "https://news.google.com/rss/articles/CBMie0FVX3lxTE9WR1g0c1gtWkVOR3RqRFdDbUdCX2JfZllucHRuQXhmRFpTQ2xVSmtOME5LR0l5XzRrY2dDTmVrZHZkVFVNWFBYbW5PamRZOV9vOXJwS2JMSkJob1BDUWtfeFRKU1Y3VVJpSDN1UzVDem81OUVvemNNd1l0bw?oc=5"
-   ],
-   [
-    "Osasuna - Málaga CF: La enésima oportunidad de creer",
-    "La Opinión de Málaga",
-    "2026-11-21T19:41",
-    "https://news.google.com/rss/articles/CBMiugFBVV95cUxQeWFjYzhQQV8waGlXN3EtamFJcVRBVHlHZkFOcWJSRjZYb0ZTOXp1VHpOZGhXYjAxVjJ4b2NDUmUyN0s1ZWQtXzJEWDNSSUJRaGpydEZwd3dCLWlBdkVyNm1ybDlxOVBNMldlTEsxaWJQX2hyRk5nXzRrWHVITmNwYXNxUUsxWjFLVy1wX2VmSmFoUmZ4THRQYXgwMXZ6Nkw3S2taNU5DMUozVDVxRC1lUjc4Qk04djUtNmfSAb8BQVVfeXFMTXRTVDBoaHlyYlJ1OF82QXBabW9UX2RrZGIxWVh2NXRfTEl3UWpURmJGUnFxWTkxcDU1UnprQ25od3FmSUJJbmhsMW9aaDV1QkI3QTFPMUl5Q1dfZzVwclRlM2dUdFYyNnlwX2hIUE40S0lCclZ6R0I4SmRjME9LcHRLWjZ2MU1ZcUFUUERNV2VXRWdsRUZnNEluOENldHpFUEl0THNkQkZrdnVmUmtqNWctZHk4QVJZSXVNb0xrdTQ?oc=5"
-   ],
-   [
-    "Murillo reaparece en la lista del Málaga para visitar a Osasuna",
-    "101tv Sevilla",
-    "2026-11-21T18:04",
-    "https://news.google.com/rss/articles/CBMikgFBVV95cUxQcGgwX1Z6N3dKdlZ4OGY0LVhBbWFReEhRSmg4OEh4aWtXLWx3N19JSlN6eUhIazNxTkNjMXVSTXJJTDZ0SktPdzMzRV96RnNaN24zU3hQdFdrdmkyWEtNTGhCT1RBNUpXZWMtUk0tNUJTc2xZZmhXN0FMMWQyWnJDU1g0T25Ed09HeDlpMG9nMWhVZw?oc=5"
-   ],
-   [
-    "El regreso de Murillo cinco meses después, gran novedad en la convocatoria del Málaga ante Osasuna",
-    "101TV",
-    "2026-11-21T18:01",
-    "https://news.google.com/rss/articles/CBMixwFBVV95cUxPMFJLVzJKdHg5eWl2eHh4blNHenc2MjkxUzF4VEtYcU50V2IxQkxVNk9lcXBIY3dxSjRtdWJCeUVMOHMxS0tOZEFiZ202TTlSYm9mQW9lcVgyOV9PNnlzR3c3dVlpaGFyYkNFZHducngtWFk5eWJKTXNTMGloWGhyUjkyU2tYM3ZaZXZrTUlGenJXTzNlLXp5aDQ5N04zcjFEcFZlUDhxOXZ4LTBDZW5KcTdhVGp6UW9tQjJOOGxqbFI1SGRNcGtr?oc=5"
-   ],
-   [
-    "Convocatoria Osasuna-Málaga: Regresa Diego Murillo",
-    "Málaga Hoy",
-    "2026-11-21T17:59",
-    "https://news.google.com/rss/articles/CBMimgFBVV95cUxPaERpRWtxanl5NGlxbzhZVV9raUNudHJ2bWZoUUxCN0szTlZrOUtTTmo0U1RzamN2OUNvY0hwOTJYRVVLSVRGdzNMT1NpVGlrc0dSRW5qM2JNdGZyMTN0Q25oNVpOV3FnenlFUWc0TmFJRlY0NFJqbWk3dEFES0tZQ2ZKUnFFSHhlUW0wek5OUTYzUk1INlN5Ukxn?oc=5"
-   ],
-   [
-    "Osasuna - Malaga CF: Murillo regresa a una convocatoria cinco meses después",
-    "La Opinión de Málaga",
-    "2026-11-21T17:46",
-    "https://news.google.com/rss/articles/CBMitgFBVV95cUxPT0s4QU9ZQlBvWFZ5dnhmTVN5RXlMWU51NkhUZFZtREdMR3RDWTBsdVJkVWxDdXAwTDBId1J2d2s5Q3I3RUhjc2lONGRRc3FOTk1hX1FGWVUydDYxR2l6MVdDc1RmSVM3eFdqMXQ1SU5pN2JSRmlZcVFQS3RYOWFPRXNnVHZNcHZyeGRSSC1GSFh2VHktVFVhOHZGY0gtQUhYSVZrZ01sYzhoTS1vOHF5dG1LdUtwd9IBuwFBVV95cUxNZFFrRkVNNGhkdnAzT1JoNmFiOFViUDJFZ0NacVB6Z0hLWENFRGhSeklxVkZVSVVOUjFsM2JzUm14U0tkNjkzYlZzU0k3VWR1d2FYQk1sNjlkNVhRdVFxRGIwZXVoSkdxRzVIMU9SeVFTOWFuYTU0elJVSENTTXBzNERiWFhSRXhBNjNDX3lJVEJnRFpHTnFhTG5SV0QzM3Bod2lTVGl4Z3JQWUtOVllFRkIybUZTNGdGOWtV?oc=5"
-   ]
-  ],
-  "Osasuna": [
-   [
-    "Osasuna-Málaga, previa: el Málaga llega con cuatro bajas",
-    "Tu Futbolero",
-    "2026-11-21T20:46",
-    "https://news.google.com/rss/articles/CBMioAFBVV95cUxQc29yVWNodmZpTnE0TzZ3ZndHR1daeC1JaHR3Qmlzel9lY045RmhrV3dDX1kyVUN3SFBkbWFGLVpkOU1sd09ZQkU4dWt2ZFFjMWhBOWl6Vi0wVWRzYm5uUTVhdy1FY2JmLXVEckE5WENuYlBEelRDdEVSM3ZfWURacjNrMms4SXRrSGVkVEZrVWhDa1plLUlRZWtSb0F0Q1RC?oc=5"
-   ],
-   [
-    "Funes cita a 24 jugadores para el Osasuna-Málaga del domingo",
-    "Tu Futbolero",
-    "2026-11-21T20:31",
-    "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNR3k3ZUFrUm1oMUlSalhjdXV3V3JnVjhvZ084WnE4RWZFSXNQUzFjb3BfSW1RVmozbWJyd1A0OTQ3LW80RXgxZVFZdU5lbEZ0SURZbGktYXM4d2YwYkZtSmw4UlVsSFRrSHNLNnNOaHFGZ2h1aGV4bHgxZTJ2N1J2Y19VRlY5OUxQVUdKYWlmbXhNMl8zS1otU3FuZUMzX1J1bVNCdWswNzg?oc=5"
-   ],
-   [
-    "Osasuna - Málaga CF: La enésima oportunidad de creer",
-    "La Opinión de Málaga",
-    "2026-11-21T19:41",
-    "https://news.google.com/rss/articles/CBMiugFBVV95cUxQeWFjYzhQQV8waGlXN3EtamFJcVRBVHlHZkFOcWJSRjZYb0ZTOXp1VHpOZGhXYjAxVjJ4b2NDUmUyN0s1ZWQtXzJEWDNSSUJRaGpydEZwd3dCLWlBdkVyNm1ybDlxOVBNMldlTEsxaWJQX2hyRk5nXzRrWHVITmNwYXNxUUsxWjFLVy1wX2VmSmFoUmZ4THRQYXgwMXZ6Nkw3S2taNU5DMUozVDVxRC1lUjc4Qk04djUtNmfSAb8BQVVfeXFMTXRTVDBoaHlyYlJ1OF82QXBabW9UX2RrZGIxWVh2NXRfTEl3UWpURmJGUnFxWTkxcDU1UnprQ25od3FmSUJJbmhsMW9aaDV1QkI3QTFPMUl5Q1dfZzVwclRlM2dUdFYyNnlwX2hIUE40S0lCclZ6R0I4SmRjME9LcHRLWjZ2MU1ZcUFUUERNV2VXRWdsRUZnNEluOENldHpFUEl0THNkQkZrdnVmUmtqNWctZHk4QVJZSXVNb0xrdTQ?oc=5"
-   ],
-   [
-    "Murillo reaparece en la lista del Málaga para visitar a Osasuna",
-    "101tv Sevilla",
-    "2026-11-21T18:04",
-    "https://news.google.com/rss/articles/CBMikgFBVV95cUxQcGgwX1Z6N3dKdlZ4OGY0LVhBbWFReEhRSmg4OEh4aWtXLWx3N19JSlN6eUhIazNxTkNjMXVSTXJJTDZ0SktPdzMzRV96RnNaN24zU3hQdFdrdmkyWEtNTGhCT1RBNUpXZWMtUk0tNUJTc2xZZmhXN0FMMWQyWnJDU1g0T25Ed09HeDlpMG9nMWhVZw?oc=5"
-   ],
-   [
-    "El regreso de Murillo cinco meses después, gran novedad en la convocatoria del Málaga ante Osasuna",
-    "101TV",
-    "2026-11-21T18:01",
-    "https://news.google.com/rss/articles/CBMixwFBVV95cUxPMFJLVzJKdHg5eWl2eHh4blNHenc2MjkxUzF4VEtYcU50V2IxQkxVNk9lcXBIY3dxSjRtdWJCeUVMOHMxS0tOZEFiZ202TTlSYm9mQW9lcVgyOV9PNnlzR3c3dVlpaGFyYkNFZHducngtWFk5eWJKTXNTMGloWGhyUjkyU2tYM3ZaZXZrTUlGenJXTzNlLXp5aDQ5N04zcjFEcFZlUDhxOXZ4LTBDZW5KcTdhVGp6UW9tQjJOOGxqbFI1SGRNcGtr?oc=5"
-   ],
-   [
-    "Convocatoria Osasuna-Málaga: Regresa Diego Murillo",
-    "Málaga Hoy",
-    "2026-11-21T17:59",
-    "https://news.google.com/rss/articles/CBMimgFBVV95cUxPaERpRWtxanl5NGlxbzhZVV9raUNudHJ2bWZoUUxCN0szTlZrOUtTTmo0U1RzamN2OUNvY0hwOTJYRVVLSVRGdzNMT1NpVGlrc0dSRW5qM2JNdGZyMTN0Q25oNVpOV3FnenlFUWc0TmFJRlY0NFJqbWk3dEFES0tZQ2ZKUnFFSHhlUW0wek5OUTYzUk1INlN5Ukxn?oc=5"
-   ]
-  ],
-  "Real Madrid": [
-   [
-    "Real Madrid - Celta Convocatoria & Alineación: La Liga Fútbol",
-    "Eurosport",
-    "2026-11-21T21:49",
-    "https://news.google.com/rss/articles/CBMingFBVV95cUxObVNxYVJyTzJna2QyLW16NmdDN25fMGJzcHJua3N0ejd5Z2sxZ3pac01GMUJ5VFNxdVhOdTAxRUwtZUZGaTk1WUNoSG4wM0tWUURIVGJhcG13MzczV2JxZ1JxLWhRM1hNZG1lU3NmaDRqVC1pOWpxTDBGanpUd2ExVnJNdFN2S3IxUjRHbkZyNHJvb0xqOXhQREJTX2IyQQ?oc=5"
-   ],
-   [
-    "Onces iniciales del Real Madrid y del Celta",
-    "Real Madrid CF | Web Oficial",
-    "2026-11-21T20:00",
-    "https://news.google.com/rss/articles/CBMixgFBVV95cUxPOHp4ZjlYMWlueFBoczZwTTVHTjdiV1NmX29kRFVZbllxYmJFTDB6M3BUdF9jbjJmZ1k3MVpmNkJMSU9IUHU0aEhvV1AyaFhiUUttb3FVcG5xdWFOVWZqYXluN2pFdGNFTVBCazJzZXprSWpuTlhLX3R3RWNURzBqcE5XNnRYNzFPTElCcTl6MVdNRUJRR0JJdXR0SjVxQUZObUlFaThLRDNtSXh0MVhuOElUeE1odnpqNEVpTkU5enptbWYyN3c?oc=5"
-   ],
-   [
-    "Por qué no juega Vinicius ante el Celta de Vigo si ya no está sancionado",
-    "OkDiario",
-    "2026-11-21T19:45",
-    "https://news.google.com/rss/articles/CBMitAFBVV95cUxPLUNEeEV2dktqR0t1cW9aRldiWGRyUG53cG9iY0hwM2UxSWxqa3JrcmdFbHZCc2pWN2E5bFk0R056WG9qcTZ3UUhsUm5NZ1VQY3RNRXRfekVTTlE0NzZRZUVMa1otRFNBSE9KSzhQSEthTUUxcG9ja3ladzRBRWlUeUUteUE2ekRTaTVpS2lCRWQyR2lQUlUwUkJ4Tl8zN044dkpPUUV0eWxuS3VmTklDNmM5a0HSAboBQVVfeXFMTy1mOWdTMTFicGFKWGl1SWJyVi1sUml0ejN0S1p4TFIweEZGcjFUeHJ1SjFNN0RJSkFHV284UEE1Ny02b3BTMW9sOS1Ra3JpcFdvR0pMb0ViRzdRTlVucFppc1RGQVNGQUUwUTJKbC1wQTdvNjJ2aFJJQmY1UHVyWklQS2EtVUhPQzFwUkx3T2xZaDBhaDlDTHJMcTVMdjdSOVkwaHdCVnZ1ZmFzYlI2ZHlhQ25XSFVsSHhB?oc=5"
    ],
    [
     "Harry Kane, lesión de larga duración",
@@ -1792,57 +1780,139 @@
     "https://news.google.com/rss/articles/CBMihwFBVV95cUxQS3FVSFI3a0RNRmRpMjFqU0RxYkJXemJNUXA1dklUaFNZbjNGY2UybTJwMldXWXhoVENnZFFoZW1rckNmVE9SNm42dDJQeF9ydmFKWmRtczhiQ0duOGlHTzBEVm4xT1VYZGQ0UTZlNEg5bmdTTW9fYUtjR3c4RHhVMTZ5UzFNdUk?oc=5"
    ],
    [
-    "Alineaciones confirmadas de Real Madrid y Celta de Vigo en la jornada 13 de LALIGA EA Sports",
-    "El Desmarque",
-    "2026-11-21T19:44",
-    "https://news.google.com/rss/articles/CBMi1AFBVV95cUxObGVWUEgzTVpsTC12MTBzR09zUEFTMExXZFRBbjI0Y0ZXcUhKNGFTaVQwNm9Ic01lVjdJSFluZ094dk5pek5EVmNBbS1WOS1saHVsSzUxSUt5N3c3MkJQbE82QkppVkFQZkJXWTBpamMtanZuaVg4bXh4dVUxaGNaREtCVlRDWVFtZ1ZpSTdsSC04NXNvTlZGcTNNQ0RoQ3FEY2ctcWU0Ymxwbzh3dlhLVVZXRk43Y3RDQmVZQnRQcmhFSzJ2TmZtTno3M3VTMEl4dW1lWg?oc=5"
+    "Osasuna - Málaga CF: La enésima oportunidad de creer",
+    "La Opinión de Málaga",
+    "2026-11-21T19:41",
+    "https://news.google.com/rss/articles/CBMiugFBVV95cUxQeWFjYzhQQV8waGlXN3EtamFJcVRBVHlHZkFOcWJSRjZYb0ZTOXp1VHpOZGhXYjAxVjJ4b2NDUmUyN0s1ZWQtXzJEWDNSSUJRaGpydEZwd3dCLWlBdkVyNm1ybDlxOVBNMldlTEsxaWJQX2hyRk5nXzRrWHVITmNwYXNxUUsxWjFLVy1wX2VmSmFoUmZ4THRQYXgwMXZ6Nkw3S2taNU5DMUozVDVxRC1lUjc4Qk04djUtNmfSAb8BQVVfeXFMTXRTVDBoaHlyYlJ1OF82QXBabW9UX2RrZGIxWVh2NXRfTEl3UWpURmJGUnFxWTkxcDU1UnprQ25od3FmSUJJbmhsMW9aaDV1QkI3QTFPMUl5Q1dfZzVwclRlM2dUdFYyNnlwX2hIUE40S0lCclZ6R0I4SmRjME9LcHRLWjZ2MU1ZcUFUUERNV2VXRWdsRUZnNEluOENldHpFUEl0THNkQkZrdnVmUmtqNWctZHk4QVJZSXVNb0xrdTQ?oc=5"
    ],
    [
-    "Tienda Oficial",
+    "Murillo reaparece en la lista del Málaga para visitar a Osasuna",
+    "101tv Sevilla",
+    "2026-11-21T18:04",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxQcGgwX1Z6N3dKdlZ4OGY0LVhBbWFReEhRSmg4OEh4aWtXLWx3N19JSlN6eUhIazNxTkNjMXVSTXJJTDZ0SktPdzMzRV96RnNaN24zU3hQdFdrdmkyWEtNTGhCT1RBNUpXZWMtUk0tNUJTc2xZZmhXN0FMMWQyWnJDU1g0T25Ed09HeDlpMG9nMWhVZw?oc=5"
+   ]
+  ],
+  "Osasuna": [
+   [
+    "Pronóstico Osasuna vs Málaga: El equipo visitante enfrenta dificultades debido a la escasez de jugadores.",
+    "شبكة تواصل الإخبارية",
+    "2026-11-22T13:57",
+    "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1nQUtHWHF6XzNVdHJtSWVZTC03eTNkQkUzZGVpZnFmYmpkWFlOMUdRekNQUnhjMjRGSkhCZmZISl9VODhDX2NVLWdYTWFrYTI0dGxF?oc=5"
+   ],
+   [
+    "Alineaciones de Osasuna y Málaga por la LaLiga: formaciones probables",
+    "Bolavip Perú",
+    "2026-11-22T13:42",
+    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNR25EVm1aQWNOaE1BY0h5NFVwaXJ5a0RNaDFqX05xNklhdzhOOGEyeWJnV1Vmd0hYRDFDRHpoZ2JMSVZJV1owS3Y4VUVZNnhtV2VWLTVaYUZuQ1lEMzRYTFpWSnNSMGxmYWJTNU1pYWVEZ0JWWk8zeDFSemZVanZPUzFtQk9NOTZzUElvQXI3dlg1RThXemhZdU53Y05hajJuVE81VHVoZDBWQdIBrwFBVV95cUxPR3ZmQms4d2hkNmhMenU5MHNJS2ZUUkxWRjMwOXFyWXBZUFpZc1dvNGwyc0h5bmo0eXJxOVBlSFdZQ3Y4alJXSTJqMFE5MzcyMHJHWUZ3NU0zS3BUa25KQUJscHFtWU92bWNXdzUxcllSODdjdDVPSGZ5UmF0aFEtZWxReXpRSkt4ckMybkJ0WWd2b2I3MVdtX09UV28tQ0FlNTQ1QkhRVlZPWlFYOWZv?oc=5"
+   ],
+   [
+    "Osasuna - Malaga CF: Alineaciones probables",
+    "La Opinión de Málaga",
+    "2026-11-22T10:49",
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxOSHJ2X0xUNkxDWjROX244Y2huNkxqNGhnVjc1TV9jVXpfQ2hrS3Q0ZTk2VFh5dXpPN24zeE1YTWM5dzBuZWVkdHZ4ajBuckxSMjQyV25qM2x6XzdjU1ZDejVMNGFXMUVndTV4T3d4S2JaeVVMcHk1LU5HZ0VMYjNod3hiOFlVME02cWZxSmVGTXhSaUQ0RElSZE1vZHhCYWtCWl9BSFktVVVVWXJ20gGyAUFVX3lxTE1hbWFHWEgxM2Zjd3lPa0RfeURjaWozTkFwa01UV0RfblcwdFBydlYyRkxYTlZhald0bW1xR1dkTEZfbnlWTlJvb2F4UUtjMzQxbC05VXNDeE84akJ5YWVnZVJXZFpybkZkMmVIeDZsbXhvVHFxWWVIcDhIaTJnOWVXQmNaMjhBLVVXNlFLVlpKUVdqOERaYUJ6UDNBZS1PUjQ4eUEzZl9PaFJjLTByNzlVQ1E?oc=5"
+   ],
+   [
+    "Málaga, tres altas en la convocatoria ante el Osasuna",
+    "Nuevo Fútbol",
+    "2026-11-22T08:43",
+    "https://news.google.com/rss/articles/CBMigwFBVV95cUxOZmhCS0hmRFc2RVNRLTRNbERMTHgxc1pBUkR1eG94SWltZ0VKUnYyWkVBNnQ0ZUd5SHJiak13T1JvalRENUNRV2NVLWlWaVU5VWNIUjdwTWhEdHVsRmwxWUhGeTVzVEZBSmdicmV2RWZkSG03Tkdkb2NPcTZmTXhZVEV3MA?oc=5"
+   ],
+   [
+    "Osasuna estudia las lesiones que están afectando al equipo: estos son los posibles factores",
+    "Diario de Navarra",
+    "2026-11-22T05:00",
+    "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPUlN0RkJKN2NwTWc4UVFVc1FseW5QWWFsWENfS09WSFRjN2tKTXBWRGxvdlllTW42Zmx4OWZlNUx1MEt2RUpibTQzekFieERLUl96dTlQZ19kV0M1YUhNSEFpREpCUFY3RXoxTlpuWTY5VnNFMjBvYjVQck54UGVXSnZpN3VJbkFXczdPR1k4YjJWbnpQZnBzWWxOSzhmWS1XX2J6ZW0xTk1qWkJoNmtfRVZiZ2hxZkdWNU1zRnZrck1TQVVDLVRzTjlTMDZMNjJ1RzRxc3ZtN2tqbzJJSXR6Sk8wZURYLWNn?oc=5"
+   ],
+   [
+    "Osasuna-Málaga, previa: el Málaga llega con cuatro bajas",
+    "Tu Futbolero",
+    "2026-11-21T20:41",
+    "https://news.google.com/rss/articles/CBMioAFBVV95cUxQc29yVWNodmZpTnE0TzZ3ZndHR1daeC1JaHR3Qmlzel9lY045RmhrV3dDX1kyVUN3SFBkbWFGLVpkOU1sd09ZQkU4dWt2ZFFjMWhBOWl6Vi0wVWRzYm5uUTVhdy1FY2JmLXVEckE5WENuYlBEelRDdEVSM3ZfWURacjNrMms4SXRrSGVkVEZrVWhDa1plLUlRZWtSb0F0Q1RC?oc=5"
+   ]
+  ],
+  "Real Madrid": [
+   [
+    "El Real Madrid ya prepara la Champions con las únicas bajas de Rodrygo y Asencio",
+    "FútbolFantasy",
+    "2026-11-22T13:51",
+    "https://news.google.com/rss/articles/CBMizgFBVV95cUxQQnVxUXI1ZlUwY0g4THF1NzZtaml0eXBub1pBNmFyQ0dQUWQyOTRrLXFaR1lJaU9ONG5fWG1wdVk3ejFpTlRudURIVVI2OFJPaDdMdklxNTVFRUd5TnRMaTJsaWxMb2M2V2VEU2xGa1JwWm0zVEFsT3hnRUp5b3VLOGdXblVneTNoekpRdDVQa1pwNXp3ZVQ0cWhvUUVXazh6RW5aOVVSOGtUdkFiTGhtVkFTNDRkWE5fRXp5eGhYanF4c2lZLVMzRkFBeXYtd9IB0wFBVV95cUxPc0ZvcUZuT2psQWt6N25JQjZvcTF6RlFldkdhNlpZdnk2YWZrTVVwVUpGQTBHbTJhRjN3T3hLeXh3czJZRjdqbjRtSnJGUE5rV0FoZnl2QXNXZFRJS3huN0t1cUlzXzFSWnBCRGVqWFJ6NHdLeWk2RDYtLTNEamFWc2pKajlWbE1UWWhVWkduR1p6UmpabnpWVVJkWnBaNnpNWFZPRE1DaXF0QTI0MFpsczMyMXh3S1N0Wlp6c1FYeHhUSzlreE1rSm9zeXJ1bnF"
+   ],
+   [
+    "Espen Eskås arbitrará el Real Madrid-PSV",
     "Real Madrid CF | Web Oficial",
-    "2026-11-21T18:59",
-    "https://news.google.com/rss/articles/CBMixAFBVV95cUxOeGlkdlBRLWdnU1M5bEoxclRsc3JVLWNoQmlGX0xSWDRKUVhIYThsS0VtbWVvU25GQ0dmWmVlOXU1TWdFc05DN0lxMEFtT2V0bjM3bkFMVlN4MUktV3hsVE5VSnJyZEs0NXlMTUdZQU92UlcyeUlkUndtTlRCZEo3U3dRSGhtWmtKeDYzeFh2US1vN3AyaVJZZzU5bC16dWt1blZkdWxTQ1FKWE1pTkJDbjZhZEdKTWI1SE1tUk10U2Z2c1g5?oc=5"
+    "2026-11-22T09:49",
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxOR0Flc2QzWkhabjI2Z2lueTZmVWd2NEJBV3pBMm4wb2hqaVlmVEtBNVRSODdUYWpnbGhycXB4MEFrOHN3ck9Qd09LTzVCNjZXRjE3WDMtVUUtR29rNzdZNDhRY2xuNEFsZl9MWXNfVzdZTjluT2ZhVDhlVE50T0FhVlZQUlNIaFB2SlB3YmMtaGpTY2R4bWtROUFfOEh0aXkzOW1iRGJUN1hvS2RR?oc=5"
+   ],
+   [
+    "Real Madrid - Joventut: horario, dónde ver, bajas, estadísticas y pronósticos",
+    "Betfair",
+    "2026-11-22T07:00",
+    "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNMjNNLV9fdDVpVm1jYWhlcm8tMi1SaTZOM2RYY0l6bUNESmstRmJkMlpKM1Z6S3RZS0ZkUTJ6ZWE5RDh6RjdGdVFBWEQyZHBOdnFyc1BKdE1vLXVBWlM3c3U4aEtDdjRVM2drd3QtVjVpWUluY1AwcjluWHZPdlVMY2U1d2tEcmVGd3lCUW12Z3dZZ0N2OEtWSkFxTWR5dXhIWE51Z3psMzA5clZzbmhoLWt3TnlaR0NzWGQ0SWdXM1NJdUJoV0xUeWlOeXpjcVpoTlA2YdIB3AFBVV95cUxQSExTeGQxYXZoUV9nU0FXRWlHbFRUVTBjQmVsR3IyNEItTlJ5ZGdSWVotXzlEaDNsRnJwX0pBZGlITlJOOExWcC1WcDJoTW1DZjlhMk9DTnJfWERHMFFaeTExdWIxbW14UUtjTUxMSnFOWU9ySHlubWJGeF9DRC1vcjNScVl3S05VaGRHZXNSaGE5dFJSUzZJN3N6T0JaQ2tGWlItWjRjNUg1QmJ4RThlZ0dTckctM3hZTzFPNGJKWXIwNFNxQmQzWGx"
+   ],
+   [
+    "Carlos Espí: “Voy a aprovechar cada minuto para ayudar al equipo”",
+    "Real Madrid CF | Web Oficial",
+    "2026-11-21T23:45",
+    "https://news.google.com/rss/articles/CBMizgFBVV95cUxQRjdMUklBTW5UWTRRN3VyUkMzV09vMHduWVF3Q3p1ZmNITWxfZlVqSzhQWEltaFQ4Z1RjbUp2cGZmUGtyazRDSnNWT1o3ZjJuSUgxRHoyZHZUbjVQWEk5Ymt4QkszSXM3WW9kT1ZUM0RnV0VySkxPTzJvckY2amoyTnlLYWdIalBlaXE0d2NEdjlJR3ZhRlE1R0M4VGpiMVdqZGVoN1pJOFYtbzlxRG9IaVo1b0ViYWlkT24yRG1OSHktbzNCbkNXcDc3NUprdw?oc=5"
+   ],
+   [
+    "Real Madrid - Celta Convocatoria & Alineación: La Liga Fútbol",
+    "Eurosport",
+    "2026-11-21T21:49",
+    "https://news.google.com/rss/articles/CBMingFBVV95cUxObVNxYVJyTzJna2QyLW16NmdDN25fMGJzcHJua3N0ejd5Z2sxZ3pac01GMUJ5VFNxdVhOdTAxRUwtZUZGaTk1WUNoSG4wM0tWUURIVGJhcG13MzczV2JxZ1JxLWhRM1hNZG1lU3NmaDRqVC1pOWpxTDBGanpUd2ExVnJNdFN2S3IxUjRHbkZyNHJvb0xqOXhQREJTX2IyQQ?oc=5"
+   ],
+   [
+    "La alineación del Real Madrid: El XI para el partido vs. Celta por La Liga",
+    "Sporting News",
+    "2026-11-21T19:51",
+    "https://news.google.com/rss/articles/CBMi9gFBVV95cUxPb1hwSHA5Q01ndzMyZnZTV1o4TDNKVEhuYnZ1amlSYWpsQ2hLaDBwOHd6MWRMWkE0M016N1ZkMU5sSW56Z0x3TEQwcVBHUGxCTUZYT25FU2Z0c1IzSGZaNlpBNXFuc3ktX3VaWm5MYXM3QnBEVVRoaWQxUnhjQVdMWm1VYktfNEU3S3laeHFfdmlzLVBKRDlva3pscWYwVkNQRWhKT1g5cW5PdDd1eTlJaGdqUEpaaHlVaVVLZC1NUkxFTzFNT2wwelB0MkFHYjlIa1pXcGliM1lqVWFJWWpuUWhSQkM1ejlNbEx6d0lSWnNMQnJ4YkE?oc=5"
    ]
   ],
   "Santander": [
+   [
+    "Previa del Racing de Santander vs Real Sociedad: Un punto clave en la máxima categoría.",
+    "Vietnam.vn",
+    "2026-11-22T12:58",
+    "https://news.google.com/rss/articles/CBMinAFBVV95cUxNSkx3d01zZTZzbU52TmRWV2pLbHp1OWtXSk1kNlhjdk1hcGE5T04yYUU2aVEtMWpJc25ZTDdYLWN4ODE4Y2Z5WlpvTTdHTUZmYmVLTFRNaUx4ZkNSMkZ2cG9KTm9COElUWTBxbUxnV3h5ckN6eExSZ1dpdWU3SFJfcTlwcWs0YWxRbFpCYlliaHRzQUdnTDNYcmRiZlQ?oc=5"
+   ],
+   [
+    "Alineaciones de Racing de Santander y Real Sociedad por la LaLiga: formaciones probables",
+    "Bolavip",
+    "2026-11-22T11:20",
+    "https://news.google.com/rss/articles/CBMiugFBVV95cUxOOUxRc1RLdVR3b0czWlN1VkRiT2I3NkR6N1RtTFRMS1F1UzNpMjFvcGkzbFFZc01jS3ZBQjVLd1V6NlpSY3ZwMDVOTm56VWZ3cDNYaTRJNldEMmpYamxUVDBzeE1XUUZmZDVTLWFUZFhNTmVVcVhBZGpwQko0ZUVIc0dfTW9vNkNaOURBcXJXLVI4M21wbjhpYnctS09XMVhWWE1uYjR0UF9wWVpxeVVOY1E5eXF3OUlBbkHSAboBQVVfeXFMTjlMUXNUS3VUd29HM1pTdVZEYk9iNzZEejdUbUxUTEtRdVMzaTIxb3BpM2xRWXNNY0t2QUI1S3dVejZaUmN2cDA1Tk5uelVmd3AzWGk0STZXRDJqWGpsVFQwc3hNV1FGZmQ1Uy1hVGRYTU5lVXFYQWRqcEJKNGVFSHNHX01vbzZDWjlEQXFyVy1SODNtcG44aWJ3LUtPVzFYVlhNbmI0dFBfcFlacXlVTmNROXlxdzlJQW5B?oc=5"
+   ],
+   [
+    "El Sardinero revivirá un duelo histórico entre Racing de Santander y Real Sociedad",
+    "NEKO Deportes",
+    "2026-11-22T10:34",
+    "https://news.google.com/rss/articles/CBMiWEFVX3lxTE0xcWc2Q1BJamR2UmZVY0pBZWZrcHhSVURFVnlwMjhGc2ZTZzBXYko0VzJkRGU5S2h1aGpna3ZUNkl6WUcyR3hwOXg3MTJNNVM2Um81S09hZUo?oc=5"
+   ],
+   [
+    "Racing Santander y Real Sociedad se miden este domingo por la fecha 13 de LaLiga",
+    "Diario Ahora",
+    "2026-11-22T10:26",
+    "https://news.google.com/rss/articles/CBMiggFBVV95cUxNODhOSFZXbkdKb2F0dEY5bjc3Z2YxbzY5dlV2MmI5UFNZNHVDNk5XT1YxTmU4WEpFR1ltZnQwMzNRVGo5UW9LZ2lYRHBfUkI2TUFEUVpYZGUxUS0wVEJsQmdaRkJmYUNiQ1lXYVlkZFFFSHp1MTQtS2V2cmV4Z0FMVU93?oc=5"
+   ],
+   [
+    "La Real Sociedad abre su maratón en El Sardinero ante el Racing",
+    "Diario Ahora",
+    "2026-11-22T10:21",
+    "https://news.google.com/rss/articles/CBMid0FVX3lxTE4zSlJKUFYxOTZEdDNlallPTEJjWXVLMzk1cVp2LUdtWjB6VGduOTNfc2dPY1B2dW1sNUczQnZHUHpoS2JFNE5ZN3BlU0xVbFpIX3Y2TkRzaWdMcUlvR3MwbzFNdjg0ZEdNVnVkRXRTdXB0aXdWb21R?oc=5"
+   ],
    [
     "Mamadou Sarr entra en la convocatoria ante el Racing, la primera sin Barrenetxea",
     "El Diario Vasco",
     "2026-11-21T18:30",
     "https://news.google.com/rss/articles/CBMitwFBVV95cUxNMk1LbEplMGRlOHdIZm03OENMNDZrZS1PSVZvUjRJajNsdVZya3A5Z0dJTVBscDZTLThFU1RIMzFrVVh5YkFZMXNxcDhPcnpOM2lHY2VKbm9PZ2lmcUxhdUVXUWlOUnhsWW00OTUxZGJqcHJac2xJemVSTmozcFcxZjFxUXBPbmV6SkdhZTlvN3N3RzRySEM5Tl85UnBfVkdDV3hPMnd6TjRtalJDaGdHWjczSnlMblXSAbwBQVVfeXFMTnlNYXdiV2VtcElzVDFyQmo5R0U4eXVGV0lYQVNQMzFPNTBoR1FvVHQ2SUhJeEk5c0NvVUlsT090eWFrcTZreUFudTFTQmt5TDFrZmg3ZmRhOEc0MXFSZVdFYTBMQko3cjd2VUJVOW1rbWlHcGZlWm10OEplQzNwV2FfV0JFTTFuWjVma21aWE1ENkdINk55UDA2SmZZVVl5NThWZW9xTy0xUGF6cE1BWHR6MnhsMHNKMTlzT3Y?oc=5"
-   ],
-   [
-    "Racing-Real Sociedad: el Racing recibe a la Real con tres bajas",
-    "Tu Futbolero",
-    "2026-11-21T18:29",
-    "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQRU1GVVZGajRzT29NRWpQZ3duMm9aWjRtMmR2SHNxNW40Sk95MWlqNGo4b3k3Vzl4cmlocjJDaUY0MVc5bktzWG01OFl3aVhxUEEwQ0xtb280ZnNFd2NjeFYzUW1xQTlYUzN6VE5zekJWaGxqUHR2Nlp3SjFMb1VUS3dlZTQ4TElmZEV4cy1BemlXWDltQ2k3bGtfRm9rUElBTzJ0dThKUG4?oc=5"
-   ],
-   [
-    "Vídeo: Rueda de prensa de Pellegrino Matarazzo previa al partido ante el Racing de Santander",
-    "kirolakeitb.eus",
-    "2026-11-21T16:24",
-    "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOWDZKYW1Sb1BhQkN5OU53alNNS09YMy1rMmdPOV9RLWdiVWJGQy0tV0JGb3NBQVk4X0xlTnlzakxpSGRIREc2SWU5aGR5Q1pFSGFLZld4RmRFaEx2ZVFKWnVuNVhyVnNSalB1bjRYVy0yWm9tQlFLaE1Yc3N0THZNbFFPUzA0ZFluYUdhQk1iZWlCNXp4YUl2V1puQ0FpXzlfN1ZZNm9ZZFc3ZEF2dmtRTWtRWnBVUVVkNnJUTkRPcWwxM1pkbjF4RlVXTGtzb1VvQUtzRUszbTFUNmtndDZFS3M1d19EU09wNEc4?oc=5"
-   ],
-   [
-    "El Racing, a plantar cara a una Real pendiente de su enfermería",
-    "www.abc.com.py",
-    "2026-11-21T15:10",
-    "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPT3UwZDlldzU2ZUZzZnItaE51LTMxc040cGRkNll5ektfZzZuUzhqX0liTUhuckhmaXVtNG9lZTBCcGZGMk1QWlJNSmpabWVyT1BLaE1aM3A4VmdTOXVBbmx6d1lHV21TaWFsa1FLdnpHTE12SThYa3RmZFAzNVpDZDVSQVpnT2RNT2dQaWh4Rmo2djZrNjJLaE9BUkt3ZGhBTmdUZVVNa3NFampnVWcxaEY4UHNUbmZJdjVqN2s2N18tXzFMSV9zUWlDRmVlS19N?oc=5"
-   ],
-   [
-    "Zabiri y Aarón entran en la convocatoria del Racing",
-    "FútbolFantasy",
-    "2026-11-21T12:28",
-    "https://news.google.com/rss/articles/CBMirAFBVV95cUxQUTNLWjRZTzhNSVZZRzJmcHBYVk9hUHVTODFhNnFFMkRlU3VIX29ZeWRsd0tOMmwyR1VicTkxajQzTWUzZjNvbnlNUGM4YjBudDdId3JMMV9OdWZEQ0FrYmV6VzJrQXl3T1ZOSUF2amNWc0VuYU9CTlZtaFFPZU5EWExlNkdmOWVaVGtYaUFFLTZHLS1WbDUyR19td3AtZkEtMkJqNGlUTms1VUFh0gGsAUFVX3lxTFBRM0taNFlPOE1JVllHMmZwcFhWT2FQdVM4MWE2cUUyRGVTdUhfb1l5ZGx3S04ybDJHVWJxOTFqNDNNZTNmM29ueU1QYzhiMG50N0h3ckwxX051ZkRDQWtiZXpXMmtBeXdPVk5JQXZqY1ZzRW5hT0JOVm1oUU9lTkRYTGU2R2Y5ZVpUa1hpQUUtNkctLVZsNTJHX213cC1mQS0yQmo0aVROazVVQWE?oc=5"
-   ],
-   [
-    "Racing de Santander vs Real Sociedad: pronóstico, cuotas y alineaciones posibles | LaLiga",
-    "Mundo Deportivo",
-    "2026-11-21T01:57",
-    "https://news.google.com/rss/articles/CBMi6AFBVV95cUxOVG41eHFWc2VaOERxeENjT2pKbTNGX3YzejVaSnlmWVFKWUNHNWNZNzFTNDAtZ2NjS3g5dTUydkZvN0NqY0p6T1NkUm5wRjRMdTY2bFh4T3BfVUlIcDRfa01JWHdGQ1JHSlJiMGNxZ2lTOW8xdEpSRDl1OHNEZW55VGx4MG5jaFNKUGJmS05TZ3BiSVE3cjVGNFBLdGd4VG9STkk1cHNQVEhzZGI2VFRRTlc5UjlTQjY3TDZRTnA0TkZQZEZtRWZ1aEYxU05UYW5ibU1SLUk1SHVpa1hyOW5EYjc5dU9uT3kw?oc=5"
    ]
   ],
   "Sevilla": [
+   [
+    "El Sevilla FC encarrila la vuelta de un ex: El jugador da el sí y se negocia con su club",
+    "Ficherio",
+    "2026-11-22T11:00",
+    "https://news.google.com/rss/articles/CBMivgFBVV95cUxNMXgyMUsyS0xWeFdUaFlaZElyVlBxeFVvSU1zdlQyYml4OXRxMnpVMFFxUTVGVEZaUFp5RGJtaXdETk9yZmFmOFJ1UWJFLTV3MUNvaGFwUGc5VXVlRDc2Z25YMHJ5TDF6b1JvU2xUVEdwWTBnMnQxNlZtZWRNek5TdW56Q3J2V2MzYkFxNEduMDJraFdZUlVEdmxHWWxCNEdaalVERC1VMVpVak5jZUZjcGxzWGUwTjdOblZfcUtB?oc=5"
+   ],
    [
     "EL SEVILLA SUMÓ UN PUNTO DE RAZA EN UN DERBI EN EL QUE MERECIÓ MÁS (1-1)",
     "Sevilla FC",
@@ -1856,10 +1926,10 @@
     "https://news.google.com/rss/articles/CBMiogFBVV95cUxPQVpGeVJkRHhOa2Q0cFlvUzdDVjFvU0lMczBxQVZBOEtzY2MzeDhpR01RcTVCamU5MkE0N0RpVTg5Sl9IMmZTVUZfRmpJNExDTGxnNHJVM2kxRmtzRXZ3clFGS3Y2U0ZlYnFhSTFBYVFqMDM0eDVOVDZJeVFYY2ZiX3JXM2hLWk5kd0NKbGN0b2NHRzlfUThmTFpHQjVsSzJZVlE?oc=5"
    ],
    [
-    "El Sevilla y el Betis se miden en Nervión separados por ocho puntos",
-    "101tv Sevilla",
-    "2026-11-21T17:04",
-    "https://news.google.com/rss/articles/CBMilwFBVV95cUxOQ01ZcUNHcDJrb2VKVjFqTzV2Y1pweDhfeXVreFBiQl9ianZfUldmM3ExQ2lNckEzN1VHYklMY0RQUXBhMEQ4QnNPYkJmemVuakR6eUQ3OHVSMEJkU003UUhYUU1EWHBaN1JyUXlSeHJmeGNRU2JrNjZTbXp2cDRnQmlaWDcyOHg0czlJOHlmMWkxY19uSTdv?oc=5"
+    "Sigue en vivo y en directo el Sevilla FC-Real Betis de LaLiga EA Sports",
+    "Muchodeporte",
+    "2026-11-21T14:00",
+    "https://news.google.com/rss/articles/CBMisgFBVV95cUxOYzEzR0pnVXZqaWNheUV3dE1ncWlHWDBHdlZaUlQtMmgyVEN1MlprUno5NV83S3Rtd3NOVEFVUWlJTnF2ODRuYUpiNDdncW9jY3FGWGw3TzREVmFUMjA1eGRGNHNaY09hdnR3VHcwVWhZQUpGR0FLOTNXRUswSEU5R05ISlgtN2JyVGtzMXhFcUtFWVQ0VFJEZllxdEg4UnVBVjdSVVNFenJlOHJZb3ZrcE53?oc=5"
    ],
    [
     "¡No te lo puedes perder! Espectacular video del Sevilla FC en la previa del derbi",
@@ -1872,12 +1942,6 @@
     "Vamos Mi Sevilla",
     "2026-11-21T10:25",
     "https://news.google.com/rss/articles/CBMitwFBVV95cUxOS25sTG5Ed0szRV9QWVRtT2N0ZmV0emdYRkl0SjZxbW5QcFJaM1o0ZjR2VUFxRW1lX21fTFNfaEJpWWZ1NkVQOXlvNF9HRDdqeFVDV2hhVF9FdHhVR0tnMzBZaHZJeldBRkZLcjRJck92UE1ockM5Sm05NHVaVWs3VmNtZ1RpWlJxR0FWNDJPYXJLa3AzWjU5SlJpOWE0REExR2o3MzVNb29mMVFDcTRSY3IwblNoY1U?oc=5"
-   ],
-   [
-    "24-MAN SQUAD FOR EL GRAN DERBI",
-    "Sevilla FC",
-    "2026-11-21T09:22",
-    "https://news.google.com/rss/articles/CBMia0FVX3lxTE1UaGViLW43VXJuRlQ2emlQbzN2WmF6WWVOLXl1QzBySlhtLW95RGhJLWJvLUtvdnljNGsyaU00enlPcGQzSnRfSUYwM2VBdno1XzU3eEJKN2dzaV9sWllRX0dfZEM1dFpqZHdz?oc=5"
    ]
   ],
   "Sociedad": [
@@ -1920,7 +1984,13 @@
   ],
   "Valencia": [
    [
-    "Braulio baja la euforia con el mercado de fichajes del Valencia CF: \"No habrá macrorevolución\"",
+    "Braulio baja las expectativas del mercado de invierno del Valencia CF: \"No vamos a hacer una macro revolución\"",
+    "Levante-EMV",
+    "2026-11-22T10:01",
+    "https://news.google.com/rss/articles/CBMirgFBVV95cUxOMFhyXzZ4cENQV2Y3VTd6N3RrZGVhMm4xTFpEeG5ZdThBazU2b0xveHlrXzdRRk9mMkZoR3gxSm1sT0RCTTQxa3EyQm82VVV4ekRzQlhiWnNxa21QeElNeTE0VWlIM1k3YWZjenRSWUJ4dDdEdWNxbmplMGFWU3RZT2tvaW9zQ3BVQ0pzVmJxdGVHcEhJOTNxZ0VDbUtMblVJdElfSExkQmx3ejBHQXfSAa4BQVVfeXFMTjBYcl82eHBDUFdmN1U3ejd0a2RlYTJuMUxaRHhuWXU4QWs1Nm9Mb3h5a183UUZPZjJGaEd4MUptbE9EQk00MWtxMkJvNlVVeHpEc0JYYlpzcWttUHhJTXkxNFVpSDNZN2FmY3p0UllCeHQ3RHVjcW5qZTBhVlN0WU9rb2lvc0NwVUNKc1ZicXRlR3BISTkzcWdFQ21LTG5VSXRJX0hMZEJsd3owR0F3?oc=5"
+   ],
+   [
+    "Braulio baja la euforia con el mercado de fichajes del Valencia CF: \"No habrá macro revolución\"",
     "El Desmarque",
     "2026-11-21T22:22",
     "https://news.google.com/rss/articles/CBMixAFBVV95cUxQb3BhUkdwTkxOTURYZ2kxbExieEU0al91Q3ZGcmFWbEJkMDVKbVo3Ukl1RmE0eXlRQjBLUVp3ME8tUmNYQWpnVGhxTnkwVlpfM29jTVNTdGZpdmNSY19oRDJ5RGRpdWRHOW80Yy1McnV2U1NzYmxvcHZ1Yl92dnpWLUlaY084YlRtMWhHdlJHMGRMQVA4RjJXOFROaklZNWYzczZnY1FkRlI5TENzd3pEWkNaSmN6WmVxZ3huU3NyQlo2T2pf?oc=5"
@@ -1948,15 +2018,21 @@
     "El Desmarque",
     "2026-11-21T16:02",
     "https://news.google.com/rss/articles/CBMivAFBVV95cUxQSlQ2YXdDNElQeWh5bXQ5QXlGRVdGSmczRkd2UFo4THlGc1ppNUhiVTY5bFNFUGJFeTQxa0FoZDEtMHBVemEwQXdLeW5ETUhVVkVqVTBHTGRfMjNpLVdRbDc0TUc5bERnQ21pekhnMGtPSmNxSDdyaWg2bWRuNDIwUWU1NWZ6eURBREQ1QlZaVEJhN1RfSWd1ZWllUXpYV2VMVGgwcVJEb2pTOGp3Zlc2Z2paYzdyYXB0Qnd1NA?oc=5"
-   ],
-   [
-    "Danjuma abandona la concentración del Valencia por el fallecimiento de su padre",
-    "Levante-EMV",
-    "2026-11-21T16:00",
-    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOLTkyRk8zc1pmZ1ZNblBZNXNCZ1EwQnNudzhGNTVCdnRNaWNQWG9fSWhUdFQ3RnVyaDg3Y3VfSnhjOFI0YWFoMlRvNjhEOUZWcm9RdFM2WnFKbE1DUUVBOG0xa0dBelF6TUhqc1E1R3hzTUVDN1U2TXY0Y1RVZExhdlZCU1dXTUp1eWQ5aTJRWm5fNmFSaS05a1YtVlRuemJLRGZmTzNOaWlaYVRNVWktcEtLVkgyYzNaengw0gHAAUFVX3lxTE42UHh6eENaWXhPalcwWFdIRTJKcGFObTlUVEg3RzNOQmRkQ01XWTJMTlcteFdPRWU3S0NpT0RFNTVxMXhUcFhzY0FFUU04NzdqVEFsaEYtc3hqSWFBRGZhYjhVMGRzSDNJVXZsMkNyWWRXajBneHhxYm1fQ1VNRkNPeXFDc2txemNWR3k0R1ZiZFF4NEVSWEEyczhOZ3AxOUEycWpmNlEyNHM2RHBWOU04dktiQUdsSVc4djBzM2drVA?oc=5"
    ]
   ],
   "Vallecano": [
+   [
+    "Rayo Vallecano 0-1 Valencia: Copete ha vuelto",
+    "BeSoccer ES",
+    "2026-11-21T18:10",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxQWDdkQjY0V1ZVbGl5dUJhX25oNFRLNmZibmxOamhLeDBlb0hIQVVSR19fMlp6aWJ5ZDJ3bDZudVE4UC10RktfbnlFLXJkRW1HRXhhLTBocWR4dzNqUC1DMnZUbmNMQnIxb3FhNGpyWmpTblRiZWY5a29NWGtBMWFkaW1uTlhFckpSM2szOU1ycE9NZw?oc=5"
+   ],
+   [
+    "Danjuma, baja de última hora en el Rayo-Valencia por la muerte de su padre",
+    "COPE",
+    "2026-11-21T16:39",
+    "https://news.google.com/rss/articles/CBMixwFBVV95cUxQVWo5QWtpMHZYTEV3WVNfbXFfblY5MzByQmVGdWswNXoxZ2otVjVmQlc5blpFRGRzZ1dVT2s2bWdvYWt2UG5jekp6MURnRXNhN0xrUG9GbktxcVV2eFZMMGZ2QTRQcEZDQ3BQQzFVVk1fZzZQQnRiTlBxVG5BR3dQZlBpSUd6Y2xVY0dndUlaUHVxUWpwMm9qaVVoTk5PNDViZUZwZFl3ZExDUzZDckppQ0ZjUk1wMHVicGUwcUNYRTlSUFY2VzVN0gHMAUFVX3lxTE9tS0J2YlhWME5od2VZa0pxWHZBa1lIZGVJQTlLRUw2QXVLZmJsX3lLenlMWG5qSDEzTlU5VnRGbEI3b1JfLXo4ZFlQeG9zS25uWk9aOGFoQnNGS08wQnBPMEhhQmZFMTR5YXg3MnRqUnk5N0psa3dHOXNvLXlIWmZCclNvWFlJeXRIcjY5NkoyLWJ1SEJZNU00d2ViaHdjVl9Fc0VvdzdlWTFTYUNmYVM0bVh2UGZmV2JUNURjMlFEN2pVQ3NtaVNVTEx1Vw?oc=5"
+   ],
    [
     "Danjuma, baja ante el Rayo por el fallecimiento de su padre",
     "BeSoccer ES",
@@ -1980,78 +2056,67 @@
     "Pasión por el Rayo",
     "2026-11-21T13:41",
     "https://news.google.com/rss/articles/CBMiggFBVV95cUxOR24wdHUzMnNFVGFmdktBTW1HS3VWY3JsSDBMcnlQSTB0cURaZW9pTnhiRUoxSW1HTS1RWTRFZUpTWjA0UVlmN1ZJX1ZMUG5nZ0hQZlVLVkplcTY1TU1ibUgxU3h1bGdpa1lVSDJYWGVYRjk1cmxwVHVxaUZMTjJsckl3?oc=5"
-   ],
-   [
-    "Valencia le ganó de visitante a Rayo Vallecano, salió de la zona de descenso y sigue en alza en LaLiga",
-    "DSports",
-    "2026-11-21T13:21",
-    "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQSjFKbXBTbkZHUXFGc2hQRndobmZNcDNkRzlwVlF6aDBWa1ppbGpFX3lCZUxoc2JtemI0SkFHczY4cWx6SWVDbkY0OWZPZ2pCRzZWZWF1eGhkUHI1M2dHbzFtRVVqSDdsNmQtUmR0U0o4cFNiZG9nZTRaYnZvSFJMNVJ2T3VHT0JzOGlhQjdwTHlqWkVmTVM3aFVyN3gxc3J6MXpjcy1ZQ2RLeHNCclZubkJLUWV6S0t6cklZQ1o3UmNUM0hLNzVEWmhReU5ZdURWT1IxY9IB2gFBVV95cUxPWTBKc2UxOFdiNjd4ZFRmMjAxbnBpZlBtd292VVFELXpKLUdWNHpEeWUxTzlqUG8wbmFUVGcxd3M1U1laMWhKaHdrMmljN3ZDVWFNV1hVOUtia0gteFFDbWdwSkJRMmlXVjkwQW05WFYxMFNXLS0wZ1ZNNTZGQUowOXoxNmtiS092UjF3VFJYNjlqQlhTbHFMemdKRFJaTFFyb3ZKYl9GUGJTTWh6MTd2YlVDeTVleUhjdGlmWlhpanJfMnNkUE1HUHV"
-   ],
-   [
-    "Alineaciones de Rayo Vallecano y Valencia por la LaLiga: formaciones probables",
-    "Bolavip",
-    "2026-11-21T11:21",
-    "https://news.google.com/rss/articles/CBMipwFBVV95cUxQUldxWDB0Zld0WVF4cVd6clZUWU5XS2RRWUI2VElmZHIzelBYYXF1dFk1S21IRHE1Mno1RjFRYnZOd1NnT0ctMm5DczZCNWgtcGh0dmtySGJzcE9YeW56LXJTM1ZNUnRtMWV5QUJDU25JUFdWR3VyQTBmS1QzblQ4SHVDUy0tWDRZbzY3dENlbXVKQ1FFN2hsbGd1d2ZGbWQwdmNhX0lWRdIBrAFBVV95cUxNeGZEYzQ2b2hUcFo2RXBCU2l2aDNFTUptN2hNbkJSYmg2SFhMejhvMFliVXJHdHA0ckFxaWMxYXM4S0l3c1A1Vjdub1YtN1JXZUJpTjVjQU1zbEZPanAwQlNmTTlfd1NXSDk5bmNsQTg1WU5uakFRQkpWSVI0ODJmank5NDdlbXpmMUZSZlZEM2dHZ2trd3JnM1RzMlVCXzBhMkJzdUFyU3B2X2lt?oc=5"
    ]
   ],
   "Villarreal": [
    [
-    "Luis Enrique busca con urgencia un sustituto para Doué",
-    "Fichajes.net",
-    "2026-11-21T22:45",
-    "https://news.google.com/rss/articles/CBMilAFBVV95cUxOVzdLaTBOR2lNa2NscjVZYnVWMlk3Z3hSY1ZvNE85QTl2Y0FiNlVJUklNT1VDR2ZqS2RLcWVPZGsxUlJsZW9DT1JVRnpnQ2htd2NUTlpGZVY5LTBBZk56czM3VlhRS2hGSDBSR2N2VC1NUkxhTngyMy0tMnhodWVqUVY0dmtUeS1EYmtFUzYySW9FVjEt?oc=5"
+    "Desiré Doué sufrió una grave lesión de rodilla en el PSG y se perderá el resto de la temporada",
+    "DSports",
+    "2026-11-22T14:49",
+    "https://news.google.com/rss/articles/CBMi5AFBVV95cUxPU1NMSFliRzdvTDg3S29tSXNXRmxiVG9PUHpxcE1hM3JKd3Q5anhsZG5wQW5CV0xMd0ZSTk5PN0pjSjh6SmRDNEZ1bG9CaFNyZnVmUzBDMVhVZ21QQjR5bTJGZnBTeVI2S09NUW1DSnJBWWlnb050YkcxQXdyQzVuUUVnbHp0azZEekhDM0RVMWZ2X25qQkVrY1NtaHdmaThJTTk1Q3A1SWVsNW5iRk1CX2FwZ1dsTTRweXdOY3pFTXhtT0h3NHhYYk9yZTBJVHM4emFxQ3MyNVR0RmtMZGRTaVdZaXjSAeoBQVVfeXFMTlVCMEVXRTk4YnpMYmRxTjE5YmI4N3VZYnhLQTZlZFRla2tISDFLZFoxMHRhdjhVNE5wS1RQR2xXZkF1N1VIRmlCaERsVW1rbG1JWWFiT3VKM2hMNHNzZ3c3aU9PcEVGdk1rVmZhRHl0TU5sbUhVRENqczkwRUVjVmxXcXBfMmdPNW01ZUc4S0I3RWZfeTJ4NXdJdGcybVR1OTVERXVlbUpTS2lTUlNIbGNvR1FuZFVrWWp"
+   ],
+   [
+    "FC Barcelona - Villarreal CF, en directo: el partido de la jornada 13 en LaLiga EA Sports, en vivo",
+    "Cadena SER",
+    "2026-11-22T12:05",
+    "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOUHl0VDFuRFg4Mjd0Q19MUXk5Q0haQlBqTE9WeHNxVE44c1g5cHF6N1VVd21nZm03V3g1NWc3UEc2c0xkcVg3MS1oOFlEMWdsa1dKR1VyUERjZlo1V1hYZ1hHU1B0MC1ETjZicFoxNURqR3NIb0Zzb3FsSnR0RC1WMmNrbUV2RU1IeVA0aEVsLXhTR3F0WUpKUmRSRXdWMnJCNjBLbFgxZEQyV2VlREwtN2tEMFJpcE1iMy1sYWtPUlpFSF9wd1Z6b2c0c3ZHRmpRcE5ZZW5sV3Z4TVZnWXkxONIB9AFBVV95cUxNUVFUWjJjSmZtcGx5RnE1LWtJUXFFaGc2VUpEeXBTTjZCTUp0QkUwVUF4TVBCOEVKek9RU0tYMzI0ZVEyMHdlNTBfbEd3UlRYaUg4SEtqMkdHb3FiN3ZfWW9fYU9vLTBacUUyTFBfOHRyVjVVN1ZINHJrejdadDBKNTZyVmhqQ3lhT3dxdDRSRlFGU192RFJKelJHTXk5QXBtZlB5WU5rSmpCbXRLcEt0ZExXcEZRQUdWdmZteFZ"
+   ],
+   [
+    "El Villarreal visita al Barcelona con cuatro bajas importantes",
+    "Noticias Ciudadanas",
+    "2026-11-22T10:16",
+    "https://news.google.com/rss/articles/CBMimgFBVV95cUxPSDk1MmtVRk1iNjhNdm9mdFcwRDVJSnZyemtkV0NmMlZaU0RTQXkxS3Y0RjRpRWd2VVlsVGpjNklTNHNRQzNNTFh1WC1UZFNBRWhYcFZjalppSVVwTTY2VTVybC1UZmFvVWVKZV9uVkJJS2d1a04zcDRDZFhqbmJQc0lYWXROMzVmaXdRN243VWRkd2JXNEdpU1JR?oc=5"
+   ],
+   [
+    "El Villarreal desafía al Barça en el Camp Nou",
+    "Valencia Noticias",
+    "2026-11-22T10:16",
+    "https://news.google.com/rss/articles/CBMigAFBVV95cUxPLWxMX05SY3hJTXJ0LXoyeHNfNWRVWGtBQlk5eS0ybDNORnN0VHNjS0dFZm1zRV9UdkFlTmo5NEpJdk5MdHBHa01ZVnVVaWUzMXlsTDZfM2hrUTMzNHlXY3REWnBwTmpXY0hMbFFMSFA4OFNHMHNvM0hxblpDNlFqLQ?oc=5"
+   ],
+   [
+    "FC Barcelona – Villarreal CF: horario y dónde ver el partido en directo por TV",
+    "El Periódico de Ceuta",
+    "2026-11-22T06:01",
+    "https://news.google.com/rss/articles/CBMirwFBVV95cUxQRVlCUlMtOVo2OUZRcWhTeUVRV1FraVBLck9WRnVaTTUxN0xsS09ULTVuWUdFd2hPYWJRNkVGT2NiTDBsQUk0dThXWDE5aFlmbGVCeFJEU2cwMUphZlU4Skg0MVBYMnlGc1Q1eXdqQXlOUW55dUlQOVFsUzhrQi05ZHd3N0pNMC1IcEwwZmVUR1ROT0lWUS1CZGc1QVdsMnB6YVlmcmtBYWltdkFjM0tV?oc=5"
    ],
    [
     "Harry Kane, lesión de larga duración",
     "Fichajes.net",
     "2026-11-21T19:45",
     "https://news.google.com/rss/articles/CBMihwFBVV95cUxQS3FVSFI3a0RNRmRpMjFqU0RxYkJXemJNUXA1dklUaFNZbjNGY2UybTJwMldXWXhoVENnZFFoZW1rckNmVE9SNm42dDJQeF9ydmFKWmRtczhiQ0duOGlHTzBEVm4xT1VYZGQ0UTZlNEg5bmdTTW9fYUtjR3c4RHhVMTZ5UzFNdUk?oc=5"
-   ],
-   [
-    "Copete pone fin a su pesadilla en el Valencia CF: gol y vuelta perfecta nueve meses después",
-    "Superdeporte",
-    "2026-11-21T17:16",
-    "https://news.google.com/rss/articles/CBMipgFBVV95cUxPUnJuQ0FyOUN4Q1B6SDlBNG9fNnFvVVNkVGk2NkFQcWJWWnhLbHB4Ml9rS0J3NXRqQ041dDFva3FiQWMtbjVOclAxN0xXZXNQVnBVU1VkME1sQ3NUNDVLS0lWY2FGSF9NbXZGZS1KUFFCaVZJUFBlTzlzamRBcjMzRXZLdXFtNW5JdFd2R0JuWTNOY0hhMHIwVm9fcF9qTFYtYXcyaVFn0gGmAUFVX3lxTE9Scm5DQXI5Q3hDUHpIOUE0b182cW9VU2RUaTY2QVBxYlZaeEtscHgyX2tLQnc1dGpDTjV0MW9rcWJBYy1uNU5yUDE3TFdlc1BWcFVTVWQwTWxDc1Q0NUtLSVZjYUZIX01tdkZlLUpQUUJpVklQUGVPOXNqZEFyMzNFdkt1cW01bkl0V3ZHQm5ZM05jSGEwcjBWb19wX2pMVi1hdzJpUWc?oc=5"
-   ],
-   [
-    "Flick, sobre la lesión de Christensen y la titularidad de Cubarsí",
-    "Jornada Perfecta",
-    "2026-11-21T14:28",
-    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQSUp1OUc5M0lrT3MzbkR2b0ZYNmJrRVdXZnhLelRLcHJvWmtLQmI5S2dtWGdJLVpFV0tfcjByTlcyYnNaamhFdVlFWGJPUDNYdkRzVGZ1Sk81REw4cmdGWVBGcEtrQ3RsNEl0NU8zaGRwS1pqdk5iSUFlTzk4LVBtYjVHSk1HZkhS?oc=5"
-   ],
-   [
-    "Hansi Flick sobre Raphinha y su convocatoria con Brasil: \"Mi opinión no es importante\"",
-    "SPORT",
-    "2026-11-21T13:38",
-    "https://news.google.com/rss/articles/CBMipAFBVV95cUxPOXJqTmJiWXRzSUdhZjRUTTBMYi1fLUZkYTlVR3BzSm5sOEQxWnctVUV4RlhYaHpvWXJMcmkyVFlkQWt3TGw0NHA0SnVQaXUyUkpXRHlUMXJaVHRiTXVWbTFQcnhaZ3ZvXzU3alhrM2x3MGpHajRGbktnVEhJZzFaZUxXbWVwZmt6dGw3d2V3UWtoZ0FZa00wbE1EU1hPaXdNY3VDUdIBpAFBVV95cUxPOXJqTmJiWXRzSUdhZjRUTTBMYi1fLUZkYTlVR3BzSm5sOEQxWnctVUV4RlhYaHpvWXJMcmkyVFlkQWt3TGw0NHA0SnVQaXUyUkpXRHlUMXJaVHRiTXVWbTFQcnhaZ3ZvXzU3alhrM2x3MGpHajRGbktnVEhJZzFaZUxXbWVwZmt6dGw3d2V3UWtoZ0FZa00wbE1EU1hPaXdNY3VDUQ?oc=5"
-   ],
-   [
-    "Flick habla sobre la lesión de Christensen",
-    "SPORT",
-    "2026-11-21T13:27",
-    "https://news.google.com/rss/articles/CBMilwFBVV95cUxQeFpBQVJOTHVpSDVqRUQxUjlIcEhfZ3dOQlFRblZqM1J2Rzg2cDhMaEpJV21zUzZaa1BxTk5mYVFjdkRJWF9wdTFtWENCUWRLRFlrVXlCdWJURXA2YUpmZWh6SVM1elJoU1kyQmg2VUppUUNiVUwySWJjLUt0V0swZjh1bS1BaTdaMlRmcUVGbmVCeGZtdVVB0gGXAUFVX3lxTFB4WkFBUk5MdWlINWpFRDFSOUhwSF9nd05CUVFuVmozUnZHODZwOExoSklXbXNTNlprUHFOTmZhUWN2RElYX3B1MW1YQ0JRZEtEWWtVeUJ1YlRFcDZhSmZlaHpJUzV6UmhTWTJCaDZVSmlRQ2JVTDJJYmMtS3RXSzBmOHVtLUFpN1oyVGZxRUZuZUJ4Zm11VUE?oc=5"
    ]
   ]
  },
  "news_gen": {
-  "Alaves": "2026-11-21",
-  "Ath Bilbao": "2026-11-21",
-  "Ath Madrid": "2026-11-21",
-  "Barcelona": "2026-11-21",
-  "Betis": "2026-11-21",
-  "Celta": "2026-11-21",
-  "Elche": "2026-11-21",
-  "Getafe": "2026-11-21",
-  "La Coruna": "2026-11-21",
-  "Levante": "2026-11-21",
-  "Malaga": "2026-11-21",
-  "Osasuna": "2026-11-21",
-  "Real Madrid": "2026-11-21",
-  "Santander": "2026-11-21",
-  "Sevilla": "2026-11-21",
+  "Alaves": "2026-11-22",
+  "Ath Bilbao": "2026-11-22",
+  "Ath Madrid": "2026-11-22",
+  "Barcelona": "2026-11-22",
+  "Betis": "2026-11-22",
+  "Celta": "2026-11-22",
+  "Elche": "2026-11-22",
+  "Espanol": "2026-11-22",
+  "Getafe": "2026-11-22",
+  "La Coruna": "2026-11-22",
+  "Levante": "2026-11-22",
+  "Malaga": "2026-11-22",
+  "Osasuna": "2026-11-22",
+  "Real Madrid": "2026-11-22",
+  "Santander": "2026-11-22",
+  "Sevilla": "2026-11-22",
   "Sociedad": "2026-11-21",
-  "Valencia": "2026-11-21",
-  "Vallecano": "2026-11-21",
-  "Villarreal": "2026-11-21"
+  "Valencia": "2026-11-22",
+  "Vallecano": "2026-11-22",
+  "Villarreal": "2026-11-22"
  }
 }
