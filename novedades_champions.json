@@ -1,0 +1,591 @@
+{
+ "avail": {
+  "Real Madrid": [
+   [
+    "Endrick",
+    "DEL",
+    "lesionado",
+    "Lesión muscular en el abductor de la pierna izquierda. Retorno estimado: Mediados de Diciembre.",
+    false,
+    null,
+    1,
+    103,
+    0,
+    0,
+    null
+   ],
+   [
+    "Rodrygo",
+    "DEL",
+    "lesionado",
+    "Rotura del ligamento cruzado anterior y la rotura del menisco externo de la pierna derecha. Retorno estimado: Mediados de Diciembre.",
+    false,
+    null,
+    0,
+    0,
+    0,
+    0,
+    null
+   ],
+   [
+    "Dumfries",
+    "DEF",
+    "duda",
+    "Ausente en el entrenamiento.",
+    false,
+    null,
+    5,
+    447,
+    0,
+    0,
+    null
+   ],
+   [
+    "Asencio",
+    "DEF",
+    "lesionado",
+    "Fractura por estrés en la tibia de la pierna derecha. Retorno estimado: Principios de Enero.",
+    false,
+    null,
+    0,
+    0,
+    0,
+    0,
+    null
+   ],
+   [
+    "Mendy",
+    "DEF",
+    "duda",
+    "Desgarro del tendón del recto femoral con separación ósea.",
+    false,
+    null,
+    0,
+    0,
+    0,
+    0,
+    null
+   ]
+  ],
+  "Barcelona": [
+   [
+    "Rodri",
+    "MED",
+    "duda",
+    "Pequeña lesión en el bíceps femoral de la pierna derecha.",
+    true,
+    null,
+    8,
+    697,
+    1,
+    1,
+    null
+   ],
+   [
+    "Balde",
+    "DEF",
+    "lesionado",
+    "Lesión en el tobillo. Retorno estimado: Vuelta indefinida.",
+    false,
+    null,
+    0,
+    100,
+    0,
+    0,
+    null
+   ],
+   [
+    "Roony",
+    "DEL",
+    "lesionado",
+    "Rotura del ligamento cruzado anterior de la rodilla derecha. Retorno estimado: Mediados de Junio.",
+    false,
+    null,
+    0,
+    0,
+    0,
+    0,
+    null
+   ],
+   [
+    "Christensen",
+    "DEF",
+    "duda",
+    "Molestias leves en el sóleo.",
+    false,
+    null,
+    4,
+    432,
+    0,
+    1,
+    null
+   ],
+   [
+    "Espart",
+    "DEF",
+    "lesionado",
+    "Sindesmosis del tobillo derecho. Retorno estimado: Principios de Enero.",
+    false,
+    null,
+    8,
+    650,
+    1,
+    2,
+    null
+   ]
+  ],
+  "Atlético Madrid": [
+   [
+    "Lookman",
+    "DEL",
+    "lesionado",
+    "Esguince moderado en su rodilla izquierda. Retorno estimado: Principios de Enero.",
+    true,
+    null,
+    9,
+    609,
+    1,
+    0,
+    null
+   ],
+   [
+    "Cristian Romero",
+    "DEF",
+    "duda",
+    "Molestias musculares.",
+    true,
+    null,
+    5,
+    434,
+    1,
+    0,
+    null
+   ]
+  ],
+  "Villarreal": [
+   [
+    "Saliba",
+    "MED",
+    "lesionado",
+    "Lesión ligamentosa en el tobillo izquierdo. Retorno estimado: Principios de Marzo.",
+    true,
+    null,
+    3,
+    360,
+    0,
+    0,
+    null
+   ],
+   [
+    "Akhomach",
+    "DEL",
+    "duda",
+    "Lesión muscular.",
+    false,
+    null,
+    5,
+    388,
+    0,
+    2,
+    null
+   ],
+   [
+    "Foyth",
+    "DEF",
+    "duda",
+    "Molestias musculares.",
+    false,
+    null,
+    6,
+    481,
+    0,
+    0,
+    null
+   ],
+   [
+    "Diatta",
+    "MED",
+    "lesionado",
+    "Lesión en la musculatura isquiotibial izquierda. Retorno estimado: Principios de Abril.",
+    false,
+    null,
+    0,
+    0,
+    0,
+    0,
+    null
+   ]
+  ],
+  "Real Betis": [
+   [
+    "Lo Celso",
+    "MED",
+    "duda",
+    "Golpe en la rodilla.",
+    true,
+    null,
+    1,
+    92,
+    0,
+    1,
+    null
+   ],
+   [
+    "Morante",
+    "DEL",
+    "duda",
+    "Molestias en la cadera.",
+    false,
+    null,
+    0,
+    13,
+    1,
+    0,
+    null
+   ],
+   [
+    "Ceballos",
+    "MED",
+    "duda",
+    "Molestias musculares.",
+    false,
+    null,
+    2,
+    258,
+    0,
+    1,
+    null
+   ]
+  ],
+  "Arsenal": [
+   [
+    "Saka",
+    "MED",
+    "lesionado",
+    "Thigh injury - Expected back 20 Dec",
+    true,
+    0,
+    7,
+    596,
+    3,
+    0,
+    null
+   ],
+   [
+    "Raya",
+    "POR",
+    "duda",
+    "Shoulder injury - 50% chance of playing",
+    true,
+    50,
+    11,
+    969,
+    0,
+    0,
+    null
+   ],
+   [
+    "Zubimendi",
+    "MED",
+    "lesionado",
+    "Hamstring injury - Unknown return date",
+    false,
+    0,
+    0,
+    100,
+    0,
+    0,
+    null
+   ]
+  ],
+  "Aston Villa": [
+   [
+    "Onana",
+    "MED",
+    "lesionado",
+    "Knee injury - Unknown return date",
+    false,
+    0,
+    0,
+    0,
+    0,
+    0,
+    null
+   ],
+   [
+    "Ruggeri",
+    "DEF",
+    "lesionado",
+    "Hamstring injury - Expected back 2 Jan",
+    false,
+    0,
+    2,
+    158,
+    0,
+    0,
+    null
+   ],
+   [
+    "Cash",
+    "DEF",
+    "duda",
+    "Concussion - 75% chance of playing",
+    false,
+    75,
+    7,
+    656,
+    0,
+    0,
+    null
+   ]
+  ],
+  "Liverpool": [
+   [
+    "Ekitiké",
+    "DEL",
+    "lesionado",
+    "Achilles injury - Unknown return date",
+    true,
+    0,
+    0,
+    0,
+    0,
+    0,
+    null
+   ],
+   [
+    "Gakpo",
+    "MED",
+    "lesionado",
+    "Calf injury - Expected back 2 Dec",
+    true,
+    0,
+    7,
+    601,
+    1,
+    3,
+    null
+   ],
+   [
+    "Munoz",
+    "MED",
+    "duda",
+    "Knee injury - 75% chance of playing",
+    true,
+    75,
+    5,
+    473,
+    3,
+    1,
+    null
+   ],
+   [
+    "Gravenberch",
+    "MED",
+    "lesionado",
+    "Foot injury - Unknown return date",
+    true,
+    0,
+    4,
+    341,
+    0,
+    1,
+    null
+   ],
+   [
+    "Bradley",
+    "DEF",
+    "lesionado",
+    "Knee injury - Expected back 12 Dec",
+    false,
+    0,
+    0,
+    0,
+    0,
+    0,
+    null
+   ],
+   [
+    "Jaros",
+    "POR",
+    "lesionado",
+    "Knee injury - Unknown return date",
+    false,
+    0,
+    0,
+    0,
+    0,
+    0,
+    null
+   ],
+   [
+    "Leoni",
+    "DEF",
+    "lesionado",
+    "Knee injury - Expected back 12 Dec",
+    false,
+    0,
+    0,
+    0,
+    0,
+    0,
+    null
+   ]
+  ],
+  "Manchester City": [
+   [
+    "Semenyo",
+    "MED",
+    "lesionado",
+    "Knee injury - Unknown return date",
+    true,
+    0,
+    6,
+    553,
+    2,
+    3,
+    null
+   ]
+  ],
+  "Manchester United": [
+   [
+    "Šeško",
+    "DEL",
+    "lesionado",
+    "Shin injury - Unknown return date",
+    true,
+    0,
+    0,
+    76,
+    1,
+    0,
+    null
+   ],
+   [
+    "Rashford",
+    "MED",
+    "lesionado",
+    "Hip injury - Unknown return date",
+    true,
+    0,
+    4,
+    352,
+    0,
+    0,
+    null
+   ],
+   [
+    "Ugarte",
+    "MED",
+    "lesionado",
+    "Knee injury - Unknown return date",
+    false,
+    0,
+    0,
+    0,
+    0,
+    0,
+    null
+   ],
+   [
+    "Baleba",
+    "MED",
+    "lesionado",
+    "Hamstring injury - Unknown return date",
+    false,
+    0,
+    3,
+    232,
+    0,
+    0,
+    null
+   ]
+  ]
+ },
+ "tm": {
+  "Real Madrid": {
+   "n": 13,
+   "g": 31,
+   "mg": 13,
+   "kg": 1,
+   "ma": 4,
+   "ka": 1
+  },
+  "Barcelona": {
+   "n": 13,
+   "g": 48,
+   "mg": 15,
+   "kg": 1,
+   "ma": 9,
+   "ka": 1
+  },
+  "Atlético Madrid": {
+   "n": 13,
+   "g": 26,
+   "mg": 6,
+   "kg": 1,
+   "ma": 4,
+   "ka": 1
+  },
+  "Villarreal": {
+   "n": 13,
+   "g": 18,
+   "mg": 3,
+   "kg": 2,
+   "ma": 5,
+   "ka": 1
+  },
+  "Real Betis": {
+   "n": 13,
+   "g": 21,
+   "mg": 3,
+   "kg": 3,
+   "ma": 2,
+   "ka": 2
+  },
+  "Arsenal": {
+   "n": 11,
+   "g": 17,
+   "mg": 3,
+   "kg": 3,
+   "ma": 5,
+   "ka": 1
+  },
+  "Aston Villa": {
+   "n": 11,
+   "g": 14,
+   "mg": 6,
+   "kg": 1,
+   "ma": 4,
+   "ka": 1
+  },
+  "Liverpool": {
+   "n": 11,
+   "g": 17,
+   "mg": 7,
+   "kg": 1,
+   "ma": 6,
+   "ka": 1
+  },
+  "Manchester City": {
+   "n": 11,
+   "g": 22,
+   "mg": 9,
+   "kg": 1,
+   "ma": 4,
+   "ka": 2
+  },
+  "Manchester United": {
+   "n": 11,
+   "g": 13,
+   "mg": 4,
+   "kg": 2,
+   "ma": 4,
+   "ka": 1
+  }
+ },
+ "avail_gen": "2026-11-26",
+ "news": {},
+ "news_gen": {},
+ "news_ts": {}
+}
