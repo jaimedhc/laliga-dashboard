@@ -121,6 +121,85 @@ LEAGUES = {
                      "Newcastle United FC": "Newcastle", "Nottingham Forest FC": "Nott'm Forest",
                      "Sunderland AFC": "Sunderland", "Tottenham Hotspur FC": "Tottenham"},
     },
+    "champions": {
+        # Fase liga de la Champions (36 equipos, 8 partidos cada uno). football-data no la tiene: los partidos, sus
+        # estadísticas y las cuotas de DraftKings salen de ESPN. Las eliminatorias (desde febrero) aún no se modelan.
+        "name": "Champions League",
+        "title": "Champions League 2026-27",
+        "season": "2026-27",
+        "source": "espn",
+        "espn": "https://site.api.espn.com/apis/site/v2/sports/soccer/uefa.champions",
+        # días de cada jornada de la fase liga (hora española); ESPN no da el número de jornada
+        "md_dates": {"2026-09-08": 1, "2026-09-09": 1, "2026-09-10": 1, "2026-10-13": 2, "2026-10-14": 2,
+                     "2026-10-20": 3, "2026-10-21": 3, "2026-11-03": 4, "2026-11-04": 4, "2026-11-24": 5,
+                     "2026-11-25": 5, "2026-12-08": 6, "2026-12-09": 6, "2027-01-19": 7, "2027-01-20": 7,
+                     "2027-01-27": 8},
+        "xg": False,      # ESPN no da el xG de la Champions: el modelo de goles usa solo los goles
+        "mstats": True,   # con tan pocos partidos por equipo, las cuotas ayudan a estimar las estadísticas
+        "dates": "fechas_champions.json",
+        "out": "champions.html",
+        "log": "predictions_champions.json",
+        "players": None,
+        "tiebreak": "ucl",
+        "tiebreak_text": "los empates a puntos se resuelven como en el art. 18 del reglamento de la UEFA: diferencia de goles, "
+                         "goles a favor, goles fuera, victorias, victorias fuera y, después, los puntos, la diferencia de goles y "
+                         "los goles de los rivales de cada uno (los dos últimos criterios, juego limpio y coeficiente, se sustituyen "
+                         "por un sorteo)",
+        # los 8 primeros pasan a octavos, del 9.º al 24.º juegan la ronda previa y los 12 últimos quedan eliminados
+        "zones": {"ucl": 8, "uel": 16, "rel": 12},
+        "zone_names": {"ucl": "Octavos", "uel": "Ronda previa", "rel": "Eliminado", "champ": "1.º de la fase liga",
+                       "top": "Octavos directos", "mid": "Top 24", "low": "Eliminado"},
+        "sources": "ESPN (resultados, estadísticas y cuotas de DraftKings), bajas de Biwenger y del Fantasy Premier League "
+                   "para los equipos españoles e ingleses y titulares de Google News",
+        "data_note": "Los resultados, las estadísticas de cada partido (tiros, córners, faltas, amarillas), las fechas y horas y "
+                     "las cuotas de DraftKings (1X2 y goles) salen de ESPN; football-data no cubre la Champions y ESPN no da "
+                     "el xG, así que el modelo de goles usa solo los goles. Con tan pocos partidos por equipo, las cuotas "
+                     "ayudan a estimar las estadísticas: el modelo aprende cuánto pesar las cuotas, su propia predicción y la "
+                     "media de la competición (pestaña Aprendizaje). Las bajas, dudas y sanciones solo están para los equipos "
+                     "de LaLiga y la Premier (Biwenger y el Fantasy oficial); para el resto hay titulares de Google News. "
+                     "GitHub descarga todo cada dos horas y regenera esta página. Solo se usan datos de esta temporada. Las "
+                     "horas están en horario peninsular español. De momento solo se modela la fase liga; las eliminatorias "
+                     "llegarán en febrero.",
+        "cal_label": "Fecha de ESPN",
+        "cal_fallback": "las fechas de ESPN",
+        # bajas: las de LaLiga y la Premier ya descargadas para sus páginas (nombre en su liga → nombre en la Champions)
+        "avail": {"src": "reuse", "name": "Biwenger (equipos españoles) y Fantasy Premier League (ingleses)",
+                  "from": {"laliga": {"Real Madrid": "Real Madrid", "Barcelona": "Barcelona", "Ath Madrid": "Atlético Madrid",
+                                      "Villarreal": "Villarreal", "Betis": "Real Betis"},
+                           "premier": {"Arsenal": "Arsenal", "Aston Villa": "Aston Villa", "Liverpool": "Liverpool",
+                                       "Man City": "Manchester City", "Man United": "Manchester United"}}},
+        "news_lang": "es",
+        "news_q": {"AEK Athens": "AEK Atenas", "AS Roma": "AS Roma", "Arsenal": "Arsenal", "Aston Villa": "Aston Villa",
+                   "Atlético Madrid": "Atlético de Madrid", "Barcelona": "FC Barcelona", "Bayern Munich": "Bayern de Múnich",
+                   "Bodo/Glimt": "Bodø/Glimt", "Borussia Dortmund": "Borussia Dortmund", "Club Brugge": "Brujas",
+                   "Como": "Como 1907", "FC Porto": "Oporto", "Fenerbahce": "Fenerbahçe", "Feyenoord Rotterdam": "Feyenoord",
+                   "Galatasaray": "Galatasaray", "Internazionale": "Inter de Milán", "LASK Linz": "LASK Linz", "Lens": "RC Lens",
+                   "Lille": "Lille", "Liverpool": "Liverpool", "Manchester City": "Manchester City",
+                   "Manchester United": "Manchester United", "Napoli": "Nápoles", "PSV Eindhoven": "PSV Eindhoven",
+                   "Paris Saint-Germain": "PSG", "RB Leipzig": "RB Leipzig", "Real Betis": "Real Betis",
+                   "Real Madrid": "Real Madrid", "Sabah FK": "Sabah", "Shakhtar Donetsk": "Shakhtar Donetsk",
+                   "Slavia Prague": "Slavia de Praga", "Slovan Bratislava": "Slovan Bratislava", "Sporting CP": "Sporting de Portugal",
+                   "VfB Stuttgart": "Stuttgart", "Viking FK": "Viking FK", "Villarreal": "Villarreal CF"},
+        "names": {"AEK Athens": "AEK Atenas", "AS Roma": "Roma", "Arsenal": "Arsenal", "Aston Villa": "Aston Villa",
+                  "Atlético Madrid": "Atlético", "Barcelona": "Barcelona", "Bayern Munich": "Bayern", "Bodo/Glimt": "Bodø/Glimt",
+                  "Borussia Dortmund": "Dortmund", "Club Brugge": "Brujas", "Como": "Como", "FC Porto": "Oporto",
+                  "Fenerbahce": "Fenerbahçe", "Feyenoord Rotterdam": "Feyenoord", "Galatasaray": "Galatasaray",
+                  "Internazionale": "Inter", "LASK Linz": "LASK", "Lens": "Lens", "Lille": "Lille", "Liverpool": "Liverpool",
+                  "Manchester City": "Manchester City", "Manchester United": "Manchester United", "Napoli": "Nápoles",
+                  "PSV Eindhoven": "PSV", "Paris Saint-Germain": "PSG", "RB Leipzig": "Leipzig", "Real Betis": "Betis",
+                  "Real Madrid": "Real Madrid", "Sabah FK": "Sabah", "Shakhtar Donetsk": "Shakhtar",
+                  "Slavia Prague": "Slavia Praga", "Slovan Bratislava": "Slovan Bratislava", "Sporting CP": "Sporting",
+                  "VfB Stuttgart": "Stuttgart", "Viking FK": "Viking", "Villarreal": "Villarreal"},
+        "short": {"AEK Athens": "AEK", "AS Roma": "ROM", "Arsenal": "ARS", "Aston Villa": "AVL", "Atlético Madrid": "ATM",
+                  "Barcelona": "BAR", "Bayern Munich": "BAY", "Bodo/Glimt": "BOD", "Borussia Dortmund": "BVB",
+                  "Club Brugge": "BRU", "Como": "COM", "FC Porto": "POR", "Fenerbahce": "FEN", "Feyenoord Rotterdam": "FEY",
+                  "Galatasaray": "GAL", "Internazionale": "INT", "LASK Linz": "LAS", "Lens": "LEN", "Lille": "LIL",
+                  "Liverpool": "LIV", "Manchester City": "MCI", "Manchester United": "MUN", "Napoli": "NAP",
+                  "PSV Eindhoven": "PSV", "Paris Saint-Germain": "PSG", "RB Leipzig": "RBL", "Real Betis": "BET",
+                  "Real Madrid": "RMA", "Sabah FK": "SAB", "Shakhtar Donetsk": "SHA", "Slavia Prague": "SLA",
+                  "Slovan Bratislava": "SLO", "Sporting CP": "SCP", "VfB Stuttgart": "STU", "Viking FK": "VIK",
+                  "Villarreal": "VIL"},
+    },
 }
 
 # Enlaces entre las páginas (absolutos para que funcionen también en las copias publicadas fuera de GitHub).

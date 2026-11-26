@@ -318,19 +318,59 @@ def fit_stat(matches, teams, key, cfg=None, ref=None):
     return p
 
 
-def stat_pred(p, i, j, home):
+def stat_pred(p, i, j, home, d=None):
     """Media esperada, varianza del partido y error de la media para el equipo i contra j.
     Si el modelo ya ha aprendido cuánto fiarse de sí mismo en esta estadística (p["lam"], de learn_stat_weights), la media
-    se acerca a la de la liga (p["avg"]: local, visitante) en esa medida: media + lam × (modelo − media)."""
+    se acerca a la de la liga (p["avg"]: local, visitante) en esa medida: media + lam × (modelo − media).
+    En las ligas que usan las cuotas para las estadísticas (p["mk"]), si se conoce la ventaja del local según el mercado (d,
+    de market_gap), la media mezcla modelo, cuotas y media de la liga con los pesos aprendidos (p["wm"] y p["wk"])."""
     l, v = lin(p, i, j, home)
     mean_ = math.exp(l + v / 2)
     err2 = mean_ * mean_ * (math.exp(v) - 1)
     lam, avg = p.get("lam"), p.get("avg")
-    if lam is not None and avg:
+    if avg and d is not None and p.get("mk") and p.get("wk") is not None:
+        base = avg[0 if home else 1]
+        mean_ = max(base + p["wm"] * (mean_ - base) + p["wk"] * (market_stat(p["mk"], home, d) - base), 0.05)
+        err2 *= p["wm"] * p["wm"]
+    elif lam is not None and avg:
         base = avg[0 if home else 1]
         mean_ = base + lam * (mean_ - base)
         err2 *= lam * lam
     return mean_, p["phi"] * mean_ + err2, math.sqrt(err2)
+
+
+def market_gap(odds):
+    """Ventaja del local según las cuotas 1X2: log(probabilidad de que gane el local / de que gane el visitante)."""
+    q = implied(odds)
+    return math.log(max(q[0], 1e-6) / max(q[2], 1e-6)) if q else None
+
+
+def market_stat(mk, home, d):
+    """Estadística esperada de un equipo solo con la ventaja según las cuotas (recta de fit_market_stats)."""
+    c = mk["h" if home else "a"]
+    return max(0.1, c[0] + c[1] * d)
+
+
+def fit_market_stats(matches, keys, min_n=20):
+    """Cada estadística del local y del visitante como recta de la ventaja del local según las cuotas (mínimos cuadrados).
+    Las casas saben cuánto mejor es un equipo que otro aunque haya pocos partidos, y eso se nota en tiros o córners.
+    Devuelve {estadística: {"h": [a, b], "a": [a, b], "n": partidos}}, solo con al menos min_n partidos con cuotas."""
+    out = {}
+    for k in keys:
+        R = [(market_gap(m["odds"]), m[k]) for m in matches if m.get("odds") and m.get(k) is not None]
+        if len(R) < min_n:
+            continue
+        xs = [x for x, _ in R]
+        mx = mean(xs)
+        sxx = sum((x - mx) ** 2 for x in xs) or 1e-9
+        fit = {"n": len(R)}
+        for side, si in (("h", 0), ("a", 1)):
+            ys = [v[si] for _, v in R]
+            my = mean(ys)
+            b = sum((x - mx) * (y - my) for x, y in zip(xs, ys)) / sxx
+            fit[side] = [round(my - b * mx, 4), round(b, 4)]
+        out[k] = fit
+    return out
 
 
 def side_means(matches, key):
@@ -341,12 +381,14 @@ def side_means(matches, key):
 
 def learn_stat_weights(rows, min_n=60):
     """Cuánto fiarse del modelo frente a la media de la liga en cada estadística. rows: predicciones por equipo de la prueba
-    retrospectiva, (estadística, modelo, media de la liga, real). El peso, de 0 a 1 en pasos de 0,1, es el que da el menor
-    error medio a media + peso × (modelo − media); en empate gana el que más se fía del modelo. Con menos de min_n
-    predicciones, el modelo se usa tal cual (peso 1)."""
+    retrospectiva, (estadística, modelo, media de la liga, real, cuotas o None). El peso, de 0 a 1 en pasos de 0,1, es el que
+    da el menor error medio a media + peso × (modelo − media); en empate gana el que más se fía del modelo. Con menos de min_n
+    predicciones, el modelo se usa tal cual (peso 1).
+    Si hay predicción según las cuotas (ligas con «mstats»), se aprende además la mezcla de tres: media + wm × (modelo − media)
+    + wk × (cuotas − media), con wm + wk ≤ 1, para los partidos que ya tienen cuotas."""
     out = {}
     for k, _ in STATS:
-        R = [(pr, b, o) for kk, pr, b, o in rows if kk == k]
+        R = [(r[1], r[2], r[3]) for r in rows if r[0] == k]
         if len(R) < min_n:
             out[k] = {"lam": 1.0, "n": len(R), "fit": False}
             continue
@@ -355,12 +397,19 @@ def learn_stat_weights(rows, min_n=60):
         lam = min(grid, key=lambda w: (round(err[w], 9), -w))
         out[k] = {"lam": lam, "n": len(R), "fit": True, "mae": round(err[1.0], 4), "maeb": round(err[0.0], 4),
                   "mael": round(err[lam], 4)}
+        R3 = [(r[1], r[2], r[3], r[4]) for r in rows if r[0] == k and len(r) > 4 and r[4] is not None]
+        if len(R3) >= min_n:
+            e3 = {(a / 10, c / 10): mean([abs(b + a / 10 * (pr - b) + c / 10 * (pk - b) - o) for pr, b, o, pk in R3])
+                  for a in range(11) for c in range(11 - a)}
+            wm, wk = min(e3, key=lambda w: (round(e3[w], 9), -w[0], -w[1]))
+            out[k].update(wm=wm, wk=wk, n3=len(R3), mae3=round(e3[(wm, wk)], 4), mae3m=round(e3[(1.0, 0.0)], 4),
+                          mae3k=round(e3[(0.0, 1.0)], 4), mae3b=round(e3[(0.0, 0.0)], 4))
     return out
 
 
-def stat_total(p, i, j):
-    m1, v1, e1 = stat_pred(p, i, j, 1)
-    m2, v2, e2 = stat_pred(p, j, i, 0)
+def stat_total(p, i, j, d=None):
+    m1, v1, e1 = stat_pred(p, i, j, 1, d)
+    m2, v2, e2 = stat_pred(p, j, i, 0, d)
     cov = p["rr"] * p["phi"] * math.sqrt(m1 * m2)
     return m1 + m2, max(v1 + v2 + 2 * cov, 1e-6), math.sqrt(e1 * e1 + e2 * e2)
 
@@ -489,6 +538,28 @@ def rank(n, pts, gd, gf, G, rnd=None, rule="h2h"):
     rule='gd' (Premier League): diferencia de goles, goles a favor y después puntos y goles fuera en los partidos
     entre ellos. En los dos casos el último criterio (juego limpio o partido de desempate) se sustituye por sorteo."""
     tie = (lambda t: rnd.random()) if rnd else (lambda t: 0)
+    if rule == "ucl":
+        # Fase liga de la Champions (art. 18 del reglamento 2026/27): diferencia de goles, goles, goles fuera, victorias,
+        # victorias fuera y, después, puntos, diferencia de goles y goles de todos sus rivales; juego limpio y coeficiente,
+        # por sorteo. Cada pareja se enfrenta una sola vez, así que G guarda todos los partidos.
+        aw_g, wins, aw_w, opp = [0] * n, [0] * n, [0] * n, [[] for _ in range(n)]
+        for i in range(n):
+            for j in range(n):
+                r = G[i][j]
+                if r is None:
+                    continue
+                x, y = r
+                aw_g[j] += y
+                if x > y:
+                    wins[i] += 1
+                elif y > x:
+                    wins[j] += 1
+                    aw_w[j] += 1
+                opp[i].append(j)
+                opp[j].append(i)
+        op = lambda v, t: sum(v[o] for o in opp[t])
+        return sorted(range(n), key=lambda t: (-pts[t], -gd[t], -gf[t], -aw_g[t], -wins[t], -aw_w[t], -op(pts, t), -op(gd, t),
+                                               -op(gf, t), tie(t)))
     if rule == "gd":
         order = sorted(range(n), key=lambda t: (-pts[t], -gd[t], -gf[t]))
         key = lambda t: (pts[t], gd[t], gf[t])
@@ -679,11 +750,12 @@ def walk_forward_goals(played, teams, cfg=None, min_train=30, step=1):
     return out
 
 
-def walk_forward_stats(played, teams, min_train=30, step=8, rows=None):
+def walk_forward_stats(played, teams, min_train=30, step=8, rows=None, market=False):
     """Totales esperados de cada estadística, prediciendo cada partido solo con los anteriores.
     Los modelos se reajustan cada vez que hay al menos `step` partidos nuevos. Si se pasa la lista rows, se le añaden
-    las predicciones por equipo (estadística, modelo, media de la liga, real) para learn_stat_weights."""
-    out, models, base, side, last = {}, None, None, None, -10 ** 9
+    las predicciones por equipo (estadística, modelo, media de la liga, real, según las cuotas o None) para
+    learn_stat_weights; la predicción según las cuotas solo se calcula con market=True."""
+    out, models, base, side, mkf, last = {}, None, None, None, {}, -10 ** 9
     for d in sorted({m["date"] for m in played}):
         train = [m for m in played if m["date"] < d]
         if len(train) < min_train:
@@ -692,6 +764,7 @@ def walk_forward_stats(played, teams, min_train=30, step=8, rows=None):
             models = {k: fit_stat(train, teams, k) for k, _ in STATS}
             base = {k: mean(sum(m[k]) for m in train if m.get(k) is not None) for k, _ in STATS}
             side = {k: side_means(train, k) for k, _ in STATS}
+            mkf = fit_market_stats(train, [k for k, _ in STATS]) if market else {}
             last = len(train)
         for m in played:
             if m["date"] != d:
@@ -699,10 +772,12 @@ def walk_forward_stats(played, teams, min_train=30, step=8, rows=None):
             i, j = teams.index(m["h"]), teams.index(m["a"])
             tt = {k: stat_total(p, i, j) for k, p in models.items() if p}
             if rows is not None:
+                dm = market_gap(m.get("odds")) if market else None
                 for k, p in models.items():
                     if p and side.get(k) and m.get(k) is not None:
-                        rows.append((k, stat_pred(p, i, j, 1)[0], side[k][0], m[k][0]))
-                        rows.append((k, stat_pred(p, j, i, 0)[0], side[k][1], m[k][1]))
+                        ok_ = dm is not None and k in mkf
+                        rows.append((k, stat_pred(p, i, j, 1)[0], side[k][0], m[k][0], market_stat(mkf[k], 1, dm) if ok_ else None))
+                        rows.append((k, stat_pred(p, j, i, 0)[0], side[k][1], m[k][1], market_stat(mkf[k], 0, dm) if ok_ else None))
             out[mkey(m["h"], m["a"])] = {"pred": {k: t[0] for k, t in tt.items()}, "sd": {k: math.sqrt(t[1]) for k, t in tt.items()},
                                          "base": base}
     return out
@@ -819,7 +894,7 @@ def update_log(log, played, pending, gm, sms, wf_goals, wf_stats, today, horizon
             continue
         i, j = gm["ix"][f["h"]], gm["ix"][f["a"]]
         pr = predict_goals(gm, f["h"], f["a"])
-        tt = {k: stat_total(p, i, j) for k, p in sms.items() if p}
+        tt = {k: stat_total(p, i, j, market_gap(f.get("odds"))) for k, p in sms.items() if p}
         st = {k: t[0] for k, t in tt.items()}
         sd = {k: math.sqrt(t[1]) for k, t in tt.items()}
         rf = (reff or {}).get(mkey(f["h"], f["a"])) or {}
@@ -1281,7 +1356,7 @@ def _leg_y(leg, v):
     return v[0] - v[1] if w == "local" else v[1] - v[0]
 
 
-def leg_prob(leg, gm, sms, h, a, M=None):
+def leg_prob(leg, gm, sms, h, a, M=None, d=None):
     """Probabilidad de que la pata se cumpla según el modelo (sin contar la nula). M: matriz de marcadores a usar
     en las patas de goles (por defecto, la del modelo)."""
     ih, ia, k, t, w = gm["ix"][h], gm["ix"][a], leg_key(leg), leg["tipo"], leg["equipo"]
@@ -1296,8 +1371,8 @@ def leg_prob(leg, gm, sms, h, a, M=None):
             return sum(q for x, y, q in cells if ((x - y) if w == "local" else (y - x)) + leg["linea"] > 0)
         return sum(q for x, y, q in cells if (x == y if w == "empate" else (x > y if w == "local" else x < y)))
     p = sms[k]
-    mh, vh, _ = stat_pred(p, ih, ia, 1)
-    ma, va, _ = stat_pred(p, ia, ih, 0)
+    mh, vh, _ = stat_pred(p, ih, ia, 1, d)
+    ma, va, _ = stat_pred(p, ia, ih, 0, d)
     cov = p["rr"] * p["phi"] * math.sqrt(mh * ma)
     if t in ("mas", "menos"):
         m, V = (mh + ma, vh + va + 2 * cov) if w == "total" else ((mh, vh) if w == "local" else (ma, va))
@@ -1478,9 +1553,10 @@ def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=N
                 train, g_, s_, E = cache["hoy"]
                 r["modelo"] = "hoy"
             ps = []
+            dmk = None if m else market_gap(row.get("odds"))  # partido pendiente: las cuotas, si la liga las usa
             for leg in legs:
                 k = leg_key(leg)
-                q = {**leg, "k": k, "p": round(leg_prob(leg, g_, s_, h, a), 4)}
+                q = {**leg, "k": k, "p": round(leg_prob(leg, g_, s_, h, a, d=dmk), 4)}
                 mk = implied(row.get("odds")) if k == "g" and blend is not None else None
                 if mk and leg["tipo"] == "resultado":  # el 1X2 del mercado, tal cual
                     q["pm"] = q["p"]
@@ -1492,7 +1568,7 @@ def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=N
                     if r["mm"]:
                         Mx = pool_matrix(score_matrix(g_, g_["ix"][h], g_["ix"][a]), r["mm"], blend)
                         q["pm"] = q["p"]
-                        q["p"] = round(leg_prob(leg, g_, s_, h, a, Mx), 4)
+                        q["p"] = round(leg_prob(leg, g_, s_, h, a, Mx, d=dmk), 4)
                         q["src"] = "mercado" if blend == 0 else "combinada"
                 if m:
                     v = [m["hg"], m["ag"]] if k == "g" else m.get(k)

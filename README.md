@@ -7,6 +7,7 @@ cada jornada. Solo usa datos de esta temporada.
 
 - LaLiga: https://jaimedhc.github.io/laliga-dashboard/
 - Premier League: https://jaimedhc.github.io/laliga-dashboard/premier.html
+- Champions League (fase liga): https://jaimedhc.github.io/laliga-dashboard/champions.html
 
 ## Archivos
 
@@ -21,8 +22,9 @@ cada jornada. Solo usa datos de esta temporada.
 | `apuestas.json` | Tus apuestas (partido, cuota, importe y patas). Se comprueban solas con los datos de cada partido en la pestaña **Mis apuestas**. |
 | `players.py` | Jugadores de LaLiga desde API-Football (solo funciona con un plan de pago; si no, no hace nada). |
 | `.github/workflows/update.yml` | La tarea automática. |
-| `index.html`, `premier.html` | Las páginas generadas. **No las edites**: se reescriben en cada actualización. |
-| `predictions.json`, `predictions_premier.json` | Registros de predicciones y del aprendizaje. **No los borres**: son el historial congelado. |
+| `index.html`, `premier.html`, `champions.html` | Las páginas generadas. **No las edites**: se reescriben en cada actualización. |
+| `predictions.json`, `predictions_premier.json`, `predictions_champions.json` | Registros de predicciones y del aprendizaje. **No los borres**: son el historial congelado. |
+| `partidos_champions.json` | Partidos de la Champions descargados de ESPN (estadísticas y cuotas). Los terminados no se vuelven a pedir. |
 | `calendario_of_laliga.json`, `calendario_premier.json` | Última copia buena del calendario abierto de openfootball (se reescriben solos). |
 | `estado.json` | Resultado de la última actualización de cada liga. |
 | `novedades_laliga.json`, `novedades_premier.json` | Últimas bajas, dudas y titulares guardados (se usan si una fuente falla). |
@@ -57,6 +59,18 @@ En cada actualización repite la prueba retrospectiva (cada partido predicho sol
    no se modelan: son tan pocas que ningún modelo mejora a la media.
 
 Todo se ve en la pestaña **Aprendizaje** y queda guardado en el registro de cada liga.
+
+## Champions League
+
+football-data no cubre la Champions, así que su página sale de ESPN: resultados, marcador al descanso, tiros, tiros a puerta,
+córners, faltas, amarillas, fechas y horas, y cuotas de DraftKings (1X2, goles y hándicap). No hay xG, así que el modelo de
+goles usa solo los goles. Con 8 partidos por equipo como mucho, el modelo conoce poco a cada equipo; por eso, en las
+estadísticas, aprende a mezclar su predicción con la de las cuotas (la ventaja que las casas dan a cada equipo predice sus
+tiros o sus córners) y con la media de la competición. La clasificación sigue el art. 18 del reglamento de la UEFA y la
+simulación da la probabilidad de acabar entre los 8 primeros (octavos), entre los 24 (ronda previa) o eliminado. Las bajas
+son las de LaLiga y la Premier para sus equipos (sin las sanciones de liga, que no cuentan en Europa). Las eliminatorias,
+desde febrero, aún no se modelan. Para apostar en la Champions, en `apuestas.json` se pone `"liga": "champions"` y el
+partido con los nombres de ESPN (por ejemplo `"Real Madrid|PSV Eindhoven"`).
 
 ## Mis apuestas
 

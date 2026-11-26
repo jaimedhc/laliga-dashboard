@@ -42,6 +42,10 @@ GRID = [("base", "Goles y xG al 50 %", {}),
         ("xg75", "Más peso al xG (75 %)", {"w": 0.25}),
         ("reciente", "Más peso a lo reciente (vida media 90 días)", {"half_life": 90}),
         ("sin_dc", "Sin corrección de empates", {"dc": False})]
+# Competiciones sin xG (Champions, con datos de ESPN): las versiones que cambian el peso del xG serían idénticas.
+GRID_NOXG = [("base", "Solo goles", {"w": 1.0}),
+             ("reciente", "Más peso a lo reciente (vida media 90 días)", {"w": 1.0, "half_life": 90}),
+             ("sin_dc", "Sin corrección de empates", {"w": 1.0, "dc": False})]
 MONTHS = {m: i for i, m in enumerate("Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(), 1)}
 
 
@@ -290,6 +294,170 @@ def tsdb_schedule(L, cal, played_keys, warn):
     return out
 
 
+# ----------------------------------------------------------------- competiciones de ESPN (Champions League)
+ESPN_STATS = {"s": "totalShots", "st": "shotsOnTarget", "c": "wonCorners", "f": "foulsCommitted", "y": "yellowCards"}
+
+
+def _am(o):
+    """Cuota americana (+150, -200) a decimal."""
+    try:
+        v = float(str(o).replace("+", "").strip())
+    except (TypeError, ValueError):
+        return None
+    if not v:
+        return None
+    return round(1 + v / 100, 3) if v > 0 else round(1 + 100 / -v, 3)
+
+
+def espn_odds(o):
+    """Cuotas de DraftKings de un partido de ESPN: 1X2 (de cierre si ya las hay), +/-2,5 goles (solo si esa es la línea)
+    y hándicap del local [línea, cuota local, cuota visitante]."""
+    o = o or {}
+    ml, tot, sp = o.get("moneyline") or {}, o.get("total") or {}, o.get("pointSpread") or {}
+    pick = lambda d, k: (d.get(k) or {}).get("close") or (d.get(k) or {}).get("open") or {}
+    odds = [_am(pick(ml, k).get("odds")) for k in ("home", "draw", "away")]
+    if not all(odds):  # en el marcador vienen como moneyLine de cada equipo
+        odds = [_am((o.get("homeTeamOdds") or {}).get("moneyLine")), _am((o.get("drawOdds") or {}).get("moneyLine")),
+                _am((o.get("awayTeamOdds") or {}).get("moneyLine"))]
+    line = str(pick(tot, "over").get("line") or "").lstrip("ou")
+    ou = [_am(pick(tot, "over").get("odds")), _am(pick(tot, "under").get("odds"))] if line == "2.5" else None
+    try:
+        ah = [float(pick(sp, "home").get("line")), _am(pick(sp, "home").get("odds")), _am(pick(sp, "away").get("odds"))]
+    except (TypeError, ValueError):
+        ah = None
+    return {"odds": odds if all(odds) else None, "ou": ou if ou and all(ou) else None,
+            "ah": ah if ah and all(ah[1:]) else None}
+
+
+def espn_match(s, h, a):
+    """Lo que se guarda de un partido terminado a partir de su ficha de ESPN."""
+    comp = s["header"]["competitions"][0]
+    side = {c["homeAway"]: c for c in comp["competitors"]}
+    box = {t["team"]["displayName"]: t for t in (s.get("boxscore") or {}).get("teams", [])}
+
+    def stat(team, name):
+        for x in (box.get(team) or {}).get("statistics", []):
+            if x.get("name") == name:
+                try:
+                    return round(float(x.get("displayValue")))
+                except (TypeError, ValueError):
+                    return None
+        return None
+
+    ht = [_int(((side[x].get("linescores") or [{}])[0]).get("displayValue"), None) for x in ("home", "away")]
+    rec = {"date": comp.get("date") or s["header"].get("date"), "h": h, "a": a,
+           "hg": _int(side["home"].get("score")), "ag": _int(side["away"].get("score")),
+           "g1": ht if None not in ht else None, **espn_odds((s.get("odds") or [None])[0])}
+    hn, an = side["home"]["team"]["displayName"], side["away"]["team"]["displayName"]
+    for k, name in ESPN_STATS.items():
+        v = [stat(hn, name), stat(an, name)]
+        rec[k] = v if None not in v else None
+    return rec
+
+
+def espn_competition(key, L, warn):
+    """Partidos de una competición de ESPN (fase liga de la Champions): jugados con estadísticas y cuotas de cierre de
+    DraftKings; pendientes con fecha, hora y, si ya las hay, cuotas. Devuelve (jugados, calendario, cuotas, horarios).
+    Todo se guarda en partidos_<liga>.json: un partido terminado no se vuelve a pedir, un día ya jugado tampoco, los días
+    futuros se repasan cada seis horas y las cuotas de los próximos ocho días, también cada seis horas."""
+    cache_p = p_out(f"partidos_{key}.json")
+    cache = jload(cache_p, {}) or {}
+    P, S, Dd, O = (cache.get(x) or {} for x in ("played", "sched", "dates", "odds"))
+    alias = {_nz(k): k for k in L["names"]}
+    canon = lambda n: alias.get(_nz(n), n)
+    now = datetime.now(timezone.utc)
+    stale = lambda ts, hours: not ts or (now - datetime.fromisoformat(ts)).total_seconds() > hours * 3600
+    md, base, asked, fails = L["md_dates"], L["espn"], 0, 0
+    lim = date.fromisoformat(TODAY) + timedelta(days=8)
+    for day in sorted(md):
+        dd, c = date.fromisoformat(day), Dd.get(day) or {}
+        past = dd < date.fromisoformat(TODAY)
+        if (past and c.get("all") and c.get("f", "") > day) or (not past and not stale(c.get("t"), 6)):
+            continue
+        asked += 1
+        try:
+            sb = json.loads(read(ENV(f"ESPN_{key.upper()}_{day.replace('-', '')}") or f"{base}/scoreboard?dates={day.replace('-', '')}")
+                            or "null")
+        except ValueError:
+            sb = None
+        if not isinstance(sb, dict):
+            fails += 1
+            continue
+        allc = True
+        for e in sb.get("events") or []:
+            try:
+                comp = e["competitions"][0]
+                side = {x["homeAway"]: x for x in comp["competitors"]}
+                h, a = canon(side["home"]["team"]["displayName"]), canon(side["away"]["team"]["displayName"])
+            except (KeyError, IndexError, TypeError):
+                continue
+            done = bool(((e.get("status") or {}).get("type") or {}).get("completed"))
+            allc &= done
+            S[e["id"]] = {"date": e.get("date"), "h": h, "a": a, "done": done}
+            if not done and (comp.get("odds") or [None])[0]:
+                O[e["id"]] = {"t": now.isoformat(timespec="minutes"), **espn_odds(comp["odds"][0])}
+        Dd[day] = {"f": TODAY, "t": now.isoformat(timespec="minutes"), "all": allc and bool(sb.get("events"))}
+        time.sleep(0.3)
+    for eid, e in S.items():
+        need = (e["done"] and eid not in P) or (
+            not e["done"] and e.get("date") and date.fromisoformat(e["date"][:10]) <= lim and stale((O.get(eid) or {}).get("t"), 6))
+        if not need:
+            continue
+        asked += 1
+        try:
+            sm = json.loads(read(ENV(f"ESPN_{key.upper()}_EV_{eid}") or f"{base}/summary?event={eid}") or "null")
+        except ValueError:
+            sm = None
+        if not isinstance(sm, dict):
+            fails += 1
+            continue
+        try:
+            if e["done"]:
+                P[eid] = espn_match(sm, e["h"], e["a"])
+            else:
+                O[eid] = {"t": now.isoformat(timespec="minutes"), **espn_odds((sm.get("odds") or [None])[0])}
+        except (KeyError, IndexError, TypeError) as ex:
+            warn.append(f"Partido {e['h']}-{e['a']} de ESPN sin datos completos ({type(ex).__name__}).")
+        time.sleep(0.3)
+    if asked and fails == asked:
+        warn.append("No se pudo leer ESPN; se usan los últimos datos guardados.")
+    if asked > fails:
+        write(cache_p, json.dumps({"played": P, "sched": S, "dates": Dd, "odds": O}, ensure_ascii=False, separators=(",", ":")))
+    if not P and not S:
+        raise SystemExit("Sin datos de ESPN para esta competición.")
+
+    def local(ts):
+        t = madrid_time(datetime.fromisoformat(ts.replace("Z", "+00:00")))
+        return t.date().isoformat(), t.strftime("%H:%M")
+
+    def jornada(d):
+        return md.get(d) or max([v for x, v in md.items() if x <= d] or [1])
+
+    played, cal, fx, times = [], [], {}, {}
+    for eid, r in P.items():
+        d, tm = local(r["date"])
+        m = {"date": d, "time": tm, "h": canon(r["h"]), "a": canon(r["a"]), "hg": r["hg"], "ag": r["ag"], "j": jornada(d),
+             "odds": r.get("odds"), "ou": r.get("ou"), "ref": None, "xg": None, "g1": r.get("g1")}
+        for k in ESPN_STATS:
+            m[k] = r.get(k)
+        played.append(m)
+    played.sort(key=lambda m: (m["date"], m["time"], m["h"]))
+    for eid, e in S.items():
+        if not e.get("date"):
+            continue
+        d, tm = local(e["date"])
+        cal.append([jornada(d), d, e["h"], e["a"]])
+        if not e["done"]:
+            times[(e["h"], e["a"])] = (d, tm)
+            o = O.get(eid) or {}
+            if o.get("odds"):
+                fx[(e["h"], e["a"])] = {"date": d, "time": tm, "odds": o["odds"], "ou": o.get("ou"), "ah": o.get("ah"), "ref": None}
+    unknown = sorted({t for m in played for t in (m["h"], m["a"])} - set(L["names"]))
+    if unknown:
+        warn.append("Equipos de ESPN sin traducir: " + ", ".join(unknown))
+    return played, sorted(cal), fx, times
+
+
 # ----------------------------------------------------------------- novedades: bajas, dudas y titulares
 AV_ST = {"biwenger": {"injured": "lesionado", "doubt": "duda", "sanctioned": "sancionado", "warned": "apercibido"},
          "fpl": {"i": "lesionado", "d": "duda", "s": "sancionado", "n": "no disponible"}}
@@ -534,6 +702,23 @@ def headlines(key, L, team):
     return out[:6]
 
 
+def availability_reuse(L):
+    """Bajas de una competición entre ligas (Champions) a partir de las ya descargadas para LaLiga y la Premier, con
+    los nombres de equipo de la competición. Las sanciones y los apercibimientos de liga no cuentan en la Champions, así
+    que se quitan; «último partido» también: se refiere al último partido de su liga."""
+    out, tm, gens = {}, {}, []
+    for lk, names in L["avail"]["from"].items():
+        c = jload(p_out(f"novedades_{lk}.json"), {}) or {}
+        if c.get("avail_gen"):
+            gens.append(c["avail_gen"])
+        for src, dst in names.items():
+            if src in (c.get("avail") or {}):
+                out[dst] = [r[:10] + [None] if len(r) > 10 else r for r in c["avail"][src] if r[2] not in ("sancionado", "apercibido")]
+            if src in (c.get("tm") or {}):
+                tm[dst] = c["tm"][src]
+    return (out, tm, min(gens)) if gens else None
+
+
 def team_news(key, L, teams, played, pend, warn):
     """Bajas (con lo que ha jugado cada uno) y titulares de los equipos con partido en los próximos ocho días.
     Si una fuente falla, se usa lo último guardado."""
@@ -541,9 +726,11 @@ def team_news(key, L, teams, played, pend, warn):
     cache = jload(cache_p, {}) or {}
     lim = (date.fromisoformat(TODAY) + timedelta(days=8)).isoformat()
     soon = sorted({t for f in pend if TODAY <= f["date"] <= lim for t in (f["h"], f["a"])})
-    av = availability(key, L, teams, played, warn)
+    reuse = (L.get("avail") or {}).get("src") == "reuse"
+    av = availability_reuse(L) if reuse else availability(key, L, teams, played, warn)
     out = {"avail": av[0] if av is not None else cache.get("avail", {}), "tm": av[1] if av is not None else cache.get("tm", {}),
-           "avail_gen": TODAY if av is not None else cache.get("avail_gen"), "news": {}, "news_gen": {}, "news_ts": {}}
+           "avail_gen": (av[2] if reuse else TODAY) if av is not None else cache.get("avail_gen"),
+           "news": {}, "news_gen": {}, "news_ts": {}}
     # GitHub a veces junta varias ejecuciones seguidas: los titulares de menos de 90 minutos no se vuelven a pedir
     now = datetime.now(timezone.utc)
     fails = asked = 0
@@ -571,9 +758,10 @@ def team_news(key, L, teams, played, pend, warn):
     return out
 
 
-def pending_list(cal, played_keys, fx, over, ofmap, tsmap=None):
+def pending_list(cal, played_keys, fx, over, ofmap, tsmap=None, fx_src=3):
     """Partidos pendientes y de dónde sale su fecha, de más a menos prioridad: 3 = football-data (con cuotas),
-    4 = fechas y horas anunciadas (TheSportsDB), 2 = corregida a mano, 1 = calendario abierto, 0 = calendario oficial."""
+    4 = fechas y horas anunciadas (TheSportsDB o ESPN), 2 = corregida a mano, 1 = calendario abierto, 0 = calendario oficial.
+    fx_src: fuente que se anota en los partidos con cuotas (4 en las competiciones de ESPN, cuyas cuotas no fijan la fecha)."""
     out = []
     for j, d, h, a in cal:
         if (h, a) in played_keys:
@@ -590,7 +778,7 @@ def pending_list(cal, played_keys, fx, over, ofmap, tsmap=None):
         if t:
             date_, tm, src = t[0], t[1], 4
         if f:
-            date_, tm, src = f["date"], f["time"], 3
+            date_, tm, src = f["date"], f["time"], fx_src
         out.append({"j": j, "date": date_, "cal": d, "time": tm, "h": h, "a": a, "src": src,
                     "odds": f.get("odds"), "ou": f.get("ou"), "ah": f.get("ah"), "ref": f.get("ref")})
     return sorted(out, key=lambda f: (f["date"], f["time"], f["j"], f["h"]))
@@ -655,29 +843,38 @@ def full_document(fragment):
 def build_league(key, L, fixtures_text):
     t0 = time.time()
     warn = []
-    cal, ofmap = get_calendar(key, L, warn)
-    jmap = {(c[2], c[3]): c[0] for c in cal}
-    played = load_matches(read(ENV("CSV_" + key.upper()) or L["csv"]), jmap)
-    if not played:
-        raise SystemExit("El CSV no tiene partidos jugados; no se toca la página.")
+    espn = L.get("source") == "espn"
+    if espn:  # Champions: partidos, estadísticas, calendario y cuotas de ESPN
+        played, cal, fx, tsmap = espn_competition(key, L, warn)
+        ofmap = {}
+        if not played:
+            raise SystemExit("La competición aún no tiene partidos jugados; no se toca la página.")
+    else:
+        cal, ofmap = get_calendar(key, L, warn)
+        jmap = {(c[2], c[3]): c[0] for c in cal}
+        played = load_matches(read(ENV("CSV_" + key.upper()) or L["csv"]), jmap)
+        if not played:
+            raise SystemExit("El CSV no tiene partidos jugados; no se toca la página.")
     cal_teams = {c[2] for c in cal} | {c[3] for c in cal}
     teams = sorted({m["h"] for m in played} | {m["a"] for m in played} | cal_teams)
     unknown = sorted(t for t in teams if cal_teams and t not in cal_teams)
     if unknown:
         warn.append("Equipos del CSV que no están en el calendario: " + ", ".join(unknown))
-    miss = sum(1 for m in played if m["xg"] is None or m["c"] is None)
+    miss = sum(1 for m in played if (m["xg"] is None and L.get("xg", True)) or m["c"] is None)
     if miss:
         warn.append(f"{miss} partidos sin xG o sin estadísticas completas (se usan solo los datos disponibles)")
-    fx = load_fixtures(fixtures_text, L["div"])
+    if not espn:
+        fx = load_fixtures(fixtures_text, L["div"])
     over = {k: v for k, v in jload(p_in(L["dates"]), {}).items() if not k.startswith("_")}
     pkeys = {(m["h"], m["a"]) for m in played}
-    pend = pending_list(cal, pkeys, fx, over, ofmap, tsdb_schedule(L, cal, pkeys, warn))
+    pend = pending_list(cal, pkeys, fx, over, ofmap, tsmap if espn else tsdb_schedule(L, cal, pkeys, warn), fx_src=4 if espn else 3)
     log = jload(p_out(L["log"]), {})
     prev_cfg = (log.get("learning") or [{}])[-1].get("cfg")
 
     # 1) el modelo elige su configuración con la prueba retrospectiva
     step = max(1, len(played) // 60)
-    chosen, res, why = model.select_config(played, teams, GRID, prev_cfg, step=step)
+    grid = GRID if L.get("xg", True) else GRID_NOXG
+    chosen, res, why = model.select_config(played, teams, grid, prev_cfg if prev_cfg in {g[0] for g in grid} else None, step=step)
     cfg = res[chosen]["cfg"]
     wf = res[chosen]["wf"]
     gm = model.fit_goals(played, teams, cfg, ref=TODAY)
@@ -706,18 +903,21 @@ def build_league(key, L, fixtures_text):
     t2 = time.time()
     bt = model.backtest_summary(wf)
     variants = []
-    for k, name, _ in GRID:
+    for k, name, _ in grid:
         s = model.backtest_summary(res[k]["wf"]) if res[k]["wf"] else {}
         variants.append({"key": k, "name": name, "chosen": k == chosen, "d": rnd(res[k].get("d"), 4), "se": rnd(res[k].get("se"), 4),
                          **{q: rnd(s.get(q), 4) for q in ("n", "ll", "llm", "dll", "dse", "acc", "pd", "fd")}})
     wf_rows = []
-    wfs = model.walk_forward_stats(played, teams, rows=wf_rows)
+    wfs = model.walk_forward_stats(played, teams, rows=wf_rows, market=bool(L.get("mstats")))
     # 4) cuánto fiarse del modelo frente a la media de la liga en cada estadística (prueba retrospectiva por equipo);
     #    desde aquí, todas las predicciones de estadísticas (registro, apuestas, tendencias y página) usan esa mezcla
     sw = model.learn_stat_weights(wf_rows)
+    mkf = model.fit_market_stats(played, [k for k, _ in model.STATS]) if L.get("mstats") else {}
     for k, p in sms.items():
         if p:
             p["lam"], p["avg"] = sw[k]["lam"], model.side_means(played, k)
+            if k in mkf and sw[k].get("wk") is not None:  # con cuotas: mezcla de modelo, cuotas y media
+                p["mk"], p["wm"], p["wk"] = mkf[k], sw[k]["wm"], sw[k]["wk"]
     try:
         news = team_news(key, L, teams, played, pend, warn)
     except Exception as e:  # noqa: BLE001  (las novedades no deben tumbar la página)
@@ -786,7 +986,9 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
     CXQ = ("tf", "ta", "s2", "pf", "pa")
     # lam y avg: cuánto se fía el modelo de sí mismo en cada estadística y la media de la liga (local, visitante) hacia la que se acerca
     SM = {k: dict(export_glm(p, ("rr",)), **{q: rnd(cross[k].get(q), 5) for q in CXQ}, lam=p.get("lam"),
-                  avg=[rnd(x, 4) for x in p["avg"]] if p.get("avg") else None) for k, p in sms.items() if p}
+                  avg=[rnd(x, 4) for x in p["avg"]] if p.get("avg") else None,
+                  **({"mk": {"h": p["mk"]["h"], "a": p["mk"]["a"]}, "wm": p["wm"], "wk": p["wk"]} if p.get("mk") else {}))
+          for k, p in sms.items() if p}
     GM = dict(export_glm(gm, ("rho", "w")), cx={k: {q: rnd(cross[k].get(q), 5) for q in CXQ} for k in ("g", "g2")})
     SIM = [[rnd(s["mean"], 2), s["p10"], s["p90"], rnd(s["ch"], 4), rnd(s["t4"], 4), rnd(s["t6"], 4),
             rnd(s["rel"], 4), [rnd(x, 4) for x in s["pos"]]] for s in sim]
@@ -820,7 +1022,9 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
                  "league": key, "name": L["name"], "title": L["title"], "zones": L["zones"],
                  "tiebreak": L["tiebreak_text"], "cards_note": L.get("cards_note"), "leagues": others,
                  "sources": L["sources"], "cal_label": L["cal_label"], "cal_fallback": L["cal_fallback"],
-                 "refs": bool(learn["refx"])},
+                 "refs": bool(learn["refx"]), "zone_names": L.get("zone_names"), "data_note": L.get("data_note"),
+                 "xg": L.get("xg", True), "odds_src": "DraftKings" if L.get("source") == "espn" else "football-data",
+                 "mstats": bool(L.get("mstats"))},
         "teams": teams, "names": [L["names"].get(t, t) for t in teams], "short": [L["short"].get(t, t[:3].upper()) for t in teams],
         "M": M, "E": EX, "fx": FX, "table": TB, "gm": GM, "sm": SM, "sim": SIM,
         "bt": {**rdict({k: v for k, v in bt.items() if k not in ("calib", "by_j", "ou")}),
@@ -834,6 +1038,9 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
         "pl": jload(p_in(L["players"]), {}).get("teams", {}) if L.get("players") else {},
         "bets": [{**b, "h": ti.get(b.get("h")), "a": ti.get(b.get("a"))} for b in bets],
         "news": {"src": (L.get("avail") or {}).get("name"), "lang": L.get("news_lang", "es"), "avail_gen": news.get("avail_gen"),
+                 "reuse": (L.get("avail") or {}).get("src") == "reuse",
+                 "cov": sorted(ti[t] for names in ((L.get("avail") or {}).get("from") or {}).values() for t in names.values() if t in ti)
+                 if (L.get("avail") or {}).get("src") == "reuse" else None,
                  "out": {ti[t]: v for t, v in (news.get("avail") or {}).items() if t in ti},
                  "tm": {ti[t]: v for t, v in (news.get("tm") or {}).items() if t in ti},
                  "head": {ti[t]: v for t, v in (news.get("news") or {}).items() if t in ti},
