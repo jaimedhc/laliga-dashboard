@@ -15,12 +15,13 @@ import math
 import random
 from datetime import date, timedelta
 
-VERSION = "4.1"
+VERSION = "4.2"
 
 # Estadísticas que se modelan aparte de los goles (clave, nombre).
+# Las rojas no se modelan: son tan pocas que ningún modelo ha mejorado a la media de la liga.
 STATS = [("g1", "Goles 1ª parte"), ("xg", "xG"), ("s", "Tiros"), ("st", "Tiros a puerta"),
-         ("c", "Córners"), ("f", "Faltas"), ("y", "Amarillas"), ("r", "Rojas")]
-CROSS_KEYS = ["g", "g1", "g2", "xg", "s", "st", "c", "f", "y", "r"]
+         ("c", "Córners"), ("f", "Faltas"), ("y", "Amarillas")]
+CROSS_KEYS = ["g", "g1", "g2", "xg", "s", "st", "c", "f", "y"]
 
 # w: peso de los goles reales frente al xG en el objetivo. half_life: vida media en días del peso
 # temporal (None = todos los partidos pesan igual). dc: corrección de marcadores bajos.
@@ -318,11 +319,43 @@ def fit_stat(matches, teams, key, cfg=None, ref=None):
 
 
 def stat_pred(p, i, j, home):
-    """Media esperada, varianza del partido y error de la media para el equipo i contra j."""
+    """Media esperada, varianza del partido y error de la media para el equipo i contra j.
+    Si el modelo ya ha aprendido cuánto fiarse de sí mismo en esta estadística (p["lam"], de learn_stat_weights), la media
+    se acerca a la de la liga (p["avg"]: local, visitante) en esa medida: media + lam × (modelo − media)."""
     l, v = lin(p, i, j, home)
     mean_ = math.exp(l + v / 2)
     err2 = mean_ * mean_ * (math.exp(v) - 1)
+    lam, avg = p.get("lam"), p.get("avg")
+    if lam is not None and avg:
+        base = avg[0 if home else 1]
+        mean_ = base + lam * (mean_ - base)
+        err2 *= lam * lam
     return mean_, p["phi"] * mean_ + err2, math.sqrt(err2)
+
+
+def side_means(matches, key):
+    """Media de la liga de una estadística para el equipo local y para el visitante."""
+    v = [m[key] for m in matches if m.get(key) is not None]
+    return (mean([x[0] for x in v]), mean([x[1] for x in v])) if v else None
+
+
+def learn_stat_weights(rows, min_n=60):
+    """Cuánto fiarse del modelo frente a la media de la liga en cada estadística. rows: predicciones por equipo de la prueba
+    retrospectiva, (estadística, modelo, media de la liga, real). El peso, de 0 a 1 en pasos de 0,1, es el que da el menor
+    error medio a media + peso × (modelo − media); en empate gana el que más se fía del modelo. Con menos de min_n
+    predicciones, el modelo se usa tal cual (peso 1)."""
+    out = {}
+    for k, _ in STATS:
+        R = [(pr, b, o) for kk, pr, b, o in rows if kk == k]
+        if len(R) < min_n:
+            out[k] = {"lam": 1.0, "n": len(R), "fit": False}
+            continue
+        grid = [g / 10 for g in range(11)]
+        err = {w: mean([abs(b + w * (pr - b) - o) for pr, b, o in R]) for w in grid}
+        lam = min(grid, key=lambda w: (round(err[w], 9), -w))
+        out[k] = {"lam": lam, "n": len(R), "fit": True, "mae": round(err[1.0], 4), "maeb": round(err[0.0], 4),
+                  "mael": round(err[lam], 4)}
+    return out
 
 
 def stat_total(p, i, j):
@@ -646,10 +679,11 @@ def walk_forward_goals(played, teams, cfg=None, min_train=30, step=1):
     return out
 
 
-def walk_forward_stats(played, teams, min_train=30, step=8):
+def walk_forward_stats(played, teams, min_train=30, step=8, rows=None):
     """Totales esperados de cada estadística, prediciendo cada partido solo con los anteriores.
-    Los modelos se reajustan cada vez que hay al menos `step` partidos nuevos."""
-    out, models, base, last = {}, None, None, -10 ** 9
+    Los modelos se reajustan cada vez que hay al menos `step` partidos nuevos. Si se pasa la lista rows, se le añaden
+    las predicciones por equipo (estadística, modelo, media de la liga, real) para learn_stat_weights."""
+    out, models, base, side, last = {}, None, None, None, -10 ** 9
     for d in sorted({m["date"] for m in played}):
         train = [m for m in played if m["date"] < d]
         if len(train) < min_train:
@@ -657,12 +691,18 @@ def walk_forward_stats(played, teams, min_train=30, step=8):
         if len(train) - last >= step:
             models = {k: fit_stat(train, teams, k) for k, _ in STATS}
             base = {k: mean(sum(m[k]) for m in train if m.get(k) is not None) for k, _ in STATS}
+            side = {k: side_means(train, k) for k, _ in STATS}
             last = len(train)
         for m in played:
             if m["date"] != d:
                 continue
             i, j = teams.index(m["h"]), teams.index(m["a"])
             tt = {k: stat_total(p, i, j) for k, p in models.items() if p}
+            if rows is not None:
+                for k, p in models.items():
+                    if p and side.get(k) and m.get(k) is not None:
+                        rows.append((k, stat_pred(p, i, j, 1)[0], side[k][0], m[k][0]))
+                        rows.append((k, stat_pred(p, j, i, 0)[0], side[k][1], m[k][1]))
             out[mkey(m["h"], m["a"])] = {"pred": {k: t[0] for k, t in tt.items()}, "sd": {k: math.sqrt(t[1]) for k, t in tt.items()},
                                          "base": base}
     return out
@@ -797,7 +837,7 @@ def update_log(log, played, pending, gm, sms, wf_goals, wf_stats, today, horizon
     return log
 
 
-RANGE_KEYS = ["g", "xg", "s", "st", "c", "f", "y", "r"]
+RANGE_KEYS = ["g", "xg", "s", "st", "c", "f", "y"]
 
 
 def range_of(m, sd):
@@ -819,7 +859,7 @@ def _cdf(m, V, k):
             pk *= (i - 1 + r) / i * q
             c += pk
         return min(1.0, c)
-    if V >= m * 0.98 or m < 5:  # con medias pequeñas (rojas) la normal se equivoca: Poisson
+    if V >= m * 0.98 or m < 5:  # con medias pequeñas la normal se equivoca: Poisson
         pk = math.exp(-m)
         c = pk
         for i in range(1, k + 1):
@@ -1193,7 +1233,7 @@ def referee_backtest(played, teams, min_train=40, step=8):
 #   {"tipo": "handicap", "equipo": "local" | "visitante", "linea": 3.5}   (hándicap asiático de goles; líneas enteras o ,5;
 #    con "estadistica": "corners", de esa estadística)
 BET_STATS = {"goles": "g", "tiros": "s", "tiros a puerta": "st", "corners": "c", "córners": "c", "faltas": "f",
-             "amarillas": "y", "rojas": "r", "xg": "xg"}
+             "amarillas": "y", "xg": "xg"}
 _SIDE = {"local": 0, "empate": 1, "visitante": 2}
 
 
@@ -1424,7 +1464,7 @@ def evaluate_bets(bets, played, pending, teams, cfg=None, gm_now=None, sms_now=N
                 if d not in cache:
                     train = [x for x in played if x["date"] < d]
                     g_ = fit_goals(train, teams, cfg, ref=d)
-                    s_ = {k: fit_stat(train, teams, k) for k in ("s", "st", "c", "f", "y", "r", "xg")}
+                    s_ = {k: fit_stat(train, teams, k) for k in ("s", "st", "c", "f", "y", "xg")}
                     cache[d] = (train, g_, s_, expectations(train, g_, s_))
                 train, g_, s_, E = cache[d]
                 r["modelo"] = "antes"

@@ -30,9 +30,11 @@ cada jornada. Solo usa datos de esta temporada.
 
 ## Cómo se actualiza
 
-- Dos veces al día (mañana y tarde) y cada vez que subes alguno de los archivos de la tabla.
+- Cada dos horas (GitHub retrasa o se salta a veces las ejecuciones programadas, así que se programan de sobra) y cada vez
+  que subes alguno de los archivos de la tabla.
 - Las fechas y horas de las próximas jornadas se ponen solas en cuanto la liga las anuncia (TheSportsDB) y, unos días antes, se confirman con football-data.
-- De viernes a lunes hay tres actualizaciones más (12:17, 15:17 y 20:17) para recoger bajas y titulares de última hora: bajas de Biwenger (LaLiga) y del Fantasy Premier League, titulares de Google News.
+- Las bajas salen de Biwenger (LaLiga) y del Fantasy Premier League, y los titulares, de Google News (no se vuelven a pedir
+  si tienen menos de 90 minutos).
   Cada baja se cruza con lo que ha jugado ese jugador esta temporada (titularidades, minutos, goles y asistencias) y el análisis
   de partido resume lo importante: si falta el máximo goleador, el portero titular o varios titulares habituales (titular en al menos
   la mitad de los partidos), si la baja es nueva, y qué parte del partido puede estar estimando mal el modelo por ello.
@@ -50,6 +52,9 @@ En cada actualización repite la prueba retrospectiva (cada partido predicho sol
 2. Aprende cuánto pesar frente a las cuotas del mercado (la mezcla de modelo y mercado con mejor log-loss).
 3. Si el CSV trae el árbitro (Premier), estima su efecto en tarjetas y faltas y lo aplica si no empeora la prueba.
 4. Corrige la probabilidad de las tendencias con lo que se han cumplido las anteriores.
+5. Para cada estadística, aprende cuánto fiarse de sí mismo frente a la media de la liga (de 0 a 100 %, el peso que menos
+   se equivoca por equipo en la prueba retrospectiva). Todas las cifras de estadísticas de la página usan esa mezcla. Las rojas
+   no se modelan: son tan pocas que ningún modelo mejora a la media.
 
 Todo se ve en la pestaña **Aprendizaje** y queda guardado en el registro de cada liga.
 
@@ -63,7 +68,7 @@ el importe y sus patas (una combinada tiene varias). Tipos de pata:
 - `{"tipo": "resultado", "equipo": "local"}` (o `"empate"`, `"visitante"`)
 - `{"tipo": "handicap", "equipo": "visitante", "linea": 3.5}`: hándicap asiático de goles (líneas enteras o de ,5); con `"estadistica": "corners"` (u otra), de esa estadística
 
-Estadísticas: goles, tiros, tiros a puerta, corners, faltas, amarillas, rojas. La página marca cada apuesta como ganada o perdida
+Estadísticas: goles, tiros, tiros a puerta, corners, faltas, amarillas (las rojas no se modelan). La página marca cada apuesta como ganada o perdida
 en cuanto football-data publica el partido, y muestra lo que le daba el modelo antes de jugarse.
 
 ## Corregir una fecha

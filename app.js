@@ -46,13 +46,13 @@ const VARS = [
   {k: 'c', n: 'Córners', low: 'córners', fl: 'Córners', al: 'Córners del rival'},
   {k: 'f', n: 'Faltas', low: 'faltas', fl: 'Faltas cometidas', al: 'Faltas recibidas'},
   {k: 'y', n: 'Amarillas', low: 'amarillas', fl: 'Amarillas', al: 'Amarillas del rival'},
-  {k: 'r', n: 'Rojas', low: 'rojas', fl: 'Rojas', al: 'Rojas del rival'},
 ];
 const VK = Object.fromEntries(VARS.map(v => [v.k, v]));
-const SK = ['g1', 'xg', 's', 'st', 'c', 'f', 'y', 'r'], EK = ['g', 'g1', 'xg', 's', 'st', 'c', 'f', 'y', 'r'];
+const SK = ['g1', 'xg', 's', 'st', 'c', 'f', 'y'], EK = ['g', 'g1', 'xg', 's', 'st', 'c', 'f', 'y'];
+const MO = 7 + 2 * SK.length;  // detrás de las estadísticas de cada partido: cuotas 1X2, +/-2,5 y árbitro
 const M = D.M.map((r, idx) => {
   const m = {idx, d: r[0], tm: r[1], j: r[2], h: r[3], a: r[4], hg: r[5], ag: r[6], v: {g: [r[5], r[6]]}, e: {},
-    odds: ok(r[23]) ? r.slice(23, 26) : null, ou: ok(r[26]) ? r.slice(26, 28) : null, ref: r[28] || null};
+    odds: ok(r[MO]) ? r.slice(MO, MO + 3) : null, ou: ok(r[MO + 3]) ? r.slice(MO + 3, MO + 5) : null, ref: r[MO + 5] || null};
   SK.forEach((k, q) => { const x = r[7 + 2 * q], y = r[8 + 2 * q]; m.v[k] = ok(x) && ok(y) ? [x, y] : null; });
   m.v.g2 = m.v.g1 ? [m.hg - m.v.g1[0], m.ag - m.v.g1[1]] : null;
   const e = D.E[idx] || [];
@@ -154,9 +154,12 @@ function sPred(k, i, j, home) {
     return {m, V: Math.max(g.V - g1.V, m), e: m * g.e / g.m};
   }
   const p = SM[k]; if (!p) return null;
-  const [l, v] = lin(p, i, j, home), m = Math.exp(l + v / 2), e2 = m * m * (Math.exp(v) - 1);
+  /* lam: cuánto se fía el modelo de sí mismo en esta estadística (Aprendizaje); con menos de 1 se acerca a la media de la liga */
+  const [l, v] = lin(p, i, j, home), mm = Math.exp(l + v / 2), lam = slam(k);
+  const m = lam < 1 ? p.avg[home ? 0 : 1] + lam * (mm - p.avg[home ? 0 : 1]) : mm, e2 = mm * mm * (Math.exp(v) - 1) * lam * lam;
   return {m, V: p.phi * m + e2, e: Math.sqrt(e2)};
 }
+function slam(k) { const p = SM[k]; return p && ok(p.lam) && p.avg ? p.lam : 1; }
 /* Valor esperado frente a un rival medio en campo neutral (para comparar equipos). */
 function neutral(k, i, side) {
   if (k === 'g2') { const g = neutral('g', i, side), g1 = neutral('g1', i, side); return ok(g) && ok(g1) ? g - g1 : null; }
@@ -250,7 +253,7 @@ function renderTeam() {
   const cnt = f => gs.filter(f).length;
   const nx = nextFixture(i);
   const kp = [['Posición', `${r.pos}º · ${r.pts} pts`], ['Balance', `${r.w}G ${r.d}E ${r.l}P`], ['Goles', `${r.gf} a favor · ${r.ga} en contra`],
-    ['xG', `${f1(sum('xg'))} a favor · ${f1(sum('xg', 'a'))} en contra`], ['Tarjetas', `${sum('y')} ${sum('y') === 1 ? 'amarilla' : 'amarillas'} · ${sum('r')} ${sum('r') === 1 ? 'roja' : 'rojas'}`]];
+    ['xG', `${f1(sum('xg'))} a favor · ${f1(sum('xg', 'a'))} en contra`], ['Amarillas', `${sum('y')} · ${f1(sum('y') / Math.max(gs.length, 1))} por partido`]];
   const pts = gs.map(g => g.res === 'W' ? 3 : g.res === 'D' ? 1 : 0), shots = sum('s') || 1;
   const E = (x, m) => { const q = (x + 2) / (m + 4); return '±' + Math.round(Math.sqrt(q * (1 - q) / (m + 4)) * 100) + ' pp'; };  // Agresti-Coull: no da 0 con 9 de 9
   const c0 = cnt(g => g.ga === 0), c1 = cnt(g => g.gf === 0), c2 = cnt(g => g.gf > 0 && g.ga > 0), c3 = cnt(g => g.gf + g.ga > 2);
@@ -281,7 +284,7 @@ function renderTeam() {
   const mrows = gs.slice().reverse().map(g => {
     const q = implied(g.m.odds);
     return `<tr><td>${fd(g.m.d)}</td><td>${g.m.j || ''}</td><td class="l">${g.home ? 'Casa' : 'Fuera'}</td><td class="l">${nm(g.o)}</td><td><b>${g.gf}-${g.ga}</b>${g.m.v.g1 ? ` <span class="mu">(${g.f.g1}-${g.a.g1})</span>` : ''}</td>` +
-      ['xg', 's', 'st', 'c', 'f', 'y', 'r'].map(k => cell(g, k)).join('') + `<td>${q ? pc(q[g.home ? 0 : 2]) : '–'}</td></tr>`;
+      ['xg', 's', 'st', 'c', 'f', 'y'].map(k => cell(g, k)).join('') + `<td>${q ? pc(q[g.home ? 0 : 2]) : '–'}</td></tr>`;
   });
   $('team').innerHTML = `<div class="th"><h2 class="tn">${nm(i)}</h2>${nx ? `<button class="go" data-fx="${nx.h}-${nx.a}">Analizar ${nm(nx.h)} – ${nm(nx.a)} · ${fdl(nx.d)} →</button>` : ''}</div>
     <div class="tiles">${kp.map(k => `<div class="tile"><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}</div>
@@ -291,7 +294,7 @@ function renderTeam() {
     ${card('Variación y señal de cada estadística', tbl(['', 'Media', 'Desv. típica', 'Error de la media', 'Frente a la liga', 'Señal', 'Esperable ajustado'], varRows, 'num') +
       note('<b>Desv. típica</b>: cuánto varía de un partido a otro. <b>Error de la media</b>: cuánto podría moverse su media solo por azar. <b>Señal</b>: clara si la diferencia con la liga supera dos errores, posible si supera uno (siendo optimistas) y ruido si no. <b>Esperable ajustado</b>: lo que el modelo espera contra un rival medio en campo neutral, ya corregido por la dificultad de los rivales y acercado a la media según lo que demuestran los datos.'))}
     ${card('Promedios por partido', tbl(['', 'Equipo', 'Rival', 'Equipo en casa', 'Equipo fuera', 'Rival cuando juega en casa', 'Rival cuando juega fuera'], avgRows, 'num'))}
-    ${card('Partidos', tbl(['Fecha', 'J', ['Lugar', 'l'], ['Rival', 'l'], 'Resultado', 'xG', 'Tiros', 'A puerta', 'Córners', 'Faltas', 'Amarillas', 'Rojas', 'Gana según cuotas'], mrows, 'num mt') +
+    ${card('Partidos', tbl(['Fecha', 'J', ['Lugar', 'l'], ['Rival', 'l'], 'Resultado', 'xG', 'Tiros', 'A puerta', 'Córners', 'Faltas', 'Amarillas', 'Gana según cuotas'], mrows, 'num mt') +
       note('Cada celda muestra el equipo y el rival. Debajo, la diferencia con lo que esperaba el modelo para ese partido (equipo / rival). En negrita, desviaciones de dos o más (al pasar el cursor se ven en desviaciones típicas).'))}
     ${squadHtml(i)}`;
 }
@@ -304,9 +307,9 @@ function squadHtml(i) {
   if (!sq || !sq.length) return '';
   const POSN = {Goalkeeper: 'POR', Defender: 'DEF', Midfielder: 'MED', Attacker: 'DEL'};
   const a = sq.slice().sort((x, y) => ps === 'n' ? x.n.localeCompare(y.n, 'es') : (y[ps] - x[ps]) || (y.min - x.min));
-  const H = [['n', 'Jugador'], ['pj', 'PJ'], ['min', 'Min'], ['g', 'Goles'], ['a', 'Asist.'], ['y', 'Amarillas'], ['r', 'Rojas']];
+  const H = [['n', 'Jugador'], ['pj', 'PJ'], ['min', 'Min'], ['g', 'Goles'], ['a', 'Asist.'], ['y', 'Amarillas']];
   return card('Plantilla', tbl(H.map(h => `<button class="lk" data-ps="${h[0]}">${h[1]}${ps === h[0] ? ' ↓' : ''}</button>`),
-    a.map(p => `<tr><td>${esc(p.n)} <span class="mu">${POSN[p.pos] || ''}</span></td><td>${p.pj}</td><td>${p.min}</td><td>${p.g}</td><td>${p.a}</td><td>${p.y}</td><td>${p.r}</td></tr>`), 'num'));
+    a.map(p => `<tr><td>${esc(p.n)} <span class="mu">${POSN[p.pos] || ''}</span></td><td>${p.pj}</td><td>${p.min}</td><td>${p.g}</td><td>${p.a}</td><td>${p.y}</td></tr>`), 'num'));
 }
 function renderEquipos() { renderTable(); renderRank(); renderTeam(); }
 
@@ -337,9 +340,9 @@ function estimates(h, a, win, useX, rf) {
     const q = rf && ok(rf[k]) ? rf[k] : 1;
     const H = scaleP(sPred(k, h, a, 1), q), A = scaleP(sPred(k, a, h, 0), q), rH = cH.rows[k], rA = cA.rows[k];
     if (!H || !A) return;
-    const on = useX && rH && rA;
-    const addH = on ? rH.f.adj + rA.a.adj : 0, avH = on ? rH.f.av + rA.a.av : 0;
-    const addA = on ? rA.f.adj + rH.a.adj : 0, avA = on ? rA.f.av + rH.a.av : 0;
+    const on = useX && rH && rA, lw = k === 'g' || k === 'g2' ? 1 : slam(k);
+    const addH = on ? lw * (rH.f.adj + rA.a.adj) : 0, avH = on ? lw * lw * (rH.f.av + rA.a.av) : 0;
+    const addA = on ? lw * (rA.f.adj + rH.a.adj) : 0, avA = on ? lw * lw * (rA.f.av + rH.a.av) : 0;
     const Hm = Math.max(H.m + addH, 0.001), Am = Math.max(A.m + addA, 0.001), He = Math.sqrt(H.e ** 2 + avH), Ae = Math.sqrt(A.e ** 2 + avA);
     const p = SM[k] || {rr: 0, phi: 1};
     const TV = k === 'g' ? pr.V[2] + avH + avA : Math.max(H.V + avH + A.V + avA + 2 * (p.rr || 0) * (p.phi || 1) * Math.sqrt(Hm * Am), 1e-6);
@@ -718,7 +721,7 @@ function renderPred() {
       `<td>${pr.p.map(pc).join(' · ')}</td><td>${mk ? mk.map(pc).join(' · ') : '–'}</td>${bon ? `<td>${cb ? cb.map(pc).join(' · ') : '–'}</td>` : ''}<td>${dif}</td><td>${f1(pr.e[0])} – ${f1(pr.e[1])}</td>` +
       `<td>${pc(pr.ou[2])}${mo != null ? ` <small>(${pc(mo)})</small>` : ''}</td><td>${pc(pr.bb)}</td><td>${pr.fs[0]}-${pr.fs[1]} <small>${pc(pr.fs[2])}</small></td></tr>`;
   });
-  const SKS = ['xg', 's', 'st', 'c', 'f', 'y', 'r'];
+  const SKS = ['xg', 's', 'st', 'c', 'f', 'y'];
   const gRange = f => { const pr = predict(f.h, f.a), m = pr.e[0] + pr.e[1], sd = Math.sqrt(pr.V[2]); return `<td>${f1(m)} <small>${f1(Math.max(m - sd, 0))}–${f1(m + sd)}</small></td>`; };
   const srows = list.map(f => `<tr><td class="l">${nm(f.h)} – ${nm(f.a)}${hasRf(f) ? `<br><small>Árbitro ${esc(f.ref)}: ${rfTxt(f)}</small>` : ''}</td>${gRange(f)}${SKS.map(k => {
     const t = totalOf(k, f); if (!t) return '<td>–</td>';
@@ -736,7 +739,7 @@ function renderPred() {
   $('c-pred').innerHTML = sel +
     card('Partidos', tbl(['Partido', 'Cuándo', 'Modelo 1 · X · 2', 'Mercado 1 · X · 2', ...(bon ? ['Combinada 1 · X · 2'] : []), 'Mayor diferencia', 'Goles esperados', '+2,5 goles (mercado)', 'Ambos marcan', 'Marcador'], rows, 'num pt') +
       note(`Pulsa un partido para analizarlo. El mercado son las cuotas medias de football-data sin su margen; aparecen unos días antes de cada jornada. ${b && ok(b.dll) ? `En la prueba retrospectiva (${b.n} partidos), el modelo tiene una log-loss ${f2(b.llmod)} frente a ${f2(b.llm)} del mercado (diferencia ${sg2(b.dll)} ± ${f2(b.dse)}; más baja es mejor), así que las diferencias con las cuotas no deben leerse como errores de las casas.` : ''}${learnTxt}`)) +
-    card('Estadísticas esperadas (total del partido)', tbl(['Partido', 'Goles', 'xG', 'Tiros', 'A puerta', 'Córners', 'Faltas', 'Amarillas', 'Rojas'], srows, 'num') +
+    card('Estadísticas esperadas (total del partido)', tbl(['Partido', 'Goles', 'xG', 'Tiros', 'A puerta', 'Córners', 'Faltas', 'Amarillas'], srows, 'num') +
       note(`Valor esperado y, en pequeño, el rango de una desviación típica de un partido: según el modelo, el total real cae dentro unas dos de cada tres veces. Este rango se guarda antes de cada partido y, con el resultado, cuenta como acierto si el total real cae dentro (Historial).${D.meta.refs ? ' Cuando ya se conoce el árbitro, las amarillas y las faltas incluyen su efecto.' : ''}`)) +
     card('Simulación del resto de la liga', tbl(['Equipo', 'Pts', 'Pts finales (80 %)', 'Campeón', `Top ${ZN.ucl}`, `Top ${ZN.ucl + ZN.uel}`, 'Descenso', `Puesto final: 1º → ${NT}º`], srows2, 'num sim') +
       note(`${D.meta.sims} temporadas simuladas con los partidos pendientes. En cada una se sortea también la fuerza de cada equipo, con su incertidumbre y una variación extra porque los equipos cambian durante la temporada. ${cap(D.meta.tiebreak || '')}. El rango de puntos cubre el 80 % de las simulaciones; descenso son los ${ZN.rel} últimos puestos.`)) +
@@ -777,7 +780,7 @@ function aggJs(rows) {
 }
 /* Aciertos: resultados (ganador, marcador, más/menos 2,5, ambos marcan) y totales dentro de su rango.
    Cada caso se compara con lo que esperaba el propio modelo: la suma de las probabilidades que daba a acertar. */
-const RGK = [['g', 'Goles'], ['xg', 'xG'], ['s', 'Tiros'], ['st', 'A puerta'], ['c', 'Córners'], ['f', 'Faltas'], ['y', 'Amarillas'], ['r', 'Rojas']];
+const RGK = [['g', 'Goles'], ['xg', 'xG'], ['s', 'Tiros'], ['st', 'A puerta'], ['c', 'Córners'], ['f', 'Faltas'], ['y', 'Amarillas']];
 const inR = q => q[3] >= q[1] && q[3] <= q[2];  // q = [media, desde, hasta, real, probabilidad de caer dentro]
 const mark = h => `<span class="tv ${h ? 'hit' : 'miss'}" title="${h ? 'Acierto' : 'Fallo'}">${h ? '✓' : '✗'}</span>`;
 function resHits(r) {  // cada resultado: [acierto, probabilidad que le daba el modelo, lo que predijo]
@@ -815,7 +818,7 @@ function hitsCards(rows) {
     return `<tr class="${j === ST_.hj ? 'on' : ''}"><td><button class="lk" data-hj="${j}">J${j}</button></td><td>${q.n}</td><td>${hcN(q.x)}${q.m[1] ? `<br><small>mercado ${q.m[0]}</small>` : ''}</td><td>${hcN(q.s)}</td><td>${hcN(q.u)}</td><td>${hcN(q.b)}</td><td>${hcP(q.r)}</td></tr>`; };
   const season = `<tr class="on"><td><b>Temporada</b></td><td>${H.n}</td><td>${hcN(H.x)}${H.m[1] ? `<br><small>mercado ${H.m[0]} de ${H.m[1]}</small>` : ''}</td><td>${hcN(H.s)}</td><td>${hcN(H.u)}</td><td>${hcN(H.b)}</td><td>${hcP(H.r)}</td></tr>`;
   const c1 = card('Aciertos por jornada', tbl(['Jornada', 'Partidos', 'Ganador (1X2)', 'Marcador exacto', 'Más/menos 2,5 goles', 'Ambos marcan', 'Totales dentro de su rango'], [season, ...js.map(jr)], 'num et') +
-    note('Se cuentan solos en cuanto llegan los resultados. <b>Ganador</b>: el resultado al que el modelo daba más probabilidad (1, X o 2); debajo, cuántos acertó el favorito de las casas. <b>Marcador</b>: el de la columna Marcador de Predicciones. <b>Más/menos 2,5</b> y <b>ambos marcan</b>: lo que el modelo veía más probable. <b>Totales</b>: goles, xG, tiros, tiros a puerta, córners, faltas, amarillas y rojas del partido; es acierto si el total real cae dentro del rango que se mostraba antes del partido. <b>Esperado</b>: los aciertos que correspondían a las probabilidades del propio modelo. Si los reales se le parecen, el modelo mide bien su error; si son claramente menos, se equivoca más de lo que cree. Pulsa una jornada para ver el detalle.'));
+    note('Se cuentan solos en cuanto llegan los resultados. <b>Ganador</b>: el resultado al que el modelo daba más probabilidad (1, X o 2); debajo, cuántos acertó el favorito de las casas. <b>Marcador</b>: el de la columna Marcador de Predicciones. <b>Más/menos 2,5</b> y <b>ambos marcan</b>: lo que el modelo veía más probable. <b>Totales</b>: goles, xG, tiros, tiros a puerta, córners, faltas y amarillas del partido; es acierto si el total real cae dentro del rango que se mostraba antes del partido. <b>Esperado</b>: los aciertos que correspondían a las probabilidades del propio modelo. Si los reales se le parecen, el modelo mide bien su error; si son claramente menos, se equivoca más de lo que cree. Pulsa una jornada para ver el detalle.'));
   /* por defecto, la última jornada con resultados */
   const jSel = js.includes(ST_.hj) ? ST_.hj : js[0], rj = rows.filter(r => r.j === jSel).sort((x, y) => x.d < y.d ? -1 : x.d > y.d ? 1 : 0), q = hitsOf(rj);
   const rres = rj.map(r => { const h = resHits(r);
@@ -992,7 +995,7 @@ function renderTend() {
 
 /* ---------------------------------------------------------------- vista: mis apuestas */
 /* Las apuestas salen de apuestas.json; build.py (model.evaluate_bets) las comprueba con los datos y calcula lo que daba el modelo. */
-const BSN = {g: 'goles', s: 'tiros', st: 'tiros a puerta', c: 'córners', f: 'faltas', y: 'amarillas', r: 'rojas', xg: 'xG'};
+const BSN = {g: 'goles', s: 'tiros', st: 'tiros a puerta', c: 'córners', f: 'faltas', y: 'amarillas', xg: 'xG'};
 const eur = v => ok(v) ? `${sgn(v, f2)} €` : '–', eur0 = v => ok(v) ? `${f2(v)} €` : '–';
 const BST = {ganada: ['Ganada', 'clear'], perdida: ['Perdida', 'bad'], nula: ['Nula', ''], pendiente: ['Pendiente', ''], 'sin datos': ['Sin datos', 'warn'], error: ['Revisar', 'warn']};
 function legTxt(b, q) {  // qué pasó en cada pata
@@ -1107,11 +1110,13 @@ function renderLearn() {
   const V = D.var || [], ch = V.find(v => v.chosen) || null, why = WHY[LN.why] || LN.why || '';
   const vname = k => nb((V.find(v => v.key === k) || {}).name || k);
   const R = LN.ref || {}, rk = Object.keys(R), tu = TCOR[true], td = TCOR[false], tn = tu.n + td.n;
+  const SW = LN.sw || {}, SWk = SK.filter(k => SW[k]), SWm = SWk.filter(k => SW[k].fit && SW[k].lam === 0);
   const tiles = [['Versión del modelo de goles', ch ? nb(ch.name) : '–', esc(why)],
     ['Peso del modelo frente al mercado (1X2)', LB.fit ? pf(LB.a) : '–', LB.fit ? `aprendido con ${LB.n} partidos con cuotas` : `faltan partidos con cuotas (${LB.n || 0} de 20)`],
+    ['Estadísticas con la media de la liga', SWm.length ? SWm.map(k => VK[k].n).join(', ') : 'ninguna', SWm.length ? 'en ellas el modelo no mejora a la media' : 'en todas se usa el modelo, del todo o en parte'],
     ['Árbitros', rk.length ? rk.map(k => `±${f0(R[k].tau * 100)}\u00a0% ${RKN[k]}`).join(' · ') : 'sin datos', rk.length ? 'diferencia real entre árbitros, sin el azar' : 'el CSV de esta liga no trae el árbitro'],
     ['Tendencias', `${tn} ${tn === 1 ? 'caso' : 'casos'}`, tn ? `peso de la corrección: ${pf(Math.max(tu.w, td.w))}` : 'aún no se corrige nada']];
-  const intro = note(`Cada vez que se actualiza la página, el modelo vuelve a predecir toda la temporada como si fuera la primera vez (cada partido solo con los anteriores) y ajusta cuatro cosas según lo que mejor habría funcionado. Esto es lo que ha aprendido con ${D.meta.n} partidos jugados.`);
+  const intro = note(`Cada vez que se actualiza la página, el modelo vuelve a predecir toda la temporada como si fuera la primera vez (cada partido solo con los anteriores) y ajusta cinco cosas según lo que mejor habría funcionado. Esto es lo que ha aprendido con ${D.meta.n} partidos jugados.`);
   /* 1. versión del modelo */
   const vrows = V.map(v => `<tr class="${v.chosen ? 'on' : ''}"><td class="l">${nb(v.name)}${v.chosen ? ' <span class="chip clear">Elegida</span>' : ''}</td><td>${v.n || '–'}</td><td>${f3(v.ll)}</td>` +
     `<td>${v.chosen ? '–' : `${sg3(v.d)} <small>±${f3(v.se)}</small>`}</td><td>${ok(v.dll) ? `${sg3(v.dll)} <small>±${f3(v.dse)}</small>` : '–'}</td><td>${pc(v.acc)}</td><td>${pc(v.pd)} / ${pc(v.fd)}</td></tr>`);
@@ -1138,6 +1143,15 @@ function renderLearn() {
       (cv.length ? `<details><summary>Ver los valores</summary>${tbl(['Peso del modelo', 'Log-loss'], cv.map(c => `<tr class="${Math.abs(c[0] - LB.a) < 1e-9 ? 'on' : ''}"><td>${pf(c[0])}</td><td>${f3(c[1])}</td></tr>`), 'num et')}</details>` : '');
   }
   const c2 = card('2. Cuánto fiarse del modelo frente al mercado (1X2)', c2body);
+  /* 3. cuánto fiarse del modelo en cada estadística (model.learn_stat_weights) */
+  const swRows = SWk.map(k => { const w = SW[k], imp = w.fit && w.maeb ? 1 - w.mael / w.maeb : null;
+    return `<tr><td class="l">${VK[k].n}</td><td><b>${w.fit ? pf(w.lam) : '–'}</b></td><td>${w.fit ? f2(w.mae) : '–'}</td><td>${w.fit ? f2(w.maeb) : '–'}</td>` +
+      `<td>${w.fit ? f2(w.mael) : '–'}</td><td>${ok(imp) ? (imp > 0.0005 ? `${f1(imp * 100)}\u00a0% menos` : 'igual') : '–'}</td></tr>`; });
+  const swN = SWk.length ? Math.max(...SWk.map(k => SW[k].n || 0)) : 0, swFit = SWk.some(k => SW[k].fit);
+  const c3s = card('3. Cuánto fiarse del modelo en cada estadística', note('Para cada estadística, la prueba retrospectiva compara lo que el modelo predijo para cada equipo con la media de la liga (de local o de visitante) y busca la mezcla, del 0 % al 100 % de modelo, que menos se equivoca. 100 % es el modelo tal cual; 0 %, la media de la liga. Todas las cifras de la página (análisis de partido, predicciones, rangos, tendencias y apuestas pendientes) usan esa mezcla. Se recalcula en cada actualización, así que una estadística vuelve al modelo en cuanto este empieza a mejorar a la media.') +
+    (swFit ? tbl([['Estadística', 'l'], 'Peso del modelo', 'Error del modelo', 'Error de la media', 'Error de la mezcla', 'Frente a la media'], swRows, 'num et') +
+      note(`Error medio por equipo y partido en la prueba retrospectiva (${swN} predicciones por estadística, cada partido predicho solo con los anteriores). Las rojas no se modelan: son tan pocas que ningún modelo ha mejorado a la media de la liga.`)
+      : note(`Para aprenderlo hacen falta al menos 30 partidos en la prueba retrospectiva (hay ${Math.floor(swN / 2)}). Mientras tanto se usa el modelo tal cual.`)));
   /* 3. árbitros */
   let c3body;
   if (!rk.length) c3body = note('El CSV de football-data de esta liga no trae el árbitro de cada partido, así que aquí no se puede aprender su efecto.');
@@ -1153,11 +1167,11 @@ function renderLearn() {
       tbl(head, rows, 'num et') +
       note(`El factor multiplica lo que espera el modelo para ese partido. Sale de comparar lo que ha pasado en sus partidos con lo que esperaba el modelo (que ya tiene en cuenta a los equipos), acercado a 1 según los partidos que haya dirigido. ${esc(D.meta.cards_note || '')}`);
   }
-  const c3 = card('3. Efecto del árbitro', c3body);
+  const c3 = card('4. Efecto del árbitro', c3body);
   /* 4. tendencias */
   const tl = (c, lab) => c.n ? `<li><b>${lab}</b>: ${c.hits} de ${c.n} ${c.hits === 1 ? 'se cumplió' : 'se cumplieron'} (${pf(c.hit)}), cuando el modelo esperaba un ${pc(c.model)}. Peso de la corrección: ${pf(c.w)}; una línea a la que el modelo da un 40 % pasa a ${pc(expit(lgt(0.4) + c.shift))}.</li>`
     : `<li><b>${lab}</b>: todavía ningún caso, así que no se corrige nada.</li>`;
-  const c4 = card('4. Cuánto se cumplen las tendencias', note('Las tendencias de la temporada, detectadas con los datos anteriores a cada partido, enseñan si las rachas se mantienen más o menos de lo que espera el modelo. Con eso se corrige la probabilidad del modelo en las tendencias nuevas, con un peso que crece con los casos: n/(n+20).') +
+  const c4 = card('5. Cuánto se cumplen las tendencias', note('Las tendencias de la temporada, detectadas con los datos anteriores a cada partido, enseñan si las rachas se mantienen más o menos de lo que espera el modelo. Con eso se corrige la probabilidad del modelo en las tendencias nuevas, con un peso que crece con los casos: n/(n+20).') +
     `<ul class="cl">${tl(tu, 'Al alza')}${tl(td, 'A la baja')}</ul>`);
   /* 5. evolución */
   const H = (LN.hist || []).slice().sort((p, q) => p.date < q.date ? -1 : 1);
@@ -1165,11 +1179,11 @@ function renderLearn() {
   const hchart = H.length >= 5 ? `<div class="sc">${lineSvg({ys: H.map(x => (x.fit ? x.a : 0) * 100), y0: 0, y1: 100, aria: 'Peso del modelo frente al mercado en cada actualización', fy: v => f0(v) + '\u00a0%',
     xt: [...new Set(Array.from({length: Math.min(H.length, 5)}, (_, k, a) => Math.round(k * (H.length - 1) / (Math.min(H.length, 5) - 1))))], xl: i => fd(H[i].date), ytitle: 'Peso del modelo frente al mercado',
     tip: i => `${fdl(H[i].date)}: peso del modelo ${pf(H[i].a)} · ${(V.find(v => v.key === H[i].cfg) || {}).name || H[i].cfg} · ${H[i].n} partidos`, hi: [[H.length - 1, `Hoy: ${pf(H[H.length - 1].a)}`, 'end', H[H.length - 1].a > 0.5]]})}</div>` : '';
-  const c5 = card('5. Cómo cambia cada jornada', (hchart || note(H.length ? `El registro del aprendizaje empezó el ${fdl(H[0].date)}; con cada actualización se añade una fila y, a partir de cinco, un gráfico.` : 'Todavía no hay registro del aprendizaje.')) +
+  const c5 = card('6. Cómo cambia cada jornada', (hchart || note(H.length ? `El registro del aprendizaje empezó el ${fdl(H[0].date)}; con cada actualización se añade una fila y, a partir de cinco, un gráfico.` : 'Todavía no hay registro del aprendizaje.')) +
     (hrows.length ? tbl(['Fecha', 'Partidos', ['Versión', 'l'], 'Peso del modelo', 'Log-loss modelo', 'Log-loss mercado', 'Log-loss combinada'], hrows, 'num et') : '') +
     note('Log-loss del modelo sobre todos los partidos de la prueba retrospectiva; la del mercado y la de la combinada, sobre los que tienen cuotas de cierre.'));
   $('c-learn').innerHTML = intro.replace('class="note"', 'class="note" style="margin:0 0 10px"') +
-    `<div class="tiles">${tiles.map(t => `<div class="tile"><span>${t[0]}</span><b>${t[1]}</b><small>${t[2]}</small></div>`).join('')}</div>` + c1 + c2 + c3 + c4 + c5;
+    `<div class="tiles">${tiles.map(t => `<div class="tile"><span>${t[0]}</span><b>${t[1]}</b><small>${t[2]}</small></div>`).join('')}</div>` + c1 + c2 + c3s + c3 + c4 + c5;
 }
 
 /* ---------------------------------------------------------------- arranque */

@@ -34,7 +34,7 @@ ONLY = [x.strip() for x in (ENV("LEAGUES") or "").split(",") if x.strip()]
 
 STAT_COLS = [("g1", "HTHG", "HTAG", int), ("xg", "HxG", "AxG", float), ("s", "HS", "AS", int),
              ("st", "HST", "AST", int), ("c", "HC", "AC", int), ("f", "HF", "AF", int),
-             ("y", "HY", "AY", int), ("r", "HR", "AR", int)]
+             ("y", "HY", "AY", int)]  # las rojas no se usan: son tan pocas que ningún modelo mejora a la media
 # Configuraciones del modelo de goles entre las que elige solo. La primera es la de partida.
 GRID = [("base", "Goles y xG al 50 %", {}),
         ("goles", "Solo goles", {"w": 1.0}),
@@ -543,18 +543,29 @@ def team_news(key, L, teams, played, pend, warn):
     soon = sorted({t for f in pend if TODAY <= f["date"] <= lim for t in (f["h"], f["a"])})
     av = availability(key, L, teams, played, warn)
     out = {"avail": av[0] if av is not None else cache.get("avail", {}), "tm": av[1] if av is not None else cache.get("tm", {}),
-           "avail_gen": TODAY if av is not None else cache.get("avail_gen"), "news": {}, "news_gen": {}}
-    fails = 0
+           "avail_gen": TODAY if av is not None else cache.get("avail_gen"), "news": {}, "news_gen": {}, "news_ts": {}}
+    # GitHub a veces junta varias ejecuciones seguidas: los titulares de menos de 90 minutos no se vuelven a pedir
+    now = datetime.now(timezone.utc)
+    fails = asked = 0
     for t in soon:
+        ts = (cache.get("news_ts") or {}).get(t)
+        try:
+            fresh = bool(ts) and t in (cache.get("news") or {}) and (now - datetime.fromisoformat(ts)).total_seconds() < 5400
+        except (TypeError, ValueError):
+            fresh = False
+        if fresh:
+            out["news"][t], out["news_gen"][t], out["news_ts"][t] = cache["news"][t], (cache.get("news_gen") or {}).get(t), ts
+            continue
+        asked += 1
         h = headlines(key, L, t)
         if h is None:
             fails += 1
-            h, g = (cache.get("news") or {}).get(t, []), (cache.get("news_gen") or {}).get(t)
+            h, g, ts = (cache.get("news") or {}).get(t, []), (cache.get("news_gen") or {}).get(t), ts
         else:
-            g = TODAY
-        out["news"][t], out["news_gen"][t] = h, g
+            g, ts = TODAY, now.isoformat(timespec="minutes")
+        out["news"][t], out["news_gen"][t], out["news_ts"][t] = h, g, ts
         time.sleep(1)
-    if soon and fails == len(soon):
+    if asked and fails == asked:
         warn.append("No se pudieron leer los titulares; se muestran los últimos guardados.")
     write(cache_p, json.dumps(out, ensure_ascii=False, indent=1))
     return out
@@ -699,7 +710,14 @@ def build_league(key, L, fixtures_text):
         s = model.backtest_summary(res[k]["wf"]) if res[k]["wf"] else {}
         variants.append({"key": k, "name": name, "chosen": k == chosen, "d": rnd(res[k].get("d"), 4), "se": rnd(res[k].get("se"), 4),
                          **{q: rnd(s.get(q), 4) for q in ("n", "ll", "llm", "dll", "dse", "acc", "pd", "fd")}})
-    wfs = model.walk_forward_stats(played, teams)
+    wf_rows = []
+    wfs = model.walk_forward_stats(played, teams, rows=wf_rows)
+    # 4) cuánto fiarse del modelo frente a la media de la liga en cada estadística (prueba retrospectiva por equipo);
+    #    desde aquí, todas las predicciones de estadísticas (registro, apuestas, tendencias y página) usan esa mezcla
+    sw = model.learn_stat_weights(wf_rows)
+    for k, p in sms.items():
+        if p:
+            p["lam"], p["avg"] = sw[k]["lam"], model.side_means(played, k)
     try:
         news = team_news(key, L, teams, played, pend, warn)
     except Exception as e:  # noqa: BLE001  (las novedades no deben tumbar la página)
@@ -722,7 +740,8 @@ def build_league(key, L, fixtures_text):
     log = model.update_log(log, played, pend, gm, sms, wf, wfs, TODAY, blend=blend["a"] if blend.get("fit") else None, reff=reff)
     hist = [h for h in log.get("learning", []) if h.get("date") != TODAY]
     hist.append({"date": TODAY, "n": len(played), "cfg": chosen, "a": blend["a"], "fit": blend.get("fit", False),
-                 "ll": rnd(res[chosen]["ll"], 4), "llm": rnd(blend.get("llm"), 4), "llb": rnd(blend.get("ll"), 4)})
+                 "ll": rnd(res[chosen]["ll"], 4), "llm": rnd(blend.get("llm"), 4), "llb": rnd(blend.get("ll"), 4),
+                 "lam": {k: v["lam"] for k, v in sw.items()}})
     log["learning"] = hist[-400:]
     write(p_out(L["log"]), json.dumps(log, ensure_ascii=False, indent=1, sort_keys=True))
     ev = model.evaluate_log(log, played)
@@ -730,7 +749,7 @@ def build_league(key, L, fixtures_text):
     payload = build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim, bt, variants, ev, warn,
                             trends_bt, trends_live(played, pend, pos, sms, reff), trends_flex,
                             {"chosen": chosen, "why": why, "blend": blend, "hist": log["learning"], "refx": refx,
-                             "ref_bt": ref_bt, "ref_on": ref_on, "reff": reff}, bets, news)
+                             "ref_bt": ref_bt, "ref_on": ref_on, "reff": reff, "sw": sw}, bets, news)
     fragment = render(payload, L)
     write(p_out(L["out"]), full_document(fragment))
     if ART_DIR:
@@ -756,7 +775,7 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
             row += [None, None] if v is None else [rnd(x, 2) for x in v]
         row += (m["odds"] or [None] * 3) + (m["ou"] or [None] * 2) + [m.get("ref")]
         M.append(row)
-    keys = ["g", "g1", "xg", "s", "st", "c", "f", "y", "r"]
+    keys = ["g", "g1", "xg", "s", "st", "c", "f", "y"]
     EX = [[rnd(x) for k in keys for x in (e.get(k) or [None, None])] for e in E]
     reff = learn["reff"]
     FX = []
@@ -765,7 +784,9 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
         FX.append([f["j"], f["date"], f["time"], ti[f["h"]], ti[f["a"]], f["src"]] + (f["odds"] or [None] * 3)
                   + (f["ou"] or [None] * 2) + (f.get("ah") or [None] * 3) + [f.get("ref"), rnd(rf.get("y"), 4), rnd(rf.get("f"), 4)])
     CXQ = ("tf", "ta", "s2", "pf", "pa")
-    SM = {k: dict(export_glm(p, ("rr",)), **{q: rnd(cross[k].get(q), 5) for q in CXQ}) for k, p in sms.items() if p}
+    # lam y avg: cuánto se fía el modelo de sí mismo en cada estadística y la media de la liga (local, visitante) hacia la que se acerca
+    SM = {k: dict(export_glm(p, ("rr",)), **{q: rnd(cross[k].get(q), 5) for q in CXQ}, lam=p.get("lam"),
+                  avg=[rnd(x, 4) for x in p["avg"]] if p.get("avg") else None) for k, p in sms.items() if p}
     GM = dict(export_glm(gm, ("rho", "w")), cx={k: {q: rnd(cross[k].get(q), 5) for q in CXQ} for k in ("g", "g2")})
     SIM = [[rnd(s["mean"], 2), s["p10"], s["p90"], rnd(s["ch"], 4), rnd(s["t4"], 4), rnd(s["t6"], 4),
             rnd(s["rel"], 4), [rnd(x, 4) for x in s["pos"]]] for s in sim]
@@ -808,7 +829,8 @@ def build_payload(key, L, played, teams, pend, fx, table, gm, sms, E, cross, sim
         "tbf": {k: rdict(s) for k, s in (trends_flex or {}).items()},
         "learn": {"chosen": learn["chosen"], "why": learn["why"],
                   "blend": {**rdict({q: v for q, v in b.items() if q != "curve"}), "curve": b.get("curve")},
-                  "hist": [rdict(h) for h in learn["hist"][-120:]], "ref": REF},
+                  "hist": [rdict(h) for h in learn["hist"][-120:]], "ref": REF,
+                  "sw": {k: rdict(v) for k, v in (learn.get("sw") or {}).items()}},
         "pl": jload(p_in(L["players"]), {}).get("teams", {}) if L.get("players") else {},
         "bets": [{**b, "h": ti.get(b.get("h")), "a": ti.get(b.get("a"))} for b in bets],
         "news": {"src": (L.get("avail") or {}).get("name"), "lang": L.get("news_lang", "es"), "avail_gen": news.get("avail_gen"),

@@ -2,9 +2,9 @@ name: Actualizar dashboard
 
 on:
   schedule:
-    - cron: "17 6 * * *"    # cada mañana (hora UTC)
-    - cron: "17 17 * * *"   # y cada tarde, para recoger cuotas y resultados nuevos
-    - cron: "17 11,14,19 * * 5,6,0,1"   # de viernes a lunes, tres veces más: bajas y titulares de última hora
+    # cada dos horas (hora UTC): GitHub retrasa varias horas o se salta a veces las ejecuciones programadas,
+    # así que se programan de sobra para que siempre haya una reciente (cuotas, resultados, bajas y titulares)
+    - cron: "17 */2 * * *"
   push:                     # y en cuanto subes archivos nuevos
     branches: [main]
     paths:

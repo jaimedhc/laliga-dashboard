@@ -102,7 +102,7 @@ LEAGUES = {
         "cal_label": "Fecha del calendario abierto",
         "cal_fallback": "el calendario abierto de openfootball",
         "of_time_offset": 1,  # el calendario abierto inglés da la hora británica
-        "cards_note": "En Inglaterra, una doble amarilla cuenta solo como roja.",
+        "cards_note": "En Inglaterra, la segunda amarilla de un expulsado no se cuenta como amarilla.",
         "names": {"Arsenal": "Arsenal", "Aston Villa": "Aston Villa", "Bournemouth": "Bournemouth", "Brentford": "Brentford",
                   "Brighton": "Brighton", "Chelsea": "Chelsea", "Coventry": "Coventry", "Crystal Palace": "Crystal Palace",
                   "Everton": "Everton", "Fulham": "Fulham", "Hull": "Hull", "Ipswich": "Ipswich", "Leeds": "Leeds",
