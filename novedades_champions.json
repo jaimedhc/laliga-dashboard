@@ -2,6 +2,19 @@
  "avail": {
   "Real Madrid": [
    [
+    "Trent",
+    "DEF",
+    "lesionado",
+    "Enfermedad. Retorno estimado: Principios de Diciembre.",
+    false,
+    null,
+    5,
+    413,
+    0,
+    1,
+    null
+   ],
+   [
     "Endrick",
     "DEL",
     "lesionado",
@@ -18,24 +31,11 @@
     "Rodrygo",
     "DEL",
     "lesionado",
-    "Rotura del ligamento cruzado anterior y la rotura del menisco externo de la pierna derecha. Retorno estimado: Mediados de Diciembre.",
+    "Rotura del ligamento cruzado anterior y la rotura del menisco externo de la pierna derecha. Retorno estimado: Principios de Enero.",
     false,
     null,
     0,
     0,
-    0,
-    0,
-    null
-   ],
-   [
-    "Dumfries",
-    "DEF",
-    "duda",
-    "Ausente en el entrenamiento.",
-    false,
-    null,
-    5,
-    447,
     0,
     0,
     null
@@ -52,35 +52,9 @@
     0,
     0,
     null
-   ],
-   [
-    "Mendy",
-    "DEF",
-    "duda",
-    "Desgarro del tendón del recto femoral con separación ósea.",
-    false,
-    null,
-    0,
-    0,
-    0,
-    0,
-    null
    ]
   ],
   "Barcelona": [
-   [
-    "Rodri",
-    "MED",
-    "duda",
-    "Pequeña lesión en el bíceps femoral de la pierna derecha.",
-    true,
-    null,
-    8,
-    697,
-    1,
-    1,
-    null
-   ],
    [
     "Balde",
     "DEF",
@@ -233,8 +207,8 @@
    [
     "Lo Celso",
     "MED",
-    "duda",
-    "Golpe en la rodilla.",
+    "lesionado",
+    "Molestias en la rodilla. Retorno estimado: Vuelta indefinida.",
     true,
     null,
     1,
@@ -246,8 +220,8 @@
    [
     "Ceballos",
     "MED",
-    "duda",
-    "Molestias musculares.",
+    "lesionado",
+    "Molestias musculares. Retorno estimado: Principios de Diciembre.",
     false,
     null,
     2,
@@ -448,6 +422,19 @@
    ]
   ],
   "Manchester United": [
+   [
+    "B.Fernandes",
+    "MED",
+    "duda",
+    "Illness - 75% chance of playing",
+    true,
+    75,
+    10,
+    900,
+    4,
+    2,
+    null
+   ],
    [
     "Šeško",
     "DEL",
